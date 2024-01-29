@@ -32,7 +32,7 @@ public class ConfettiGuide: CTXBaseGuideController {
             return
         }
         
-        controller.addChildViewController(self.hostingController!)
+        controller.addChild(self.hostingController!)
         controller.view.addSubview(self.hostingController!.view)
         
         hostingController.view.translatesAutoresizingMaskIntoConstraints = false
@@ -57,6 +57,6 @@ public class ConfettiGuide: CTXBaseGuideController {
     override public func isDismissingGuide() {
         self.hostingController?.willMove(toParent: nil)
         self.hostingController?.view.removeFromSuperview()
-        self.hostingController?.removeFromParentViewController()
+        self.hostingController?.removeFromParent()
     }
 }

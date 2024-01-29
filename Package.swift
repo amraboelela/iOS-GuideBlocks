@@ -26,7 +26,8 @@ let package = Package(
         .target(
             name: "iOS-GuideBlocks",
             dependencies: [
-              .product(name: "ContextualSDK", package: "Contextual")
+              .product(name: "ContextualSDK", package: "Contextual"),
+              .product(name: "ConfettiSwiftUI", package: "ConfettiSwiftUI")
             ]
         ),
     ]
