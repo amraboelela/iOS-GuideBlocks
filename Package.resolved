@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "Contextual",
+        "repositoryURL": "https://github.com/contextu-al/Contextual-SDK",
+        "state": {
+          "branch": null,
+          "revision": "e387ca9c689943b624a59e966b2474ce749a11f5",
+          "version": "3.0.1"
+        }
+      }
+    ]
+  },
+  "version": 1
+}
