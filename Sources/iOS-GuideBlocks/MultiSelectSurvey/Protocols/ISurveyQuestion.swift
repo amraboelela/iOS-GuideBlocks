@@ -11,7 +11,6 @@ import Foundation
 protocol ISurveyQuestion : Codable {
     var title : String { get }
     var uuid : UUID { get }
-    var tag : String { get }
     
     var type : SurveyItemType { get }
     var required : Bool { get set }

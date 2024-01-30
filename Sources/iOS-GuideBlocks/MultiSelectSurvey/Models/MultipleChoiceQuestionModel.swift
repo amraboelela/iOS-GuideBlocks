@@ -15,18 +15,16 @@ class MultipleChoiceQuestionModel : ObservableObject, ISurveyQuestion {
     var choices : [MultipleChoiceResponseModel]
     var required: Bool = false
     var allowsMultipleSelection = false
-    var tag: String
     var type: SurveyItemType = .multipleChoiceQuestion
     
-    init(title:String, answers:[String], multiSelect : Bool = false, tag : String ) {
+    init(title:String, answers:[String], multiSelect : Bool = false) {
         self.title = title
         self.uuid = UUID()
         self.choices = answers.map({ MultipleChoiceResponseModel($0) })
         self.allowsMultipleSelection = multiSelect
-        self.tag = tag
     }
     
-    init(title:String, items: [Any], multiSelect : Bool = false, tag : String ) {
+    init(title:String, items: [Any], multiSelect : Bool = false) {
         self.title = title
         self.uuid = UUID()
         
@@ -39,8 +37,8 @@ class MultipleChoiceQuestionModel : ObservableObject, ISurveyQuestion {
                 self.choices.append( item2 )
             }
         }
+        
         self.allowsMultipleSelection = multiSelect
-        self.tag = tag
     }
     
 }

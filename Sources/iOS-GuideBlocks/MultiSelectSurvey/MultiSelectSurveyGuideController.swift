@@ -19,16 +19,17 @@ public class MultiSelectSurveyGuideController: CTXBaseGuideController {
                                            failure: @escaping ((CTXIGuidePayload) -> ())) {
         let guide = contextualContainer.guidePayload.guide
         
-        let title = guide.feedback?.feedbackMessage ?? "What are you primarily using our app for?"
+        let title = guide.feedback?.feedbackTitle ?? ""
+        let message = guide.feedback?.feedbackMessage ?? ""
+        let options = guide.feedback?.arrayOptions as? [String] ?? []
         
         let question = MultipleChoiceQuestionModel(
-            title: title,
-            answers: guide.feedback?.arrayOptions as? [String] ?? ["Work", "Fun", "Chat GPT", "I don't know"],
-            multiSelect: true,
-            tag: "MultipleChoice")
+            title: message,
+            answers: options,
+            multiSelect: true)
         
         let widgetView = SurveyView(
-            title: guide.feedback?.feedbackTitle ?? "Multiple Choice Survey",
+            title: title,
             question: question,
             cancelTapped: {
                 self.hostingController?.dismiss(animated: true)
@@ -36,7 +37,7 @@ public class MultiSelectSurveyGuideController: CTXBaseGuideController {
             },
             doneTapped: {
                 let choices = question.choices.filter({ $0.selected }).map { $0.text }
-                let feedback = CTXFeedback(title: title, answers: choices, extraJSON: [
+                let feedback = CTXFeedback(title: message, answers: choices, extraJSON: [
                     "answers-array": choices,
                     "any-other-custom-data": "Example custom data"
                 ])
