@@ -22,7 +22,7 @@ In this example, we show how to make a Fancy Announcement, just like the crazy o
 `
  * Match the name in the JSON to the name of your wrapper in the code
 
- <img src="https://github.com/contextu-al/AirBnB-iOS/tree/main/airbnb-main/img/FancyAnnouncementTree.png" alt="Adding your Extra JSON" width="200"/>
+ <img src="https://raw.githubusercontent.com/contextu-al/AirBnB-iOS/main/airbnb-main/img/FancyAnnouncementTree.png" alt="Adding your Extra JSON" width="200"/>
 
 8. If you are still in Preview Mode, then you should see the Announcement will magically change to Fancy Announcement
 9. Change the Title and Content and buttons. Play around with it and see the results.
