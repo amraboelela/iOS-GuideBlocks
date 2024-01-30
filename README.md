@@ -16,6 +16,12 @@ There are two ways to use GuideBlocks:
 
 ### 1. Make use of these public GuideBlocks
 
+0. you have an account on the Contextual Dashboard and you've added the iOS SDK, you've added the **app_key** into your App and tested a simple Guide in your App.
+1. using Swift Package Manager add [iOS-GuideBlocks](https://github.com/GuideBlocks-org/iOS-GuideBlocks/blob/confetti/Sources/iOS-GuideBlocks) to your Package Dependencies
+2. add `import iOS_GuideBlocks`
+3. for the GuideBlock you wish to use, then add `Contextual.sharedInstance().registerGuideBlock(FancyAnnouncementGuide(), forKey: "FancyAnnouncement")`
+4. build and run!
+
 
 ### 2. Make your own App elements into private GuideBlocks
 
@@ -39,8 +45,9 @@ You can contribute to https://guideblocks.org by wrapping a code element that wo
 5. [Wrap your code following these instructions](https://github.com/GuideBlocks-org#how-do-i-make-a-guideblock)
 6. Test it out with a sample add and the Contextual Dashboard. Push this sammple app to a public repo or use the [AirBnB Sample](https://github.com/contextu-al/AirBnB-iOS)
 7. Create a GuideBlock.yaml in the root directory - see the template below. Be sure to add the sample app repo/branch that you have used into the GuideBlock.yaml 
-8. Commit, Push and create a PR.
-9. Sit back, relax, have a bubble tea and wait for approval!
+8. Create a README.md in the root directory to tell users how to use the GuideBlock (mapping parameters and adding to the extensibility section of the Dashboard) 
+9. Commit, Push and create a PR.
+10. Sit back, relax, have a bubble tea and wait for approval!
 
 
 ### Sample GuideBlock.yaml
