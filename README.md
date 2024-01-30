@@ -29,9 +29,9 @@ Simply wrap your existing code elements into a GuideBlock, even if they are deep
 
 See the following examples:
 
-[AppFieldEdit](https://github.com/contextu-al/AirBnB-iOS/tree/guideblocks-org/confetti/airbnb-main/airbnb-main/Components/CustomGuideBlocks/AppFieldEdit)
+[AppFieldEdit](https://github.com/contextu-al/AirBnB-iOS/tree/main/airbnb-main/airbnb-main/Components/CustomGuideBlocks/AppFieldEdit)
 
-[AdhocRowInsertion](https://github.com/contextu-al/AirBnB-iOS/tree/guideblocks-org/confetti/airbnb-main/airbnb-main/Components/CustomGuideBlocks/AdhocRowInsertion)
+[AdhocRowInsertion](https://github.com/contextu-al/AirBnB-iOS/tree/main/airbnb-main/airbnb-main/Components/CustomGuideBlocks/AdhocRowInsertion)
  
 
 ## Contributing Guideblocks to this repo
