@@ -52,6 +52,7 @@ You can contribute to https://guideblocks.org by wrapping a code element that wo
 
 ### Sample GuideBlock.yaml
 
+```
 Title: Confetti
 Author: Marc Stroebel
 Email: support@contextu.al
@@ -64,5 +65,5 @@ Video: https://vimeo.com/907653617/7384df8a67
 Extensibility: {
   "guideBlockKey": "Confetti"
 }
-
+```
  
