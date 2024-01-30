@@ -54,7 +54,7 @@ public class CircleVideoGuide: CTXBaseGuideController {
         let view = CircleVideoView(vid_url: vid_url, circle_diameter: circle_diameter, dismissbuttonTapped: {
             self.hostingController?.willMove(toParent: nil)
             self.hostingController?.view.removeFromSuperview()
-            self.hostingController?.removeFromParentViewController()
+            self.hostingController?.removeFromParent()
             self.dismissGuide()
         })
     
@@ -67,7 +67,7 @@ public class CircleVideoGuide: CTXBaseGuideController {
             return
         }
         
-        controller.addChildViewController(self.hostingController!)
+        controller.addChild(self.hostingController!)
         controller.view.addSubview(self.hostingController!.view)
         self.hostingController?.view.backgroundColor = .clear
         hostingController.view.translatesAutoresizingMaskIntoConstraints = false
@@ -86,6 +86,6 @@ public class CircleVideoGuide: CTXBaseGuideController {
     override public func isDismissingGuide() {
         self.hostingController?.willMove(toParent: nil)
         self.hostingController?.view.removeFromSuperview()
-        self.hostingController?.removeFromParentViewController()
+        self.hostingController?.removeFromParent()
     }
 }
