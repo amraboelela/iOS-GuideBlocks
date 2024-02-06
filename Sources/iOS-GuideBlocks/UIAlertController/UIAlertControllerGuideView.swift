@@ -47,7 +47,7 @@ struct UIAlertControllerGuideView: View {
                     }
                     .padding()
                     .foregroundColor(.white)
-
+                    .background(Color(nextbgcolor))
                 }
             }
             .padding()

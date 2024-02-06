@@ -34,7 +34,7 @@ public class UIAlertControllerGuide: CTXBaseGuideController {
             title: contextualContainer.guidePayload.guide.title.text,
             message: contextualContainer.guidePayload.guide.content.text,
             nextlabel: contextualContainer.guidePayload.guide.next.buttonText ?? "next",
-nextbgcolor: contextualContainer.guidePayload.guide.next.backgroundColor ?? UIColor(Color.green),
+            nextbgcolor: contextualContainer.guidePayload.guide.next.backgroundColor ?? UIColor(Color.green),
             nextButtonTapped: {
                     self.nextStepOfGuide() // SDK is being told "success" and progress to the next step (if any) in the Guide
                     dismissGuide()
