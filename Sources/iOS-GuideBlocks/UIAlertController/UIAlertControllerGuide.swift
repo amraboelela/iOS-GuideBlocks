@@ -30,18 +30,31 @@ public class UIAlertControllerGuide: CTXBaseGuideController {
             self.dismissGuide()
         }
         
+        let guideId = contextualContainer.guidePayload.guide.campaignid ?? "<no_guide_id>"
+        let stepOfGuide = contextualContainer.guidePayload.guide.suid ?? "0"
+        
         let view = UIAlertControllerGuideView(
             title: contextualContainer.guidePayload.guide.title.text,
             message: contextualContainer.guidePayload.guide.content.text,
             nextlabel: contextualContainer.guidePayload.guide.next.buttonText ?? "next",
             nextbgcolor: contextualContainer.guidePayload.guide.next.backgroundColor ?? UIColor(Color.green),
             nextButtonTapped: {
-                    self.nextStepOfGuide() // SDK is being told "success" and progress to the next step (if any) in the Guide
-                    dismissGuide()
+                // Save a tag based on the user's action on this step of the guide
+                let key = "\(guideId)_\(stepOfGuide)_action"
+                let value = contextualContainer.guidePayload.guide.next.buttonText ?? "next"
+                contextualContainer.tagManager.saveTag(key: key, value: value, success: nil, failure: nil)
+                
+                self.nextStepOfGuide() // SDK is being told "success" and progress to the next step (if any) in the Guide
+                dismissGuide()
             },
             prevlabel: contextualContainer.guidePayload.guide.prev.buttonText ?? "back",
             prevbgcolor: contextualContainer.guidePayload.guide.prev.backgroundColor ?? UIColor(Color.red),
             prevButtonTapped: {
+                // Save a tag based on the user's action on this step of the guide
+                let key = "\(guideId)_\(stepOfGuide)_action"
+                let value = contextualContainer.guidePayload.guide.prev.buttonText ?? "back"
+                contextualContainer.tagManager.saveTag(key: key, value: value, success: nil, failure: nil)
+                
                 self.previousStepOfGuide() // SDK is being told "fail" and go back to the last step (if any) in the Guide
                 dismissGuide()
             }
