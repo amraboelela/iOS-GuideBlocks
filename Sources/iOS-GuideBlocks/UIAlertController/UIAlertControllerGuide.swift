@@ -10,6 +10,7 @@ import SwiftUI
 import ContextualSDK
 
 public class UIAlertControllerGuide: CTXBaseGuideController {
+    var controller: UIViewController?
     public override func presentGuideBlock(contextualContainer: ContextualContainer,
                                            viewController controller: UIViewController?,
                                            success: @escaping ((CTXIGuidePayload) -> ()),
@@ -19,6 +20,7 @@ public class UIAlertControllerGuide: CTXBaseGuideController {
         failure(contextualContainer.guidePayload) // SDK will move to next guide in the feed if the step can't be shown
         return
     }
+    self.controller=controller
 
     var myAlertStyle: UIAlertController.Style = .alert // default style of UIAlertController
             
@@ -34,11 +36,11 @@ public class UIAlertControllerGuide: CTXBaseGuideController {
                                   message: contextualContainer.guidePayload.guide.content.text,
                                   preferredStyle: myAlertStyle)
 
-    alert.addAction(UIAlertAction(title: "OK", style:.default, handler: { action in
-        self.nextStepOfGuide()
-    }))
     alert.addAction(UIAlertAction(title: "Cancel", style: .destructive, handler: { action in
         self.previousStepOfGuide()
+    }))
+    alert.addAction(UIAlertAction(title: "OK", style:.default, handler: { action in
+        self.nextStepOfGuide()
     }))
     controller.present(alert, animated: true, completion: nil)
 
@@ -48,6 +50,7 @@ public class UIAlertControllerGuide: CTXBaseGuideController {
     }
     
     override public func isDismissingGuide() {
+        self.controller?.dismiss(animated: true)
         // anything else you want to implement during the dismissal of this GuideBlock step
     }
 }
