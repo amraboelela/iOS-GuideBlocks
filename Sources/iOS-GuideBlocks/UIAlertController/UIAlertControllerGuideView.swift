@@ -32,7 +32,7 @@ struct UIAlertControllerGuideView: View {
                     .multilineTextAlignment(.center)
                     .foregroundColor(.secondary)
 
-                HStack(spacing: 16) {
+                HStack(spacing: 1) {
                     Button(prevlabel) {
                         self.prevButtonTapped?()
                     }
@@ -40,7 +40,7 @@ struct UIAlertControllerGuideView: View {
                     .foregroundColor(.white)
                     .background(Color(prevbgcolor))
                     
-                    Spacer()
+                    //Spacer()
 
                     Button(nextlabel) {
                         self.nextButtonTapped?()
