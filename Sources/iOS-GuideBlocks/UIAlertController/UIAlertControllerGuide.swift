@@ -33,14 +33,14 @@ public class UIAlertControllerGuide: CTXBaseGuideController {
         let view = UIAlertControllerGuideView(
             title: contextualContainer.guidePayload.guide.title.text,
             message: contextualContainer.guidePayload.guide.content.text,
-            nextlabel: contextualContainer.guidePayload.guide.next.buttonText,
-            nextbgcolor: contextualContainer.guidePayload.guide.next.backgroundColor,
+            nextlabel: contextualContainer.guidePayload.guide.next.buttonText ?? "next",
+nextbgcolor: contextualContainer.guidePayload.guide.next.backgroundColor ?? UIColor(Color.green),
             nextButtonTapped: {
                     self.nextStepOfGuide() // SDK is being told "success" and progress to the next step (if any) in the Guide
                     dismissGuide()
             },
-            prevlabel: contextualContainer.guidePayload.guide.prev.buttonText,
-            prevbgcolor: contextualContainer.guidePayload.guide.prev.backgroundColor,
+            prevlabel: contextualContainer.guidePayload.guide.prev.buttonText ?? "back",
+            prevbgcolor: contextualContainer.guidePayload.guide.prev.backgroundColor ?? UIColor(Color.red),
             prevButtonTapped: {
                 self.previousStepOfGuide() // SDK is being told "fail" and go back to the last step (if any) in the Guide
                 dismissGuide()
