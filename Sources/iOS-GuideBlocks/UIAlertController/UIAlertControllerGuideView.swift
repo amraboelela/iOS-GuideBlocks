@@ -12,7 +12,10 @@ struct UIAlertControllerGuideView: View {
     var title: String
     var message: String
     var nextlabel: String
+    var nextbgcolor: UIColor
     var nextButtonTapped: (() -> ())?
+    var prevlabel: String
+    var prevbgcolor: UIColor
     var prevButtonTapped: (() -> ())?
     
     var body: some View {
@@ -30,12 +33,12 @@ struct UIAlertControllerGuideView: View {
                     .foregroundColor(.secondary)
 
                 HStack(spacing: 16) {
-                    Button("Cancel") {
+                    Button(prevlabel) {
                         self.prevButtonTapped?()
                     }
                     .padding()
                     .foregroundColor(.white)
-                    .background(Color.red)
+                    .background(Color(prevbgcolor))
                     
                     Spacer()
 
@@ -44,7 +47,7 @@ struct UIAlertControllerGuideView: View {
                     }
                     .padding()
                     .foregroundColor(.white)
-                    .background(Color.green)
+
                 }
             }
             .padding()
@@ -64,9 +67,12 @@ struct UIAlertControllerGuideView_Previews: PreviewProvider {
             title: "title",
             message: "message",
             nextlabel: "next",
+            nextbgcolor: UIColor(Color.green),
             nextButtonTapped:  {
                 // Do nothing
             },
+            prevlabel: "back",
+            prevbgcolor: UIColor(Color.red),
             prevButtonTapped: {
                 // Do nothing
             }
