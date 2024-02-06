@@ -34,9 +34,11 @@ public class UIAlertControllerGuide: CTXBaseGuideController {
             title: contextualContainer.guidePayload.guide.title.text,
             message: contextualContainer.guidePayload.guide.content.text,
             okButtonTapped: {
+                self.nextStepOfGuide()
                 dismissGuide()
             },
             cancelButtonTapped: {
+                self.previousStepOfGuide()
                 dismissGuide()
             }
         )
