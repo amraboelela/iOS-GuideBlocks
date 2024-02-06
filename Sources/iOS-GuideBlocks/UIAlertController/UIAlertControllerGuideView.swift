@@ -12,18 +12,21 @@ struct UIAlertControllerGuideView: View {
     var title: String
     var message: String
     var nextlabel: String
+    var nexttextColor:UIColor
     var nextbgcolor: UIColor
     var nextButtonTapped: (() -> ())?
     var prevlabel: String
+    var prevtextColor:UIColor
     var prevbgcolor: UIColor
     var prevButtonTapped: (() -> ())?
+    var actiontagvalue: String
     
     var body: some View {
         VStack {
             Spacer()
 
             VStack(spacing: 16) {
-                Text(title)
+                Text("\(title) [[\(actiontagvalue)]]")
                     .font(.headline)
                     .foregroundColor(.primary)
 
@@ -37,7 +40,7 @@ struct UIAlertControllerGuideView: View {
                         self.prevButtonTapped?()
                     }
                     .padding()
-                    .foregroundColor(.white)
+                    .foregroundColor(Color(prevtextColor))
                     .background(Color(prevbgcolor))
                     
                     //Spacer()
@@ -46,7 +49,7 @@ struct UIAlertControllerGuideView: View {
                         self.nextButtonTapped?()
                     }
                     .padding()
-                    .foregroundColor(.white)
+                    .foregroundColor(Color(nexttextColor))
                     .background(Color(nextbgcolor))
                 }
             }
@@ -67,15 +70,18 @@ struct UIAlertControllerGuideView_Previews: PreviewProvider {
             title: "title",
             message: "message",
             nextlabel: "next",
+            nexttextColor:UIColor(Color.white),
             nextbgcolor: UIColor(Color.green),
             nextButtonTapped:  {
                 // Do nothing
             },
             prevlabel: "back",
+            prevtextColor:UIColor(Color.white),
             prevbgcolor: UIColor(Color.red),
             prevButtonTapped: {
                 // Do nothing
-            }
+            },
+            actiontagvalue: "last action"
         )
     }
 }
