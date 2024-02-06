@@ -33,12 +33,13 @@ public class UIAlertControllerGuide: CTXBaseGuideController {
         let view = UIAlertControllerGuideView(
             title: contextualContainer.guidePayload.guide.title.text,
             message: contextualContainer.guidePayload.guide.content.text,
-            okButtonTapped: {
-                self.nextStepOfGuide()
-                dismissGuide()
+            nextlabel: contextualContainer.guidePayload.guide.next.buttonText,
+            nextButtonTapped: {
+                    self.nextStepOfGuide() // SDK is being told "success" and progress to the next step (if any) in the Guide
+                    dismissGuide()
             },
-            cancelButtonTapped: {
-                self.previousStepOfGuide()
+            prevButtonTapped: {
+                self.previousStepOfGuide() // SDK is being told "fail" and go back to the last step (if any) in the Guide
                 dismissGuide()
             }
         )
@@ -46,7 +47,7 @@ public class UIAlertControllerGuide: CTXBaseGuideController {
         self.hostingController = UIHostingController(rootView: view)
         
         guard let hostingController = self.hostingController else {
-            failure(contextualContainer.guidePayload)
+            failure(contextualContainer.guidePayload) // // SDK will move to next guide in the feed if the step can't be shown
             return
         }
         

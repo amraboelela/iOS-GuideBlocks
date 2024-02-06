@@ -11,8 +11,9 @@ import ContextualSDK
 struct UIAlertControllerGuideView: View {
     var title: String
     var message: String
-    var okButtonTapped: (() -> ())?
-    var cancelButtonTapped: (() -> ())?
+    var nextlabel: String
+    var nextButtonTapped: (() -> ())?
+    var prevButtonTapped: (() -> ())?
     
     var body: some View {
         VStack {
@@ -30,7 +31,7 @@ struct UIAlertControllerGuideView: View {
 
                 HStack(spacing: 16) {
                     Button("Cancel") {
-                        self.cancelButtonTapped?()
+                        self.prevButtonTapped?()
                     }
                     .padding()
                     .foregroundColor(.white)
@@ -38,8 +39,8 @@ struct UIAlertControllerGuideView: View {
                     
                     Spacer()
 
-                    Button("OK") {
-                        self.okButtonTapped?()
+                    Button(nextlabel) {
+                        self.nextButtonTapped?()
                     }
                     .padding()
                     .foregroundColor(.white)
@@ -62,10 +63,11 @@ struct UIAlertControllerGuideView_Previews: PreviewProvider {
         return UIAlertControllerGuideView(
             title: "title",
             message: "message",
-            okButtonTapped:  {
+            nextlabel: "next",
+            nextButtonTapped:  {
                 // Do nothing
             },
-            cancelButtonTapped: {
+            prevButtonTapped: {
                 // Do nothing
             }
         )
