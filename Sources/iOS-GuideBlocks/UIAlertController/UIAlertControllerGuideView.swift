@@ -13,7 +13,11 @@ struct UIAlertControllerGuideView: View {
     var message: SHTipTextElement?
     var actiontagvalue: String
     var nextButton: SHTipButtonElement?
+    var nextFG:Color
+    var nextBG:Color
     var prevButton: SHTipButtonElement?
+    var prevFG:Color
+    var prevBG:Color
     var nextButtonTapped: (() -> ())?
     var prevButtonTapped: (() -> ())?
     
@@ -24,7 +28,6 @@ struct UIAlertControllerGuideView: View {
                 if let title = self.title?.text {
                     Text("\(title) [[\(actiontagvalue)]]").contextualText(textElement: self.title)
                 }
-
                 if let message = self.message?.text {
                     Text(message).contextualText(textElement: self.message)
                 }
@@ -38,7 +41,10 @@ struct UIAlertControllerGuideView: View {
                                 .cornerRadius(8)
                                 .contextualText(buttonElement: self.prevButton)
                                 .offset(x: 20, y: 0)
+                                .background(prevBG)
+                                .foregroundColor(prevFG)
                         })
+
                     }
                     //Spacer()
                     if let nextButtonText = self.nextButton?.buttonText {
@@ -50,6 +56,8 @@ struct UIAlertControllerGuideView: View {
                                 .cornerRadius(8)
                                 .contextualText(buttonElement: self.nextButton)
                                 .offset(x: 20, y: 0)
+                                .background(nextBG)
+                                .foregroundColor(nextFG)
                         })
                     }
                 }
