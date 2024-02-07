@@ -20,9 +20,9 @@ struct UIAlertControllerGuideView: View {
     
     var body: some View {
         if let unwrappedGuide = guide {
-            let guideBorderColor: Color = Color(unwrappedGuide.borderColor) // ?? Color.clear
-            let guideCnr = unwrappedGuide.borderCornerRadius
-            let guideBorderWidth = unwrappedGuide.borderWidth
+            let guideBorderColor: Color = unwrappedGuide.borderColor != nil ? Color(unwrappedGuide.borderColor) : Color.clear
+            let guideCnr = unwrappedGuide.borderCornerRadius >= 0 ? unwrappedGuide.borderCornerRadius : 5
+            let guideBorderWidth = unwrappedGuide.borderWidth >= 0 ? unwrappedGuide.borderWidth : 5
             let prevBG = Color(unwrappedGuide.prev.backgroundColor)
             let prevFG = Color(unwrappedGuide.prev.textColor)
             let nextBG = Color(unwrappedGuide.next.backgroundColor)
