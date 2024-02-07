@@ -38,7 +38,7 @@ struct UIAlertControllerGuideView: View {
                     if let message = self.message?.text {
                         Text(message).contextualText(textElement: self.message)
                     }
-                    HStack(spacing: 1) {
+                    HStack(spacing: 5) {
                         if let prevButtonText = self.prevButton?.buttonText {
                             Button(action: {
                                 self.prevButtonTapped?()
