@@ -35,6 +35,7 @@ public class UIAlertControllerGuide: CTXBaseGuideController {
         let stepOfGuide = guide.suid ?? "0"
         let actiontagkey = "\(guideId)_\(stepOfGuide)_action"
         let view = UIAlertControllerGuideView(
+            guide: guide,
             title: guide.title,
             message: guide.content,
             actiontagvalue: contextualContainer.tagManager.getTagValue(key: actiontagkey),
