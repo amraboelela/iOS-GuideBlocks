@@ -73,23 +73,3 @@ struct UIAlertControllerGuideView: View {
         .edgesIgnoringSafeArea(.all)
     }
 }
-
-/*
-struct UIAlertControllerGuideView_Previews: PreviewProvider {
-    static var previews: some View {
-        return UIAlertControllerGuideView(
-            title: "title",
-            message: "message",
-            actiontagvalue: "last action"
-            nextButton: "next",
-            prevButton: "prev",
-            nextButtonTapped:  {
-                // Do nothing
-            },
-            prevButtonTapped: {
-                // Do nothing
-            },
-        )
-    }
-}
-*/

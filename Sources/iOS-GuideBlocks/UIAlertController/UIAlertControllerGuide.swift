@@ -46,16 +46,16 @@ public class UIAlertControllerGuide: CTXBaseGuideController {
             prevBG: Color(guide.prev.backgroundColor),
             nextButtonTapped: {
                 // Save a tag based on the user's action on this step of the guide
-                //let value = contextualContainer.guidePayload.guide.next.buttonText ?? "next"
-                //contextualContainer.tagManager.saveTag(key: actiontagkey, value: value, success: nil, failure: nil)
-                //self.nextStepOfGuide() // SDK is being told "success" and progress to the next step (if any) in the Guide
+                let value = contextualContainer.guidePayload.guide.next.buttonText ?? "next"
+                contextualContainer.tagManager.saveTag(key: actiontagkey, value: value, success: nil, failure: nil)
+                self.nextStepOfGuide() // SDK is being told "success" and progress to the next step (if any) in the Guide
                 dismissGuide()
             },
             prevButtonTapped: {
                 // Save a tag based on the user's action on this step of the guide
-                //let value = contextualContainer.guidePayload.guide.prev.buttonText ?? "back"
-                //contextualContainer.tagManager.saveTag(key: actiontagkey, value: value, success: nil, failure: nil)
-                //self.previousStepOfGuide() // SDK is being told "fail" and go back to the last step (if any) in the Guide
+                let value = contextualContainer.guidePayload.guide.prev.buttonText ?? "back"
+                contextualContainer.tagManager.saveTag(key: actiontagkey, value: value, success: nil, failure: nil)
+                self.previousStepOfGuide() // SDK is being told "fail" and go back to the last step (if any) in the Guide
                 dismissGuide()
             }
         )
