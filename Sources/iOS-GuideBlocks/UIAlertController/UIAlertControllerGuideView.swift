@@ -14,11 +14,7 @@ struct UIAlertControllerGuideView: View {
     var message: SHTipTextElement?
     var actiontagvalue: String
     var nextButton: SHTipButtonElement?
-    var nextFG:Color
-    var nextBG:Color
     var prevButton: SHTipButtonElement?
-    var prevFG:Color
-    var prevBG:Color
     var nextButtonTapped: (() -> ())?
     var prevButtonTapped: (() -> ())?
     
@@ -27,6 +23,10 @@ struct UIAlertControllerGuideView: View {
             let guideBorderColor: Color = Color(unwrappedGuide.borderColor) // ?? Color.clear
             let guideCnr = unwrappedGuide.borderCornerRadius
             let guideBorderWidth = unwrappedGuide.borderWidth
+            let prevBG = Color(unwrappedGuide.prev.backgroundColor)
+            let prevFG = Color(unwrappedGuide.prev.textColor)
+            let nextBG = Color(unwrappedGuide.next.backgroundColor)
+            let nextFG = Color(unwrappedGuide.prev.textColor)
             let prevCnr = self.prevButton?.borderCornerRadius ?? 5
             let nextCnr = self.nextButton?.borderCornerRadius ?? 5
             VStack {
@@ -53,7 +53,7 @@ struct UIAlertControllerGuideView: View {
                             })
 
                         }
-                        Spacer()
+                        //Spacer()
                         if let nextButtonText = self.nextButton?.buttonText {
                             Button(action: {
                                 self.nextButtonTapped?()

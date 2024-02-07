@@ -40,11 +40,7 @@ public class UIAlertControllerGuide: CTXBaseGuideController {
             message: guide.content,
             actiontagvalue: contextualContainer.tagManager.getTagValue(key: actiontagkey),
             nextButton: guide.next,
-            nextFG: Color(guide.next.textColor),
-            nextBG: Color(guide.next.backgroundColor),
             prevButton: guide.prev,
-            prevFG: Color(guide.prev.textColor),
-            prevBG: Color(guide.prev.backgroundColor),
             nextButtonTapped: {
                 // Save a tag based on the user's action on this step of the guide
                 let value = contextualContainer.guidePayload.guide.next.buttonText ?? "next"
