@@ -27,7 +27,6 @@ struct UIAlertControllerGuideView: View {
 
                 if let message = self.message?.text {
                     Text(message).contextualText(textElement: self.message)
-                        .multilineTextAlignment(self.message?.alignment)
                 }
                 HStack(spacing: 1) {
                     if let prevButtonText = self.prevButton?.buttonText {

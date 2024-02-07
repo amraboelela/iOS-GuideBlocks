@@ -14,9 +14,13 @@ struct ContextualTextModifier: ViewModifier {
     let fontWeight: String?
     let fontSize: CGFloat?
     let textColor: UIColor?
+    let textAlignment: NSTextAlignment?
     
     func body(content: Content) -> some View {
-        return content.font(self.customFont()).foregroundColor(self.customColor())
+        return content
+            .font(self.customFont())
+            .foregroundColor(self.customColor())
+            .multilineTextAlignment(self.customAlignment())
     }
     
     private func customFont() -> Font {
@@ -54,6 +58,29 @@ struct ContextualTextModifier: ViewModifier {
         
         return color
     }
+    
+    private func customAlignment() -> TextAlignment {
+        var alignment = TextAlignment.leading
+        
+        if let textAlignment = self.textAlignment {
+            switch textAlignment {
+            case NSTextAlignment.left:
+                alignment = .leading
+            case NSTextAlignment.right:
+                alignment = .trailing
+            case NSTextAlignment.center:
+                alignment = .center
+            case NSTextAlignment.justified:
+                alignment = .leading
+            case NSTextAlignment.natural:
+                alignment = .leading
+            default:
+                alignment = .leading
+            }
+        }
+        
+        return alignment
+    }
 }
 
 extension Font {
@@ -71,13 +98,15 @@ extension View {
         self.modifier(ContextualTextModifier(fontName: textElement?.fontName,
                                              fontWeight: textElement?.fontWeight,
                                              fontSize: textElement?.fontSize,
-                                             textColor: textElement?.textColor))
+                                             textColor: textElement?.textColor,
+                                             textAlignment: textElement?.alignment))
     }
     
     func contextualText(buttonElement: SHTipButtonElement?) -> some View {
         self.modifier(ContextualTextModifier(fontName: buttonElement?.fontName,
                                              fontWeight: buttonElement?.fontWeight,
                                              fontSize: buttonElement?.fontSize,
-                                             textColor: buttonElement?.textColor))
+                                             textColor: buttonElement?.textColor,
+                                             textAlignment: buttonElement?.alignment))
     }
 }
