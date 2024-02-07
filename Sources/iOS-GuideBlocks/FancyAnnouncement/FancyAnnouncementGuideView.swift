@@ -64,8 +64,7 @@ struct FancyAnnouncementGuideView: View {
                     VStack {
                         Spacer()
                         if let title = self.title?.text {
-                            Text(title).contextualText(textElement: self.title)
-                                
+                            Text(title).contextualText(textElement: self.title)    
                         }
                         if let message = self.message?.text {
                             Text(message)

@@ -9,48 +9,50 @@ import SwiftUI
 import ContextualSDK
 
 struct UIAlertControllerGuideView: View {
-    var title: String
-    var message: String
-    var nextlabel: String
-    var nexttextColor:UIColor
-    var nextbgcolor: UIColor
-    var nextButtonTapped: (() -> ())?
-    var prevlabel: String
-    var prevtextColor:UIColor
-    var prevbgcolor: UIColor
-    var prevButtonTapped: (() -> ())?
+    var title: SHTipTextElement?
+    var message: SHTipTextElement?
     var actiontagvalue: String
+    var nextButton: SHTipButtonElement?
+    var prevButton: SHTipButtonElement?
+    var nextButtonTapped: (() -> ())?
+    var prevButtonTapped: (() -> ())?
     
     var body: some View {
         VStack {
             Spacer()
-
             VStack(spacing: 16) {
-                Text("\(title) [[\(actiontagvalue)]]")
-                    .font(.headline)
-                    .foregroundColor(.primary)
+                if let title = self.title?.text {
+                    Text("\(title) [[\(actiontagvalue)]]").contextualText(textElement: self.title)
+                }
 
-                Text(message)
-                    .font(.body)
-                    .multilineTextAlignment(.center)
-                    .foregroundColor(.secondary)
-
+                if let message = self.message?.text {
+                    Text(message).contextualText(textElement: self.message)
+                        .multilineTextAlignment(self.message?.alignment)
+                }
                 HStack(spacing: 1) {
-                    Button(prevlabel) {
-                        self.prevButtonTapped?()
+                    if let prevButtonText = self.prevButton?.buttonText {
+                        Button(action: {
+                            self.prevButtonTapped?()
+                        }, label: {
+                            Text(prevButtonText)
+                                .padding()
+                                .cornerRadius(8)
+                                .contextualText(buttonElement: self.prevButton)
+                                .offset(x: 20, y: 0)
+                        })
                     }
-                    .padding()
-                    .foregroundColor(Color(prevtextColor))
-                    .background(Color(prevbgcolor))
-                    
                     //Spacer()
-
-                    Button(nextlabel) {
-                        self.nextButtonTapped?()
+                    if let nextButtonText = self.nextButton?.buttonText {
+                        Button(action: {
+                            self.nextButtonTapped?()
+                        }, label: {
+                            Text(nextButtonText)
+                                .padding()
+                                .cornerRadius(8)
+                                .contextualText(buttonElement: self.nextButton)
+                                .offset(x: 20, y: 0)
+                        })
                     }
-                    .padding()
-                    .foregroundColor(Color(nexttextColor))
-                    .background(Color(nextbgcolor))
                 }
             }
             .padding()
@@ -64,24 +66,23 @@ struct UIAlertControllerGuideView: View {
         .edgesIgnoringSafeArea(.all)
     }
 }
+
+/*
 struct UIAlertControllerGuideView_Previews: PreviewProvider {
     static var previews: some View {
         return UIAlertControllerGuideView(
             title: "title",
             message: "message",
-            nextlabel: "next",
-            nexttextColor:UIColor(Color.white),
-            nextbgcolor: UIColor(Color.green),
+            actiontagvalue: "last action"
+            nextButton: "next",
+            prevButton: "prev",
             nextButtonTapped:  {
                 // Do nothing
             },
-            prevlabel: "back",
-            prevtextColor:UIColor(Color.white),
-            prevbgcolor: UIColor(Color.red),
             prevButtonTapped: {
                 // Do nothing
             },
-            actiontagvalue: "last action"
         )
     }
 }
+*/
