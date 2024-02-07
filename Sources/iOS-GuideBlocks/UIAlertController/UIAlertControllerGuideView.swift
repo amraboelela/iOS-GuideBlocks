@@ -26,7 +26,7 @@ struct UIAlertControllerGuideView: View {
             let prevBG = Color(unwrappedGuide.prev.backgroundColor)
             let prevFG = Color(unwrappedGuide.prev.textColor)
             let nextBG = Color(unwrappedGuide.next.backgroundColor)
-            let nextFG = Color(unwrappedGuide.prev.textColor)
+            let nextFG = Color(unwrappedGuide.next.textColor)
             let prevCnr = self.prevButton?.borderCornerRadius ?? 5
             let nextCnr = self.nextButton?.borderCornerRadius ?? 5
             VStack {
