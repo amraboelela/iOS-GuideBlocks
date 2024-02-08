@@ -1,7 +1,7 @@
 # iOS-GuideBlocks
 
-This is a shared open source repository for GuideBlocks that can be used in IOS Apps.
-You can use any of these GuideBlocks here in your App in Conjunction with the Contextual IOS SDK and an account at https://dashboard.contextu.al
+This is a shared open source repository for GuideBlocks that can be used in iOS Apps.
+You can use any of these GuideBlocks here in your App in Conjunction with the Contextual iOS SDK and an account at https://dashboard.contextu.al
 
 ## Using GuideBlocks
 
@@ -25,7 +25,7 @@ There are two ways to use GuideBlocks:
 
 ### 2. Make your own App elements into private GuideBlocks
 
-Simply wrap your existing code elements into a GuideBlock, even if they are deeply embedded your product team can launch from the Contextual Dashboard.
+Simply wrap your existing code elements into a GuideBlock, even if they are deeply embedded, your product team can launch from the Contextual Dashboard.
 
 See the following examples:
 
@@ -43,8 +43,8 @@ You can contribute to https://guideblocks.org by wrapping a code element that wo
 3. Create a new branch with your GuideBlock name
 4. Add your code: maybe it is yours or maybe it is some public available source on the internet. Isolate the functional elements.
 5. [Wrap your code following these instructions](https://github.com/GuideBlocks-org#how-do-i-make-a-guideblock)
-6. Test it out with a sample add and the Contextual Dashboard. Push this sammple app to a public repo or use the [AirBnB Sample](https://github.com/contextu-al/AirBnB-iOS)
-7. Create a GuideBlock.yaml in the root directory - see the template below. Be sure to add the sample app repo/branch that you have used into the GuideBlock.yaml 
+6. Test it out with a sample app in and the Contextual Dashboard. Push this sammple app to a public repo or use the [AirBnB Sample](https://github.com/contextu-al/AirBnB-iOS)
+7. Create a GuideBlock.yaml in the directory of the each GuideBlock inside the iOS-GuideBlocks repo - see the template below. Be sure to add the sample app repo/branch that you have used into the GuideBlock.yaml 
 8. Create a README.md in the root directory to tell users how to use the GuideBlock (mapping parameters and adding to the extensibility section of the Dashboard) 
 9. Commit, Push and create a PR.
 10. Sit back, relax, have a bubble tea and wait for approval!
