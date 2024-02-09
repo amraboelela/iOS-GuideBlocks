@@ -9,6 +9,30 @@ import SwiftUI
 
 struct MyChecklistView: View {
     @State private var isPopupVisible = false
+    
+    var body: some View {
+        VStack {
+            Button(action: {
+                isPopupVisible.toggle()
+                print("Do list button tapped")
+            }) {
+                Text("Do list")
+                    .foregroundColor(.white) // Set text color to white
+                    .padding() // Add padding to the text
+                    .background(Color.blue) // Set background color to sky blue
+                    .cornerRadius(10) // Apply round rectangle shape with corner radius
+            }
+        }
+        .overlay {
+            if isPopupVisible {
+                DoListView()
+            }
+         }
+    }
+}
+
+struct DoListView: View {
+    @State private var isPopupVisible = false
     @State private var selectedRow: Int?
     @State private var rowsEnabled = [true, true, true] // Enable/disable rows programmatically
     
@@ -26,79 +50,43 @@ struct MyChecklistView: View {
     
     var body: some View {
         VStack {
-            Button(action: {
-                isPopupVisible.toggle()
-                print("Do list button tapped")
-            }) {
-                Text("Do list")
-                    .foregroundColor(.white) // Set text color to white
-                    .padding() // Add padding to the text
-                    .background(Color.blue) // Set background color to sky blue
-                    .cornerRadius(10) // Apply round rectangle shape with corner radius
-            }
-            .sheet(isPresented: $isPopupVisible) {
-                Text("Do list")
-                    .font(.headline)
-                    .padding()
-                List(0..<rowData.count, id: \.self) { index in
-                    Button(action: {
-                        if self.rowsEnabled[index] {
-                            self.rowActions[index](self.rowData[index].0)
-                            self.selectedRow = index
-                        }
-                    }) {
-                        HStack {
-                            Text(self.rowData[index].0)
-                            Spacer()
-                            Image(systemName: self.rowData[index].1 ? "checkmark.square.fill" : "square.fill")
-                                .foregroundColor(self.rowData[index].1 ? .green : .gray)
-                        }
-                        .foregroundColor(self.rowsEnabled[index] ? .primary : .gray)
+            Text("Do list")
+                .font(.headline)
+                .padding()
+            List(0..<rowData.count, id: \.self) { index in
+                Button(action: {
+                    if self.rowsEnabled[index] {
+                        self.rowActions[index](self.rowData[index].0)
+                        self.selectedRow = index
                     }
-                    .disabled(!self.rowsEnabled[index])
+                }) {
+                    HStack {
+                        Text(self.rowData[index].0)
+                        Spacer()
+                        Image(systemName: self.rowData[index].1 ? "checkmark.square.fill" : "square.fill")
+                            .foregroundColor(self.rowData[index].1 ? .green : .gray)
+                    }
+                    .foregroundColor(self.rowsEnabled[index] ? .primary : .gray)
                 }
-                .frame(height: 200)
+                .disabled(!self.rowsEnabled[index])
             }
-            .padding()
-            .background(Color.white)
-            .cornerRadius(10)
-            .shadow(radius: 10)
+            .frame(height: 200)
         }
-        /*
-         Text("Do list")
-         .font(.headline)
-         .padding()
-         List(0..<rowData.count, id: \.self) { index in
-         Button(action: {
-         if self.rowsEnabled[index] {
-         self.rowActions[index](self.rowData[index].0)
-         self.selectedRow = index
-         }
-         }) {
-         HStack {
-         Text(self.rowData[index].0)
-         Spacer()
-         Image(systemName: self.rowData[index].1 ? "checkmark.square.fill" : "square.fill")
-         .foregroundColor(self.rowData[index].1 ? .green : .gray)
-         }
-         .foregroundColor(self.rowsEnabled[index] ? .primary : .gray)
-         }
-         .disabled(!self.rowsEnabled[index])
-         }
-         .frame(height: 200)
-         }
-         .padding()
-         .background(Color.white)
-         .cornerRadius(10)
-         .shadow(radius: 10)
-         .onTapGesture {
-         self.isPopupVisible = false
-         }*/
+        .padding()
+        .background(Color.white)
+        .cornerRadius(10)
+        .shadow(radius: 10)
     }
 }
 
 struct MyChecklistView_Previews: PreviewProvider {
     static var previews: some View {
         MyChecklistView()
+    }
+}
+
+struct DoListView_Previews: PreviewProvider {
+    static var previews: some View {
+        DoListView()
     }
 }
