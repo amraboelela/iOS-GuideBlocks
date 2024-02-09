@@ -48,6 +48,7 @@ struct DoListView: View {
         true,
         true,
         true,
+        true,
         true
     ] // Enable/disable rows programmatically
     
