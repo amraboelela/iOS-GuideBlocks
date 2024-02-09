@@ -20,10 +20,12 @@ public class MyChecklistGuide: CTXBaseGuideController {
     ///   - controller: The view controller to present the guide block on.
     ///   - success: The closure to be called when the guide block is successfully presented.
     ///   - failure: The closure to be called when there is a failure in presenting the guide block.
-    public override func presentGuideBlock(contextualContainer: ContextualContainer,
-                                           viewController controller: UIViewController?,
-                                           success: @escaping ((CTXIGuidePayload) -> ()),
-                                           failure: @escaping ((CTXIGuidePayload) -> ())) {
+    public override func presentGuideBlock(
+        contextualContainer: ContextualContainer,
+        viewController controller: UIViewController?,
+        success: @escaping ((CTXIGuidePayload) -> ()),
+        failure: @escaping ((CTXIGuidePayload) -> ())
+    ) {
 
         guard let controller = controller else {
             failure(contextualContainer.guidePayload)
@@ -31,15 +33,6 @@ public class MyChecklistGuide: CTXBaseGuideController {
         }
         
         //let guide = contextualContainer.guidePayload.guide
-                
-        /*guard let vid_url = guide.extraJson?["vid_url"] as? String else {
-            failure(contextualContainer.guidePayload)
-            return
-        }
-        guard let circle_diameter = guide.extraJson?["circle_diameter"] as? Int else {
-            let circle_diameter = 150
-            return
-        }*/
         
         let view = MyChecklistView()
         
