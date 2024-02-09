@@ -37,12 +37,33 @@ struct MyChecklistView: View {
 struct DoListView: View {
     @State private var isPopupVisible = false
     @State private var selectedRow: Int?
-    @State private var rowsEnabled = [true, true, true] // Enable/disable rows programmatically
+    @State private var rowsEnabled = [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+    ] // Enable/disable rows programmatically
     
     let rowActions: [(String) -> Void] = [
-        { text in print("Action for row 1 with text: \(text)") },
-        { text in print("Action for row 2 with text: \(text)") },
-        { text in print("Action for row 3 with text: \(text)") }
+        { text in print("Action for task 1 with text: \(text)") },
+        { text in print("Action for task 2 with text: \(text)") },
+        { text in print("Action for task 3 with text: \(text)") },
+        { text in print("Action for task 4 with text: \(text)") },
+        { text in print("Action for task 5 with text: \(text)") },
+        { text in print("Action for task 6 with text: \(text)") },
+        { text in print("Action for task 7 with text: \(text)") },
+        { text in print("Action for task 8 with text: \(text)") },
+        { text in print("Action for task 9 with text: \(text)") },
+        { text in print("Action for task 10 with text: \(text)") },
+        { text in print("Action for task 11 with text: \(text)") },
+        { text in print("Action for task 12 with text: \(text)") },
     ]
     
     let rowData: [(String, Bool)] = [
