@@ -23,11 +23,9 @@ struct MyChecklistView: View {
                     .cornerRadius(10) // Apply round rectangle shape with corner radius
             }
         }
-        .overlay {
-            if isPopupVisible {
-                DoListView()
-            }
-         }
+        .sheet(isPresented: $isPopupVisible) {
+            DoListView()
+        }
     }
 }
 
