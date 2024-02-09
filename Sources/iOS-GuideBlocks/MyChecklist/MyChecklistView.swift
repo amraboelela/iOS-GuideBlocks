@@ -26,9 +26,43 @@ struct MyChecklistView: View {
     
     var body: some View {
         VStack {
-            Button("Do list", action: {
+            Button(action: {
+                isPopupVisible.toggle()
                 print("Do list button tapped")
-            })
+            }) {
+                Text("Do list")
+                    .foregroundColor(.white) // Set text color to white
+                    .padding() // Add padding to the text
+                    .background(Color.blue) // Set background color to sky blue
+                    .cornerRadius(10) // Apply round rectangle shape with corner radius
+            }
+            .sheet(isPresented: $isPopupVisible) {
+                Text("Do list")
+                    .font(.headline)
+                    .padding()
+                List(0..<rowData.count, id: \.self) { index in
+                    Button(action: {
+                        if self.rowsEnabled[index] {
+                            self.rowActions[index](self.rowData[index].0)
+                            self.selectedRow = index
+                        }
+                    }) {
+                        HStack {
+                            Text(self.rowData[index].0)
+                            Spacer()
+                            Image(systemName: self.rowData[index].1 ? "checkmark.square.fill" : "square.fill")
+                                .foregroundColor(self.rowData[index].1 ? .green : .gray)
+                        }
+                        .foregroundColor(self.rowsEnabled[index] ? .primary : .gray)
+                    }
+                    .disabled(!self.rowsEnabled[index])
+                }
+                .frame(height: 200)
+            }
+            .padding()
+            .background(Color.white)
+            .cornerRadius(10)
+            .shadow(radius: 10)
         }
         /*
          Text("Do list")
