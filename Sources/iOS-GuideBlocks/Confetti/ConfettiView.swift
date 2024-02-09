@@ -1,9 +1,9 @@
 //
 //  ConfettiView.swift
-//  airbnb-main
+//  iOS-GuideBlocks
 //
 //  Created by Marc Stroebel on 8/12/2023.
-//  Copyright © 2023 Yonas Stephen. All rights reserved.
+//  Copyright © 2023 Yonas Stephen.
 //
 
 import SwiftUI

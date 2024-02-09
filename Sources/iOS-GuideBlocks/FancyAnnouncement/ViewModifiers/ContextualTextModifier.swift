@@ -1,9 +1,9 @@
 //
 //  ContextualTextModifier.swift
-//  airbnb-main
+//  iOS-GuideBlocks
 //
 //  Created by Marc Stroebel on 22/1/2024.
-//  Copyright © 2024 Yonas Stephen. All rights reserved.
+//  Copyright © 2024 Yonas Stephen.
 //
 
 import SwiftUI

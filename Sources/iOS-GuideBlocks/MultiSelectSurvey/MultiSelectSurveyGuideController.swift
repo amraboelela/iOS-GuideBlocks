@@ -3,7 +3,7 @@
 //  GuideBlocks
 //
 //  Created by Marc Stroebel on 25/1/2024.
-//  Copyright © 2024 GuideBlocks. All rights reserved.
+//  Copyright © 2024 GuideBlocks.
 //
 
 import SwiftUI

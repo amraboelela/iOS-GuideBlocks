@@ -22,7 +22,7 @@ Everyone loves Confetti! This is a simple example to get you started with Contex
 `
  * Match the name in the JSON to the name of your wrapper in the code
 
- <img src="https://raw.githubusercontent.com/GuideBlocks-org/iOS-GuideBlocks/main/Sources/iOS-GuideBlocks/Confetti/confetti-guideblock.png" alt="Adding your Extra JSON" width="200"/>
+ <img src="confetti-guideblock.png" alt="Adding your Extra JSON" width="200"/>
 
 8. If you are still in Preview Mode, then you should see the Announcement will magically change to Confetti.
 9. Save the guide and show to your Product Team, once you release this version of the App they can launch Confetti to whoever they want, whenever they want.

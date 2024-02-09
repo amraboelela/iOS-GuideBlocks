@@ -1,8 +1,8 @@
 //
 //  CircleVideoGuide.swift
-//  airbnb-main
+//  iOS-GuideBlocks
 //
-//  Copyright © 2023 Contextual. All rights reserved.
+//  Copyright © 2023 Contextual.
 //
 
 import SwiftUI

@@ -1,9 +1,9 @@
 //
 //  FancyAnnouncementGuideView.swift
-//  airbnb-main
+//  iOS-GuideBlocks
 //
 //  Created by Marc Stroebel on 7/11/2023.
-//  Copyright © 2023 Contextual. All rights reserved.
+//  Copyright © 2023 Contextual.
 //
 
 import SwiftUI

@@ -1,13 +1,12 @@
 //
 //  CircleVideoView.swift
-//  airbnb-main
+//  iOS-GuideBlocks
 //
 //  Created by David Jones on 11/12/2023.
 //
 
 import SwiftUI
 import WebKit
-
 
 // WebView Representable
 struct WebView: UIViewRepresentable {
@@ -21,7 +20,6 @@ struct WebView: UIViewRepresentable {
         uiView.load(URLRequest(url: url))
     }
 }
-
 
 // Round Popup View
 struct CircleVideoView: View {
@@ -56,7 +54,6 @@ struct CircleVideoView: View {
     }
 }
 
-
 struct CircleVideoView_Previews: PreviewProvider {
     static var previews: some View {
         CircleVideoView(vid_url: "https://www.youtube.com/embed/dQw4w9WgXcQ?si=Wx9SC9sBIU6AlMnz",
@@ -65,5 +62,3 @@ struct CircleVideoView_Previews: PreviewProvider {
         })
     }
 }
-
-
