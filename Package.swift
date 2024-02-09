@@ -11,23 +11,27 @@ let package = Package(
     products: [
         .library(
             name: "iOS-GuideBlocks",
-            targets: ["iOS-GuideBlocks"]),
+            targets: ["iOS-GuideBlocks"]
+        ),
     ],
     dependencies: [
         .package(
-          name:"Contextual", 
-          url: "https://github.com/contextu-al/Contextual-SDK", 
-          .upToNextMajor(from: "3.0.1")),
+            name: "Contextual",
+            url: "https://github.com/contextu-al/Contextual-SDK",
+            .upToNextMajor(from: "3.0.1")
+        ),
         .package(
             name: "ConfettiSwiftUI",
-            url: "https://github.com/simibac/ConfettiSwiftUI", .upToNextMajor(from: "1.0.0")),
+            url: "https://github.com/simibac/ConfettiSwiftUI",
+            .upToNextMajor(from: "1.0.0")
+        ),
     ],
     targets: [
         .target(
             name: "iOS-GuideBlocks",
             dependencies: [
-              .product(name: "ContextualSDK", package: "Contextual"),
-              .product(name: "ConfettiSwiftUI", package: "ConfettiSwiftUI")
+                .product(name: "ContextualSDK", package: "Contextual"),
+                .product(name: "ConfettiSwiftUI", package: "ConfettiSwiftUI")
             ]
         ),
     ]
