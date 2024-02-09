@@ -26,35 +26,40 @@ struct MyChecklistView: View {
     
     var body: some View {
         VStack {
-            Text("Do list")
-                .font(.headline)
-                .padding()
-            List(0..<rowData.count, id: \.self) { index in
-                Button(action: {
-                    if self.rowsEnabled[index] {
-                        self.rowActions[index](self.rowData[index].0)
-                        self.selectedRow = index
-                    }
-                }) {
-                    HStack {
-                        Text(self.rowData[index].0)
-                        Spacer()
-                        Image(systemName: self.rowData[index].1 ? "checkmark.square.fill" : "square.fill")
-                            .foregroundColor(self.rowData[index].1 ? .green : .gray)
-                    }
-                    .foregroundColor(self.rowsEnabled[index] ? .primary : .gray)
-                }
-                .disabled(!self.rowsEnabled[index])
-            }
-            .frame(height: 200)
+            Button("Do list", action: {
+                print("Do list button tapped")
+            })
         }
-        .padding()
-        .background(Color.white)
-        .cornerRadius(10)
-        .shadow(radius: 10)
-        .onTapGesture {
-            self.isPopupVisible = false
-        }
+        /*
+         Text("Do list")
+         .font(.headline)
+         .padding()
+         List(0..<rowData.count, id: \.self) { index in
+         Button(action: {
+         if self.rowsEnabled[index] {
+         self.rowActions[index](self.rowData[index].0)
+         self.selectedRow = index
+         }
+         }) {
+         HStack {
+         Text(self.rowData[index].0)
+         Spacer()
+         Image(systemName: self.rowData[index].1 ? "checkmark.square.fill" : "square.fill")
+         .foregroundColor(self.rowData[index].1 ? .green : .gray)
+         }
+         .foregroundColor(self.rowsEnabled[index] ? .primary : .gray)
+         }
+         .disabled(!self.rowsEnabled[index])
+         }
+         .frame(height: 200)
+         }
+         .padding()
+         .background(Color.white)
+         .cornerRadius(10)
+         .shadow(radius: 10)
+         .onTapGesture {
+         self.isPopupVisible = false
+         }*/
     }
 }
 
