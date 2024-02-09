@@ -16,7 +16,7 @@ struct MyChecklistView: View {
                 isPopupVisible.toggle()
                 print("Do list button tapped")
             }) {
-                Text("Do list")
+                Text("To-do List")
                     .foregroundColor(.white) // Set text color to white
                     .padding() // Add padding to the text
                     .background(Color.blue) // Set background color to sky blue
@@ -47,13 +47,22 @@ struct DoListView: View {
     
     let rowData: [(String, Bool)] = [
         ("Task 1", false),
-        ("Task 2", true),
-        ("Task 3", true)
+        ("Task 2", false),
+        ("Task 3", true),
+        ("Task 4", true),
+        ("Task 5", false),
+        ("Task 6", true),
+        ("Task 7", true),
+        ("Task 8", false),
+        ("Task 9", true),
+        ("Task 10", true),
+        ("Task 11", false),
+        ("Task 12", false)
     ]
     
     var body: some View {
         VStack {
-            Text("Do list")
+            Text("Do List")
                 .font(.headline)
                 .padding()
             List(0..<rowData.count, id: \.self) { index in
