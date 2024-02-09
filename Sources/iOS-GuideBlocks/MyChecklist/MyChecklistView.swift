@@ -24,11 +24,9 @@ struct MyChecklistView: View {
             }
         }
         .sheet(isPresented: $isPopupVisible) {
-            NavigationView {
-                DoListView()
-            }
-            .navigationViewStyle(StackNavigationViewStyle()) // Use StackNavigationViewStyle to allow the view to appear smaller
+            DoListView()
         }
+        .frame(width: 300, height: 500)
     }
 }
 
