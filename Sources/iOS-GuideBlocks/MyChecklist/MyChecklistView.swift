@@ -24,9 +24,13 @@ struct MyChecklistView: View {
             }
         }
         .sheet(isPresented: $isPopupVisible) {
-            DoListView()
+            if #available(iOS 16.0, *) {
+                DoListView()
+                    .presentationDetents([.medium, .large])
+            } else {
+                DoListView()
+            }
         }
-        .frame(width: 300, height: 500)
     }
 }
 
