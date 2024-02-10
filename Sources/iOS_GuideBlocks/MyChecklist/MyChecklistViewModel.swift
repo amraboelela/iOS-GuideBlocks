@@ -10,25 +10,39 @@ import Foundation
 
 class MyChecklistViewModel : ObservableObject {
 
-    @Published var tasks = [ToDoTaskModel]()
+    @Published var taskModels = [ToDoTaskModel]()
     
     init() {
-        updateTasks()
     }
     
-    func updateTasks() {
-        var toDoTaskModels = [ToDoTaskModel]()
+    func updateWithSampleTasks() {
+        var result = [ToDoTaskModel]()
         for i in 1...12 {
-            let toDoTaskModel = ToDoTaskModel(
+            let taskModel = ToDoTaskModel(
                 id: "task\(i)",
                 name: "Task \(i)",
                 checked: i.isPrime(),
                 enabled: true,
                 action: { text in print("Action for task \(i)") }
             )
-            toDoTaskModels.append(toDoTaskModel)
+            result.append(taskModel)
         }
-        tasks = toDoTaskModels
+        taskModels = result
+    }
+    
+    func load(tasks: [String]) {
+        var result = [ToDoTaskModel]()
+        for (i, task) in tasks.enumerated() {
+            let taskModel = ToDoTaskModel(
+                id: "task\(i)",
+                name: task,
+                checked: i.isPrime(),
+                enabled: true,
+                action: { text in print("Action for task \(i)") }
+            )
+            result.append(taskModel)
+        }
+        taskModels = result
     }
     
 }
