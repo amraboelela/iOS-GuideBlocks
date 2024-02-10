@@ -22,9 +22,18 @@ class IntTests: XCTestCase {
     }
     
     func testIsPrime() {
+        XCTAssertFalse(0.isPrime())
+        XCTAssertFalse(1.isPrime())
+        
         XCTAssertTrue(2.isPrime())
         XCTAssertTrue(3.isPrime())
         XCTAssertTrue(5.isPrime())
         XCTAssertFalse(9.isPrime())
+        
+        XCTAssertFalse((-1).isPrime())
+        XCTAssertTrue((-2).isPrime())
+        XCTAssertTrue((-3).isPrime())
+        XCTAssertTrue((-5).isPrime())
+        XCTAssertFalse((-9).isPrime())
     }
 }

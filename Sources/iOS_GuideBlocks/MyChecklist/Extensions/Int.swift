@@ -10,10 +10,11 @@ import Foundation
 
 extension Int {
     func isPrime() -> Bool {
-        if self == 1 {
+        let value = abs(self)
+        if value == 0 || value == 1 {
             return false
         }
-        for divisor in 2..<self {
+        for divisor in 2..<value {
             if self % divisor == 0 {
                 return false
             }

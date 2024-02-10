@@ -8,5 +8,5 @@ Acknowledgements:
 Screenshot: 
 Video: {
   "guideBlockKey": "MyChecklist",
-  "tasks": [“Row1”, “Row2”, “Row 3”, “Another Row”],
+   "tasks": ["Row1", "Row2", "Row 3", "Another Row"]
 }
