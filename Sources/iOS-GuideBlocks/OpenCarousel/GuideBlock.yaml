@@ -1,0 +1,15 @@
+Title: OpenCarousel
+Author: Aamir Alvi
+Email: support@contextu.al
+
+TestApp: https://github.com/contextu-al/AirBnB-iOS
+TestAppBranch: open-carousel
+Description: It will display `Carousel` or Onboarding Screens
+Acknowledgements:
+Screenshot:
+Video: 
+Extensibility: {
+  "guideBlockKey": "OpenCarousel"
+}
+
+
