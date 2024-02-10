@@ -10,19 +10,17 @@ import ContextualSDK
 
 struct OpenCarouselGuidView: View {
     
-    
-//    var dismissbuttonTapped: () -> ()
-
-    @State private var currentTab = 1
-    
     let screenSize = UIScreen.main.bounds
 
+    var dismissController: () -> ()
+
+    @State private var currentTab = 1
     
     var body: some View {
         TabView(selection: $currentTab,
                 content:  {
             ForEach(OpenCarouselData.list) { viewData in
-                OpenCarouselView(data: viewData,currentTab: $currentTab)
+                OpenCarouselView(data: viewData,currentTab: $currentTab, dismissController: dismissController)
                     .tag(viewData.id)
             }
         })
@@ -41,7 +39,7 @@ struct OpenCarouselView: View {
     @State private var backgroundImage: Image?
     @State private var primaryImage: Image?
     @State private var isAnimating: Bool = false
-    
+    var dismissController: () -> ()
     var body: some View {
         
         data.loadBackgroundImage { image in
@@ -98,8 +96,8 @@ struct OpenCarouselView: View {
                             currentTab += 1
                         }
                     } else {
-                        currentTab = 1
                         print("Reached last screen")
+                        dismissController()
                     }
                 
                 
@@ -133,6 +131,6 @@ struct OpenCarouselView: View {
     }
 }
 
-#Preview {
-    OpenCarouselGuidView()
-}
+//#Preview {
+//    OpenCarouselGuidView()
+//}

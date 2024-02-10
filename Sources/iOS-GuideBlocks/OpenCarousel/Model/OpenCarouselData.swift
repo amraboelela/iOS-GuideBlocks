@@ -58,6 +58,7 @@ struct OpenCarouselData: Hashable, Identifiable {
         self.title = SHTipTextElement()
         self.subtitle = "subtitle"
         self.totalCarouselsCount = 3
+        self.isLastScreen = isLastScreen
     }
     
     static let list: [OpenCarouselData] = [

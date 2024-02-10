@@ -38,7 +38,10 @@ public class OpenCarouselGuid: CTXBaseGuideController {
          */
         
         //TODO: CHANGE to Open Carousel Guid View
-        let view = OpenCarouselGuidView()
+        let view = OpenCarouselGuidView {
+            self.hostingController?.dismiss(animated: true)
+            self.dismissGuide()
+        }
         
         //TODO: uncomment after setting view to Open Carousel Guid View
         self.hostingController = UIHostingController(rootView: view)
@@ -48,25 +51,14 @@ public class OpenCarouselGuid: CTXBaseGuideController {
             return
         }
         
-        controller.addChild(self.hostingController!)
-        controller.view.addSubview(self.hostingController!.view)
-        self.hostingController?.view.backgroundColor = .clear
-        hostingController.view.translatesAutoresizingMaskIntoConstraints = false
+        hostingController.modalPresentationStyle = .overFullScreen
+        controller.present(hostingController, animated: true)
         
-        NSLayoutConstraint.activate([
-            hostingController.view.centerXAnchor.constraint(equalTo: controller.view.centerXAnchor),
-            hostingController.view.centerYAnchor.constraint(equalTo: controller.view.centerYAnchor)
-        ])
-        
-        hostingController.didMove(toParent: controller)
-
         success(contextualContainer.guidePayload)
     }
     
     /// Called when the app or framework dismisses the guide block, do cleanup to remove it.
     override public func isDismissingGuide() {
-        self.hostingController?.willMove(toParent: nil)
-        self.hostingController?.view.removeFromSuperview()
-        self.hostingController?.removeFromParent()
+        self.hostingController?.dismiss(animated: true)
     }
 }
