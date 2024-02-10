@@ -4,14 +4,15 @@
 import PackageDescription
 
 let package = Package(
-    name: "iOS-GuideBlocks",
+    name: "iOS_GuideBlocks",
     platforms: [
         .iOS(.v15),
+        .macOS(.v11)
     ],
     products: [
         .library(
-            name: "iOS-GuideBlocks",
-            targets: ["iOS-GuideBlocks"]
+            name: "iOS_GuideBlocks",
+            targets: ["iOS_GuideBlocks"]
         ),
     ],
     dependencies: [
@@ -28,11 +29,15 @@ let package = Package(
     ],
     targets: [
         .target(
-            name: "iOS-GuideBlocks",
+            name: "iOS_GuideBlocks",
             dependencies: [
                 .product(name: "ContextualSDK", package: "Contextual"),
                 .product(name: "ConfettiSwiftUI", package: "ConfettiSwiftUI")
             ]
+        ),
+        .testTarget(
+            name: "GuideBlocksTests",
+            dependencies: ["iOS_GuideBlocks"]
         ),
     ]
 )
