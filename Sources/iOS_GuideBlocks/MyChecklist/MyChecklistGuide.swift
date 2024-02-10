@@ -10,7 +10,7 @@ import SwiftUI
 import ContextualSDK
 
 /// A guide controller for displaying a checklist view.
-public class MyChecklistGuideController: CTXBaseGuideController {
+public class MyChecklistGuide: CTXBaseGuideController {
     
     private var hostingController: UIHostingController<MyChecklistView>?
     
