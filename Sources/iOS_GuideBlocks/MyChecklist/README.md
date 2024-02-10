@@ -17,7 +17,7 @@ Everyone loves checklists. This is a simple example to get you started with Cont
 `
 {
   "guideBlockKey": "MyChecklist",
-   "tasks": ["Row1", "Row2", "Row 3", "Another Row"]
+   "tasks": ["Row 1", "Row 2", "Row 3", "Another Row"]
 }
 `
  * Match the name in the JSON to the name of your wrapper in the code

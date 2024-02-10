@@ -37,9 +37,8 @@ public class MyChecklistGuide: CTXBaseGuideController {
         let myChecklistViewModel = MyChecklistViewModel()
         if let tasks = guide.extraJson?["tasks"] as? [String] {
             myChecklistViewModel.load(tasks: tasks)
-        } else {
-            myChecklistViewModel.updateWithSampleTasks()
         }
+        myChecklistViewModel.title = guide.title.text
         let view = MyChecklistView(myChecklistViewModel: myChecklistViewModel)
         
         self.hostingController = UIHostingController(rootView: view)

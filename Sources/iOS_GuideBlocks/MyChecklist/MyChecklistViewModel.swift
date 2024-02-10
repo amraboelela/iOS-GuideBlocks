@@ -9,13 +9,14 @@
 import Foundation
 
 class MyChecklistViewModel : ObservableObject {
-
+    @Published var title = "Do List"
     @Published var taskModels = [ToDoTaskModel]()
     
     init() {
+        loadWithSampleTasks()
     }
     
-    func updateWithSampleTasks() {
+    func loadWithSampleTasks() {
         var result = [ToDoTaskModel]()
         for i in 1...12 {
             let taskModel = ToDoTaskModel(

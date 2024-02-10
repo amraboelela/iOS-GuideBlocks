@@ -18,7 +18,7 @@ struct MyChecklistView: View {
                 isPopupVisible.toggle()
                 print("Do list button tapped")
             }) {
-                Text("To-do List")
+                Text(myChecklistViewModel.title)
                     .foregroundColor(.white) // Set text color to white
                     .padding() // Add padding to the text
                     .background(Color.blue) // Set background color to sky blue

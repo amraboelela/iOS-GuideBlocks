@@ -18,7 +18,7 @@ struct ToDoTaskModel: Hashable {
     // MARK: - Delegates
     
     static func == (lhs: ToDoTaskModel, rhs: ToDoTaskModel) -> Bool {
-        lhs.name == rhs.name
+        lhs.id == rhs.id
     }
     
     public func hash(into hasher: inout Hasher) {

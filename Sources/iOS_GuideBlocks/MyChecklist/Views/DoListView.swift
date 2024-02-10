@@ -14,9 +14,6 @@ struct DoListView: View {
     
     var body: some View {
         VStack {
-            Text("Do List")
-                .font(.headline)
-                .padding()
             List(myChecklistViewModel.taskModels, id: \.self.id) { toDoTask in
                 Button(action: {
                     if toDoTask.enabled {
