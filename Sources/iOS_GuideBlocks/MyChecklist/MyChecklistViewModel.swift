@@ -10,7 +10,7 @@ import Foundation
 
 class MyChecklistViewModel : ObservableObject {
 
-    @Published var toDoTasks = [ToDoTaskModel]()
+    @Published var tasks = [ToDoTaskModel]()
     
     init() {
         updateTasks()
@@ -28,7 +28,7 @@ class MyChecklistViewModel : ObservableObject {
             )
             toDoTaskModels.append(toDoTaskModel)
         }
-        toDoTasks = toDoTaskModels
+        tasks = toDoTaskModels
     }
     
 }

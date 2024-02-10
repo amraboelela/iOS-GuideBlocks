@@ -40,16 +40,9 @@ public class CircleVideoGuide: CTXBaseGuideController {
          */
         
         let guide = contextualContainer.guidePayload.guide
-                
-        guard let vid_url = guide.extraJson?["vid_url"] as? String else {
-            failure(contextualContainer.guidePayload)
-            return
-        }
-        guard let circle_diameter = guide.extraJson?["circle_diameter"] as? Int else {
-            let circle_diameter = 150
-            return
-        }
-        
+        let defaultVideoURL = "https://www.youtube.com/embed/Y9ChGCY8Azk?si=aLGas88lnxI6g_jJ?autoplay=1"
+        let vid_url = (guide.extraJson?["vid_url"] as? String) ?? defaultVideoURL
+        let circle_diameter = (guide.extraJson?["circle_diameter"] as? Int) ?? 150
         
         let view = CircleVideoView(vid_url: vid_url, circle_diameter: circle_diameter, dismissbuttonTapped: {
             self.hostingController?.willMove(toParent: nil)

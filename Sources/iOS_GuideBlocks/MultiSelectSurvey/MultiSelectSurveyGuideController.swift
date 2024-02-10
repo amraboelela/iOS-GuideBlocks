@@ -44,7 +44,7 @@ public class MultiSelectSurveyGuideController: CTXBaseGuideController {
                 contextualContainer.operations.submitFeedback(feedback,
                                                               forGuide: contextualContainer.guidePayload,
                                                               withHandler: { request, error in
-                    if let error = error {
+                    if error != nil {
                         // Handler error here as necessary
                         return
                     }
