@@ -80,4 +80,18 @@ extension View {
                                              fontSize: buttonElement?.fontSize,
                                              textColor: buttonElement?.textColor))
     }
+    
+    func contextualCarouselTitleElement(_ titleElement: SHTipCarouselItem?) -> some View {
+        self.modifier(ContextualTextModifier(fontName: titleElement?.titleFontName,
+                                             fontWeight: titleElement?.titleFontWeight,
+                                             fontSize: titleElement?.titleFontSize,
+                                             textColor: titleElement?.titleColor))
+    }
+    
+    func contextualCarouselContentElement(_ contentElement: SHTipCarouselItem?) -> some View {
+        self.modifier(ContextualTextModifier(fontName: contentElement?.contentFontName,
+                                             fontWeight: contentElement?.contentFontWeight,
+                                             fontSize: contentElement?.contentFontSize,
+                                             textColor: contentElement?.contentColor))
+    }
 }
