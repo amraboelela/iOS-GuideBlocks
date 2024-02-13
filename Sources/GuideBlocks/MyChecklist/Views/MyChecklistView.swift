@@ -10,12 +10,11 @@ import SwiftUI
 
 struct MyChecklistView: View {
     @ObservedObject var myChecklistViewModel: MyChecklistViewModel
-    @State private var isPopupVisible = false
     
     var body: some View {
         VStack {
             Button(action: {
-                isPopupVisible.toggle()
+                myChecklistViewModel.isPopupVisible.toggle()
                 print("Do list button tapped")
             }) {
                 Text(myChecklistViewModel.title)
@@ -25,7 +24,7 @@ struct MyChecklistView: View {
                     .cornerRadius(10) // Apply round rectangle shape with corner radius
             }
         }
-        .sheet(isPresented: $isPopupVisible) {
+        .sheet(isPresented: $myChecklistViewModel.isPopupVisible) {
             if #available(iOS 16.0, *) {
                 TaskListView(viewModel: myChecklistViewModel)
                     .presentationDetents([.medium, .large])

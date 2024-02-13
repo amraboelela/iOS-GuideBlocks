@@ -14,18 +14,13 @@ let myChecklistViewModel = MyChecklistViewModel()
 
 class MyChecklistViewModel : ObservableObject {
     var contextualContainer: ContextualContainer?
+    
+    @Published var isPopupVisible: Bool = false
     @Published var title = "Do List"
     @Published var taskModels = [TaskModel]()
     
     init() {
         loadWithSampleTasks()
-    }
-    
-    func taskModelBinding(forIndex index: Int) -> Binding<TaskModel> {
-        Binding(
-            get: { self.taskModels[index] },
-            set: { self.taskModels[index] = $0 }
-        )
     }
     
     func loadWithSampleTasks() {

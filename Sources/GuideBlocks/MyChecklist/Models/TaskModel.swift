@@ -87,7 +87,7 @@ struct TaskModel: Codable, Hashable {
         if let deepLink = actionData.deepLink, let result = URL(string: deepLink) {
             return result
         } else {
-            print("Invalid deeplink URL")
+            print("Invalid deeplink URL, actionData.deepLink: \(actionData.deepLink ?? "")")
         }
         return nil
     }

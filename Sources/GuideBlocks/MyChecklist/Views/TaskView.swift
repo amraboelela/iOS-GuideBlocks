@@ -9,13 +9,17 @@
 import SwiftUI
 
 struct TaskView: View {
-    @Binding var taskModel: TaskModel
+    @ObservedObject var viewModel: MyChecklistViewModel
+    var taskIndex: Int
+    
+    var taskModel: TaskModel { viewModel.taskModels[taskIndex] }
     
     var body: some View {
         Button(action: {
             if taskModel.enabled {
                 print("Action for task \(taskModel.name)")
-                taskModel.doTheAction()
+                viewModel.taskModels[taskIndex].doTheAction()
+                viewModel.isPopupVisible = false
             } else {
                 print("Task \(taskModel.name) is not enabled")
             }
@@ -33,14 +37,7 @@ struct TaskView: View {
 }
 
 struct TaskView_Previews: PreviewProvider {
-    @State static var taskModel = TaskModel(
-        name: "Task 1",
-        rawActionType: "gotoScreen",
-        actionData: TaskActionData(
-            deepLink: "airbnbContextual://screen/screen_1"
-        ))
-    
     static var previews: some View {
-        TaskView(taskModel: $taskModel)
+        TaskView(viewModel: myChecklistViewModel, taskIndex: 0)
     }
 }

@@ -15,7 +15,7 @@ struct TaskListView: View {
     var body: some View {
         VStack {
             List(viewModel.taskModels.indices, id: \.self) { index in
-                TaskView(taskModel: viewModel.taskModelBinding(forIndex: index))
+                TaskView(viewModel: myChecklistViewModel, taskIndex: index)
             }
         }
         .padding()
