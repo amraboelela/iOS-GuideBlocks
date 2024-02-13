@@ -72,7 +72,7 @@ struct TaskModel: Codable, Hashable {
     }
     
     var enabled: Bool {
-        return !checked
+        return true //!checked
     }
     
     public enum CodingKeys: String, CodingKey {
