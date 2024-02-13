@@ -27,10 +27,10 @@ struct MyChecklistView: View {
         }
         .sheet(isPresented: $isPopupVisible) {
             if #available(iOS 16.0, *) {
-                DoListView(myChecklistViewModel: myChecklistViewModel)
+                TaskListView(viewModel: myChecklistViewModel)
                     .presentationDetents([.medium, .large])
             } else {
-                DoListView(myChecklistViewModel: myChecklistViewModel)
+                TaskListView(viewModel: myChecklistViewModel)
             }
         }
     }
@@ -38,6 +38,6 @@ struct MyChecklistView: View {
 
 struct MyChecklistView_Previews: PreviewProvider {
     static var previews: some View {
-        MyChecklistView(myChecklistViewModel: MyChecklistViewModel())
+        MyChecklistView(myChecklistViewModel: myChecklistViewModel)
     }
 }

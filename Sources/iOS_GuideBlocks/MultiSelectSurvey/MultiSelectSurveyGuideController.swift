@@ -13,10 +13,12 @@ public class MultiSelectSurveyGuideController: CTXBaseGuideController {
     
     private var hostingController: UIHostingController<SurveyView>?
     
-    public override func presentGuideBlock(contextualContainer: ContextualContainer,
-                                           viewController controller: UIViewController?,
-                                           success: @escaping ((CTXIGuidePayload) -> ()),
-                                           failure: @escaping ((CTXIGuidePayload) -> ())) {
+    public override func presentGuideBlock(
+        contextualContainer: ContextualContainer,
+        viewController controller: UIViewController?,
+        success: @escaping ((CTXIGuidePayload) -> ()),
+        failure: @escaping ((CTXIGuidePayload) -> ())
+    ) {
         let guide = contextualContainer.guidePayload.guide
         
         let title = guide.feedback?.feedbackTitle ?? ""

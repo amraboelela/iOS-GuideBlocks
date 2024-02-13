@@ -34,9 +34,9 @@ public class MyChecklistGuide: CTXBaseGuideController {
         }
         
         let guide = contextualContainer.guidePayload.guide
-        let myChecklistViewModel = MyChecklistViewModel()
-        if let tasks = guide.extraJson?["tasks"] as? [String] {
-            myChecklistViewModel.load(tasks: tasks)
+        myChecklistViewModel.contextualContainer = contextualContainer
+        if let tasks = guide.extraJson?["tasks"] as? NSDictionary, let tasksJson = tasks.toData() {
+            myChecklistViewModel.load(tasksJson: tasksJson)
         }
         if let title = guide.title?.text {
             myChecklistViewModel.title = title

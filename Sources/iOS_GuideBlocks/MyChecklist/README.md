@@ -16,8 +16,31 @@ Everyone loves checklists. This is a simple example to get you started with Cont
 7. Now go to the Extensibility section in the sidebar and paste in the JSON as follows:
 `
 {
-  "guideBlockKey": "MyChecklist",
-   "tasks": ["Row 1", "Row 2", "Row 3", "Another Row"]
+    "guideBlockKey": "MyChecklist",
+    "tasks": [
+        {
+            "name": "Set My Tag",
+            "action": "SetTag",
+            "action_data": {
+                "key": "mytag",
+                "value": "1234"
+            }
+        },
+        {
+            "name": "Visit Inbox",
+            "action": "gotoScreen",
+            "action_data": {
+                "deeplink": "airbnb_contextual://screen/inbox"
+            }
+        },
+        {
+            "name": "Visit Profile",
+            "action": "gotoScreen",
+            "action_data": {
+                "deeplink": "airbnb_contextual://screen/profile"
+            }
+        }
+    ]
 }
 `
  * Match the name in the JSON to the name of your wrapper in the code

@@ -13,10 +13,12 @@ public class ConfettiGuide: CTXBaseGuideController {
     
     private var hostingController: UIHostingController<ConfettiView>?
     
-    public override func presentGuideBlock(contextualContainer: ContextualContainer,
-                                           viewController controller: UIViewController?,
-                                           success: @escaping ((CTXIGuidePayload) -> ()),
-                                           failure: @escaping ((CTXIGuidePayload) -> ())) {
+    public override func presentGuideBlock(
+        contextualContainer: ContextualContainer,
+        viewController controller: UIViewController?,
+        success: @escaping ((CTXIGuidePayload) -> ()),
+        failure: @escaping ((CTXIGuidePayload) -> ())
+    ) {
 
         guard let controller = controller else {
             failure(contextualContainer.guidePayload)
