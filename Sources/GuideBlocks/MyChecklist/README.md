@@ -30,14 +30,14 @@ Everyone loves checklists. This is a simple example to get you started with Cont
             "name": "Visit Inbox",
             "action": "gotoScreen",
             "action_data": {
-                "deeplink": "airbnb_contextual://screen/inbox"
+                "deep_link": "airbnb_contextual://screen/inbox"
             }
         },
         {
             "name": "Visit Profile",
             "action": "gotoScreen",
             "action_data": {
-                "deeplink": "airbnb_contextual://screen/profile"
+                "deep_link": "airbnb_contextual://screen/profile"
             }
         }
     ]

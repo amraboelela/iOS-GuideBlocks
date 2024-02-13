@@ -42,39 +42,13 @@ class MyChecklistViewModel : ObservableObject {
     }
     
     func load(tasks: Any?) {
-        
         if let tasksArray = tasks as? NSArray, let tasksJson = tasksArray.toData() {
-            //myChecklistViewModel.load(tasksJson: tasksJson)
-            
             if let result = try? JSONDecoder().decode([TaskModel].self, from: tasksJson) {
                 taskModels = result
             } else {
                 print("couldn't JSON serialize data: \(tasksJson.hexEncodedString)")
             }
         }
-        
-        
-        /*
-        if let taskModels = try? JSONDecoder().decode([TaskModel.self], from: tasksData) {
-            taskModels = taskModels
-        }*/
-        /*
-        var result = [TaskModel]()
-        for (i, task) in tasks.enumerated() {
-            var taskModel = TaskModel(
-                name: task, deepLink: <#String#>
-                /*action: { _ in
-                    print("Action for task \(i)")
-                    //taskModel.checked = true
-                }*/
-            )
-            taskModel.action = { _ in
-                print("Action for \(taskModel.name)")
-                taskModel.checked = true
-            }
-            result.append(taskModel)
-        }
-        taskModels = result*/
     }
     
 }

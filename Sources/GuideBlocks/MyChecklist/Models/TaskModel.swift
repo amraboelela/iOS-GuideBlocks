@@ -20,7 +20,7 @@ struct TaskActionData: Codable {
     var tagValue: String?
     
     public enum CodingKeys: String, CodingKey {
-        case deepLink
+        case deepLink = "deep_link"
         case tagKey = "key"
         case tagValue = "value"
     }
@@ -31,7 +31,6 @@ struct TaskModel: Codable, Hashable {
     var name: String
     var rawActionType: String
     var taskActionData: TaskActionData
-    //var action: (() -> Void)?
     
     var id: String {
         return name.lowercased()
