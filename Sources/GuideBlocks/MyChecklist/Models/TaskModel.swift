@@ -32,6 +32,8 @@ struct TaskModel: Codable, Hashable {
     var rawActionType: String
     var taskActionData: TaskActionData
     
+    var gotoScreenAction: ((String) -> ())?
+    
     var id: String {
         return name.lowercased()
             .trimmingCharacters(in: .whitespaces)
@@ -77,6 +79,28 @@ struct TaskModel: Codable, Hashable {
         case name
         case rawActionType = "action"
         case taskActionData = "action_data"
+    }
+    
+    mutating func doTheAction() {
+        checked = true
+        switch actionType {
+        case .gotoScreen:
+            if let deepLink = taskActionData.deepLink {
+                gotoScreenAction?(deepLink)
+            }
+        case .setTag:
+            if let tagKey = taskActionData.tagKey, let tagValue = taskActionData.tagValue {
+                myChecklistViewModel.contextualContainer?.tagManager.saveTag(
+                    key: tagKey,
+                    value: tagValue,
+                    success: nil,
+                    failure: nil,
+                    forceSend: false
+                )
+            }
+        case .unknown:
+            print("TaskModel, doTheAction, unknown actionType")
+        }
     }
     
     // MARK: - Delegates

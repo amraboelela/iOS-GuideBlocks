@@ -15,7 +15,7 @@ struct TaskView: View {
         Button(action: {
             if taskModel.enabled {
                 print("Action for task \(taskModel.name)")
-                taskModel.checked = true
+                taskModel.doTheAction()
             } else {
                 print("Task \(taskModel.name) is not enabled")
             }

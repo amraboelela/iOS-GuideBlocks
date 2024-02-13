@@ -43,8 +43,22 @@ class MyChecklistViewModel : ObservableObject {
     
     func load(tasks: Any?) {
         if let tasksArray = tasks as? NSArray, let tasksJson = tasksArray.toData() {
-            if let result = try? JSONDecoder().decode([TaskModel].self, from: tasksJson) {
-                taskModels = result
+            if var resultTaskModels = try? JSONDecoder().decode([TaskModel].self, from: tasksJson) {
+                for (i, taskModel) in resultTaskModels.enumerated() {
+                    resultTaskModels[i].gotoScreenAction = { deepLink in
+                        print("gotoScreenAction for task: \(taskModel.name), deepLink: \(deepLink)")
+                        if let deepLinkURL = URL(string: deepLink) {
+                            if UIApplication.shared.canOpenURL(deepLinkURL) {
+                                UIApplication.shared.open(deepLinkURL)
+                            } else {
+                                print("Cannot open deep link")
+                            }
+                        } else {
+                            print("Invalid deep link URL")
+                        }
+                    }
+                }
+                taskModels = resultTaskModels
             } else {
                 print("couldn't JSON serialize data: \(tasksJson.hexEncodedString)")
             }
