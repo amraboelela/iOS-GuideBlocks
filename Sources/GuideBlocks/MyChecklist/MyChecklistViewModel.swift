@@ -51,10 +51,10 @@ class MyChecklistViewModel : ObservableObject {
                             if UIApplication.shared.canOpenURL(deepLinkURL) {
                                 UIApplication.shared.open(deepLinkURL)
                             } else {
-                                print("Cannot open deep link")
+                                print("Cannot open deeplink")
                             }
                         } else {
-                            print("Invalid deep link URL")
+                            print("Invalid deeplink URL")
                         }
                     }
                 }

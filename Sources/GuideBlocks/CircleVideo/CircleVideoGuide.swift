@@ -21,11 +21,12 @@ public class CircleVideoGuide: CTXBaseGuideController {
     ///   - controller: The view controller to present the guide block on.
     ///   - success: The closure to be called when the guide block is successfully presented.
     ///   - failure: The closure to be called when there is a failure in presenting the guide block.
-    public override func presentGuideBlock(contextualContainer: ContextualContainer,
-                                           viewController controller: UIViewController?,
-                                           success: @escaping ((CTXIGuidePayload) -> ()),
-                                           failure: @escaping ((CTXIGuidePayload) -> ())) {
-
+    public override func presentGuideBlock(
+        contextualContainer: ContextualContainer,
+        viewController controller: UIViewController?,
+        success: @escaping ((CTXIGuidePayload) -> ()),
+        failure: @escaping ((CTXIGuidePayload) -> ())
+    ) {
         guard let controller = controller else {
             failure(contextualContainer.guidePayload)
             return
