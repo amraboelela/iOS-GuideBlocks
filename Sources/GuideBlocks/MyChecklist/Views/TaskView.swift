@@ -37,7 +37,7 @@ struct TaskView_Previews: PreviewProvider {
         name: "Task 1",
         rawActionType: "gotoScreen",
         actionData: TaskActionData(
-            deepLink: "airbnb_contextual://screen/screen_1"
+            deepLink: "airbnbContextual://screen/screen_1"
         ))
     
     static var previews: some View {

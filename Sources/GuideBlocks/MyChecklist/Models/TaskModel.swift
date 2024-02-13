@@ -15,7 +15,7 @@ public enum TaskActionType : String {
 }
 
 struct TaskActionData: Codable {
-    var deepLink: String? // e.g. "airbnb_contextual://screen/profile"
+    var deepLink: String? // e.g. "airbnbContextual://screen/profile"
     var tagKey: String?
     var tagValue: String?
     
@@ -32,7 +32,7 @@ struct TaskModel: Codable, Hashable {
     var rawActionType: String
     var actionData: TaskActionData
     
-    var gotoScreenAction: ((String) -> ())?
+    var gotoScreenAction: ((URL) -> ())?
     
     var id: String {
         return name.lowercased()
@@ -72,6 +72,7 @@ struct TaskModel: Codable, Hashable {
     }
     
     var enabled: Bool {
+        // TODO: fix this when done with testing
         return true //!checked
     }
     
@@ -81,12 +82,22 @@ struct TaskModel: Codable, Hashable {
         case actionData = "action_data"
     }
     
+    
+    var deepLinkURL: URL? {
+        if let deepLink = actionData.deepLink, let result = URL(string: deepLink) {
+            return result
+        } else {
+            print("Invalid deeplink URL")
+        }
+        return nil
+    }
+    
     mutating func doTheAction() {
         checked = true
         switch actionType {
         case .gotoScreen:
-            if let deepLink = actionData.deepLink {
-                gotoScreenAction?(deepLink)
+            if let deepLinkURL {
+                gotoScreenAction?(deepLinkURL)
             }
         case .setTag:
             if let tagKey = actionData.tagKey, let tagValue = actionData.tagValue {

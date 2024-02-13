@@ -34,7 +34,7 @@ class MyChecklistViewModel : ObservableObject {
             let taskModel = TaskModel(
                 name: "Task \(i)",
                 rawActionType: "gotoScreen",
-                actionData: TaskActionData(deepLink: "airbnb_contextual://screen/" + "task_\(i)")
+                actionData: TaskActionData(deepLink: "airbnbContextual://screen/" + "task_\(i)")
             )
             result.append(taskModel)
         }
@@ -45,17 +45,17 @@ class MyChecklistViewModel : ObservableObject {
         if let tasksArray = tasks as? NSArray, let tasksJson = tasksArray.toData() {
             if var resultTaskModels = try? JSONDecoder().decode([TaskModel].self, from: tasksJson) {
                 for (i, taskModel) in resultTaskModels.enumerated() {
-                    resultTaskModels[i].gotoScreenAction = { deepLink in
-                        print("gotoScreenAction for task: \(taskModel.name), deepLink: \(deepLink)")
-                        if let deepLinkURL = URL(string: deepLink) {
-                            if UIApplication.shared.canOpenURL(deepLinkURL) {
-                                UIApplication.shared.open(deepLinkURL)
-                            } else {
-                                print("Cannot open deeplink")
-                            }
+                    resultTaskModels[i].gotoScreenAction = { deepLinkURL in
+                        print("gotoScreenAction for task: \(taskModel.name), deepLinkURL: \(deepLinkURL)")
+                        //if let deepLinkURL = URL(string: deepLink) {
+                        if UIApplication.shared.canOpenURL(deepLinkURL) {
+                            UIApplication.shared.open(deepLinkURL)
                         } else {
-                            print("Invalid deeplink URL")
+                            print("Cannot open deeplink")
                         }
+                        /*} else {
+                         print("Invalid deeplink URL")
+                         }*/
                     }
                 }
                 taskModels = resultTaskModels

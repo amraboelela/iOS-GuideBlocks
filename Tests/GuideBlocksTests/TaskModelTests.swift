@@ -17,17 +17,17 @@ class TaskModelTests: XCTestCase {
         let task1 = TaskModel(
             name: "Task 1",
             rawActionType: "gotoScreen",
-            actionData: TaskActionData(deepLink: "airbnb_contextual://screen/screen_1")
+            actionData: TaskActionData(deepLink: "airbnbContextual://screen/screen_1")
         )
         let task2 = TaskModel(
             name: "Task 2",
             rawActionType: "gotoScreen",
-            actionData: TaskActionData(deepLink: "airbnb_contextual://screen/screen_2")
+            actionData: TaskActionData(deepLink: "airbnbContextual://screen/screen_2")
         )
         let task3 = TaskModel(
             name: "Task 3",
             rawActionType: "gotoScreen",
-            actionData: TaskActionData(deepLink: "airbnb_contextual://screen/screen_3")
+            actionData: TaskActionData(deepLink: "airbnbContextual://screen/screen_3")
         )
         XCTAssertEqual(task1.id, "task_1")
         XCTAssertEqual(task2.id, "task_2")
@@ -38,22 +38,22 @@ class TaskModelTests: XCTestCase {
         let task1 = TaskModel(
             name: "Task 1",
             rawActionType: "gotoScreen",
-            actionData: TaskActionData(deepLink: "airbnb_contextual://screen/screen_1")
+            actionData: TaskActionData(deepLink: "airbnbContextual://screen/screen_1")
         )
         let task2 = TaskModel(
             name: "Task 2",
             rawActionType: "gotoScreen",
-            actionData: TaskActionData(deepLink: "airbnb_contextual://screen/screen_2")
+            actionData: TaskActionData(deepLink: "airbnbContextual://screen/screen_2")
         )
         let task3 = TaskModel(
             name: "Task 3",
             rawActionType: "gotoScreen",
-            actionData: TaskActionData(deepLink: "airbnb_contextual://screen/screen_3")
+            actionData: TaskActionData(deepLink: "airbnbContextual://screen/screen_3")
         )
         let task4 = TaskModel(
             name: "Task 3 ",
             rawActionType: "gotoScreen",
-            actionData: TaskActionData(deepLink: "airbnb_contextual://screen/screen_3")
+            actionData: TaskActionData(deepLink: "airbnbContextual://screen/screen_3")
         )
         
         XCTAssertEqual(task1, task1) // A task is equal to itself
@@ -67,22 +67,22 @@ class TaskModelTests: XCTestCase {
         let task1 = TaskModel(
             name: "Task 1",
             rawActionType: "gotoScreen",
-            actionData: TaskActionData(deepLink: "airbnb_contextual://screen/screen_1")
+            actionData: TaskActionData(deepLink: "airbnbContextual://screen/screen_1")
         )
         let task2 = TaskModel(
             name: "Task 2",
             rawActionType: "gotoScreen",
-            actionData: TaskActionData(deepLink: "airbnb_contextual://screen/screen_2")
+            actionData: TaskActionData(deepLink: "airbnbContextual://screen/screen_2")
         )
         let task3 = TaskModel(
             name: "Task 3",
             rawActionType: "gotoScreen",
-            actionData: TaskActionData(deepLink: "airbnb_contextual://screen/screen_3")
+            actionData: TaskActionData(deepLink: "airbnbContextual://screen/screen_3")
         )
         let task4 = TaskModel(
             name: "Task 3 ",
             rawActionType: "gotoScreen",
-            actionData: TaskActionData(deepLink: "airbnb_contextual://screen/screen_3")
+            actionData: TaskActionData(deepLink: "airbnbContextual://screen/screen_3")
         )
         
         XCTAssertEqual(task1.hashValue, task1.hashValue) // Hash value should be consistent
@@ -91,17 +91,40 @@ class TaskModelTests: XCTestCase {
         XCTAssertEqual(task3.hashValue, task4.hashValue) // equal as they have same id
     }
     
+    func testDeepLinkURL() {
+        let taskModel1 = TaskModel(
+            name: "Task 1",
+            rawActionType: "gotoScreen",
+            actionData: TaskActionData(deepLink: "https://example.com")
+        )
+        XCTAssertNotNil(taskModel1.deepLinkURL)
+        
+        let taskModel2 = TaskModel(
+            name: "Task 2",
+            rawActionType: "gotoScreen",
+            actionData: TaskActionData(deepLink: "myApp://screen/home")
+        )
+        XCTAssertNotNil(taskModel2.deepLinkURL)
+        
+        let taskModel3 = TaskModel(
+            name: "Task 3",
+            rawActionType: "gotoScreen",
+            actionData: TaskActionData(deepLink: "airbnbContextual://screen/inbox")
+        )
+        XCTAssertNotNil(taskModel3.deepLinkURL)
+    }
+    
     func testGotoScreenAction() {
         var taskModel = TaskModel(
             name: "Task 1",
             rawActionType: "gotoScreen",
-            actionData: TaskActionData(deepLink: "your_deep_link_here")
+            actionData: TaskActionData(deepLink: "myApp://screen/home")
         )
         
         let expectation = XCTestExpectation(description: "Gotoscreen method gets called")
-        let taskModelDeepLink = taskModel.actionData.deepLink
-        taskModel.gotoScreenAction = { deepLink in
-            XCTAssertEqual(deepLink, taskModelDeepLink)
+        let taskModelDeepLink = URL(string: taskModel.actionData.deepLink!)
+        taskModel.gotoScreenAction = { deepLinkURL in
+            XCTAssertEqual(deepLinkURL, taskModelDeepLink)
             expectation.fulfill()
         }
         taskModel.doTheAction()
@@ -116,8 +139,6 @@ class TaskModelTests: XCTestCase {
             actionData: TaskActionData(tagKey: "tag_key", tagValue: "tag_value")
         )
         taskModel.doTheAction()
-        
-        // Then
-        //XCTAssertTrue(taskModel.checked)
     }
+    
 }
