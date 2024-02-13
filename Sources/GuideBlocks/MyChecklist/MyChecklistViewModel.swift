@@ -41,12 +41,19 @@ class MyChecklistViewModel : ObservableObject {
         taskModels = result
     }
     
-    func load(tasksJson: Data) {
-        if let result = try? JSONDecoder().decode([TaskModel].self, from: tasksJson) {
-            taskModels = result
-        } else {
-            print("couldn't JSON serialize data: \(tasksJson.hexEncodedString)")
+    func load(tasks: Any?) {
+        
+        if let tasksArray = tasks as? NSArray, let tasksJson = tasksArray.toData() {
+            //myChecklistViewModel.load(tasksJson: tasksJson)
+            
+            if let result = try? JSONDecoder().decode([TaskModel].self, from: tasksJson) {
+                taskModels = result
+            } else {
+                print("couldn't JSON serialize data: \(tasksJson.hexEncodedString)")
+            }
         }
+        
+        
         /*
         if let taskModels = try? JSONDecoder().decode([TaskModel.self], from: tasksData) {
             taskModels = taskModels
