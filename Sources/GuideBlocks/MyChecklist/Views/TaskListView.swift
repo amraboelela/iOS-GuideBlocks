@@ -16,12 +16,12 @@ struct TaskListView: View {
         VStack {
             List(viewModel.taskModels.indices, id: \.self) { index in
                 TaskView(taskModel: viewModel.taskModelBinding(forIndex: index))
+                Button(action: {
+                    print("Tapped on task \(viewModel.taskModels[index].name)")
+                }) {
+                    Text("Tap me")
+                }
             }
-            
-            /*List(checklistViewModel.taskModels.indices, id: \.self.id) { index in
-                TaskView(taskModel: checklistViewModel.taskModelBinding(forIndex: index))
-                //TextField("user", text: $username)
-            }*/
         }
         .padding()
         .background(Color.white)
