@@ -30,7 +30,7 @@ struct TaskModel: Codable, Hashable {
     
     var name: String
     var rawActionType: String
-    var taskActionData: TaskActionData
+    var actionData: TaskActionData
     
     var gotoScreenAction: ((String) -> ())?
     
@@ -78,18 +78,18 @@ struct TaskModel: Codable, Hashable {
     public enum CodingKeys: String, CodingKey {
         case name
         case rawActionType = "action"
-        case taskActionData = "action_data"
+        case actionData = "action_data"
     }
     
     mutating func doTheAction() {
         checked = true
         switch actionType {
         case .gotoScreen:
-            if let deepLink = taskActionData.deepLink {
+            if let deepLink = actionData.deepLink {
                 gotoScreenAction?(deepLink)
             }
         case .setTag:
-            if let tagKey = taskActionData.tagKey, let tagValue = taskActionData.tagValue {
+            if let tagKey = actionData.tagKey, let tagValue = actionData.tagValue {
                 myChecklistViewModel.contextualContainer?.tagManager.saveTag(
                     key: tagKey,
                     value: tagValue,

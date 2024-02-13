@@ -34,7 +34,7 @@ class MyChecklistViewModel : ObservableObject {
             let taskModel = TaskModel(
                 name: "Task \(i)",
                 rawActionType: "gotoScreen",
-                taskActionData: TaskActionData(deepLink: "airbnb_contextual://screen/" + "task_\(i)")
+                actionData: TaskActionData(deepLink: "airbnb_contextual://screen/" + "task_\(i)")
             )
             result.append(taskModel)
         }
