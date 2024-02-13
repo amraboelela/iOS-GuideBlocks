@@ -28,7 +28,7 @@ struct TaskView: View {
             }
             .foregroundColor(taskModel.enabled ? .primary : .gray)
         }
-        //.disabled(!taskModel.enabled)
+        .disabled(!taskModel.enabled)
     }
 }
 
