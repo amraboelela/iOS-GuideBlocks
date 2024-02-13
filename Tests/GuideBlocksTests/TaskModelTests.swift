@@ -8,7 +8,7 @@
 
 import XCTest
 
-@testable import iOS_GuideBlocks
+@testable import GuideBlocks
 
 class TaskModelTests: XCTestCase {
     

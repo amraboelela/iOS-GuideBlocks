@@ -5,7 +5,7 @@ Everyone loves checklists. This is a simple example to get you started with Cont
 
 1. Create an account at [Contextual Dashboard](https://dashboard.contextu.al/ "Contextual Dashboard").
 2. Add the iOS-GuideBlocks package to your project as in [AirBnB sample app](https://github.com/contextu-al/AirBnB-iOS) 
-3. Add `import iOS_GuideBlocks` usually in your AppDelegate.swift
+3. Add `import GuideBlocks` usually in your AppDelegate.swift
 4. Copy-Paste the instantiation of the Guide Component AFTER the Contextual SDK registration. e.g `Contextual.sharedInstance().registerGuideBlock(MyChecklistGuide(), forKey: "MyChecklist")`
 5. Build your App and Run it on a phone or simulator
 6. Go to the Dashboard and create a guide:

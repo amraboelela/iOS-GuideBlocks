@@ -6,7 +6,7 @@ Everyone loves Confetti! This is a simple example to get you started with Contex
 
 1. Create an account at [Contextual Dashboard](https://dashboard.contextu.al/ "Contextual Dashboard").
 2. Install the Contextual SDK following the instructions for IOS or Android.
-3. Add `import iOS_GuideBlocks` usually in your AppDelegate.swift
+3. Add `import GuideBlocks` usually in your AppDelegate.swift
 4. Copy-Paste the instantiation of the Guide Component AFTER the Contextual SDK registration. e.g `Contextual.sharedInstance().registerGuideBlock(ConfettiGuide(), forKey: "Confetti")`
 5. Build your App and Run it on a phone or 
 6. Go to the Dashboard and create a guide:
