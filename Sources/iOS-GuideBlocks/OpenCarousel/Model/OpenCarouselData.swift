@@ -11,38 +11,32 @@ import SwiftUI
 struct OpenCarouselDataManager {
     var carouselItems: [OpenCarouselData] = []
     
-    init(carouselData: SHTipCarouselElement) {
+    init(guide: SHTipElement) {
         
-        print("CAROUSEL DATA \(carouselData.items)")
-        guard carouselData.items.count > 0 else {
+        print("CAROUSEL DATA \(guide.carousel.items)")
+        
+        let backgroundImages = guide.arrayImages
+        print("Total Background Images \(backgroundImages)")
+        guard let carouselData = guide.carousel,
+              let items = carouselData.items else {
             carouselItems = []
-            return }
-        
-        let items = carouselData.items ?? []
-        
+            return
+        }
+
         for (index, item) in items.enumerated() {
+            var _bgImageElement: SHTipImageElement?
             
             print("CAROUSEL DATA ITEM \(item)")
-            carouselItems.append(OpenCarouselData(id: index, carouselData: item, isLastScreen: (index == items.count - 1)))
+            if (backgroundImages ?? []).indices.contains(index) {
+                _bgImageElement = backgroundImages?[index]
+                print("Background Image \(_bgImageElement?.resource)")
+            }
+            carouselItems.append(OpenCarouselData(id: index,
+                                                  carouselData: item,
+                                                  isLastScreen: (index == items.count - 1),
+                                                  backgroundImage: _bgImageElement))
+            
         }
-        
-        //TODO: WIP
-//        let extraJSON = guide.extraJson
-//        if let carouselBackgroundImages = extraJSON["backgroundImages"] as? [[String: Any]] {
-//            for carouselBackgroundImage in carouselBackgroundImages {
-//
-//            }
-//        }
-    }
-}
-
-struct CarouselBackgroundImage {
-    private let placeholderBackgroundImageURL = "https://picsum.photos/seed/picsum/200/300"
-
-    var imageURL: String!
-    
-    init(imageURL: String!) {
-        self.imageURL = imageURL
     }
 }
 
@@ -51,24 +45,21 @@ struct OpenCarouselData: Hashable, Identifiable {
     // ID
     let id: Int
     
-//    var title: SHTipCarouselItem?
-//    var subtitle: SHTipCarouselItem?
-    
-    // This will represents both title and subtitle for carousel
+    // This will represents both title and subtitle for carousel.
     var carouselDataItem: SHTipCarouselItem?
         
-    // It will have center image of screen
+    // It will have center image of screen.
     var primaryImageUrl: String?
     
-    // It will have background image of screen
-    var backgroundImageURL: String?
+    // It will have background image of screen.
+    var backgroundImage: SHTipImageElement?
     
-    //
+    // Usually Button with text `Next`.
     var button: SHTipButtonElement?
     //
     var totalCarouselsCount: Int?
     
-    // Used to dismiss screen if last screen from array is reached
+    // Used to dismiss screen if last screen from array is reached.
     var isLastScreen = false
     
     //Default URLs if in case Dashboard returns nil
@@ -111,28 +102,34 @@ struct OpenCarouselData: Hashable, Identifiable {
     
     //MARK: Init
     // Used for debug
-    init(id: Int,isLastScreen: Bool = false) {
+    init(id: Int,
+         isLastScreen: Bool = false) {
         self.id = id
-//        self.title = SHTipCarouselItem()
-//        self.subtitle = SHTipCarouselItem()
         self.totalCarouselsCount = 3
         self.isLastScreen = isLastScreen
     }
-
     
-    init(id: Int, carouselData: SHTipCarouselItem, isLastScreen: Bool) {
+    init(id: Int,
+         carouselData: SHTipCarouselItem,
+         isLastScreen: Bool,
+         backgroundImage: SHTipImageElement?) {
+        
         print("CAROUSEL DATA ITEM id \(id) carouselDataItem \(carouselDataItem) isLastScreen \(isLastScreen)")
         print("CAROUSEL DATA ITEM image \(carouselData.image) image Source \(carouselData.imageSource) \n icon \(carouselData.icon) icon source \(carouselData.iconSource)")
+        
         self.id = id
         self.carouselDataItem = carouselData
         self.isLastScreen = isLastScreen
         self.primaryImageUrl = carouselData.imageSource
         self.button = carouselData.button
+        self.backgroundImage = backgroundImage
+        
+        
     }
     
     //MARK: Loading Image
     func loadBackgroundImage(completion: @escaping ((Image) -> ())) {
-        loadImage(imageURLString: backgroundImageURL ?? placeholderBackgroundImageURL) { loadedImage in
+        loadImage(imageURLString: backgroundImage?.resource ?? placeholderBackgroundImageURL) { loadedImage in
             guard let loadedImage = loadedImage else {
                 completion(Image("person.circle.fill"))
                 return

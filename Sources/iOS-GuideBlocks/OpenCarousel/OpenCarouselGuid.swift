@@ -38,12 +38,10 @@ public class OpenCarouselGuid: CTXBaseGuideController {
          */
         
         print("RECEIVED NEW PAYLOAD \(contextualContainer.guidePayload.guide.carousel)")
-        //TODO: CHANGE to Open Carousel Guid View
-        let view = OpenCarouselGuidView(openCarouselDataManager: OpenCarouselDataManager(carouselData: contextualContainer.guidePayload.guide.carousel), dismissController: {
+        let view = OpenCarouselGuidView(guide: contextualContainer.guidePayload.guide) {
             self.hostingController?.dismiss(animated: true)
             self.dismissGuide()
-        })
-        
+        }
         
         //TODO: uncomment after setting view to Open Carousel Guid View
         self.hostingController = UIHostingController(rootView: view)

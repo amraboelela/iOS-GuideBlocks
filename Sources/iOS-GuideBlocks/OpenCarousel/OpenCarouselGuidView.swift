@@ -14,6 +14,11 @@ struct OpenCarouselGuidView: View {
     let openCarouselDataManager: OpenCarouselDataManager
     
     var dismissController: () -> ()
+    
+    init(guide: SHTipElement,onDismiss dismissController: @escaping () -> Void) {
+        self.openCarouselDataManager = OpenCarouselDataManager(guide: guide)
+        self.dismissController = dismissController
+    }
 
     @State private var currentTab = 0
     
@@ -21,16 +26,15 @@ struct OpenCarouselGuidView: View {
         TabView(selection: $currentTab,
                 content:  {
             ForEach(openCarouselDataManager.carouselItems) { viewData in
-                OpenCarouselView(data: viewData,currentTab: $currentTab, dismissController: dismissController)
-                    .tag(viewData.id)
+                OpenCarouselView(data: viewData,
+                                 currentTab: $currentTab,
+                                 dismissController: dismissController)
+                .tag(viewData.id)
             }
         })
-        
         .tabViewStyle(PageTabViewStyle())
         .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))
         .frame(width: screenSize.width, height: screenSize.height * 0.95)
-
-        
     }
 }
 
@@ -44,22 +48,20 @@ struct OpenCarouselView: View {
     
     let screenSize = UIScreen.main.bounds
     var dismissController: () -> ()
+    
     var body: some View {
         
-        data.loadBackgroundImage { image in
-            backgroundImage = image
-        }
-        
-        data.loadPrimaryImage { image in
-            primaryImage = image
-        }
-        
-        return VStack(spacing: 20) {
+        VStack(spacing: 20) {
             ZStack {
                 backgroundImage?
                 .resizable()
+                .padding(.top, data.backgroundImage?.margin.top ?? 0)
+                .padding(.bottom, data.backgroundImage?.margin.bottom ?? 0)
+                .padding(.leading, data.backgroundImage?.margin.left ?? 0)
+                .padding(.trailing, data.backgroundImage?.margin.right ?? 0)
+                .border(Color(uiColor: data.backgroundImage?.borderColor ?? .clear), width: data.backgroundImage?.borderWidth ?? 0)
+                .clipShape(RoundedRectangle(cornerRadius: data.backgroundImage?.cornerRadius ?? 0, style: .circular))
 //                .scaledToFit()
-
 
                 primaryImage?
                     .resizable()
@@ -82,14 +84,10 @@ struct OpenCarouselView: View {
                     .foregroundColor(.white)
 
             }
-            
-            
-            //TODO: Below code will be removed later
-            //
-            
+                        
             if let subtitle = data.carouselDataItem?.contentText {
                 Text(subtitle).contextualCarouselContentElement(data.carouselDataItem)
-
+                
             } else {
                 Text("Subtitle \(data.id)")
                     .font(.headline)
@@ -97,21 +95,18 @@ struct OpenCarouselView: View {
                     .frame(maxWidth: 250)
                     .foregroundColor(.red)
                     .shadow(color: Color.black.opacity(0.1), radius: 1, x: 2, y: 2)
-
             }
-
-//            Spacer()
-
+            
             Button(action: {
-                    if !data.isLastScreen {
-                        withAnimation {
-                            currentTab += 1
-                        }
-                    } else {
-                        print("Reached last screen")
-                        dismissController()
-                        
+                if !data.isLastScreen {
+                    withAnimation {
+                        currentTab += 1
                     }
+                } else {
+                    print("Reached last screen")
+                    dismissController()
+                    
+                }
                 
                 
             }, label: {
@@ -149,6 +144,16 @@ struct OpenCarouselView: View {
                 self.isAnimating = true
             }
         })
+        .task {
+            data.loadBackgroundImage { image in
+                backgroundImage = image
+            }
+            
+            data.loadPrimaryImage { image in
+                primaryImage = image
+            }
+            
+        }
     }
 }
 
