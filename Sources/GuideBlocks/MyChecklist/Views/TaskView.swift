@@ -16,6 +16,8 @@ struct TaskView: View {
             if taskModel.enabled {
                 print("Action for task \(taskModel.name)")
                 taskModel.checked = true
+            } else {
+                print("Task \(taskModel.name) is not enabled")
             }
         }) {
             HStack {
