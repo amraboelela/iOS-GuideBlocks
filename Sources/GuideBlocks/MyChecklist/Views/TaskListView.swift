@@ -16,11 +16,6 @@ struct TaskListView: View {
         VStack {
             List(viewModel.taskModels.indices, id: \.self) { index in
                 TaskView(taskModel: viewModel.taskModelBinding(forIndex: index))
-                Button(action: {
-                    print("Tapped on task \(viewModel.taskModels[index].name)")
-                }) {
-                    Text("Tap me")
-                }
             }
         }
         .padding()
