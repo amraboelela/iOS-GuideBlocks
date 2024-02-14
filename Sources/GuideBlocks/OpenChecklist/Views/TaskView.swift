@@ -12,7 +12,12 @@ struct TaskView: View {
     @ObservedObject var viewModel: OpenChecklistViewModel
     var taskIndex: Int
     
-    var taskModel: TaskModel { viewModel.taskModels[taskIndex] }
+    var taskModel: TaskModel {
+        if taskIndex < viewModel.taskModels.count {
+            return viewModel.taskModels[taskIndex]
+        }
+        return viewModel.taskModels.last ?? TaskModel.sampleTaskModelWith(index: 0)
+    }
     
     var body: some View {
         Button(action: {
@@ -38,6 +43,6 @@ struct TaskView: View {
 
 struct TaskView_Previews: PreviewProvider {
     static var previews: some View {
-        TaskView(viewModel: openChecklistViewModel, taskIndex: 0)
+        TaskView(viewModel: openChecklistViewModel, taskIndex: 7)
     }
 }

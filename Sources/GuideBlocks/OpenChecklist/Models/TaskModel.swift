@@ -90,6 +90,14 @@ struct TaskModel: Codable, Hashable {
         return nil
     }
     
+    static func sampleTaskModelWith(index: Int) -> TaskModel {
+        return TaskModel(
+            name: "Task \(index)",
+            rawActionType: "gotoScreen",
+            actionData: TaskActionData(deepLink: "airbnbContextual://screen/" + "task_\(index)")
+        )
+    }
+    
     mutating func doTheAction() {
         checked = true
         switch actionType {

@@ -9,27 +9,29 @@
 import SwiftUI
 
 struct OpenChecklistView: View {
-    @ObservedObject var openChecklistViewModel: OpenChecklistViewModel
+    @ObservedObject var viewModel: OpenChecklistViewModel
     
     var body: some View {
         VStack {
-            Button(action: {
-                openChecklistViewModel.isPopupVisible.toggle()
-                print("Do list button tapped")
-            }) {
-                Text(openChecklistViewModel.title)
-                    .foregroundColor(.white) // Set text color to white
-                    .padding() // Add padding to the text
-                    .background(Color.blue) // Set background color to sky blue
-                    .cornerRadius(10) // Apply round rectangle shape with corner radius
+            if viewModel.taskListVisible {
+                Button(action: {
+                    viewModel.isPopupVisible.toggle()
+                    print("Do list button tapped")
+                }) {
+                    Text(viewModel.title)
+                        .foregroundColor(.white) // Set text color to white
+                        .padding() // Add padding to the text
+                        .background(Color.blue) // Set background color to sky blue
+                        .cornerRadius(10) // Apply round rectangle shape with corner radius
+                }
             }
         }
-        .sheet(isPresented: $openChecklistViewModel.isPopupVisible) {
+        .sheet(isPresented: $viewModel.isPopupVisible) {
             if #available(iOS 16.0, *) {
-                TaskListView(viewModel: openChecklistViewModel)
+                TaskListView(viewModel: viewModel)
                     .presentationDetents([.medium, .large])
             } else {
-                TaskListView(viewModel: openChecklistViewModel)
+                TaskListView(viewModel: viewModel)
             }
         }
     }
@@ -37,6 +39,6 @@ struct OpenChecklistView: View {
 
 struct OpenChecklistView_Previews: PreviewProvider {
     static var previews: some View {
-        OpenChecklistView(openChecklistViewModel: openChecklistViewModel)
+        OpenChecklistView(viewModel: openChecklistViewModel)
     }
 }

@@ -39,7 +39,7 @@ public class OpenChecklistGuide: CTXBaseGuideController {
         if let title = guide.title?.text {
             openChecklistViewModel.title = title
         }
-        let view = OpenChecklistView(openChecklistViewModel: openChecklistViewModel)
+        let view = OpenChecklistView(viewModel: openChecklistViewModel)
         
         self.hostingController = UIHostingController(rootView: view)
         

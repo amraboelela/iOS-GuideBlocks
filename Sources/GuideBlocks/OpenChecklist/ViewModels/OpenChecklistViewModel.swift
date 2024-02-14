@@ -17,7 +17,12 @@ class OpenChecklistViewModel : ObservableObject {
     
     @Published var isPopupVisible: Bool = false
     @Published var title = "Do List"
-    @Published var taskModels = [TaskModel]()
+    @Published var taskModels = [TaskModel]() {
+        didSet {
+            updateTaskListVisible()
+        }
+    }
+    @Published var taskListVisible = true
     
     init() {
         loadWithSampleTasks()
@@ -26,11 +31,7 @@ class OpenChecklistViewModel : ObservableObject {
     func loadWithSampleTasks() {
         var result = [TaskModel]()
         for i in 1...12 {
-            let taskModel = TaskModel(
-                name: "Task \(i)",
-                rawActionType: "gotoScreen",
-                actionData: TaskActionData(deepLink: "airbnbContextual://screen/" + "task_\(i)")
-            )
+            let taskModel = TaskModel.sampleTaskModelWith(index: i)
             result.append(taskModel)
         }
         taskModels = result
@@ -42,7 +43,6 @@ class OpenChecklistViewModel : ObservableObject {
                 for (i, taskModel) in resultTaskModels.enumerated() {
                     resultTaskModels[i].gotoScreenAction = { deepLinkURL in
                         print("gotoScreenAction for task: \(taskModel.name), deepLinkURL: \(deepLinkURL)")
-                        //if let deepLinkURL = URL(string: deepLink) {
                         if UIApplication.shared.canOpenURL(deepLinkURL) {
                             UIApplication.shared.open(deepLinkURL)
                         } else {
@@ -55,6 +55,16 @@ class OpenChecklistViewModel : ObservableObject {
                 print("couldn't JSON serialize data: \(tasksJson.hexEncodedString)")
             }
         }
+    }
+    
+    func updateTaskListVisible() {
+        var result = false
+        for taskModel in taskModels {
+            if taskModel.enabled {
+                result = true
+            }
+        }
+        self.taskListVisible = result
     }
     
 }

@@ -114,6 +114,15 @@ class TaskModelTests: XCTestCase {
         XCTAssertNotNil(taskModel3.deepLinkURL)
     }
     
+    func testSampleTaskModelWithIndex() {
+        let index = 1
+        
+        let taskModel = TaskModel.sampleTaskModelWith(index: index)
+        
+        XCTAssertEqual(taskModel.name, "Task \(index)")
+        XCTAssertEqual(taskModel.actionData.deepLink, "airbnbContextual://screen/task_\(index)")
+    }
+    
     func testGotoScreenAction() {
         var taskModel = TaskModel(
             name: "Task 1",
