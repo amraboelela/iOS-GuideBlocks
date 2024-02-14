@@ -55,13 +55,13 @@ struct TaskModel: Codable, Hashable {
     
     var checked: Bool {
         get {
-            let tagValue = myChecklistViewModel.contextualContainer?.tagManager.getTagValue(
+            let tagValue = openChecklistViewModel.contextualContainer?.tagManager.getTagValue(
                 key: checkedKey
             )
             return tagValue == "true"
         }
         set {
-            myChecklistViewModel.contextualContainer?.tagManager.saveTag(
+            openChecklistViewModel.contextualContainer?.tagManager.saveTag(
                 key: checkedKey,
                 value: "\(newValue)",
                 success: nil,
@@ -81,7 +81,6 @@ struct TaskModel: Codable, Hashable {
         case actionData = "action_data"
     }
     
-    
     var deepLinkURL: URL? {
         if let deepLink = actionData.deepLink, let result = URL(string: deepLink) {
             return result
@@ -100,7 +99,7 @@ struct TaskModel: Codable, Hashable {
             }
         case .setTag:
             if let tagKey = actionData.tagKey, let tagValue = actionData.tagValue {
-                myChecklistViewModel.contextualContainer?.tagManager.saveTag(
+                openChecklistViewModel.contextualContainer?.tagManager.saveTag(
                     key: tagKey,
                     value: tagValue,
                     success: nil,

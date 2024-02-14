@@ -1,5 +1,5 @@
 //
-//  MyChecklistViewModelTests.swift
+//  OpenChecklistViewModelTests.swift
 //  GuideBlocksTests
 //
 //  Created by Amr Aboelela on 2024/2/9.
@@ -11,28 +11,26 @@ import XCTest
 
 @testable import GuideBlocks
 
-class MyChecklistViewModelTests: XCTestCase {
+class OpenChecklistViewModelTests: XCTestCase {
 
     override func setUp() {
         super.setUp()
     }
 
     override func tearDown() {
-        //viewModel = nil
         super.tearDown()
     }
 
     func testLoadWithSampleTasks() {
-        myChecklistViewModel.loadWithSampleTasks()
+        openChecklistViewModel.loadWithSampleTasks()
         // Check if taskModels are loaded with sample tasks
-        XCTAssertEqual(myChecklistViewModel.taskModels.count, 12)
+        XCTAssertEqual(openChecklistViewModel.taskModels.count, 12)
         
         // Verify the properties of each taskModel
-        for (index, taskModel) in myChecklistViewModel.taskModels.enumerated() {
+        for (index, taskModel) in openChecklistViewModel.taskModels.enumerated() {
             XCTAssertEqual(taskModel.name, "Task \(index + 1)")
             XCTAssertEqual(taskModel.checked, false)
             XCTAssertTrue(taskModel.enabled)
-            //XCTAssertNil(taskModel.action)
         }
     }
 
@@ -41,13 +39,13 @@ class MyChecklistViewModelTests: XCTestCase {
         let customTasks = ["Task A", "Task B", "Task C"]
         
         // Load tasks with custom tasks
-        //myChecklistViewModel.load(tasks: customTasks)
+        //openChecklistViewModel.load(tasks: customTasks)
         
         // Check if taskModels are loaded with custom tasks
-        //XCTAssertEqual(myChecklistViewModel.taskModels.count, customTasks.count)
+        //XCTAssertEqual(openChecklistViewModel.taskModels.count, customTasks.count)
         
         // Verify the properties of each taskModel
-        /*for (index, taskModel) in myChecklistViewModel.taskModels.enumerated() {
+        /*for (index, taskModel) in openChecklistViewModel.taskModels.enumerated() {
             let taskName = customTasks[index]
             XCTAssertEqual(
                 taskModel.id,

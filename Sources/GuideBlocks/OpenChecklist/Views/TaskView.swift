@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct TaskView: View {
-    @ObservedObject var viewModel: MyChecklistViewModel
+    @ObservedObject var viewModel: OpenChecklistViewModel
     var taskIndex: Int
     
     var taskModel: TaskModel { viewModel.taskModels[taskIndex] }
@@ -38,6 +38,6 @@ struct TaskView: View {
 
 struct TaskView_Previews: PreviewProvider {
     static var previews: some View {
-        TaskView(viewModel: myChecklistViewModel, taskIndex: 0)
+        TaskView(viewModel: openChecklistViewModel, taskIndex: 0)
     }
 }

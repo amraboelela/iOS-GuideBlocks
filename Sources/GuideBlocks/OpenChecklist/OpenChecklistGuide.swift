@@ -1,5 +1,5 @@
 //
-//  MyChecklistGuide.swift
+//  OpenChecklistGuide.swift
 //  iOS-GuideBlocks
 //
 //  Created by Amr Aboelela on 2024/2/8.
@@ -10,9 +10,9 @@ import SwiftUI
 import ContextualSDK
 
 /// A guide controller for displaying a checklist view.
-public class MyChecklistGuide: CTXBaseGuideController {
+public class OpenChecklistGuide: CTXBaseGuideController {
     
-    private var hostingController: UIHostingController<MyChecklistView>?
+    private var hostingController: UIHostingController<OpenChecklistView>?
     
     /// Presents the guide block.
     ///
@@ -34,12 +34,12 @@ public class MyChecklistGuide: CTXBaseGuideController {
         }
         
         let guide = contextualContainer.guidePayload.guide
-        myChecklistViewModel.contextualContainer = contextualContainer
-        myChecklistViewModel.load(tasks: guide.extraJson?["tasks"])
+        openChecklistViewModel.contextualContainer = contextualContainer
+        openChecklistViewModel.load(tasks: guide.extraJson?["tasks"])
         if let title = guide.title?.text {
-            myChecklistViewModel.title = title
+            openChecklistViewModel.title = title
         }
-        let view = MyChecklistView(myChecklistViewModel: myChecklistViewModel)
+        let view = OpenChecklistView(openChecklistViewModel: openChecklistViewModel)
         
         self.hostingController = UIHostingController(rootView: view)
         

@@ -1,5 +1,5 @@
 //
-//  MyChecklistViewModel.swift
+//  OpenChecklistViewModel.swift
 //  iOS-GuideBlocks
 //
 //  Created by Amr Aboelela on 2024/2/9.
@@ -10,9 +10,9 @@ import ContextualSDK
 import Foundation
 import SwiftUI
 
-let myChecklistViewModel = MyChecklistViewModel()
+let openChecklistViewModel = OpenChecklistViewModel()
 
-class MyChecklistViewModel : ObservableObject {
+class OpenChecklistViewModel : ObservableObject {
     var contextualContainer: ContextualContainer?
     
     @Published var isPopupVisible: Bool = false

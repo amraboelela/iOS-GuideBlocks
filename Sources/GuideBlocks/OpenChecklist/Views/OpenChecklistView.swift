@@ -1,5 +1,5 @@
 //
-//  MyChecklistView.swift
+//  OpenChecklistView.swift
 //  iOS-GuideBlocks
 //
 //  Created by Amr Aboelela on 2024/2/8.
@@ -8,35 +8,35 @@
 
 import SwiftUI
 
-struct MyChecklistView: View {
-    @ObservedObject var myChecklistViewModel: MyChecklistViewModel
+struct OpenChecklistView: View {
+    @ObservedObject var openChecklistViewModel: OpenChecklistViewModel
     
     var body: some View {
         VStack {
             Button(action: {
-                myChecklistViewModel.isPopupVisible.toggle()
+                openChecklistViewModel.isPopupVisible.toggle()
                 print("Do list button tapped")
             }) {
-                Text(myChecklistViewModel.title)
+                Text(openChecklistViewModel.title)
                     .foregroundColor(.white) // Set text color to white
                     .padding() // Add padding to the text
                     .background(Color.blue) // Set background color to sky blue
                     .cornerRadius(10) // Apply round rectangle shape with corner radius
             }
         }
-        .sheet(isPresented: $myChecklistViewModel.isPopupVisible) {
+        .sheet(isPresented: $openChecklistViewModel.isPopupVisible) {
             if #available(iOS 16.0, *) {
-                TaskListView(viewModel: myChecklistViewModel)
+                TaskListView(viewModel: openChecklistViewModel)
                     .presentationDetents([.medium, .large])
             } else {
-                TaskListView(viewModel: myChecklistViewModel)
+                TaskListView(viewModel: openChecklistViewModel)
             }
         }
     }
 }
 
-struct MyChecklistView_Previews: PreviewProvider {
+struct OpenChecklistView_Previews: PreviewProvider {
     static var previews: some View {
-        MyChecklistView(myChecklistViewModel: myChecklistViewModel)
+        OpenChecklistView(openChecklistViewModel: openChecklistViewModel)
     }
 }

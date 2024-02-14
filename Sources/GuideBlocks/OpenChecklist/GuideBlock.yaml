@@ -8,7 +8,7 @@ Acknowledgements:
 Screenshot: 
 Video:
 Extensibility: {
-    "guideBlockKey": "MyChecklist",
+    "guideBlockKey": "OpenChecklist",
     "tasks": [
         {
             "name": "Set My Tag",

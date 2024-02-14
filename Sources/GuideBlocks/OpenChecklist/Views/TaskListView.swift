@@ -9,13 +9,13 @@
 import SwiftUI
 
 struct TaskListView: View {
-    @ObservedObject var viewModel: MyChecklistViewModel
+    @ObservedObject var viewModel: OpenChecklistViewModel
     @State private var isPopupVisible = false
     
     var body: some View {
         VStack {
             List(viewModel.taskModels.indices, id: \.self) { index in
-                TaskView(viewModel: myChecklistViewModel, taskIndex: index)
+                TaskView(viewModel: openChecklistViewModel, taskIndex: index)
             }
         }
         .padding()
@@ -27,6 +27,6 @@ struct TaskListView: View {
 
 struct TaskListView_Previews: PreviewProvider {
     static var previews: some View {
-        TaskListView(viewModel: myChecklistViewModel)
+        TaskListView(viewModel: openChecklistViewModel)
     }
 }
