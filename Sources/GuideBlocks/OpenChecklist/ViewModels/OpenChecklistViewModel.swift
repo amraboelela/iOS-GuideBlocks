@@ -18,6 +18,7 @@ class OpenChecklistViewModel : ObservableObject {
     
     @Published var isPopupVisible: Bool = false
     @Published var title = "Do List"
+    @Published var taskListVisible = true
     @Published var taskModels = [TaskModel]() {
         didSet {
             dismissIfNeeded()
@@ -67,6 +68,7 @@ class OpenChecklistViewModel : ObservableObject {
             }
         }
         if needToDismiss {
+            taskListVisible = false
             openChecklistGuide?.isDismissingGuide()
         }
     }
