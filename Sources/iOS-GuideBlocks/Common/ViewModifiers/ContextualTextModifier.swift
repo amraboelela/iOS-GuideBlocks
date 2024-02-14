@@ -15,17 +15,11 @@ struct ContextualTextModifier: ViewModifier {
     let fontSize: CGFloat?
     let textColor: UIColor?
     
-    func body(content: Content) -> some View {
-        content
-            .font(customFont())
-            .foregroundColor(customColor())
-    }
-    
-    private func customFont() -> Font {
+    private var customFont: Font {
         var font = Font.system(size: fontSize ?? 12.0)
 
-        if let name = fontName {
-            font = font.font(customName: name)
+        if let fontName {
+            font = font.fontWith(name: fontName)
         }
 
         if let weight = fontWeight {
@@ -36,33 +30,21 @@ struct ContextualTextModifier: ViewModifier {
                 font = font.weight(.regular)
             }
         }
-        
         return font
     }
     
-    private func customColor() -> Color {
-        var color = Color.black
-        
-        if let textColor = self.textColor {
-           var red: CGFloat = 0
-           var green: CGFloat = 0
-           var blue: CGFloat = 0
-           var alpha: CGFloat = 0
-           textColor.getRed(&red, green: &green, blue: &blue, alpha: &alpha)
-           color = Color(red: red, green: green, blue: blue).opacity(alpha)
-        }
-        
-        return color
-    }
-}
-
-extension Font {
-    func font(customName name: String) -> Font {
-        if let customFont = UIFont(name: name, size: UIFontDescriptor.preferredFontDescriptor(withTextStyle: .body).pointSize) {
-            return Font(customFont)
+    private var customColor: Color {
+        if let textColor {
+            return Color(textColor)
         } else {
-            return self
+            return Color.black
         }
+    }
+    
+    func body(content: Content) -> some View {
+        content
+            .font(customFont)
+            .foregroundColor(customColor)
     }
 }
 
