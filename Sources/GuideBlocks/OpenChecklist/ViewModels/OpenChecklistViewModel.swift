@@ -67,8 +67,8 @@ class OpenChecklistViewModel : ObservableObject {
                 needToDismiss = false
             }
         }
+        taskListVisible = !needToDismiss
         if needToDismiss {
-            taskListVisible = false
             openChecklistGuide?.isDismissingGuide()
         }
     }
