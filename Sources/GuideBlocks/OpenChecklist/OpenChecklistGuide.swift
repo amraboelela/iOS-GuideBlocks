@@ -34,6 +34,7 @@ public class OpenChecklistGuide: CTXBaseGuideController {
         }
         
         let guide = contextualContainer.guidePayload.guide
+        openChecklistViewModel.openChecklistGuide = self
         openChecklistViewModel.contextualContainer = contextualContainer
         openChecklistViewModel.load(tasks: guide.extraJson?["tasks"])
         if let title = guide.title?.text {
@@ -48,8 +49,8 @@ public class OpenChecklistGuide: CTXBaseGuideController {
             return
         }
         
-        controller.addChild(self.hostingController!)
-        controller.view.addSubview(self.hostingController!.view)
+        controller.addChild(hostingController)
+        controller.view.addSubview(hostingController.view)
         self.hostingController?.view.backgroundColor = .clear
         hostingController.view.translatesAutoresizingMaskIntoConstraints = false
         

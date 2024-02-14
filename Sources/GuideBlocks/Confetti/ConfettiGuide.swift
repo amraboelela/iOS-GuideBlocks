@@ -34,8 +34,8 @@ public class ConfettiGuide: CTXBaseGuideController {
             return
         }
         
-        controller.addChild(self.hostingController!)
-        controller.view.addSubview(self.hostingController!.view)
+        controller.addChild(hostingController)
+        controller.view.addSubview(hostingController.view)
         
         hostingController.view.translatesAutoresizingMaskIntoConstraints = false
         

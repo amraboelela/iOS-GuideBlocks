@@ -51,8 +51,7 @@ public class CircleVideoGuide: CTXBaseGuideController {
             self.hostingController?.removeFromParent()
             self.dismissGuide()
         })
-    
-        
+
         self.hostingController = UIHostingController(rootView: view)
         
         guard let hostingController = self.hostingController else {
@@ -60,8 +59,8 @@ public class CircleVideoGuide: CTXBaseGuideController {
             return
         }
         
-        controller.addChild(self.hostingController!)
-        controller.view.addSubview(self.hostingController!.view)
+        controller.addChild(hostingController)
+        controller.view.addSubview(hostingController.view)
         self.hostingController?.view.backgroundColor = .clear
         hostingController.view.translatesAutoresizingMaskIntoConstraints = false
         

@@ -13,16 +13,16 @@ import SwiftUI
 let openChecklistViewModel = OpenChecklistViewModel()
 
 class OpenChecklistViewModel : ObservableObject {
+    var openChecklistGuide: OpenChecklistGuide?
     var contextualContainer: ContextualContainer?
     
     @Published var isPopupVisible: Bool = false
     @Published var title = "Do List"
     @Published var taskModels = [TaskModel]() {
         didSet {
-            updateTaskListVisible()
+            dismissIfNeeded()
         }
     }
-    @Published var taskListVisible = true
     
     init() {
         loadWithSampleTasks()
@@ -59,14 +59,16 @@ class OpenChecklistViewModel : ObservableObject {
         }
     }
     
-    func updateTaskListVisible() {
-        var result = false
+    func dismissIfNeeded() {
+        var needToDismiss = true
         for taskModel in taskModels {
             if taskModel.enabled {
-                result = true
+                needToDismiss = false
             }
         }
-        self.taskListVisible = result
+        if needToDismiss {
+            openChecklistGuide?.isDismissingGuide()
+        }
     }
     
 }

@@ -13,17 +13,15 @@ struct OpenChecklistView: View {
     
     var body: some View {
         VStack {
-            if viewModel.taskListVisible {
-                Button(action: {
-                    viewModel.isPopupVisible.toggle()
-                    print("Do list button tapped")
-                }) {
-                    Text(viewModel.title)
-                        .foregroundColor(.white) // Set text color to white
-                        .padding() // Add padding to the text
-                        .background(Color.blue) // Set background color to sky blue
-                        .cornerRadius(10) // Apply round rectangle shape with corner radius
-                }
+            Button(action: {
+                viewModel.isPopupVisible.toggle()
+                print("Do list button tapped")
+            }) {
+                Text(viewModel.title)
+                    .foregroundColor(.white) // Set text color to white
+                    .padding() // Add padding to the text
+                    .background(Color.blue) // Set background color to sky blue
+                    .cornerRadius(10) // Apply round rectangle shape with corner radius
             }
         }
         .sheet(isPresented: $viewModel.isPopupVisible) {
