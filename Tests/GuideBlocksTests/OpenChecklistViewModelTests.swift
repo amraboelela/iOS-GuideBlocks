@@ -12,15 +12,15 @@ import XCTest
 @testable import GuideBlocks
 
 class OpenChecklistViewModelTests: XCTestCase {
-
+    
     override func setUp() {
         super.setUp()
     }
-
+    
     override func tearDown() {
         super.tearDown()
     }
-
+    
     func testLoadWithSampleTasks() {
         openChecklistViewModel.loadWithSampleTasks()
         // Check if taskModels are loaded with sample tasks
@@ -33,27 +33,28 @@ class OpenChecklistViewModelTests: XCTestCase {
             XCTAssertTrue(taskModel.enabled)
         }
     }
-
-    func testLoadWithCustomTasks() {
-        // Define custom tasks
-        let customTasks = ["Task A", "Task B", "Task C"]
+    
+    func testLoadWithValidTasks() {
+        let viewModel = OpenChecklistViewModel()
+        let tasksArray: [Any] = [
+            [
+                "name": "Task 1",
+                "action": "gotoScreen",
+                "action_data": ["deep_link": "airbnbContextual://screen/task_1"]
+            ],
+            [
+                "name": "Task 2",
+                "action": "gotoScreen",
+                "action_data": ["deep_link": "airbnbContextual://screen/task_2"]
+            ]
+        ]
         
-        // Load tasks with custom tasks
-        //openChecklistViewModel.load(tasks: customTasks)
+        viewModel.load(tasks: tasksArray)
         
-        // Check if taskModels are loaded with custom tasks
-        //XCTAssertEqual(openChecklistViewModel.taskModels.count, customTasks.count)
-        
-        // Verify the properties of each taskModel
-        /*for (index, taskModel) in openChecklistViewModel.taskModels.enumerated() {
-            let taskName = customTasks[index]
-            XCTAssertEqual(
-                taskModel.id,
-                taskName.lowercased().replacingOccurrences(of: " ", with: "_")
-            )
-            XCTAssertEqual(taskModel.name, taskName)
-            XCTAssertTrue(taskModel.enabled)
-            XCTAssertNotNil(taskModel.action)
-        }*/
+        XCTAssertEqual(viewModel.taskModels.count, 2)
+        XCTAssertEqual(viewModel.taskModels[0].name, "Task 1")
+        XCTAssertEqual(viewModel.taskModels[0].actionData.deepLink, "airbnbContextual://screen/task_1")
+        XCTAssertEqual(viewModel.taskModels[1].name, "Task 2")
+        XCTAssertEqual(viewModel.taskModels[1].actionData.deepLink, "airbnbContextual://screen/task_2")
     }
 }
