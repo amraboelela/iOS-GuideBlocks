@@ -1,9 +1,9 @@
 //
 //  ContextualTextModifier.swift
-//  airbnb-main
+//  GuideBlocks
 //
-//  Created by Marc Stroebel on 22/1/2024.
-//  Copyright © 2024 Yonas Stephen. All rights reserved.
+//  Created by Marc Stroebel on 2024/1/22.
+//  Copyright © 2024 Contextual.
 //
 
 import SwiftUI
@@ -16,24 +16,24 @@ struct ContextualTextModifier: ViewModifier {
     let textColor: UIColor?
     
     func body(content: Content) -> some View {
-        return content.font(self.customFont()).foregroundColor(self.customColor())
+        content
+            .font(customFont())
+            .foregroundColor(customColor())
     }
     
     private func customFont() -> Font {
-        var font = Font.system(size: self.fontSize ?? 12.0)
+        var font = Font.system(size: fontSize ?? 12.0)
 
-        if let name = self.fontName {
+        if let name = fontName {
             font = font.font(customName: name)
         }
 
-        if let weight = self.fontWeight {
+        if let weight = fontWeight {
             switch weight {
             case "bold":
                 font = font.weight(.bold)
-                break
             default:
                 font = font.weight(.regular)
-                break
             }
         }
         
@@ -68,16 +68,20 @@ extension Font {
 
 extension View {
     func contextualText(textElement: SHTipTextElement?) -> some View {
-        self.modifier(ContextualTextModifier(fontName: textElement?.fontName,
-                                             fontWeight: textElement?.fontWeight,
-                                             fontSize: textElement?.fontSize,
-                                             textColor: textElement?.textColor))
+        modifier(ContextualTextModifier(
+            fontName: textElement?.fontName,
+            fontWeight: textElement?.fontWeight,
+            fontSize: textElement?.fontSize,
+            textColor: textElement?.textColor
+        ))
     }
     
     func contextualText(buttonElement: SHTipButtonElement?) -> some View {
-        self.modifier(ContextualTextModifier(fontName: buttonElement?.fontName,
-                                             fontWeight: buttonElement?.fontWeight,
-                                             fontSize: buttonElement?.fontSize,
-                                             textColor: buttonElement?.textColor))
+        modifier(ContextualTextModifier(
+            fontName: buttonElement?.fontName,
+            fontWeight: buttonElement?.fontWeight,
+            fontSize: buttonElement?.fontSize,
+            textColor: buttonElement?.textColor
+        ))
     }
 }
