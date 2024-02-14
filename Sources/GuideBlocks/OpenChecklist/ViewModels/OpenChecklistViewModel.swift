@@ -31,7 +31,8 @@ class OpenChecklistViewModel : ObservableObject {
     func loadWithSampleTasks() {
         var result = [TaskModel]()
         for i in 1...12 {
-            let taskModel = TaskModel.sampleTaskModelWith(index: i)
+            var taskModel = TaskModel.sampleTaskModelWith(index: i)
+            taskModel.contextualContainer = contextualContainer
             result.append(taskModel)
         }
         taskModels = result
@@ -39,9 +40,10 @@ class OpenChecklistViewModel : ObservableObject {
     
     func load(tasks: Any?) {
         if let tasksArray = tasks as? NSArray, let tasksJson = tasksArray.toData() {
-            if var resultTaskModels = try? JSONDecoder().decode([TaskModel].self, from: tasksJson) {
-                for (i, taskModel) in resultTaskModels.enumerated() {
-                    resultTaskModels[i].gotoScreenAction = { deepLinkURL in
+            if var loadedTaskModels = try? JSONDecoder().decode([TaskModel].self, from: tasksJson) {
+                for (i, taskModel) in loadedTaskModels.enumerated() {
+                    loadedTaskModels[i].contextualContainer = contextualContainer
+                    loadedTaskModels[i].gotoScreenAction = { deepLinkURL in
                         print("gotoScreenAction for task: \(taskModel.name), deepLinkURL: \(deepLinkURL)")
                         if UIApplication.shared.canOpenURL(deepLinkURL) {
                             UIApplication.shared.open(deepLinkURL)
@@ -50,7 +52,7 @@ class OpenChecklistViewModel : ObservableObject {
                         }
                     }
                 }
-                taskModels = resultTaskModels
+                taskModels = loadedTaskModels
             } else {
                 print("couldn't JSON serialize data: \(tasksJson.hexEncodedString)")
             }

@@ -6,6 +6,7 @@
 //  Copyright © 2024 Contextual.
 //
 
+import ContextualSDK
 import Foundation
 
 public enum TaskActionType : String {
@@ -27,6 +28,7 @@ struct TaskActionData: Codable {
 }
 
 struct TaskModel: Codable, Hashable {
+    var contextualContainer: ContextualContainer?
     
     var name: String
     var rawActionType: String
@@ -55,13 +57,13 @@ struct TaskModel: Codable, Hashable {
     
     var checked: Bool {
         get {
-            let tagValue = openChecklistViewModel.contextualContainer?.tagManager.getTagValue(
+            let tagValue = contextualContainer?.tagManager.getTagValue(
                 key: checkedKey
             )
             return tagValue == "true"
         }
         set {
-            openChecklistViewModel.contextualContainer?.tagManager.saveTag(
+            contextualContainer?.tagManager.saveTag(
                 key: checkedKey,
                 value: "\(newValue)",
                 success: nil,
@@ -107,7 +109,7 @@ struct TaskModel: Codable, Hashable {
             }
         case .setTag:
             if let tagKey = actionData.tagKey, let tagValue = actionData.tagValue {
-                openChecklistViewModel.contextualContainer?.tagManager.saveTag(
+                contextualContainer?.tagManager.saveTag(
                     key: tagKey,
                     value: tagValue,
                     success: nil,
