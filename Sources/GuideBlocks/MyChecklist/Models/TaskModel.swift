@@ -72,7 +72,6 @@ struct TaskModel: Codable, Hashable {
     }
     
     var enabled: Bool {
-        // TODO: fix this when done with testing
         return !checked
     }
     
