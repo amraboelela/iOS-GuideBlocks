@@ -48,9 +48,6 @@ class MyChecklistViewModel : ObservableObject {
                         } else {
                             print("Cannot open deeplink")
                         }
-                        /*} else {
-                         print("Invalid deeplink URL")
-                         }*/
                     }
                 }
                 taskModels = resultTaskModels
