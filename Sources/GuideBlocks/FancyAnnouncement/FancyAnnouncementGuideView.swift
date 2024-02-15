@@ -65,12 +65,12 @@ struct FancyAnnouncementGuideView: View {
                         Spacer()
                         if let title = titleElement?.text {
                             Text(title)
-                                .contextualTextWith(textElement: titleElement)
+                                .contextualTextFormat(titleElement)
                         }
                         if let message = messageElement?.text {
                             Text(message)
                                 .padding()
-                                .contextualTextWith(textElement: messageElement)
+                                .contextualTextFormat(messageElement)
                         }
                         HStack {
                             if let leftButtonText = leftButtonElement?.buttonText {
@@ -87,9 +87,7 @@ struct FancyAnnouncementGuideView: View {
                                                 RoundedRectangle(cornerRadius: 8)
                                                     .stroke(accentColorFinal, lineWidth: 1)
                                             )
-                                            .contextualButtonWith(
-                                                buttonElement: leftButtonElement
-                                            )
+                                            .contextualButtonFormat(leftButtonElement)
                                             .offset(x: 20, y: 0)
                                     }
                                 )
@@ -105,9 +103,7 @@ struct FancyAnnouncementGuideView: View {
                                             .padding()
                                             .background(accentColorFinal)
                                             .cornerRadius(8)
-                                            .contextualButtonWith(
-                                                buttonElement: rightButtonElement
-                                            )
+                                            .contextualButtonFormat(rightButtonElement)
                                             .offset(x: -20, y: 0)
                                     }
                                 )
