@@ -54,6 +54,7 @@ struct ContextualButtonModifier: ViewModifier {
         content
             .font(customFont)
             .foregroundColor(foregroundColor)
+            .background(customBackgroundColor)
             .tint(customBackgroundColor)
     }
 }
