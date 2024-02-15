@@ -34,6 +34,13 @@ class OpenChecklistViewModelTests: XCTestCase {
         }
     }
     
+    func testUpdateData() {
+        openChecklistViewModel.updateData()
+        
+        XCTAssertEqual(openChecklistViewModel.taskModels.count, 12)
+        XCTAssertEqual(openChecklistViewModel.title, "Do List")
+    }
+    
     func testLoadWithValidTasks() {
         let viewModel = OpenChecklistViewModel()
         let tasksArray: [Any] = [

@@ -14,7 +14,9 @@ let openChecklistViewModel = OpenChecklistViewModel()
 
 class OpenChecklistViewModel : ObservableObject {
     var openChecklistGuide: OpenChecklistGuide?
-    var contextualContainer: ContextualContainer?
+    var contextualContainer: ContextualContainer? {
+        openChecklistGuide?.contextualContainer
+    }
     
     @Published var isPopupVisible: Bool = false
     @Published var title = "Do List"
@@ -37,6 +39,14 @@ class OpenChecklistViewModel : ObservableObject {
             result.append(taskModel)
         }
         taskModels = result
+    }
+    
+    func updateData() {
+        let guide = contextualContainer?.guidePayload.guide
+        load(tasks: guide?.extraJson?["tasks"])
+        if let title = guide?.title?.text {
+            self.title = title
+        }
     }
     
     func load(tasks: Any?) {

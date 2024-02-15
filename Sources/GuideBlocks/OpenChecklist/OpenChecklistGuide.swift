@@ -12,6 +12,7 @@ import ContextualSDK
 /// A guide controller for displaying a checklist view.
 public class OpenChecklistGuide: CTXBaseGuideController {
     
+    var contextualContainer: ContextualContainer?
     private var hostingController: UIHostingController<OpenChecklistView>?
     
     /// Presents the guide block.
@@ -32,16 +33,12 @@ public class OpenChecklistGuide: CTXBaseGuideController {
             failure(contextualContainer.guidePayload)
             return
         }
-        
-        let guide = contextualContainer.guidePayload.guide
+        self.contextualContainer = contextualContainer
         openChecklistViewModel.openChecklistGuide = self
-        openChecklistViewModel.contextualContainer = contextualContainer
-        openChecklistViewModel.load(tasks: guide.extraJson?["tasks"])
-        if let title = guide.title?.text {
-            openChecklistViewModel.title = title
-        }
+        openChecklistViewModel.updateData()
+        let guide = contextualContainer.guidePayload.guide
         var view = OpenChecklistView(viewModel: openChecklistViewModel)
-        view.buttonElement = guide.next
+        view.buttonTextElement = guide.title
         self.hostingController = UIHostingController(rootView: view)
         
         guard let hostingController = self.hostingController else {
