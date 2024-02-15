@@ -1,8 +1,9 @@
 //
-//  UIImage+LoadFromUrl.swift
-//  
+//  UIImage.swift
+//  GuideBlocks
 //
-//  Created by Marc Stroebel on 29/1/2024.
+//  Created by Marc Stroebel on 2024/1/29.
+//  Copyright © 2024 Contextual.
 //
 
 import UIKit

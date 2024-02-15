@@ -10,10 +10,10 @@ import SwiftUI
 import ContextualSDK
 
 struct FancyAnnouncementGuideView: View {
-    var title: SHTipTextElement?
-    var message: SHTipTextElement?
-    var leftButton: SHTipButtonElement?
-    var rightButton: SHTipButtonElement?
+    var titleElement: SHTipTextElement?
+    var messageElement: SHTipTextElement?
+    var leftButtonElement: SHTipButtonElement?
+    var rightButtonElement: SHTipButtonElement?
     var image: Image?
     var imageUrl: String?
     var accentColor: Color?
@@ -63,51 +63,58 @@ struct FancyAnnouncementGuideView: View {
                 .overlay(
                     VStack {
                         Spacer()
-                        if let title = self.title?.text {
-                            Text(title).contextualText(textElement: self.title)
-                                
+                        if let title = titleElement?.text {
+                            Text(title)
+                                .contextualTextFormat(titleElement)
                         }
-                        if let message = self.message?.text {
+                        if let message = messageElement?.text {
                             Text(message)
                                 .padding()
-                                .contextualText(textElement: self.message)
+                                .contextualTextFormat(messageElement)
                         }
                         HStack {
-                            if let leftButtonText = self.leftButton?.buttonText {
-                                Button(action: {
-                                    self.leftButtonTapped?()
-                                }, label: {
-                                    Text(leftButtonText)
-                                        .padding()
-                                        .background(Color.white)
-                                        .cornerRadius(8)
-                                        .overlay(
-                                            RoundedRectangle(cornerRadius: 8)
-                                                .stroke(accentColorFinal, lineWidth: 1)
-                                        )
-                                        .contextualText(buttonElement: self.leftButton)
-                                        .offset(x: 20, y: 0)
-                                })
+                            if let leftButtonText = leftButtonElement?.buttonText {
+                                Button(
+                                    action: {
+                                        leftButtonTapped?()
+                                    },
+                                    label: {
+                                        Text(leftButtonText)
+                                            .padding()
+                                            .background(Color.white)
+                                            .cornerRadius(8)
+                                            .overlay(
+                                                RoundedRectangle(cornerRadius: 8)
+                                                    .stroke(accentColorFinal, lineWidth: 1)
+                                            )
+                                            .contextualButtonFormat(leftButtonElement)
+                                            .offset(x: 20, y: 0)
+                                    }
+                                )
                             }
                             Spacer()
-                            if let rightButtonText = self.rightButton?.buttonText {
-                                Button(action: {
-                                    self.rightButtonTapped?()
-                                }, label: {
-                                    Text(rightButtonText)
-                                        .padding()
-                                        .background(accentColorFinal)
-                                        .cornerRadius(8)
-                                        .contextualText(buttonElement: self.rightButton)
-                                        .offset(x: -20, y: 0)
-                                })
+                            if let rightButtonText = rightButtonElement?.buttonText {
+                                Button(
+                                    action: {
+                                        rightButtonTapped?()
+                                    },
+                                    label: {
+                                        Text(rightButtonText)
+                                            .padding()
+                                            .background(accentColorFinal)
+                                            .cornerRadius(8)
+                                            .contextualButtonFormat(rightButtonElement)
+                                            .offset(x: -20, y: 0)
+                                    }
+                                )
                             }
                         }
-                    }.offset(x: 0, y: -20)
+                    }
+                    .offset(x: 0, y: -20)
                 )
                 .frame(width: square, height: square)
                 .zIndex(0)
-        
+            
             // Top Border Line
             Rectangle()
                 .foregroundColor(accentColorFinal)
@@ -133,7 +140,7 @@ struct FancyAnnouncementGuideView: View {
             
             // Close Button
             Button(action: {
-                self.closeButtonTapped()
+                closeButtonTapped()
             }) {
                 Image(systemName: "xmark.circle.fill")
                     .resizable()
@@ -192,10 +199,10 @@ struct FancyAnnouncementGuideView_Previews: PreviewProvider {
         rightButton.buttonText = "Submit"
         
         return FancyAnnouncementGuideView(
-            title: title,
-            message: message,
-            leftButton: leftButton,
-            rightButton: rightButton,
+            titleElement: title,
+            messageElement: message,
+            leftButtonElement: leftButton,
+            rightButtonElement: rightButton,
             imageUrl: "https://virl.bc.ca/wp-content/uploads/2019/01/AccountIcon2.png",
             accentColor: nil,
             closeButtonColor: nil,
