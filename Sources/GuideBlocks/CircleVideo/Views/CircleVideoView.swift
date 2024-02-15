@@ -37,7 +37,7 @@ struct CircleVideoView: View {
             Button(action: {self.dismissbuttonTapped()}){
                 Image(systemName: "xmark.circle.fill")
                     .padding()
-                    .background(Color.green)
+                    .background(Color.red)
                     .foregroundColor(Color.white)
                     .clipShape(Circle())
                     .shadow(radius: 8)
