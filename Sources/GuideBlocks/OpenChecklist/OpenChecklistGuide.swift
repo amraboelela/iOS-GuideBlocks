@@ -39,11 +39,7 @@ public class OpenChecklistGuide: CTXBaseGuideController {
         let guide = contextualContainer.guidePayload.guide
         var view = OpenChecklistView(viewModel: openChecklistViewModel)
         view.buttonTextElement = guide.title
-        
-        let targetView = guide.target.findTarget(in: controller)
-        print("targetView: \(String(describing: targetView))")
-        
-        hostingController = UIHostingController(rootView: view)
+        self.hostingController = UIHostingController(rootView: view)
         
         guard let hostingController = self.hostingController else {
             failure(contextualContainer.guidePayload)
