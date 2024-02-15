@@ -1,19 +1,20 @@
 //
-//  ContextualTextModifier.swift
+//  ContextualButtonModifier.swift
 //  GuideBlocks
 //
-//  Created by Marc Stroebel on 2024/1/22.
+//  Created by Amr Aboelela on 2024/2/14.
 //  Copyright © 2024 Contextual.
 //
 
 import ContextualSDK
 import SwiftUI
 
-struct ContextualTextModifier: ViewModifier {
+struct ContextualButtonModifier: ViewModifier {
     let fontName: String?
     let fontWeight: String?
     let fontSize: CGFloat?
     let textColor: UIColor?
+    let backgroundColor: UIColor?
     
     private var customFont: Font {
         var font = Font.system(size: fontSize ?? 12.0)
@@ -33,7 +34,7 @@ struct ContextualTextModifier: ViewModifier {
         return font
     }
     
-    private var customColor: Color {
+    private var foregroundColor: Color {
         if let textColor {
             return Color(textColor)
         } else {
@@ -41,9 +42,18 @@ struct ContextualTextModifier: ViewModifier {
         }
     }
     
+    private var customBackgroundColor: Color {
+        if let backgroundColor {
+            return Color(backgroundColor)
+        } else {
+            return Color.white
+        }
+    }
+    
     func body(content: Content) -> some View {
         content
             .font(customFont)
-            .foregroundColor(customColor)
+            .foregroundColor(foregroundColor)
+            .tint(customBackgroundColor)
     }
 }

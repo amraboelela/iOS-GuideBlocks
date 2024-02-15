@@ -34,10 +34,10 @@ public class FancyAnnouncementGuide: CTXBaseGuideController {
         }
         
         let view = FancyAnnouncementGuideView(
-            title: guide.title,
-            message: guide.content,
-            leftButton: guide.prev,
-            rightButton: guide.next,
+            titleElement: guide.title,
+            messageElement: guide.content,
+            leftButtonElement: guide.prev,
+            rightButtonElement: guide.next,
             imageUrl: guide.arrayImages?.first?.resource,
             closeButtonTapped: {
                 dismissGuide()
