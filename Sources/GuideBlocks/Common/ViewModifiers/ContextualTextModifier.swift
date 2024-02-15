@@ -6,8 +6,8 @@
 //  Copyright © 2024 Contextual.
 //
 
-import SwiftUI
 import ContextualSDK
+import SwiftUI
 
 struct ContextualTextModifier: ViewModifier {
     let fontName: String?
@@ -45,25 +45,5 @@ struct ContextualTextModifier: ViewModifier {
         content
             .font(customFont)
             .foregroundColor(customColor)
-    }
-}
-
-extension View {
-    func contextualText(textElement: SHTipTextElement?) -> some View {
-        modifier(ContextualTextModifier(
-            fontName: textElement?.fontName,
-            fontWeight: textElement?.fontWeight,
-            fontSize: textElement?.fontSize,
-            textColor: textElement?.textColor
-        ))
-    }
-    
-    func contextualText(buttonElement: SHTipButtonElement?) -> some View {
-        modifier(ContextualTextModifier(
-            fontName: buttonElement?.fontName,
-            fontWeight: buttonElement?.fontWeight,
-            fontSize: buttonElement?.fontSize,
-            textColor: buttonElement?.textColor
-        ))
     }
 }
