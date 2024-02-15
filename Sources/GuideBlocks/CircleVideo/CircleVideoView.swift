@@ -6,6 +6,7 @@
 //  Copyright © 2023 Contextual.
 //
 
+import ContextualSDK
 import SwiftUI
 import WebKit
 
@@ -24,6 +25,7 @@ struct WebView: UIViewRepresentable {
 
 // Round Popup View
 struct CircleVideoView: View {
+    var imageElement: SHTipImageElement?
     var vid_url: String
     var circle_diameter: Int
     var dismissbuttonTapped: () -> ()
@@ -40,6 +42,7 @@ struct CircleVideoView: View {
                     .clipShape(Circle())
                     .shadow(radius: 8)
                     .zIndex(11)
+                    .contextualImageFormat(imageElement)
             }
             .offset(x: width/2, y: -1*(height/2))
             .zIndex(10)

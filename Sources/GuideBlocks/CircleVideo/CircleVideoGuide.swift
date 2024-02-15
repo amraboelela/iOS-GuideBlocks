@@ -45,14 +45,14 @@ public class CircleVideoGuide: CTXBaseGuideController {
         let vid_url = (guide.extraJson?["vid_url"] as? String) ?? defaultVideoURL
         let circle_diameter = (guide.extraJson?["circle_diameter"] as? Int) ?? 200
         
-        let view = CircleVideoView(vid_url: vid_url, circle_diameter: circle_diameter, dismissbuttonTapped: {
+        var view = CircleVideoView(vid_url: vid_url, circle_diameter: circle_diameter, dismissbuttonTapped: {
             self.hostingController?.willMove(toParent: nil)
             self.hostingController?.view.removeFromSuperview()
             self.hostingController?.removeFromParent()
             self.dismissGuide()
         })
-
-        self.hostingController = UIHostingController(rootView: view)
+        view.imageElement = guide.arrayImages.first
+        hostingController = UIHostingController(rootView: view)
         
         guard let hostingController = self.hostingController else {
             failure(contextualContainer.guidePayload)
