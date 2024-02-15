@@ -50,15 +50,14 @@ public class CircleVideoGuide: CTXBaseGuideController {
             return
         }
         
-        
-        let view = CircleVideoView(vid_url: vid_url, circle_diameter: circle_diameter, dismissbuttonTapped: {
+        var view = CircleVideoView(vid_url: vid_url, circle_diameter: circle_diameter, dismissbuttonTapped: {
             self.hostingController?.willMove(toParent: nil)
             self.hostingController?.view.removeFromSuperview()
             self.hostingController?.removeFromParent()
             self.dismissGuide()
         })
     
-        
+        view.imageElement = guide.arrayImages.first
         
         self.hostingController = UIHostingController(rootView: view)
         

@@ -14,18 +14,9 @@ struct ContextualImageModifier: ViewModifier {
     let height: CGFloat?
     let backgroundColor: UIColor?
     
-    private var customBackgroundColor: Color {
-        if let backgroundColor {
-            return Color(backgroundColor)
-        } else {
-            return Color.white
-        }
-    }
-    
     func body(content: Content) -> some View {
         content
             .frame(width: width, height: height)
-            .background(customBackgroundColor)
-            .tint(customBackgroundColor)
+            .background(backgroundColor.map { Color($0) })
     }
 }

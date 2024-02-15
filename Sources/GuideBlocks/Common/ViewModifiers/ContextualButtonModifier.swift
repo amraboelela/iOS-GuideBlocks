@@ -34,27 +34,11 @@ struct ContextualButtonModifier: ViewModifier {
         return font
     }
     
-    private var foregroundColor: Color {
-        if let textColor {
-            return Color(textColor)
-        } else {
-            return Color.black
-        }
-    }
-    
-    private var customBackgroundColor: Color {
-        if let backgroundColor {
-            return Color(backgroundColor)
-        } else {
-            return Color.white
-        }
-    }
-    
     func body(content: Content) -> some View {
         content
             .font(customFont)
-            .foregroundColor(foregroundColor)
-            .background(customBackgroundColor)
-            .tint(customBackgroundColor)
+            .foregroundColor(textColor.map { Color($0) })
+            .background(backgroundColor.map { Color($0) })
+            .tint(backgroundColor.map { Color($0) })
     }
 }

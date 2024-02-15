@@ -5,6 +5,7 @@
 //  Created by David Jones on 11/12/2023.
 //
 
+import ContextualSDK
 import SwiftUI
 import WebKit
 
@@ -23,6 +24,7 @@ struct WebView: UIViewRepresentable {
 
 // Round Popup View
 struct CircleVideoView: View {
+    var imageElement: SHTipImageElement?
     var vid_url: String
     var circle_diameter: Int
     var dismissbuttonTapped: () -> ()
@@ -34,8 +36,9 @@ struct CircleVideoView: View {
             Button(action: {self.dismissbuttonTapped()}){
                 Image(systemName: "xmark.circle.fill")
                     .padding()
-                    .background(Color.red)
-                    .foregroundColor(Color.white)
+                    .contextualImageFormat(imageElement)
+                    .background(.red)
+                    .foregroundColor(.white)
                     .clipShape(Circle())
                     .shadow(radius: 8)
                     .zIndex(11)
