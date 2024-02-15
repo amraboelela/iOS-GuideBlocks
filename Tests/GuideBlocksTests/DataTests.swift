@@ -1,5 +1,5 @@
 //
-//  DataExtensionTests.swift
+//  DataTests.swift
 //  GuideBlocksTests
 //
 //  Created by Amr Aboelela on 2024/2/12.
@@ -11,7 +11,7 @@ import XCTest
 
 @testable import GuideBlocks
 
-class DataExtensionTests: XCTestCase {
+class DataTests: XCTestCase {
     
     func testHexEncodedString() {
         let data = Data([0x48, 0x65, 0x6C, 0x6C, 0x6F]) // "Hello"
