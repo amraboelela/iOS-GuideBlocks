@@ -35,14 +35,14 @@ class ViewTests: XCTestCase {
         buttonElement.textColor = .red
         buttonElement.backgroundColor = .blue
     
-        let view = Button(action: {}, label: {
-            Text("Button")
-        })
-        
+        let view = Button(
+            action: {},
+            label: {
+                Text("Button")
+            }
+        )
         let modifiedView = view.contextualButtonWith(buttonElement: buttonElement)
-        
         XCTAssertTrue("\(modifiedView)".contains("ContextualButtonModifier"))
     }
     
 }
-
