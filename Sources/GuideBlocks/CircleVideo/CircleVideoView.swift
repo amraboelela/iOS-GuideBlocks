@@ -27,7 +27,7 @@ struct CircleVideoView: View {
     var vid_url: String
     var circle_diameter: Int
     var dismissbuttonTapped: () -> ()
-        
+    
     var body: some View {
         let width = CGFloat(circle_diameter)
         let height = CGFloat(circle_diameter)
@@ -45,7 +45,7 @@ struct CircleVideoView: View {
             .zIndex(10)
             WebView(url: URL(string: vid_url)!)
                 .cornerRadius(width/2)
-                //.cornerRadius(10)
+            //.cornerRadius(10)
                 .frame(width:width, height: height)
         }
         .frame(width: 100+width, height: 100+height) // Adjust popup size as you need
@@ -57,9 +57,11 @@ struct CircleVideoView: View {
 
 struct CircleVideoView_Previews: PreviewProvider {
     static var previews: some View {
-        CircleVideoView(vid_url: "https://www.youtube.com/embed/dQw4w9WgXcQ?si=Wx9SC9sBIU6AlMnz",
-                        circle_diameter: 150,
-                        dismissbuttonTapped: {
-        })
+        CircleVideoView(
+            vid_url: "https://www.youtube.com/embed/dQw4w9WgXcQ?si=Wx9SC9sBIU6AlMnz",
+            circle_diameter: 150,
+            dismissbuttonTapped: {
+            }
+        )
     }
 }
