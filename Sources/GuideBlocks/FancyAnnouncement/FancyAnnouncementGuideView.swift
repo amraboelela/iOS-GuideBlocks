@@ -6,8 +6,8 @@
 //  Copyright © 2023 Contextual.
 //
 
-import SwiftUI
 import ContextualSDK
+import SwiftUI
 
 struct FancyAnnouncementGuideView: View {
     var titleElement: SHTipTextElement?

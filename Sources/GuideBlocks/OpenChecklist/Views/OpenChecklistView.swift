@@ -6,9 +6,12 @@
 //  Copyright © 2024 Contextual.
 //
 
+import ContextualSDK
 import SwiftUI
 
 struct OpenChecklistView: View {
+    var buttonElement: SHTipButtonElement?
+    
     @ObservedObject var viewModel: OpenChecklistViewModel
     
     var body: some View {
@@ -25,8 +28,12 @@ struct OpenChecklistView: View {
                             .padding() // Add padding to the text
                             .background(Color.blue) // Set background color to sky blue
                             .cornerRadius(10) // Apply round rectangle shape with corner radius
+                            .contextualButtonWith(
+                                buttonElement: buttonElement
+                            )
                     }
                 )
+                
             }
         }
         .sheet(isPresented: $viewModel.isPopupVisible) {

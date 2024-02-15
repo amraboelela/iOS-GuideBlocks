@@ -40,8 +40,8 @@ public class OpenChecklistGuide: CTXBaseGuideController {
         if let title = guide.title?.text {
             openChecklistViewModel.title = title
         }
-        let view = OpenChecklistView(viewModel: openChecklistViewModel)
-        
+        var view = OpenChecklistView(viewModel: openChecklistViewModel)
+        view.buttonElement = guide.next
         self.hostingController = UIHostingController(rootView: view)
         
         guard let hostingController = self.hostingController else {
