@@ -163,3 +163,56 @@ struct OpenCarouselData: Hashable, Identifiable {
         }
     }
 }
+
+extension SHTipImageElement {
+    var imageSize: CGSize {
+        
+        let percentRange = 0.0...1.0
+        
+        var width_height: (width: CGFloat,height: CGFloat) = (width, height)
+        let screenSize = UIScreen.main.bounds
+        
+        if percentRange.contains(width) {
+        
+            width_height.width = screenSize.width * width
+        }
+        
+        if percentRange.contains(height) {
+            width_height.height = screenSize.height * height
+        }
+
+        return CGSize(width: width_height.width, height: width_height.height)
+    }
+    
+    var imageAligment: Alignment {
+        
+        if imageAlign == SHTipImageAlignment_LeftTop {
+            return .topLeading
+        }
+        else if imageAlign == SHTipImageAlignment_LeftMiddle {
+            return .leading
+        }
+        else if imageAlign == SHTipImageAlignment_LeftBottom {
+            return .bottomLeading
+        }
+        else if imageAlign == SHTipImageAlignment_CenterTop {
+            return .top
+        }
+        else if imageAlign == SHTipImageAlignment_CenterMiddle {
+            return .center
+        }
+        else if imageAlign == SHTipImageAlignment_CenterBottom {
+            return .bottom
+        }
+        else if imageAlign == SHTipImageAlignment_RightTop {
+            return .topTrailing
+        }
+        else if imageAlign == SHTipImageAlignment_RightMiddle {
+            return .trailing
+        }
+        else if imageAlign == SHTipImageAlignment_RightBottom {
+            return .bottomTrailing
+        }
+        return .topLeading
+    }
+}

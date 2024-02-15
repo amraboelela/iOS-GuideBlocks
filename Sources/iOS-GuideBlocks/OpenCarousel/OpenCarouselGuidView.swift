@@ -53,15 +53,9 @@ struct OpenCarouselView: View {
         
         VStack(spacing: 20) {
             ZStack {
-                backgroundImage?
+                
+                Image("")
                 .resizable()
-                .padding(.top, data.backgroundImage?.margin.top ?? 0)
-                .padding(.bottom, data.backgroundImage?.margin.bottom ?? 0)
-                .padding(.leading, data.backgroundImage?.margin.left ?? 0)
-                .padding(.trailing, data.backgroundImage?.margin.right ?? 0)
-                .border(Color(uiColor: data.backgroundImage?.borderColor ?? .clear), width: data.backgroundImage?.borderWidth ?? 0)
-                .clipShape(RoundedRectangle(cornerRadius: data.backgroundImage?.cornerRadius ?? 0, style: .circular))
-//                .scaledToFit()
 
                 primaryImage?
                     .resizable()
@@ -154,7 +148,31 @@ struct OpenCarouselView: View {
             }
             
         }
+        .background {
+            ZStack(alignment: data.backgroundImage?.imageAligment ?? .center, content: {
+                Rectangle()
+                    .frame(width: screenSize.width, height: screenSize.height)
+//                    .background(Color(uiColor: data.backgroundImage?.backgroundColor ?? .clear))
+
+                backgroundImage?
+                .resizable()
+                .frame(width: data.backgroundImage?.imageSize.width, height: data.backgroundImage?.imageSize.height)
+
+                .padding(.top, data.backgroundImage?.margin.top ?? 0)
+                .padding(.bottom, data.backgroundImage?.margin.bottom ?? 0)
+                .padding(.leading, data.backgroundImage?.margin.left ?? 0)
+                .padding(.trailing, data.backgroundImage?.margin.right ?? 0)
+                .border(Color(uiColor: data.backgroundImage?.borderColor ?? .clear), width: data.backgroundImage?.borderWidth ?? 0)
+                .clipShape(RoundedRectangle(cornerRadius: data.backgroundImage?.cornerRadius ?? 0, style: .circular))
+
+            })
+            
+            .frame(width: screenSize.width, height: screenSize.height)
+            .background(Color(uiColor: data.backgroundImage?.backgroundColor ?? .clear))
+
+        }
     }
+        
 }
 
 //#Preview {
