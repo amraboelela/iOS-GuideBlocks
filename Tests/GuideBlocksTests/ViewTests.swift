@@ -22,7 +22,7 @@ class ViewTests: XCTestCase {
         textElement.textColor = .red
         let view = Text("Hello")
         
-        let modifiedView = view.contextualTextWith(textElement: textElement)
+        let modifiedView = view.contextualTextFormat(textElement)
         
         XCTAssertTrue("\(modifiedView)".contains("ContextualTextModifier"))
     }
@@ -41,7 +41,7 @@ class ViewTests: XCTestCase {
                 Text("Button")
             }
         )
-        let modifiedView = view.contextualButtonWith(buttonElement: buttonElement)
+        let modifiedView = view.contextualButtonFormat(buttonElement)
         XCTAssertTrue("\(modifiedView)".contains("ContextualButtonModifier"))
     }
     

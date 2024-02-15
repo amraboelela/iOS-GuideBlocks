@@ -10,7 +10,7 @@ import ContextualSDK
 import SwiftUI
 
 extension View {
-    func contextualTextWith(textElement: SHTipTextElement?) -> some View {
+    func contextualTextFormat(_ textElement: SHTipTextElement?) -> some View {
         modifier(
             ContextualTextModifier(
                 fontName: textElement?.fontName,
@@ -21,7 +21,7 @@ extension View {
         )
     }
     
-    func contextualButtonWith(buttonElement: SHTipButtonElement?) -> some View {
+    func contextualButtonFormat(_ buttonElement: SHTipButtonElement?) -> some View {
         modifier(
             ContextualButtonModifier(
                 fontName: buttonElement?.fontName,
