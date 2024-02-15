@@ -28,9 +28,7 @@ struct OpenChecklistView: View {
                             .padding() // Add padding to the text
                             .background(Color.blue) // Set background color to sky blue
                             .cornerRadius(10) // Apply round rectangle shape with corner radius
-                            .contextualButtonWith(
-                                buttonElement: buttonElement
-                            )
+                            .contextualButtonFormat(buttonElement)
                     }
                 )
                 
