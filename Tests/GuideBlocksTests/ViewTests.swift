@@ -14,7 +14,7 @@ import XCTest
 
 class ViewTests: XCTestCase {
     
-    func testContextualTextWithTextElement() {
+    func testContextualTextFormat() {
         let textElement = SHTipTextElement()
         textElement.fontName = "Helvetica"
         textElement.fontWeight = "bold"
@@ -27,7 +27,7 @@ class ViewTests: XCTestCase {
         XCTAssertTrue("\(modifiedView)".contains("ContextualTextModifier"))
     }
     
-    func testContextualButtonWithButtonElement() {
+    func testContextualButtonFormat() {
         let buttonElement = SHTipButtonElement()
         buttonElement.fontName = "Helvetica"
         buttonElement.fontWeight = "bold"
@@ -45,4 +45,24 @@ class ViewTests: XCTestCase {
         XCTAssertTrue("\(modifiedView)".contains("ContextualButtonModifier"))
     }
     
+    func testContextualImageBackground() {
+        let imageElement = SHTipImageElement()
+        imageElement.backgroundColor = .blue
+        
+        let view = Image(systemName: "photo")
+        
+        let modifiedView = view.contextualImageBackground(imageElement)
+        XCTAssertTrue("\(modifiedView)".contains("ContextualImageBackgroundModifier"))
+    }
+    
+    func testContextualImageResize() {
+        let imageElement = SHTipImageElement()
+        imageElement.width = 200
+        imageElement.height = 100
+        
+        let view = Image(systemName: "photo")
+        
+        let modifiedView = view.contextualImageResize(imageElement)
+        XCTAssertTrue("\(modifiedView)".contains("ContextualImageResizeModifier"))
+    }
 }

@@ -16,7 +16,9 @@ Everyone loves Circle Video! This is a simple example to get you started with Co
 7. Now go to the Extensibility section in the sidebar and paste in the JSON as follows:
 `
 {
-  "guideBlockKey": "CircleVideo"
+    "guideBlockKey": "CircleVideo",
+    "vid_url": "https://www.youtube.com/embed/Y9ChGCY8Azk?si=aLGas88lnxI6g_jJ?autoplay=1 ",
+    "circle_diameter": 200
 }
 `
  * Match the name in the JSON to the name of your wrapper in the code
