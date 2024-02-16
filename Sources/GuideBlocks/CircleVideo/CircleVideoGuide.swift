@@ -1,13 +1,12 @@
 //
 //  CircleVideoGuide.swift
-//  iOS-GuideBlocks
+//  GuideBlocks
 //
 //  Copyright © 2023 Contextual.
 //
 
 import SwiftUI
 import ContextualSDK
-
 
 /// A guide controller for displaying a circle video view.
 public class CircleVideoGuide: CTXBaseGuideController {
@@ -42,10 +41,10 @@ public class CircleVideoGuide: CTXBaseGuideController {
         
         let guide = contextualContainer.guidePayload.guide
         let defaultVideoURL = "https://www.youtube.com/embed/Y9ChGCY8Azk?si=aLGas88lnxI6g_jJ?autoplay=1"
-        let vid_url = (guide.extraJson?["vid_url"] as? String) ?? defaultVideoURL
-        let circle_diameter = (guide.extraJson?["circle_diameter"] as? Int) ?? 200
+        let videoUrl = (guide.extraJson?["vid_url"] as? String) ?? defaultVideoURL
+        let circleDiameter = (guide.extraJson?["circle_diameter"] as? Int) ?? 200
         
-        var view = CircleVideoView(vid_url: vid_url, circle_diameter: circle_diameter, dismissbuttonTapped: {
+        var view = CircleVideoView(videoUrl: videoUrl, circleDiameter: circleDiameter, dismissbuttonTapped: {
             self.hostingController?.willMove(toParent: nil)
             self.hostingController?.view.removeFromSuperview()
             self.hostingController?.removeFromParent()

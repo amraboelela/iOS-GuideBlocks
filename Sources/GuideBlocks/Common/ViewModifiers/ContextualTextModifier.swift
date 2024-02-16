@@ -33,17 +33,9 @@ struct ContextualTextModifier: ViewModifier {
         return font
     }
     
-    private var customColor: Color {
-        if let textColor {
-            return Color(textColor)
-        } else {
-            return Color.black
-        }
-    }
-    
     func body(content: Content) -> some View {
         content
             .font(customFont)
-            .foregroundColor(customColor)
+            .background(textColor.map { Color($0) })
     }
 }
