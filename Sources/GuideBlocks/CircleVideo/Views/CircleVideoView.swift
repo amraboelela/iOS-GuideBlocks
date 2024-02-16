@@ -35,20 +35,28 @@ struct CircleVideoView: View {
         let width = CGFloat(circleDiameter)
         let height = CGFloat(circleDiameter)
         ZStack {
-            Button(action: {self.dismissbuttonTapped()}){
-                Image(systemName: "xmark.circle.fill")
-                    .resizable()
-                    .contextualImageResize(imageElement)
-                    .padding()
-                    .contextualImageBackground(imageElement)
-                    .background(.red)
-                    .foregroundColor(.white)
-                    .cornerRadius(width/2)
-                    .clipShape(Circle())
-                    .shadow(radius: 8)
-                    .zIndex(11)
-            }
-            .offset(x: width/2, y: -1*(height/2))
+            Button(
+                action: {
+                    dismissbuttonTapped()
+                },
+                label: {
+                    Image(systemName: "xmark.circle.fill")
+                        .resizable()
+                        .contextualImageResize(imageElement)
+                        .padding(10)
+                        .contextualImageBackground(imageElement)
+                        .background(.red)
+                        .foregroundColor(.white)
+                        .cornerRadius(width/2)
+                        .clipShape(Circle())
+                        .shadow(radius: 8)
+                        .zIndex(11)
+                }
+            )
+            .offset(
+                x: width/2 - (imageElement?.width ?? 0) / 4,
+                y: -1*(height/2) + (imageElement?.height ?? 0) / 4
+            )
             .zIndex(10)
             WebView(url: URL(string: videoUrl))
                 .cornerRadius(width/2)
@@ -58,7 +66,6 @@ struct CircleVideoView: View {
         
     }
 }
-
 
 struct CircleVideoView_Previews: PreviewProvider {
     static var previews: some View {
