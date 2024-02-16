@@ -1,8 +1,9 @@
 //
 //  CircleVideoView.swift
-//  airbnb-main
+//  iOS-GuideBlocks
 //
-//  Created by David Jones on 11/12/2023.
+//  Created by David Jones on 2023/12/11.
+//  Copyright © 2023 Contextual.
 //
 
 import ContextualSDK
@@ -77,5 +78,3 @@ struct CircleVideoView_Previews: PreviewProvider {
         )
     }
 }
-
-

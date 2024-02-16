@@ -11,7 +11,7 @@ import XCTest
 
 @testable import GuideBlocks
 
-class FontExtensionTests: XCTestCase {
+class FontTests: XCTestCase {
     func testFontWithValidName() {
         let font = Font.title // or any other initial font
         

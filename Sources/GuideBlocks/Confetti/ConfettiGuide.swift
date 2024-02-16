@@ -1,9 +1,9 @@
 //
 //  ConfettiGuide.swift
-//  airbnb-main
+//  iOS-GuideBlocks
 //
-//  Created by Marc Stroebel on 8/12/2023.
-//  Copyright © 2023 Contextual. All rights reserved.
+//  Created by Marc Stroebel on 2023/12/8.
+//  Copyright © 2023 Contextual.
 //
 
 import SwiftUI
@@ -13,10 +13,12 @@ public class ConfettiGuide: CTXBaseGuideController {
     
     private var hostingController: UIHostingController<ConfettiView>?
     
-    public override func presentGuideBlock(contextualContainer: ContextualContainer,
-                                           viewController controller: UIViewController?,
-                                           success: @escaping ((CTXIGuidePayload) -> ()),
-                                           failure: @escaping ((CTXIGuidePayload) -> ())) {
+    public override func presentGuideBlock(
+        contextualContainer: ContextualContainer,
+        viewController controller: UIViewController?,
+        success: @escaping ((CTXIGuidePayload) -> ()),
+        failure: @escaping ((CTXIGuidePayload) -> ())
+    ) {
 
         guard let controller = controller else {
             failure(contextualContainer.guidePayload)
@@ -32,8 +34,8 @@ public class ConfettiGuide: CTXBaseGuideController {
             return
         }
         
-        controller.addChild(self.hostingController!)
-        controller.view.addSubview(self.hostingController!.view)
+        controller.addChild(hostingController)
+        controller.view.addSubview(hostingController.view)
         
         hostingController.view.translatesAutoresizingMaskIntoConstraints = false
         
