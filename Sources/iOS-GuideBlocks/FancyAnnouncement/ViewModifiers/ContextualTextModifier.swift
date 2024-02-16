@@ -9,6 +9,47 @@
 import SwiftUI
 import ContextualSDK
 
+struct ContexualButton: View {
+    let button: SHTipButtonElement
+    let action: () -> Void
+    var body: some View {
+        HStack {
+            
+            Button(action: action, label: {
+                
+                Text(button.buttonText)
+                    .frame(width: button.buttonSize.width, height: button.buttonSize.height, alignment: button.buttonTextAligment)
+                    .background(Color(uiColor: button.backgroundColor ?? .black))
+                    .foregroundStyle(Color(uiColor: button.textColor ?? .white))
+                    .contextualText(buttonElement: button)
+                    .margin(button.margin)
+                    .border(Color(uiColor: button.borderColor ?? .clear), width: button.borderWidth)
+                    .clipShape(RoundedRectangle(cornerRadius: button.borderCornerRadius, style: .circular))
+            })
+            if button.padding.hasNoLeftRightPadding && button.buttonSize.width != UIScreen.main.bounds.width {
+                Spacer()
+            }
+            
+        }
+        
+    }
+}
+
+struct MarginModifier: ViewModifier {
+    let margin: FourSide
+    
+    func body(content: Content) -> some View {
+        return content
+            .padding(.top, margin.top)
+            .padding(.bottom, margin.bottom)
+            .padding(.leading, margin.left)
+            .padding(.trailing, margin.right)
+
+    }
+}
+
+
+
 struct ContextualTextModifier: ViewModifier {
     let fontName: String?
     let fontWeight: String?
@@ -23,7 +64,7 @@ struct ContextualTextModifier: ViewModifier {
         var font = Font.system(size: self.fontSize ?? 12.0)
 
         if let name = self.fontName {
-            font = font.font(customName: name)
+            font = font.font(customName: name,size: self.fontSize)
         }
 
         if let weight = self.fontWeight {
@@ -57,8 +98,8 @@ struct ContextualTextModifier: ViewModifier {
 }
 
 extension Font {
-    func font(customName name: String) -> Font {
-        if let customFont = UIFont(name: name, size: UIFontDescriptor.preferredFontDescriptor(withTextStyle: .body).pointSize) {
+    func font(customName name: String,size: CGFloat? = nil) -> Font {
+        if let customFont = UIFont(name: name, size: size ?? UIFontDescriptor.preferredFontDescriptor(withTextStyle: .body).pointSize) {
             return Font(customFont)
         } else {
             return self
@@ -93,5 +134,8 @@ extension View {
                                              fontWeight: contentElement?.contentFontWeight,
                                              fontSize: contentElement?.contentFontSize,
                                              textColor: contentElement?.contentColor))
+    }
+    func margin(_ margin: FourSide) -> some View {
+        self.modifier(MarginModifier(margin: margin))
     }
 }

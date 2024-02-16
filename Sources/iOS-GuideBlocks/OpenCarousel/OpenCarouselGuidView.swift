@@ -80,7 +80,8 @@ struct OpenCarouselView: View {
             }
                         
             if let subtitle = data.carouselDataItem?.contentText {
-                Text(subtitle).contextualCarouselContentElement(data.carouselDataItem)
+                Text(subtitle)
+                    .contextualCarouselContentElement(data.carouselDataItem)
                 
             } else {
                 Text("Subtitle \(data.id)")
@@ -90,48 +91,76 @@ struct OpenCarouselView: View {
                     .foregroundColor(.red)
                     .shadow(color: Color.black.opacity(0.1), radius: 1, x: 2, y: 2)
             }
-            
-            Button(action: {
-                if !data.isLastScreen {
-                    withAnimation {
-                        currentTab += 1
-                    }
-                } else {
-                    print("Reached last screen")
-                    dismissController()
+            if let button = data.button {
                     
-                }
-                
-                
-            }, label: {
-                if let text = data.button?.buttonText {
-                    Text(text)
-                        .background(Color(uiColor: data.button?.backgroundColor ?? .black))
-                        .contextualText(buttonElement: data.button)
+                    ContexualButton(button: button) {
+                        if !data.isLastScreen {
+                            withAnimation {
+                                currentTab += 1
+                            }
+                        } else {
+                            print("Reached last screen")
+                            dismissController()
+                        }
+                    }
 
-                } else {
-                    Text("Next")
-                        .font(.headline)
-                        .foregroundColor(.white)
-                        .padding(.horizontal, 50)
-                        .padding(.vertical, 16)
-                        .background(
-                            RoundedRectangle(cornerRadius: 20)
-                                .foregroundColor(
-                                    Color(
-                                        red: 255 / 255,
-                                        green: 115 / 255,
-                                        blue: 115 / 255
-                                    )
-                                )
-                        )
-                }
-                
-            })
-            .shadow(radius: 10)
+            } else {
+                Text("Next")
 
+            }
+            
+//            Button(action: {
+//                if !data.isLastScreen {
+//                    withAnimation {
+//                        currentTab += 1
+//                    }
+//                } else {
+//                    print("Reached last screen")
+//                    dismissController()
+//                }
+//
+//            }, label: {
+//                if let text = data.button?.buttonText {
+//                    Text(text)
+//                        .frame(width: data.button?.buttonSize.width, height: data.button?.buttonSize.height)
+//                        .multilineTextAlignment(data.button?.buttonTextAligment ?? .center)
+//
+//                        .background(Color(uiColor: data.button?.backgroundColor ?? .black))
+//                        .foregroundStyle(Color(uiColor: data.button?.textColor ?? .white))
+//                        .contextualText(buttonElement: data.button)
+//                        .padding(.top, data.button?.margin.top ?? 0)
+//                        .padding(.bottom, data.button?.margin.bottom ?? 0)
+//                        .padding(.leading, data.button?.margin.left ?? 0)
+//                        .padding(.trailing, data.button?.margin.right ?? 0)
+//                        .border(Color(uiColor: data.button?.borderColor ?? .clear), width: data.button?.borderWidth ?? 0)
+//                        .clipShape(RoundedRectangle(cornerRadius: data.button?.borderCornerRadius ?? 0, style: .circular))
+//
+//                } else {
+//                    Text("Next")
+//                        .font(.headline)
+//                        .foregroundColor(.white)
+//                        .padding(.horizontal, 50)
+//                        .padding(.vertical, 16)
+//                        .background(
+//                            RoundedRectangle(cornerRadius: 20)
+//                                .foregroundColor(
+//                                    Color(
+//                                        red: 255 / 255,
+//                                        green: 115 / 255,
+//                                        blue: 115 / 255
+//                                    )
+//                                )
+//                        )
+//                }
+//
+//            })
+
+//            .shadow(radius: 10)
+            
             Spacer()
         }
+        
+
         .onAppear(perform: {
             isAnimating = false
             withAnimation(.easeOut(duration: 0.5)) {
@@ -157,13 +186,14 @@ struct OpenCarouselView: View {
                 backgroundImage?
                 .resizable()
                 .frame(width: data.backgroundImage?.imageSize.width, height: data.backgroundImage?.imageSize.height)
-
-                .padding(.top, data.backgroundImage?.margin.top ?? 0)
-                .padding(.bottom, data.backgroundImage?.margin.bottom ?? 0)
-                .padding(.leading, data.backgroundImage?.margin.left ?? 0)
-                .padding(.trailing, data.backgroundImage?.margin.right ?? 0)
+                .margin(data.backgroundImage?.margin ?? FourSide(top: 0, bottom: 0, left: 0, right: 0))
                 .border(Color(uiColor: data.backgroundImage?.borderColor ?? .clear), width: data.backgroundImage?.borderWidth ?? 0)
                 .clipShape(RoundedRectangle(cornerRadius: data.backgroundImage?.cornerRadius ?? 0, style: .circular))
+                
+                Rectangle()
+                    .frame(width: screenSize.width, height: screenSize.height)
+                    .foregroundStyle(Color(uiColor: data.carouselDataItem?.backgroundColor ?? .clear))
+
 
             })
             
