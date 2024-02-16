@@ -18,7 +18,7 @@ There are two ways to use GuideBlocks:
 
 0. you have an account on the Contextual Dashboard and you've added the iOS SDK, you've added the **app_key** into your App and tested a simple Guide in your App.
 1. using Swift Package Manager add [iOS-GuideBlocks](https://github.com/GuideBlocks-org/iOS-GuideBlocks/blob/confetti/Sources/iOS-GuideBlocks) to your Package Dependencies
-2. add `import iOS_GuideBlocks`
+2. add `import GuideBlocks`
 3. for the GuideBlock you wish to use, then add `Contextual.sharedInstance().registerGuideBlock(FancyAnnouncementGuide(), forKey: "FancyAnnouncement")`
 4. build and run!
 

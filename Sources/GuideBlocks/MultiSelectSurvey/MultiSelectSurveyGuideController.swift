@@ -2,8 +2,8 @@
 //  MultiSelectSurveyGuideController.swift
 //  GuideBlocks
 //
-//  Created by Marc Stroebel on 25/1/2024.
-//  Copyright © 2024 GuideBlocks. All rights reserved.
+//  Created by Marc Stroebel on 2024/1/25.
+//  Copyright © 2024 Contextual.
 //
 
 import SwiftUI
@@ -13,10 +13,12 @@ public class MultiSelectSurveyGuideController: CTXBaseGuideController {
     
     private var hostingController: UIHostingController<SurveyView>?
     
-    public override func presentGuideBlock(contextualContainer: ContextualContainer,
-                                           viewController controller: UIViewController?,
-                                           success: @escaping ((CTXIGuidePayload) -> ()),
-                                           failure: @escaping ((CTXIGuidePayload) -> ())) {
+    public override func presentGuideBlock(
+        contextualContainer: ContextualContainer,
+        viewController controller: UIViewController?,
+        success: @escaping ((CTXIGuidePayload) -> ()),
+        failure: @escaping ((CTXIGuidePayload) -> ())
+    ) {
         let guide = contextualContainer.guidePayload.guide
         
         let title = guide.feedback?.feedbackTitle ?? ""
@@ -41,20 +43,21 @@ public class MultiSelectSurveyGuideController: CTXBaseGuideController {
                     "answers-array": choices,
                     "any-other-custom-data": "Example custom data"
                 ])
-                contextualContainer.operations.submitFeedback(feedback,
-                                                              forGuide: contextualContainer.guidePayload,
-                                                              withHandler: { request, error in
-                    if let error = error {
-                        // Handler error here as necessary
-                        return
+                contextualContainer.operations.submitFeedback(
+                    feedback,
+                    forGuide: contextualContainer.guidePayload,
+                    withHandler: { request, error in
+                        if error != nil {
+                            // Handler error here as necessary
+                            return
+                        }
+                        // Handle success here as necessary, such as provide a modal to the user thanking them for their feedback
                     }
-                    
-                    // Handle success here as necessary, such as provide a modal to the user thanking them for their feedback
-                })
+                )
                 self.hostingController?.dismiss(animated: true)
                 self.nextStepOfGuide()
-            })
-        
+            }
+        )
         self.hostingController = UIHostingController(rootView: widgetView)
         controller?.present(self.hostingController!, animated: true)
         success(contextualContainer.guidePayload)

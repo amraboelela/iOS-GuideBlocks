@@ -4,7 +4,7 @@ In this example, we show how to make a Fancy Announcement, just like the crazy o
 
 1. Create an account at [Contextual Dashboard](https://dashboard.contextu.al/ "Contextual Dashboard").
 2. Install the Contextual SDK following the instructions for IOS or Android.
-3. Add `import iOS_GuideBlocks` usually in your AppDelegate.swift
+3. Add `import GuideBlocks` usually in your AppDelegate.swift
 4. Copy-Paste the instantiation of the Guide Component AFTER the Contextual SDK registration. e.g `Contextual.sharedInstance().registerGuideBlock(FancyAnnouncementGuide(), forKey: "FancyAnnouncementGuide")`
 5. Build your App and Run it on a phone or simulator
 6. Go to the Dashboard and create a guide:
@@ -20,7 +20,7 @@ In this example, we show how to make a Fancy Announcement, just like the crazy o
 `
  * Match the name in the JSON to the name of your wrapper in the code
 
- <img src="https://raw.githubusercontent.com/contextu-al/AirBnB-iOS/main/airbnb-main/img/FancyAnnouncementTree.png" alt="Adding your Extra JSON" width="200"/>
+ <img src="FancyAnnouncementTree.png" alt="Adding your Extra JSON" width="200"/>
 
 8. If you are still in Preview Mode, then you should see the Announcement will magically change to Fancy Announcement
 9. Change the Title and Content and buttons. Play around with it and see the results.

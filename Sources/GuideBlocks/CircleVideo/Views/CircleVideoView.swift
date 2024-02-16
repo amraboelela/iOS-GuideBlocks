@@ -1,13 +1,14 @@
 //
 //  CircleVideoView.swift
-//  airbnb-main
+//  iOS-GuideBlocks
 //
-//  Created by David Jones on 11/12/2023.
+//  Created by David Jones on 2023/12/11.
+//  Copyright © 2023 Contextual.
 //
 
+import ContextualSDK
 import SwiftUI
 import WebKit
-
 
 // WebView Representable
 struct WebView: UIViewRepresentable {
@@ -22,13 +23,13 @@ struct WebView: UIViewRepresentable {
     }
 }
 
-
 // Round Popup View
 struct CircleVideoView: View {
+    var imageElement: SHTipImageElement?
     var vid_url: String
     var circle_diameter: Int
     var dismissbuttonTapped: () -> ()
-        
+    
     var body: some View {
         let width = CGFloat(circle_diameter)
         let height = CGFloat(circle_diameter)
@@ -41,12 +42,13 @@ struct CircleVideoView: View {
                     .clipShape(Circle())
                     .shadow(radius: 8)
                     .zIndex(11)
+                    .contextualImageFormat(imageElement)
             }
             .offset(x: width/2, y: -1*(height/2))
             .zIndex(10)
             WebView(url: URL(string: vid_url)!)
                 .cornerRadius(width/2)
-                //.cornerRadius(10)
+            //.cornerRadius(10)
                 .frame(width:width, height: height)
         }
         .frame(width: 100+width, height: 100+height) // Adjust popup size as you need
@@ -56,14 +58,13 @@ struct CircleVideoView: View {
     }
 }
 
-
 struct CircleVideoView_Previews: PreviewProvider {
     static var previews: some View {
-        CircleVideoView(vid_url: "https://www.youtube.com/embed/dQw4w9WgXcQ?si=Wx9SC9sBIU6AlMnz",
-                        circle_diameter: 150,
-                        dismissbuttonTapped: {
-        })
+        CircleVideoView(
+            vid_url: "https://www.youtube.com/embed/dQw4w9WgXcQ?si=Wx9SC9sBIU6AlMnz",
+            circle_diameter: 150,
+            dismissbuttonTapped: {
+            }
+        )
     }
 }
-
-

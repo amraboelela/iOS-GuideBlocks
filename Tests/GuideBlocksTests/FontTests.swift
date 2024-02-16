@@ -11,14 +11,13 @@ import XCTest
 
 @testable import GuideBlocks
 
-class FontExtensionTests: XCTestCase {
+class FontTests: XCTestCase {
     func testFontWithValidName() {
         let font = Font.title // or any other initial font
         
         let modifiedFont = font.fontWith(name: "Helvetica")
         
         XCTAssertNotEqual(modifiedFont, font) // Ensure the font has changed
-        // Add more assertions as needed to verify the properties of the modified font
     }
     
     func testFontWithInvalidName() {
@@ -27,6 +26,5 @@ class FontExtensionTests: XCTestCase {
         let modifiedFont = font.fontWith(name: "InvalidFontName")
         
         XCTAssertEqual(modifiedFont, font) // Ensure the font remains unchanged
-        // Add more assertions as needed to verify the properties of the modified font
     }
 }
