@@ -22,9 +22,9 @@ struct ContexualButton: View {
                     .background(Color(uiColor: button.backgroundColor ?? .black))
                     .foregroundStyle(Color(uiColor: button.textColor ?? .white))
                     .contextualText(buttonElement: button)
-                    .margin(button.margin)
+                    .clipShape(RoundedRectangle(cornerRadius: button.borderCornerRadius))
                     .border(Color(uiColor: button.borderColor ?? .clear), width: button.borderWidth)
-                    .clipShape(RoundedRectangle(cornerRadius: button.borderCornerRadius, style: .circular))
+                    .margin(button.margin)
             })
             if button.padding.hasNoLeftRightPadding && button.buttonSize.width != UIScreen.main.bounds.width {
                 Spacer()
