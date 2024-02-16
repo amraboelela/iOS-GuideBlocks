@@ -9,14 +9,27 @@
 import ContextualSDK
 import SwiftUI
 
-struct ContextualImageModifier: ViewModifier {
-    let width: CGFloat?
-    let height: CGFloat?
+struct ContextualImageBackgroundModifier: ViewModifier {
     let backgroundColor: UIColor?
     
     func body(content: Content) -> some View {
         content
-            .frame(width: width, height: height)
             .background(backgroundColor.map { Color($0) })
+    }
+}
+
+struct ContextualImageResizeModifier: ViewModifier {
+    
+    let width: CGFloat?
+    let height: CGFloat?
+    
+    func body(content: Content) -> some View {
+        if let width, let height {
+            content
+                .frame(width: width, height: height)
+        } else {
+            content
+                .frame(width: 50, height: 50)
+        }
     }
 }

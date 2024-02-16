@@ -35,10 +35,13 @@ struct CircleVideoView: View {
         ZStack {
             Button(action: {self.dismissbuttonTapped()}){
                 Image(systemName: "xmark.circle.fill")
+                    .resizable()
+                    .contextualImageResize(imageElement)
                     .padding()
-                    .contextualImageFormat(imageElement)
+                    .contextualImageBackground(imageElement)
                     .background(.red)
                     .foregroundColor(.white)
+                    .cornerRadius(width/2)
                     .clipShape(Circle())
                     .shadow(radius: 8)
                     .zIndex(11)
@@ -50,8 +53,8 @@ struct CircleVideoView: View {
             //.cornerRadius(10)
                 .frame(width:width, height: height)
         }
-        .frame(width: 100+width, height: 100+height) // Adjust popup size as you need
-        .cornerRadius(width/2) // to get circle these will be smaller once dismiss is visible
+        //.frame(width: 100+width, height: 100+height) // Adjust popup size as you need
+        //.cornerRadius(width/2) // to get circle these will be smaller once dismiss is visible
         .shadow(radius: width/2)
         
     }

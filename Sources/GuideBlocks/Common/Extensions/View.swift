@@ -33,12 +33,19 @@ extension View {
         )
     }
     
-    func contextualImageFormat(_ imageElement: SHTipImageElement?) -> some View {
+    func contextualImageBackground(_ imageElement: SHTipImageElement?) -> some View {
         modifier(
-            ContextualImageModifier(
-                width: imageElement?.width,
-                height: imageElement?.height,
+            ContextualImageBackgroundModifier(
                 backgroundColor: imageElement?.backgroundColor
+            )
+        )
+    }
+    
+    func contextualImageResize(_ imageElement: SHTipImageElement?) -> some View {
+        modifier(
+            ContextualImageResizeModifier(
+                width: imageElement?.width,
+                height: imageElement?.height
             )
         )
     }
