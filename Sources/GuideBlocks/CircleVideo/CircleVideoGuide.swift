@@ -1,13 +1,12 @@
 //
 //  CircleVideoGuide.swift
-//  airbnb-main
+//  GuideBlocks
 //
-//  Copyright © 2023 Contextual. All rights reserved.
+//  Copyright © 2023 Contextual.
 //
 
 import SwiftUI
 import ContextualSDK
-
 
 /// A guide controller for displaying a circle video view.
 public class CircleVideoGuide: CTXBaseGuideController {
@@ -21,11 +20,12 @@ public class CircleVideoGuide: CTXBaseGuideController {
     ///   - controller: The view controller to present the guide block on.
     ///   - success: The closure to be called when the guide block is successfully presented.
     ///   - failure: The closure to be called when there is a failure in presenting the guide block.
-    public override func presentGuideBlock(contextualContainer: ContextualContainer,
-                                           viewController controller: UIViewController?,
-                                           success: @escaping ((CTXIGuidePayload) -> ()),
-                                           failure: @escaping ((CTXIGuidePayload) -> ())) {
-
+    public override func presentGuideBlock(
+        contextualContainer: ContextualContainer,
+        viewController controller: UIViewController?,
+        success: @escaping ((CTXIGuidePayload) -> ()),
+        failure: @escaping ((CTXIGuidePayload) -> ())
+    ) {
         guard let controller = controller else {
             failure(contextualContainer.guidePayload)
             return
@@ -40,35 +40,26 @@ public class CircleVideoGuide: CTXBaseGuideController {
          */
         
         let guide = contextualContainer.guidePayload.guide
-                
-        guard let vid_url = guide.extraJson?["vid_url"] as? String else {
-            failure(contextualContainer.guidePayload)
-            return
-        }
-        guard let circle_diameter = guide.extraJson?["circle_diameter"] as? Int else {
-            let circle_diameter = 150
-            return
-        }
+        let defaultVideoURL = "https://www.youtube.com/embed/Y9ChGCY8Azk?si=aLGas88lnxI6g_jJ?autoplay=1"
+        let videoUrl = (guide.extraJson?["vid_url"] as? String) ?? defaultVideoURL
+        let circleDiameter = (guide.extraJson?["circle_diameter"] as? Int) ?? 200
         
-        
-        let view = CircleVideoView(vid_url: vid_url, circle_diameter: circle_diameter, dismissbuttonTapped: {
+        var view = CircleVideoView(videoUrl: videoUrl, circleDiameter: circleDiameter, dismissbuttonTapped: {
             self.hostingController?.willMove(toParent: nil)
             self.hostingController?.view.removeFromSuperview()
             self.hostingController?.removeFromParent()
             self.dismissGuide()
         })
-    
-        
-        
-        self.hostingController = UIHostingController(rootView: view)
+        view.imageElement = guide.arrayImages.first
+        hostingController = UIHostingController(rootView: view)
         
         guard let hostingController = self.hostingController else {
             failure(contextualContainer.guidePayload)
             return
         }
         
-        controller.addChild(self.hostingController!)
-        controller.view.addSubview(self.hostingController!.view)
+        controller.addChild(hostingController)
+        controller.view.addSubview(hostingController.view)
         self.hostingController?.view.backgroundColor = .clear
         hostingController.view.translatesAutoresizingMaskIntoConstraints = false
         
