@@ -1,13 +1,12 @@
 //
 //  CircleVideoGuide.swift
-//  iOS-GuideBlocks
+//  GuideBlocks
 //
 //  Copyright © 2023 Contextual.
 //
 
 import SwiftUI
 import ContextualSDK
-
 
 /// A guide controller for displaying a circle video view.
 public class CircleVideoGuide: CTXBaseGuideController {

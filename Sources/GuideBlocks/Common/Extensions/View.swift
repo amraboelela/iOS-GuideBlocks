@@ -49,4 +49,15 @@ extension View {
             )
         )
     }
+    
+    /*func contextualBoxFormat(_ boxElement: SHTipBoxElement?) -> some View {
+        modifier(
+            ContextualBoxModifier(
+                fontName: boxElement?.fontName,
+                fontWeight: boxElement?.fontWeight,
+                fontSize: boxElement?.fontSize,
+                textColor: boxElement?.textColor
+            )
+        )
+    }*/
 }

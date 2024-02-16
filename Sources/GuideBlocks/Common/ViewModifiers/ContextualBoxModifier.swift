@@ -1,15 +1,15 @@
 //
-//  ContextualTextModifier.swift
+//  ContextualBoxModifier.swift
 //  GuideBlocks
 //
-//  Created by Marc Stroebel on 2024/1/22.
+//  Created by Amr Aboelela on 2024/2/15.
 //  Copyright © 2024 Contextual.
 //
 
 import ContextualSDK
 import SwiftUI
 
-struct ContextualTextModifier: ViewModifier {
+struct ContextualBoxModifier: ViewModifier {
     let fontName: String?
     let fontWeight: String?
     let fontSize: CGFloat?
