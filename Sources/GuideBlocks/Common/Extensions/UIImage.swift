@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftUI
 
 extension UIImage {
     static func loadFromUrl(_ url: URL, completion: @escaping (UIImage?) -> Void) {
