@@ -1,6 +1,6 @@
 //
 //  FancyAnnouncementGuideView.swift
-//  iOS-GuideBlocks
+//  GuideBlocks
 //
 //  Created by Marc Stroebel on 2023/11/7.
 //  Copyright © 2023 Contextual.
@@ -14,6 +14,7 @@ struct FancyAnnouncementGuideView: View {
     var messageElement: SHTipTextElement?
     var leftButtonElement: SHTipButtonElement?
     var rightButtonElement: SHTipButtonElement?
+    var boxElement: SHTipTextElement?
     var image: Image?
     var imageUrl: String?
     var accentColor: Color?
@@ -69,8 +70,9 @@ struct FancyAnnouncementGuideView: View {
                         }
                         if let message = messageElement?.text {
                             Text(message)
-                                .padding()
+                                .contextualBoxFormat(boxElement)
                                 .contextualTextFormat(messageElement)
+                                //.padding()
                         }
                         HStack {
                             if let leftButtonText = leftButtonElement?.buttonText {
@@ -125,7 +127,6 @@ struct FancyAnnouncementGuideView: View {
             // Circular Header Image
             mainImage?
                 .resizable()
-                .aspectRatio(contentMode: .fill)
                 .frame(width: circle, height: circle)
                 .clipShape(Circle())
                 .overlay(Circle().stroke(Color.white, lineWidth: circleBorderWidth))

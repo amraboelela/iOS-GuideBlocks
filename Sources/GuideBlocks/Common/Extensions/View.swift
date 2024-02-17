@@ -16,7 +16,8 @@ extension View {
                 fontName: textElement?.fontName,
                 fontWeight: textElement?.fontWeight,
                 fontSize: textElement?.fontSize,
-                textColor: textElement?.textColor
+                textColor: textElement?.textColor,
+                backgroundColor: textElement?.backgroundColor
             )
         )
     }
@@ -50,14 +51,11 @@ extension View {
         )
     }
     
-    /*func contextualBoxFormat(_ boxElement: SHTipBoxElement?) -> some View {
+    func contextualBoxFormat(_ boxElement: SHTipTextElement?) -> some View {
         modifier(
             ContextualBoxModifier(
-                fontName: boxElement?.fontName,
-                fontWeight: boxElement?.fontWeight,
-                fontSize: boxElement?.fontSize,
-                textColor: boxElement?.textColor
+                padding: boxElement?.padding
             )
         )
-    }*/
+    }
 }

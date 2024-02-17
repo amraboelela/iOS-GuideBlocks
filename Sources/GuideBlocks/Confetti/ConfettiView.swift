@@ -1,6 +1,6 @@
 //
 //  ConfettiView.swift
-//  iOS-GuideBlocks
+//  GuideBlocks
 //
 //  Created by Marc Stroebel on 2023/12/8.
 //  Copyright © 2023 Yonas Stephen.

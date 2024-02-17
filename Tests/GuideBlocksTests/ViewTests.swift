@@ -65,4 +65,15 @@ class ViewTests: XCTestCase {
         let modifiedView = view.contextualImageResize(imageElement)
         XCTAssertTrue("\(modifiedView)".contains("ContextualImageResizeModifier"))
     }
+    
+    func testContextualBoxFormat() {
+        let boxElement = SHTipTextElement()
+        boxElement.padding = FourSide(top: 10, bottom: 10, left: 10, right: 10)
+        let view = Text("Text Message")
+        
+        let modifiedView = view.contextualBoxFormat(boxElement)
+        
+        XCTAssertTrue("\(modifiedView)".contains("ContextualBoxModifier"))
+    }
+    
 }
