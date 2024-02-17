@@ -10,32 +10,23 @@ import ContextualSDK
 import SwiftUI
 
 struct ContextualBoxModifier: ViewModifier {
-    let fontName: String?
-    let fontWeight: String?
-    let fontSize: CGFloat?
-    let textColor: UIColor?
-    
-    private var customFont: Font {
-        var font = Font.system(size: fontSize ?? 12.0)
-
-        if let fontName {
-            font = font.fontWith(name: fontName)
-        }
-
-        if let weight = fontWeight {
-            switch weight {
-            case "bold":
-                font = font.weight(.bold)
-            default:
-                font = font.weight(.regular)
-            }
-        }
-        return font
-    }
+    let padding: FourSide?
+    /*let borderWidth: CGFloat?
+    let borderShadow: CGFloat?
+    let cornerRadius: CGFloat?
+    */
     
     func body(content: Content) -> some View {
-        content
-            .font(customFont)
-            .background(textColor.map { Color($0) })
+        if let padding {
+            content
+                .padding(EdgeInsets(
+                    top: padding.top,
+                    leading: padding.left,
+                    bottom: padding.bottom,
+                    trailing: padding.right
+                ))
+        } else {
+            content
+        }
     }
 }
