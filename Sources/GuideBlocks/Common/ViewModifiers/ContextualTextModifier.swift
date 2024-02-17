@@ -35,9 +35,20 @@ struct ContextualTextModifier: ViewModifier {
     }
     
     func body(content: Content) -> some View {
-        content
-            .font(customFont)
-            .foregroundColor(textColor.map { Color($0) })
-            .background(backgroundColor.map { Color($0) })
+        if let textColor {
+            if let backgroundColor {
+                content
+                    .font(customFont)
+                    .foregroundColor(Color(textColor))
+                    .background(Color(backgroundColor))
+            } else {
+                content
+                    .font(customFont)
+                    .foregroundColor(Color(textColor))
+            }
+        } else {
+            content
+                .font(customFont)
+        }
     }
 }
