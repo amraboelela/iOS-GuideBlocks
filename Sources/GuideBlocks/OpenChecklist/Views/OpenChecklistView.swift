@@ -24,10 +24,10 @@ struct OpenChecklistView: View {
                     },
                     label: {
                         Text(viewModel.title)
+                            .padding()
                             .contextualTextFormat(buttonTextElement)
-                            .foregroundColor(.white) // Set text color to white
-                            .padding() // Add padding to the text
-                            .background(Color.blue) // Set background color to sky blue
+                            .foregroundColor(.white)
+                            .background(.blue)
                             .clipShape(RoundedRectangle(cornerRadius: 10))
                     }
                 )

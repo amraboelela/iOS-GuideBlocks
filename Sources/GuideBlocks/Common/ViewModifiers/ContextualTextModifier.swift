@@ -47,8 +47,14 @@ struct ContextualTextModifier: ViewModifier {
                     .foregroundColor(Color(textColor))
             }
         } else {
-            content
-                .font(customFont)
+            if let backgroundColor {
+                content
+                    .font(customFont)
+                    .background(Color(backgroundColor))
+            } else {
+                content
+                    .font(customFont)
+            }
         }
     }
 }
