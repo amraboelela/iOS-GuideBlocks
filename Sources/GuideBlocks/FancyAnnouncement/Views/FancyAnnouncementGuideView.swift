@@ -72,7 +72,7 @@ struct FancyAnnouncementGuideView: View {
                             Text(message)
                                 .contextualBoxFormat(boxElement)
                                 .contextualTextFormat(messageElement)
-                                .padding()
+                                //.padding()
                         }
                         HStack {
                             if let leftButtonText = leftButtonElement?.buttonText {
