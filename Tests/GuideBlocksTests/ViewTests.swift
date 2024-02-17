@@ -45,15 +45,35 @@ class ViewTests: XCTestCase {
         XCTAssertTrue("\(modifiedView)".contains("ContextualButtonModifier"))
     }
     
-    func testContextualImageFormat() {
+    func testContextualImageBackground() {
         let imageElement = SHTipImageElement()
-        imageElement.width = 200
-        imageElement.height = 100
         imageElement.backgroundColor = .blue
         
         let view = Image(systemName: "photo")
         
-        let modifiedView = view.contextualImageFormat(imageElement)
-        XCTAssertTrue("\(modifiedView)".contains("ContextualImageModifier"))
+        let modifiedView = view.contextualImageBackground(imageElement)
+        XCTAssertTrue("\(modifiedView)".contains("ContextualImageBackgroundModifier"))
     }
+    
+    func testContextualImageResize() {
+        let imageElement = SHTipImageElement()
+        imageElement.width = 200
+        imageElement.height = 100
+        
+        let view = Image(systemName: "photo")
+        
+        let modifiedView = view.contextualImageResize(imageElement)
+        XCTAssertTrue("\(modifiedView)".contains("ContextualImageResizeModifier"))
+    }
+    
+    func testContextualBoxFormat() {
+        let boxElement = SHTipTextElement()
+        boxElement.padding = FourSide(top: 10, bottom: 10, left: 10, right: 10)
+        let view = Text("Text Message")
+        
+        let modifiedView = view.contextualBoxFormat(boxElement)
+        
+        XCTAssertTrue("\(modifiedView)".contains("ContextualBoxModifier"))
+    }
+    
 }

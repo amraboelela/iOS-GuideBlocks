@@ -38,6 +38,7 @@ public class FancyAnnouncementGuide: CTXBaseGuideController {
             messageElement: guide.content,
             leftButtonElement: guide.prev,
             rightButtonElement: guide.next,
+            boxElement: guide.content,
             imageUrl: guide.arrayImages?.first?.resource,
             closeButtonTapped: {
                 dismissGuide()
