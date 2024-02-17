@@ -14,6 +14,7 @@ struct FancyAnnouncementGuideView: View {
     var messageElement: SHTipTextElement?
     var leftButtonElement: SHTipButtonElement?
     var rightButtonElement: SHTipButtonElement?
+    var boxElement: SHTipTextElement?
     var image: Image?
     var imageUrl: String?
     var accentColor: Color?
@@ -70,6 +71,7 @@ struct FancyAnnouncementGuideView: View {
                         if let message = messageElement?.text {
                             Text(message)
                                 .padding()
+                                .contextualBoxFormat(boxElement)
                                 .contextualTextFormat(messageElement)
                         }
                         HStack {
@@ -125,7 +127,6 @@ struct FancyAnnouncementGuideView: View {
             // Circular Header Image
             mainImage?
                 .resizable()
-                .aspectRatio(contentMode: .fill)
                 .frame(width: circle, height: circle)
                 .clipShape(Circle())
                 .overlay(Circle().stroke(Color.white, lineWidth: circleBorderWidth))
