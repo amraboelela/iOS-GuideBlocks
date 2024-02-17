@@ -1,6 +1,6 @@
 //
 //  CircleVideoView.swift
-//  iOS-GuideBlocks
+//  GuideBlocks
 //
 //  Created by David Jones on 2023/12/11.
 //  Copyright © 2023 Contextual.

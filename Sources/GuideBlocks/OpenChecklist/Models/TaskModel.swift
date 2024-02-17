@@ -1,6 +1,6 @@
 //
 //  TaskModel.swift
-//  iOS-GuideBlocks
+//  GuideBlocks
 //
 //  Created by Amr Aboelela on 2024/2/9.
 //  Copyright © 2024 Contextual.
@@ -12,6 +12,7 @@ import Foundation
 public enum TaskActionType : String {
     case setTag
     case gotoScreen
+    case checkTag
     case unknown
 }
 
@@ -117,6 +118,8 @@ struct TaskModel: Codable, Hashable {
                     forceSend: false
                 )
             }
+        case .checkTag:
+            print("TaskModel, doTheAction, checkTag actionType")
         case .unknown:
             print("TaskModel, doTheAction, unknown actionType")
         }

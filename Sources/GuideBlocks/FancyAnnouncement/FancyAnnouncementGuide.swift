@@ -1,6 +1,6 @@
 //
 //  FancyAnnouncementGuide.swift
-//  iOS-GuideBlocks
+//  GuideBlocks
 //
 //  Created by Marc Stroebel on 2023/11/7.
 //  Copyright © 2023 Contextual.
