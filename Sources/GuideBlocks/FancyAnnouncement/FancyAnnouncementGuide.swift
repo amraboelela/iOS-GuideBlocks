@@ -1,9 +1,9 @@
 //
 //  FancyAnnouncementGuide.swift
-//  airbnb-main
+//  iOS-GuideBlocks
 //
-//  Created by Marc Stroebel on 7/11/2023.
-//  Copyright © 2023 Contextual. All rights reserved.
+//  Created by Marc Stroebel on 2023/11/7.
+//  Copyright © 2023 Contextual.
 //
 
 import SwiftUI
@@ -58,8 +58,8 @@ public class FancyAnnouncementGuide: CTXBaseGuideController {
             return
         }
         
-        controller.addChild(self.hostingController!)
-        controller.view.addSubview(self.hostingController!.view)
+        controller.addChild(hostingController)
+        controller.view.addSubview(hostingController.view)
         
         hostingController.view.translatesAutoresizingMaskIntoConstraints = false
         hostingController.view.backgroundColor = .clear

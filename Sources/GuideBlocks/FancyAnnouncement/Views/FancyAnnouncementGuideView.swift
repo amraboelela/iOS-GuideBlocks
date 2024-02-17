@@ -1,13 +1,13 @@
 //
 //  FancyAnnouncementGuideView.swift
-//  airbnb-main
+//  iOS-GuideBlocks
 //
-//  Created by Marc Stroebel on 7/11/2023.
-//  Copyright © 2023 Contextual. All rights reserved.
+//  Created by Marc Stroebel on 2023/11/7.
+//  Copyright © 2023 Contextual.
 //
 
-import SwiftUI
 import ContextualSDK
+import SwiftUI
 
 struct FancyAnnouncementGuideView: View {
     var titleElement: SHTipTextElement?

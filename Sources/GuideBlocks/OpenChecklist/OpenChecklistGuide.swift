@@ -1,18 +1,27 @@
 //
-//  ConfettiGuide.swift
+//  OpenChecklistGuide.swift
 //  iOS-GuideBlocks
 //
-//  Created by Marc Stroebel on 2023/12/8.
-//  Copyright © 2023 Contextual.
+//  Created by Amr Aboelela on 2024/2/8.
+//  Copyright © 2024 Contextual.
 //
 
 import SwiftUI
 import ContextualSDK
 
-public class ConfettiGuide: CTXBaseGuideController {
+/// A guide controller for displaying a checklist view.
+public class OpenChecklistGuide: CTXBaseGuideController {
     
-    private var hostingController: UIHostingController<ConfettiView>?
+    var contextualContainer: ContextualContainer?
+    private var hostingController: UIHostingController<OpenChecklistView>?
     
+    /// Presents the guide block.
+    ///
+    /// - Parameters:
+    ///   - contextualContainer: The contextual container.
+    ///   - controller: The view controller to present the guide block on.
+    ///   - success: The closure to be called when the guide block is successfully presented.
+    ///   - failure: The closure to be called when there is a failure in presenting the guide block.
     public override func presentGuideBlock(
         contextualContainer: ContextualContainer,
         viewController controller: UIViewController?,
@@ -24,9 +33,12 @@ public class ConfettiGuide: CTXBaseGuideController {
             failure(contextualContainer.guidePayload)
             return
         }
-        
-        let view = ConfettiView()
-        
+        self.contextualContainer = contextualContainer
+        openChecklistViewModel.openChecklistGuide = self
+        openChecklistViewModel.updateData()
+        let guide = contextualContainer.guidePayload.guide
+        var view = OpenChecklistView(viewModel: openChecklistViewModel)
+        view.buttonTextElement = guide.title
         self.hostingController = UIHostingController(rootView: view)
         
         guard let hostingController = self.hostingController else {
@@ -36,7 +48,7 @@ public class ConfettiGuide: CTXBaseGuideController {
         
         controller.addChild(hostingController)
         controller.view.addSubview(hostingController.view)
-        
+        self.hostingController?.view.backgroundColor = .clear
         hostingController.view.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
@@ -47,15 +59,9 @@ public class ConfettiGuide: CTXBaseGuideController {
         hostingController.didMove(toParent: controller)
 
         success(contextualContainer.guidePayload)
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-            // Dismissing the guide after 5 seconds since it is a timed guide requiring no user intervention
-            // If we don't dismiss the guide here, we would see a message in the console if we tried to use the same
-            // guide again on a different page without this one being dismissed
-            self.dismissGuide()
-        }
     }
     
+    /// Called when the app or framework dismisses the guide block, do cleanup to remove it.
     override public func isDismissingGuide() {
         self.hostingController?.willMove(toParent: nil)
         self.hostingController?.view.removeFromSuperview()
