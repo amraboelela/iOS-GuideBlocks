@@ -16,7 +16,8 @@ extension View {
                 fontName: textElement?.fontName,
                 fontWeight: textElement?.fontWeight,
                 fontSize: textElement?.fontSize,
-                textColor: textElement?.textColor
+                textColor: textElement?.textColor,
+                backgroundColor: textElement?.backgroundColor
             )
         )
     }

@@ -14,6 +14,7 @@ struct ContextualTextModifier: ViewModifier {
     let fontWeight: String?
     let fontSize: CGFloat?
     let textColor: UIColor?
+    let backgroundColor: UIColor?
     
     private var customFont: Font {
         var font = Font.system(size: fontSize ?? 12.0)
@@ -36,6 +37,7 @@ struct ContextualTextModifier: ViewModifier {
     func body(content: Content) -> some View {
         content
             .font(customFont)
-            .background(textColor.map { Color($0) })
+            .foregroundColor(textColor.map { Color($0) })
+            .background(backgroundColor.map { Color($0) })
     }
 }
