@@ -1,0 +1,11 @@
+Title: UIAlertController
+Author: David Jones
+Email: support@contextu.al
+TestApp: https://github.com/contextu-al/AirBnB-iOS
+TestAppBranch: UIAlertController
+Description: Launch a simple UIAlertController to show the basic elements of compliance for a GuideBlock
+Extensibility: {
+  "guideBlockKey": "UIAlertController"
+}
+
+
