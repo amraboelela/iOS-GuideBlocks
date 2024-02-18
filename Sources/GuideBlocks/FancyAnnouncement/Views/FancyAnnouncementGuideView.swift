@@ -64,14 +64,9 @@ struct FancyAnnouncementGuideView: View {
                 .overlay(
                     VStack {
                         Spacer()
-<<<<<<< HEAD:Sources/GuideBlocks/FancyAnnouncement/Views/FancyAnnouncementGuideView.swift
                         if let title = titleElement?.text {
                             Text(title)
                                 .contextualTextFormat(titleElement)
-=======
-                        if let title = self.title?.text {
-                            Text(title).contextualText(textElement: self.title)    
->>>>>>> UIAlertController:Sources/iOS-GuideBlocks/FancyAnnouncement/FancyAnnouncementGuideView.swift
                         }
                         if let message = messageElement?.text {
                             Text(message)
