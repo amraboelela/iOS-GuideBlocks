@@ -13,14 +13,16 @@ extension View {
         self.modifier(ContextualTextModifier(fontName: titleElement?.titleFontName,
                                              fontWeight: titleElement?.titleFontWeight,
                                              fontSize: titleElement?.titleFontSize,
-                                             textColor: titleElement?.titleColor))
+                                             textColor: titleElement?.titleColor, 
+                                             backgroundColor: titleElement?.backgroundColor))
     }
 
     func contextualCarouselContentElement(_ contentElement: SHTipCarouselItem?) -> some View {
         self.modifier(ContextualTextModifier(fontName: contentElement?.contentFontName,
                                              fontWeight: contentElement?.contentFontWeight,
                                              fontSize: contentElement?.contentFontSize,
-                                             textColor: contentElement?.contentColor))
+                                             textColor: contentElement?.contentColor, 
+                                             backgroundColor: contentElement?.backgroundColor))
     }
     func margin(_ margin: FourSide) -> some View {
         self.modifier(MarginModifier(margin: margin))

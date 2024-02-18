@@ -106,56 +106,7 @@ struct OpenCarouselView: View {
 
             } else {
                 Text("Next")
-
             }
-            
-//            Button(action: {
-//                if !data.isLastScreen {
-//                    withAnimation {
-//                        currentTab += 1
-//                    }
-//                } else {
-//                    print("Reached last screen")
-//                    dismissController()
-//                }
-//
-//            }, label: {
-//                if let text = data.button?.buttonText {
-//                    Text(text)
-//                        .frame(width: data.button?.buttonSize.width, height: data.button?.buttonSize.height)
-//                        .multilineTextAlignment(data.button?.buttonTextAligment ?? .center)
-//
-//                        .background(Color(uiColor: data.button?.backgroundColor ?? .black))
-//                        .foregroundStyle(Color(uiColor: data.button?.textColor ?? .white))
-//                        .contextualText(buttonElement: data.button)
-//                        .padding(.top, data.button?.margin.top ?? 0)
-//                        .padding(.bottom, data.button?.margin.bottom ?? 0)
-//                        .padding(.leading, data.button?.margin.left ?? 0)
-//                        .padding(.trailing, data.button?.margin.right ?? 0)
-//                        .border(Color(uiColor: data.button?.borderColor ?? .clear), width: data.button?.borderWidth ?? 0)
-//                        .clipShape(RoundedRectangle(cornerRadius: data.button?.borderCornerRadius ?? 0, style: .circular))
-//
-//                } else {
-//                    Text("Next")
-//                        .font(.headline)
-//                        .foregroundColor(.white)
-//                        .padding(.horizontal, 50)
-//                        .padding(.vertical, 16)
-//                        .background(
-//                            RoundedRectangle(cornerRadius: 20)
-//                                .foregroundColor(
-//                                    Color(
-//                                        red: 255 / 255,
-//                                        green: 115 / 255,
-//                                        blue: 115 / 255
-//                                    )
-//                                )
-//                        )
-//                }
-//
-//            })
-
-//            .shadow(radius: 10)
             
             Spacer()
         }
@@ -204,7 +155,3 @@ struct OpenCarouselView: View {
     }
         
 }
-
-//#Preview {
-//    OpenCarouselGuidView()
-//}

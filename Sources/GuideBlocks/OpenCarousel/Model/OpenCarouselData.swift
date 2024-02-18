@@ -13,10 +13,8 @@ struct OpenCarouselDataManager {
     
     init(guide: SHTipElement) {
         
-        print("CAROUSEL DATA \(guide.carousel.items)")
-        
         let backgroundImages = guide.arrayImages
-        print("Total Background Images \(backgroundImages)")
+
         guard let carouselData = guide.carousel,
               let items = carouselData.items else {
             carouselItems = []
@@ -26,11 +24,10 @@ struct OpenCarouselDataManager {
         for (index, item) in items.enumerated() {
             var _bgImageElement: SHTipImageElement?
             
-            print("CAROUSEL DATA ITEM \(item)")
             if (backgroundImages ?? []).indices.contains(index) {
                 _bgImageElement = backgroundImages?[index]
-                print("Background Image \(_bgImageElement?.resource)")
             }
+            
             carouselItems.append(OpenCarouselData(id: index,
                                                   carouselData: item,
                                                   isLastScreen: (index == items.count - 1),
@@ -66,40 +63,6 @@ struct OpenCarouselData: Hashable, Identifiable {
     private let placeholderBackgroundImageURL = "https://picsum.photos/seed/picsum/200/300"
     private let placeholderPrimaryImageURL = "https://picsum.photos/id/870/200/300?grayscale&blur=2"
     
-    //TODO: NEED TO REMOVE THIS INIT
-    //    init(guide: SHTipElement) {
-    //
-    //        // will change later.
-    //        self.id = [0,1,2].randomElement() ?? 0
-    //        self.title = guide.title
-    //
-    //        guard let json = guide.extraJson else { return }
-    //
-    //        if let subtitle = json["subtitle"] as? String {
-    //            self.subtitle = subtitle
-    //        }
-    //
-    //        if let primaryImageUrl = json["primaryImageUrl"] as? String {
-    //            self.primaryImageUrl = primaryImageUrl
-    //        }
-    //
-    //        if let backgroundImageURL = json["backgroundImageURL"] as? String {
-    //            self.backgroundImageURL = backgroundImageURL
-    //        }
-    //
-    //        if let totalCarouselsCount = json["totalCarouselsCount"] as? Int {
-    //            self.totalCarouselsCount = totalCarouselsCount
-    //        }
-    //    }
-    
-    
-    //    static let list: [OpenCarouselData] = [
-    //        OpenCarouselData(id: 1),
-    //        OpenCarouselData(id: 2),
-    //        OpenCarouselData(id: 3, isLastScreen: true)
-    //    ]
-    
-    
     //MARK: Init
     // Used for debug
     init(id: Int,
@@ -123,8 +86,6 @@ struct OpenCarouselData: Hashable, Identifiable {
         self.primaryImageUrl = carouselData.imageSource
         self.button = carouselData.button
         self.backgroundImage = backgroundImage
-        
-        
     }
     
     //MARK: Loading Image
