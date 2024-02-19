@@ -10,21 +10,54 @@ import ContextualSDK
 import Foundation
 
 public enum TaskActionType : String {
-    case setTag
     case gotoScreen
+    case setTag
     case checkTag
     case unknown
+}
+
+public enum TagType : String {
+    case int
+    case string
+    case unknown
+}
+
+public enum TagOperator : String {
+    case gte // greater than or equals
+    case lte // less than or equals
+    case equ // equals
 }
 
 struct TaskActionData: Codable {
     var deepLink: String? // e.g. "airbnbContextual://screen/profile"
     var tagKey: String?
     var tagValue: String?
+    var rawTagType: String?
+    var rawTagOperator: String?
     
-    public enum CodingKeys: String, CodingKey {
+    var tagType: TagType {
+        get {
+            return TagType(rawValue:rawTagType ?? "unknown") ?? .unknown
+        }
+        set {
+            self.rawTagType = newValue.rawValue
+        }
+    }
+    
+    var tagOperator: TagOperator {
+        get {
+            return TagOperator(rawValue:rawTagOperator ?? "equ") ?? .equ
+        }
+        set {
+            self.rawTagOperator = newValue.rawValue
+        }
+    }
+    
+    enum CodingKeys: String, CodingKey {
         case deepLink = "deep_link"
         case tagKey = "key"
         case tagValue = "value"
+        case rawTagType = "type"
     }
 }
 
@@ -58,9 +91,7 @@ struct TaskModel: Codable, Hashable {
     
     var checked: Bool {
         get {
-            let tagValue = contextualContainer?.tagManager.getTagValue(
-                key: checkedKey
-            )
+            let tagValue = contextualContainer?.tagManager.getTagValue(key: checkedKey)
             return tagValue == "true"
         }
         set {
@@ -78,7 +109,7 @@ struct TaskModel: Codable, Hashable {
         return !checked
     }
     
-    public enum CodingKeys: String, CodingKey {
+    enum CodingKeys: String, CodingKey {
         case name
         case rawActionType = "action"
         case actionData = "action_data"
@@ -101,14 +132,36 @@ struct TaskModel: Codable, Hashable {
         )
     }
     
+    func compare(value1: String, value2: String, tagType: TagType, tagOperator: TagOperator) -> Bool {
+        switch tagType {
+        case .int:
+            if let intValue1 = Int(value1), let intValue2 = Int(value2) {
+                switch tagOperator {
+                case .gte:
+                    return intValue1 >= intValue2
+                case .lte:
+                    return intValue1 <= intValue2
+                case .equ:
+                    return intValue1 == intValue2
+                }
+            }
+        case .string:
+            return value1 == value2
+        case .unknown:
+            return false
+        }
+        return false
+    }
+    
     mutating func doTheAction() {
-        checked = true
         switch actionType {
         case .gotoScreen:
+            checked = true
             if let deepLinkURL {
                 gotoScreenAction?(deepLinkURL)
             }
         case .setTag:
+            checked = true
             if let tagKey = actionData.tagKey, let tagValue = actionData.tagValue {
                 contextualContainer?.tagManager.saveTag(
                     key: tagKey,
@@ -120,6 +173,26 @@ struct TaskModel: Codable, Hashable {
             }
         case .checkTag:
             print("TaskModel, doTheAction, checkTag actionType")
+            if let tagKey = actionData.tagKey, let expectedTagValue = actionData.tagValue {
+                
+                // TODO: remove when not testing
+                contextualContainer?.tagManager.saveTag(
+                    key: tagKey,
+                    value: expectedTagValue,
+                    success: nil,
+                    failure: nil,
+                    forceSend: false
+                )
+                
+                if let tagValue = contextualContainer?.tagManager.getTagValue(key: tagKey) {
+                    checked = compare(
+                        value1: tagValue,
+                        value2: expectedTagValue,
+                        tagType: actionData.tagType,
+                        tagOperator: actionData.tagOperator
+                    )
+                }
+            }
         case .unknown:
             print("TaskModel, doTheAction, unknown actionType")
         }
