@@ -24,7 +24,6 @@ struct OpenChecklistView: View {
                     },
                     label: {
                         Text(viewModel.title)
-                            .padding()
                             .contextualTextFormat(buttonTextElement)
                             .foregroundColor(.white)
                             .background(.blue)

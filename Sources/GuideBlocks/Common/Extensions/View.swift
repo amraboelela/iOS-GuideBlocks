@@ -13,6 +13,7 @@ extension View {
     func contextualTextFormat(_ textElement: SHTipTextElement?) -> some View {
         modifier(
             ContextualTextModifier(
+                padding: textElement?.padding,
                 fontName: textElement?.fontName,
                 fontWeight: textElement?.fontWeight,
                 fontSize: textElement?.fontSize,
