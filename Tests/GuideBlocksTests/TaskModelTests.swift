@@ -150,9 +150,28 @@ class TaskModelTests: XCTestCase {
         taskModel.doTheAction()
     }
     
+    func testCheckTagAction() {
+        var taskModel = TaskModel(
+            name: "Task 2",
+            rawActionType: "checkTag",
+            actionData: TaskActionData(
+                tagKey: "favourited_properties_count",
+                tagValue: "3",
+                rawTagType: "int",
+                rawTagOperator: "gte"
+            )
+        )
+        taskModel.doTheAction()
+        XCTAssertEqual(taskModel.favouritedCount, 1)
+        taskModel.doTheAction()
+        XCTAssertEqual(taskModel.favouritedCount, 2)
+        taskModel.doTheAction()
+        XCTAssertEqual(taskModel.favouritedCount, 3)
+    }
+    
     // Test case for comparing two integer values with greater than or equal operator
     func testCompare() {
-        var taskModel = TaskModel(
+        let taskModel = TaskModel(
             name: "Task 2",
             rawActionType: "checkTag",
             actionData: TaskActionData(

@@ -153,6 +153,8 @@ struct TaskModel: Codable, Hashable {
         return false
     }
     
+    var favouritedCount = 0
+    
     mutating func doTheAction() {
         switch actionType {
         case .gotoScreen:
@@ -175,10 +177,11 @@ struct TaskModel: Codable, Hashable {
             print("TaskModel, doTheAction, checkTag actionType")
             if let tagKey = actionData.tagKey, let expectedTagValue = actionData.tagValue {
                 
+                favouritedCount += 1
                 // TODO: remove when not testing
                 contextualContainer?.tagManager.saveTag(
                     key: tagKey,
-                    value: expectedTagValue,
+                    value: "\(favouritedCount)",
                     success: nil,
                     failure: nil,
                     forceSend: false
