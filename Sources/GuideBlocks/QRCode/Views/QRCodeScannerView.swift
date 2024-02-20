@@ -16,15 +16,18 @@ struct QRCodeScannerView: View {
 
     var body: some View {
         VStack(spacing: 10) {
-            if let code = scannedCode {
-                NavigationLink("Next page", destination: ScannedCodeView(scannedCode: code), isActive: .constant(true)).hidden()
-            }
-
+            Spacer()
             Button("Scan Code") {
                 isPresentingScanner = true
             }
-
-            Text("Scan a QR code to begin")
+            .padding(40)
+            if let code = scannedCode {
+                Text("Scanned code:")
+                Text(code)
+            } else {
+                Text("Scan a QR code to begin")
+            }
+            Spacer()
         }
         .sheet(isPresented: $isPresentingScanner) {
             CodeScannerView(codeTypes: [.qr]) { response in
