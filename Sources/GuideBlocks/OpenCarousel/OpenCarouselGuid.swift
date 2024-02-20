@@ -55,6 +55,7 @@ public class OpenCarouselGuid: CTXBaseGuideController {
         
         hostingController.modalPresentationStyle = .overFullScreen
         hostingController.transitioningDelegate = self
+        hostingController.view.backgroundColor = .clear
 
         controller.present(hostingController, animated: true)
         

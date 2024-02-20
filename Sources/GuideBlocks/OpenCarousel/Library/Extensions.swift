@@ -43,9 +43,8 @@ extension SHTipButtonElement {
         return .center
     }
     
-    var buttonSize: CGSize {
-        
-        return CGSize.sizeFromGuide(width: width, height: height)
+    func buttonSize(containerSize: CGSize) -> CGSize {
+        return CGSize.sizeFromGuide(width: width, height: height, containerSize: containerSize)
     }
 }
 
@@ -58,8 +57,8 @@ extension FourSide {
 
 extension SHTipImageElement {
     
-    var imageSize: CGSize {
-        return CGSize.sizeFromGuide(width: width, height: height)
+    func imageSize(containerSize: CGSize = UIScreen.main.bounds.size) -> CGSize {
+        return CGSize.sizeFromGuide(width: width, height: height, containerSize: containerSize)
     }
     
     var imageAligment: Alignment {
@@ -95,21 +94,27 @@ extension SHTipImageElement {
     }
 }
 
+extension SHTipElement {
+    var containerSize: CGSize {
+        return CGSize.sizeFromGuide(width: width, height: height)
+    }
+}
+
 extension CGSize {
-    static func sizeFromGuide(width: CGFloat, height: CGFloat) -> CGSize {
+    static func sizeFromGuide(width: CGFloat, height: CGFloat, containerSize: CGSize = UIScreen.main.bounds.size) -> CGSize {
         
         let percentRange = 0.0...1.0
         
         var width_height: (width: CGFloat,height: CGFloat) = (width, height)
-        let screenSize = UIScreen.main.bounds
+//        let screenSize = UIScreen.main.bounds
         
         if percentRange.contains(width) {
         
-            width_height.width = screenSize.width * width
+            width_height.width = containerSize.width * width
         }
         
         if percentRange.contains(height) {
-            width_height.height = screenSize.height * height
+            width_height.height = containerSize.height * height
         }
 
         

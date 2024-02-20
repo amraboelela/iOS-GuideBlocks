@@ -27,27 +27,41 @@ struct OpenCarouselGuidView: View {
                 content:  {
             ForEach(openCarouselDataManager.carouselItems) { viewData in
                 OpenCarouselView(data: viewData,
-                                 currentTab: $currentTab,
-                                 dismissController: dismissController)
+                                 dismissController: dismissController,
+                                 guide: openCarouselDataManager.guide,
+                                 currentTab: $currentTab)
                 .tag(viewData.id)
             }
         })
         .tabViewStyle(PageTabViewStyle())
         .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))
-        .frame(width: screenSize.width, height: screenSize.height * 0.95)
+        .frame(width: openCarouselDataManager.containerSize.width, height: openCarouselDataManager.containerSize.height)
+        
+        .clipShape(RoundedRectangle(cornerRadius: openCarouselDataManager.guide.borderCornerRadius))
+        .border(Color(uiColor: openCarouselDataManager.guide.borderColor), width: openCarouselDataManager.guide.borderWidth)
+        .margin(openCarouselDataManager.guide.margin)
+//        .background {
+//            Rectangle()
+//                .frame(width: openCarouselDataManager.guide.containerSize.width, height: openCarouselDataManager.guide.containerSize.height)
+//                .background(Color(uiColor: openCarouselDataManager.guide.backgroundColor))
+//        }
+        
     }
 }
 
 struct OpenCarouselView: View {
+    
     var data: OpenCarouselData
+    let screenSize = UIScreen.main.bounds
+    @State private var backgroundImageSize: CGSize = .zero
+    
+    var dismissController: () -> ()
+    var guide: SHTipElement
     
     @Binding var currentTab: Int
     @State private var backgroundImage: Image?
     @State private var primaryImage: Image?
     @State private var isAnimating: Bool = false
-    
-    let screenSize = UIScreen.main.bounds
-    var dismissController: () -> ()
     
     var body: some View {
         
@@ -61,7 +75,8 @@ struct OpenCarouselView: View {
                     .resizable()
                     .scaledToFit()
                     .offset(x: 0, y: 150)
-                    .frame(width: screenSize.width * 0.8, height: screenSize.width * 0.8)
+//                    .frame(width: screenSize.width * 0.8, height: screenSize.width * 0.8)
+                    .frame(width: guide.containerSize.width * 0.8, height: guide.containerSize.width * 0.8)
                     .scaleEffect(isAnimating ? 1 : 0.9)
                     .foregroundStyle(.gray)
             }
@@ -76,7 +91,6 @@ struct OpenCarouselView: View {
                     .font(.title2)
                     .bold()
                     .foregroundColor(.white)
-
             }
                         
             if let subtitle = data.carouselDataItem?.contentText {
@@ -93,7 +107,7 @@ struct OpenCarouselView: View {
             }
             if let button = data.button {
                     
-                    ContexualButton(button: button) {
+                ContexualButton(button: button,containerSize: guide.containerSize) {
                         if !data.isLastScreen {
                             withAnimation {
                                 currentTab += 1
@@ -119,6 +133,7 @@ struct OpenCarouselView: View {
             }
         })
         .task {
+            self.backgroundImageSize = data.backgroundImage?.imageSize(containerSize: guide.containerSize) ?? .zero
             data.loadBackgroundImage { image in
                 backgroundImage = image
             }
@@ -126,29 +141,31 @@ struct OpenCarouselView: View {
             data.loadPrimaryImage { image in
                 primaryImage = image
             }
-            
         }
+        
         .background {
             ZStack(alignment: data.backgroundImage?.imageAligment ?? .center, content: {
                 Rectangle()
-                    .frame(width: screenSize.width, height: screenSize.height)
-//                    .background(Color(uiColor: data.backgroundImage?.backgroundColor ?? .clear))
+                    .frame(width: guide.containerSize.width, height: guide.containerSize.height)
+                    .background(Color(uiColor: data.backgroundImage?.backgroundColor ?? .clear))
 
                 backgroundImage?
                 .resizable()
-                .frame(width: data.backgroundImage?.imageSize.width, height: data.backgroundImage?.imageSize.height)
-                .margin(data.backgroundImage?.margin ?? FourSide(top: 0, bottom: 0, left: 0, right: 0))
+                .frame(width: data.backgroundImage?.imageSize(containerSize: guide.containerSize).width, height: data.backgroundImage?.imageSize(containerSize: guide.containerSize).height)
+//                .background(.red)
+//                .frame(width: data.backgroundImage?.imageSize.width, height: data.backgroundImage?.imageSize.height)
+                .clipShape(RoundedRectangle(cornerRadius: data.backgroundImage?.cornerRadius ?? 0))
                 .border(Color(uiColor: data.backgroundImage?.borderColor ?? .clear), width: data.backgroundImage?.borderWidth ?? 0)
-                .clipShape(RoundedRectangle(cornerRadius: data.backgroundImage?.cornerRadius ?? 0, style: .circular))
+                .margin(data.backgroundImage?.margin ?? FourSide(top: 0, bottom: 0, left: 0, right: 0))
+
                 
                 Rectangle()
-                    .frame(width: screenSize.width, height: screenSize.height)
+                    .frame(width: guide.containerSize.width, height: guide.containerSize.height)
                     .foregroundStyle(Color(uiColor: data.carouselDataItem?.backgroundColor ?? .clear))
-
 
             })
             
-            .frame(width: screenSize.width, height: screenSize.height)
+            .frame(width: guide.containerSize.width, height: guide.containerSize.height)
             .background(Color(uiColor: data.backgroundImage?.backgroundColor ?? .clear))
 
         }

@@ -10,14 +10,24 @@ import ContextualSDK
 
 struct ContexualButton: View {
     let button: SHTipButtonElement
+    let containerSize: CGSize
     let action: () -> Void
+    private let buttonSize: CGSize
+    
+    init(button: SHTipButtonElement, containerSize: CGSize, action: @escaping () -> Void) {
+        self.button = button
+        self.containerSize = containerSize
+        self.buttonSize = button.buttonSize(containerSize: containerSize)
+        self.action = action
+        
+    }
     var body: some View {
         HStack {
             
             Button(action: action, label: {
                 
                 Text(button.buttonText)
-                    .frame(width: button.buttonSize.width, height: button.buttonSize.height, alignment: button.buttonTextAligment)
+                    .frame(width: buttonSize.width, height: buttonSize.height, alignment: button.buttonTextAligment)
                     .background(Color(uiColor: button.backgroundColor ?? .black))
                     .foregroundStyle(Color(uiColor: button.textColor ?? .white))
                     .contextualButtonFormat(button)
@@ -25,7 +35,7 @@ struct ContexualButton: View {
                     .border(Color(uiColor: button.borderColor ?? .clear), width: button.borderWidth)
                     .margin(button.margin)
             })
-            if button.padding.hasNoLeftRightPadding && button.buttonSize.width != UIScreen.main.bounds.width {
+            if button.padding.hasNoLeftRightPadding && buttonSize.width != UIScreen.main.bounds.width {
                 Spacer()
             }
             

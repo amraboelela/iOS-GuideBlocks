@@ -11,10 +11,16 @@ import SwiftUI
 struct OpenCarouselDataManager {
     var carouselItems: [OpenCarouselData] = []
     
+    var containerSize: CGSize!
+    var guide: SHTipElement!
+    
     init(guide: SHTipElement) {
         
         let backgroundImages = guide.arrayImages
-
+        
+        self.guide = guide
+        containerSize = guide.containerSize
+        
         guard let carouselData = guide.carousel,
               let items = carouselData.items else {
             carouselItems = []
@@ -31,7 +37,8 @@ struct OpenCarouselDataManager {
             carouselItems.append(OpenCarouselData(id: index,
                                                   carouselData: item,
                                                   isLastScreen: (index == items.count - 1),
-                                                  backgroundImage: _bgImageElement))
+                                                  backgroundImage: _bgImageElement,
+                                                  guide: guide))
             
         }
     }
@@ -44,7 +51,9 @@ struct OpenCarouselData: Hashable, Identifiable {
     
     // This will represents both title and subtitle for carousel.
     var carouselDataItem: SHTipCarouselItem?
-        
+    
+    var guide: SHTipElement!
+
     // It will have center image of screen.
     var primaryImageUrl: String?
     
@@ -75,7 +84,8 @@ struct OpenCarouselData: Hashable, Identifiable {
     init(id: Int,
          carouselData: SHTipCarouselItem,
          isLastScreen: Bool,
-         backgroundImage: SHTipImageElement?) {
+         backgroundImage: SHTipImageElement?,
+         guide: SHTipElement) {
         
         print("CAROUSEL DATA ITEM id \(id) carouselDataItem \(carouselDataItem) isLastScreen \(isLastScreen)")
         print("CAROUSEL DATA ITEM image \(carouselData.image) image Source \(carouselData.imageSource) \n icon \(carouselData.icon) icon source \(carouselData.iconSource)")
@@ -86,6 +96,7 @@ struct OpenCarouselData: Hashable, Identifiable {
         self.primaryImageUrl = carouselData.imageSource
         self.button = carouselData.button
         self.backgroundImage = backgroundImage
+        self.guide = guide
     }
     
     //MARK: Loading Image
