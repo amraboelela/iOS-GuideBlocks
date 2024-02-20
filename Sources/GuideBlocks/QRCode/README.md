@@ -16,7 +16,7 @@ Everyone loves checklists. This is a simple example to get you started with Cont
 7. Now go to the Extensibility section in the sidebar and paste in the JSON as follows:
 `
 {
-    "guideBlockKey": "QRCode",
+    "guideBlockKey": "QRCode"
 }
 `
  * Match the name in the JSON to the name of your wrapper in the code
