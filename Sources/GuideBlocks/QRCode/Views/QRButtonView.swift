@@ -35,10 +35,10 @@ struct QRButtonView: View {
         }
         .sheet(isPresented: $viewModel.isPopupVisible) {
             if #available(iOS 16.0, *) {
-                QRContainerView(viewModel: viewModel)
+                QRCodeScannerView(viewModel: viewModel)
                     .presentationDetents([.medium, .large])
             } else {
-                QRContainerView(viewModel: viewModel)
+                QRCodeScannerView(viewModel: viewModel)
             }
         }
     }
