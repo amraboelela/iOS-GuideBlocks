@@ -13,7 +13,8 @@ import ContextualSDK
 public class OpenCarouselGuid: CTXBaseGuideController {
     
     private var hostingController: UIHostingController<OpenCarouselGuidView>?
-    
+    fileprivate var animation: SHTipAnimationElement!
+
     /// Presents the guide block.
     ///
     /// - Parameters:
@@ -38,12 +39,13 @@ public class OpenCarouselGuid: CTXBaseGuideController {
          */
         
         print("RECEIVED NEW PAYLOAD \(contextualContainer.guidePayload.guide.carousel)")
+        
+        animation = contextualContainer.guidePayload.guide.animation
         let view = OpenCarouselGuidView(guide: contextualContainer.guidePayload.guide) {
             self.hostingController?.dismiss(animated: true)
             self.dismissGuide()
         }
         
-        //TODO: uncomment after setting view to Open Carousel Guid View
         self.hostingController = UIHostingController(rootView: view)
         
         guard let hostingController = self.hostingController else {
@@ -52,6 +54,9 @@ public class OpenCarouselGuid: CTXBaseGuideController {
         }
         
         hostingController.modalPresentationStyle = .overFullScreen
+        hostingController.transitioningDelegate = self
+        hostingController.view.backgroundColor = .clear
+
         controller.present(hostingController, animated: true)
         
         success(contextualContainer.guidePayload)
@@ -60,5 +65,15 @@ public class OpenCarouselGuid: CTXBaseGuideController {
     /// Called when the app or framework dismisses the guide block, do cleanup to remove it.
     override public func isDismissingGuide() {
         self.hostingController?.dismiss(animated: true)
+    }
+}
+
+extension OpenCarouselGuid: UIViewControllerTransitioningDelegate {
+    public func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return CustomTransitionAnimator(isPresenting: true,animationModel: AnimationModel(inAnimation: animation))
+    }
+    
+    public func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return CustomTransitionAnimator(isPresenting: false, animationModel: AnimationModel(outAnimation: animation))
     }
 }
