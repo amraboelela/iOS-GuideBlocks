@@ -33,13 +33,21 @@ struct OpenCarouselGuidView: View {
                 .tag(viewData.id)
             }
         })
+        .frame(width: openCarouselDataManager.containerSize.width, height: openCarouselDataManager.containerSize.height)
         .tabViewStyle(PageTabViewStyle())
         .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))
-        .frame(width: openCarouselDataManager.containerSize.width, height: openCarouselDataManager.containerSize.height)
         
+//        .clipShape(RoundedRectangle(cornerRadius: openCarouselDataManager.guide.borderCornerRadius))
+//        .border(Color(uiColor: openCarouselDataManager.guide.borderColor), width: openCarouselDataManager.guide.borderWidth)
+        .overlay(content: {
+            RoundedRectangle(cornerRadius: openCarouselDataManager.guide.borderCornerRadius)
+                .stroke(Color(uiColor: openCarouselDataManager.guide.borderColor), lineWidth: openCarouselDataManager.guide.borderWidth)
+        })
         .clipShape(RoundedRectangle(cornerRadius: openCarouselDataManager.guide.borderCornerRadius))
-        .border(Color(uiColor: openCarouselDataManager.guide.borderColor), width: openCarouselDataManager.guide.borderWidth)
+
+        .margin(openCarouselDataManager.guide.padding)
         .margin(openCarouselDataManager.guide.margin)
+        
 //        .background {
 //            Rectangle()
 //                .frame(width: openCarouselDataManager.guide.containerSize.width, height: openCarouselDataManager.guide.containerSize.height)
@@ -150,15 +158,16 @@ struct OpenCarouselView: View {
                     .background(Color(uiColor: data.backgroundImage?.backgroundColor ?? .clear))
 
                 backgroundImage?
-                .resizable()
-                .frame(width: data.backgroundImage?.imageSize(containerSize: guide.containerSize).width, height: data.backgroundImage?.imageSize(containerSize: guide.containerSize).height)
-//                .background(.red)
-//                .frame(width: data.backgroundImage?.imageSize.width, height: data.backgroundImage?.imageSize.height)
-                .clipShape(RoundedRectangle(cornerRadius: data.backgroundImage?.cornerRadius ?? 0))
-                .border(Color(uiColor: data.backgroundImage?.borderColor ?? .clear), width: data.backgroundImage?.borderWidth ?? 0)
-                .margin(data.backgroundImage?.margin ?? FourSide(top: 0, bottom: 0, left: 0, right: 0))
-
-                
+                    .resizable()
+                    .frame(width: backgroundImageSize.width, height: backgroundImageSize.height)
+                    .overlay(content: {
+                        RoundedRectangle(cornerRadius: data.backgroundImage?.cornerRadius ?? 0)
+                            .stroke(Color(uiColor: data.backgroundImage?.borderColor ?? .clear), lineWidth: data.backgroundImage?.borderWidth ?? 0)
+                    })
+                    .clipShape(RoundedRectangle(cornerRadius: data.backgroundImage?.cornerRadius ?? 0))
+                    .background(Color(uiColor: data.backgroundImage?.backgroundColor ?? .clear))
+                    .margin(data.backgroundImage?.margin ?? FourSide(top: 0, bottom: 0, left: 0, right: 0))
+                    
                 Rectangle()
                     .frame(width: guide.containerSize.width, height: guide.containerSize.height)
                     .foregroundStyle(Color(uiColor: data.carouselDataItem?.backgroundColor ?? .clear))
@@ -170,5 +179,7 @@ struct OpenCarouselView: View {
 
         }
     }
-        
 }
+
+
+

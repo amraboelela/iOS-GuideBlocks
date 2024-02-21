@@ -20,7 +20,7 @@ struct ContextualTextModifier: ViewModifier {
         var font = Font.system(size: fontSize ?? 12.0)
 
         if let fontName {
-            font = font.fontWith(name: fontName)
+            font = font.fontWith(name: fontName, size: fontSize)
         }
 
         if let weight = fontWeight {

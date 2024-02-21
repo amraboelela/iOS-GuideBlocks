@@ -9,10 +9,10 @@
 import SwiftUI
 
 extension Font {
-    func fontWith(name: String) -> Font {
+    func fontWith(name: String, size: CGFloat? = nil) -> Font {
         if let customFont = UIFont(
             name: name,
-            size: UIFontDescriptor.preferredFontDescriptor(withTextStyle: .body).pointSize
+            size: size ?? UIFontDescriptor.preferredFontDescriptor(withTextStyle: .body).pointSize
         ) {
             return Font(customFont)
         } else {
