@@ -44,7 +44,7 @@ struct OpenCarouselDataManager {
     }
 }
 
-struct OpenCarouselData: Hashable, Identifiable {
+struct OpenCarouselData: Identifiable {
     
     // ID
     let id: Int
@@ -59,6 +59,8 @@ struct OpenCarouselData: Hashable, Identifiable {
     
     // It will have background image of screen.
     var backgroundImage: SHTipImageElement?
+    
+    var backgroundImageSize: CGSize = .zero
     
     // Usually Button with text `Next`.
     var button: SHTipButtonElement?
@@ -97,6 +99,7 @@ struct OpenCarouselData: Hashable, Identifiable {
         self.button = carouselData.button
         self.backgroundImage = backgroundImage
         self.guide = guide
+        self.backgroundImageSize = backgroundImage?.imageSize(containerSize: guide.containerSize) ?? .zero
     }
     
     //MARK: Loading Image
