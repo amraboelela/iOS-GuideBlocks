@@ -32,8 +32,5 @@ class QRViewModel : ObservableObject {
             self.title = title
         }
     }
-    
-    func scanned(code: String) {
-        scannedCodeCallback?(code)
-    }
+
 }
