@@ -27,9 +27,6 @@ public class FancyAnnouncementGuide: CTXBaseGuideController {
         }
         
         let dismissGuide = {
-            self.hostingController?.willMove(toParent: nil)
-            self.hostingController?.view.removeFromSuperview()
-            self.hostingController?.removeFromParent()
             self.dismissGuide()
         }
         

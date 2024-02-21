@@ -10,7 +10,6 @@ import SwiftUI
 
 struct TaskListView: View {
     @ObservedObject var viewModel: OpenChecklistViewModel
-    @State private var isPopupVisible = false
     
     var body: some View {
         VStack {
