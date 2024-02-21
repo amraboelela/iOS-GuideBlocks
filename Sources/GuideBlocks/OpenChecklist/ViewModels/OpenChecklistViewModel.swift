@@ -18,6 +18,8 @@ class OpenChecklistViewModel : ObservableObject {
         openChecklistGuide?.contextualContainer
     }
     
+    var completedCallback: (() -> ())?
+    
     @Published var isPopupVisible: Bool = false
     @Published var title = "Do List"
     @Published var taskListVisible = true

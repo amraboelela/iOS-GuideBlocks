@@ -1,11 +1,9 @@
 //
 //  String.swift
-//  SwiftLevelDB
+//  GuideBlocks
 //
-//  Created by Amr Aboelela on 7/31/18.
-//  Copyright © 2018 Amr Aboelela.
-//
-//  See LICENCE for details.
+//  Created by Amr Aboelela on 2024/2/12.
+//  Copyright © 2024 Contextual.
 //
 
 import Foundation

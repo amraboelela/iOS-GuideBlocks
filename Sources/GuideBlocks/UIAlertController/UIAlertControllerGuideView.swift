@@ -1,8 +1,8 @@
 //
-//  File.swift
+//  UIAlertControllerGuideView.swift
 //  
 //
-//  Created by Marc Stroebel on 6/2/2024.
+//  Created by Marc Stroebel on 2024/2/6.
 //
 
 import SwiftUI
@@ -33,10 +33,12 @@ struct UIAlertControllerGuideView: View {
                 Spacer()
                 VStack(spacing: 16) {
                     if let title = self.title?.text {
-                        Text("\(title) [[\(actiontagvalue)]]").contextualText(textElement: self.title)
+                        Text("\(title) [[\(actiontagvalue)]]")
+                            .contextualTextFormat(self.title)
                     }
                     if let message = self.message?.text {
-                        Text(message).contextualText(textElement: self.message)
+                        Text(message)
+                            .contextualTextFormat(self.message)
                     }
                     HStack(spacing: 5) {
                         if let prevButtonText = self.prevButton?.buttonText {
@@ -46,7 +48,7 @@ struct UIAlertControllerGuideView: View {
                                 Text(prevButtonText)
                                     .padding()
                                     .cornerRadius(prevCnr)
-                                    .contextualText(buttonElement: self.prevButton)
+                                    .contextualButtonFormat(self.prevButton)
                                     .background(prevBG)
                                     .foregroundColor(prevFG)
                             })
@@ -60,7 +62,7 @@ struct UIAlertControllerGuideView: View {
                                 Text(nextButtonText)
                                     .padding()
                                     .cornerRadius(nextCnr)
-                                    .contextualText(buttonElement: self.nextButton)
+                                    .contextualButtonFormat(self.nextButton)
                                     .background(nextBG)
                                     .foregroundColor(nextFG)
                             })

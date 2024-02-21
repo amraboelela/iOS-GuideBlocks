@@ -33,19 +33,3 @@ struct ContexualButton: View {
         
     }
 }
-
-struct MarginModifier: ViewModifier {
-    let margin: FourSide
-    
-    func body(content: Content) -> some View {
-        return content
-            .padding(.top, margin.top)
-            .padding(.bottom, margin.bottom)
-            .padding(.leading, margin.left)
-            .padding(.trailing, margin.right)
-
-    }
-}
-
-
-

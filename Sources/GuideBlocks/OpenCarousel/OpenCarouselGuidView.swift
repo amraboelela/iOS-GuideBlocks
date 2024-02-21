@@ -53,7 +53,6 @@ struct OpenCarouselView: View {
         
         VStack(spacing: 20) {
             ZStack {
-                
                 Image("")
                 .resizable()
 
@@ -65,18 +64,16 @@ struct OpenCarouselView: View {
                     .scaleEffect(isAnimating ? 1 : 0.9)
                     .foregroundStyle(.gray)
             }
-
             Spacer()
             Spacer()
-
             if let title = data.carouselDataItem?.titleText {
-                Text(title).contextualCarouselTitleElement(data.carouselDataItem)
+                Text(title)
+                    .contextualCarouselFormat(data.carouselDataItem)
             } else {
                 Text("Title \(data.id)")
                     .font(.title2)
                     .bold()
                     .foregroundColor(.white)
-
             }
                         
             if let subtitle = data.carouselDataItem?.contentText {
@@ -92,75 +89,21 @@ struct OpenCarouselView: View {
                     .shadow(color: Color.black.opacity(0.1), radius: 1, x: 2, y: 2)
             }
             if let button = data.button {
-                    
-                    ContexualButton(button: button) {
-                        if !data.isLastScreen {
-                            withAnimation {
-                                currentTab += 1
-                            }
-                        } else {
-                            print("Reached last screen")
-                            dismissController()
+                ContexualButton(button: button) {
+                    if !data.isLastScreen {
+                        withAnimation {
+                            currentTab += 1
                         }
+                    } else {
+                        print("Reached last screen")
+                        dismissController()
                     }
-
+                }
             } else {
                 Text("Next")
-
             }
-            
-//            Button(action: {
-//                if !data.isLastScreen {
-//                    withAnimation {
-//                        currentTab += 1
-//                    }
-//                } else {
-//                    print("Reached last screen")
-//                    dismissController()
-//                }
-//
-//            }, label: {
-//                if let text = data.button?.buttonText {
-//                    Text(text)
-//                        .frame(width: data.button?.buttonSize.width, height: data.button?.buttonSize.height)
-//                        .multilineTextAlignment(data.button?.buttonTextAligment ?? .center)
-//
-//                        .background(Color(uiColor: data.button?.backgroundColor ?? .black))
-//                        .foregroundStyle(Color(uiColor: data.button?.textColor ?? .white))
-//                        .contextualText(buttonElement: data.button)
-//                        .padding(.top, data.button?.margin.top ?? 0)
-//                        .padding(.bottom, data.button?.margin.bottom ?? 0)
-//                        .padding(.leading, data.button?.margin.left ?? 0)
-//                        .padding(.trailing, data.button?.margin.right ?? 0)
-//                        .border(Color(uiColor: data.button?.borderColor ?? .clear), width: data.button?.borderWidth ?? 0)
-//                        .clipShape(RoundedRectangle(cornerRadius: data.button?.borderCornerRadius ?? 0, style: .circular))
-//
-//                } else {
-//                    Text("Next")
-//                        .font(.headline)
-//                        .foregroundColor(.white)
-//                        .padding(.horizontal, 50)
-//                        .padding(.vertical, 16)
-//                        .background(
-//                            RoundedRectangle(cornerRadius: 20)
-//                                .foregroundColor(
-//                                    Color(
-//                                        red: 255 / 255,
-//                                        green: 115 / 255,
-//                                        blue: 115 / 255
-//                                    )
-//                                )
-//                        )
-//                }
-//
-//            })
-
-//            .shadow(radius: 10)
-            
             Spacer()
         }
-        
-
         .onAppear(perform: {
             isAnimating = false
             withAnimation(.easeOut(duration: 0.5)) {
@@ -204,7 +147,3 @@ struct OpenCarouselView: View {
     }
         
 }
-
-//#Preview {
-//    OpenCarouselGuidView()
-//}
