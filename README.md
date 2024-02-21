@@ -17,7 +17,7 @@ There are two ways to use GuideBlocks:
 ### 1. Make use of these public GuideBlocks
 
 0. you have an account on the Contextual Dashboard and you've added the iOS SDK, you've added the **app_key** into your App and tested a simple Guide in your App.
-1. using Swift Package Manager add [iOS-GuideBlocks](https://github.com/GuideBlocks-org/iOS-GuideBlocks/blob/confetti/Sources/iOS-GuideBlocks) to your Package Dependencies
+1. using Swift Package Manager add [iOS-GuideBlocks](https://github.com/GuideBlocks-org/iOS-GuideBlocks/blob/confetti/Sources/GuideBlocks) to your Package Dependencies
 2. add `import GuideBlocks`
 3. for the GuideBlock you wish to use, then add `Contextual.sharedInstance().registerGuideBlock(FancyAnnouncementGuide(), forKey: "FancyAnnouncement")`
 4. build and run!
@@ -60,7 +60,7 @@ TestApp: https://github.com/contextu-al/AirBnB-iOS
 TestAppBranch: confetti
 Description: Launch confetti to targeted users at any time with this low-code GuideBlock
 Acknowledgements: https://github.com/simibac/ConfettiSwiftUI
-Screenshot: https://github.com/GuideBlocks-org/iOS-GuideBlocks/blob/main/Sources/iOS-GuideBlocks/Confetti/confetti-guideblock.png 
+Screenshot: https://github.com/GuideBlocks-org/iOS-GuideBlocks/blob/main/Sources/GuideBlocks/Confetti/confetti-guideblock.png 
 Video: https://vimeo.com/907653617/7384df8a67
 Extensibility: {
   "guideBlockKey": "Confetti"
