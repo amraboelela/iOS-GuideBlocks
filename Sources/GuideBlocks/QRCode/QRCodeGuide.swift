@@ -12,7 +12,8 @@ import ContextualSDK
 /// A guide controller for displaying a checklist view.
 public class QRCodeGuide: CTXBaseGuideController {
     
-    var contextualContainer: ContextualContainer?
+    public var contextualContainer: ContextualContainer?
+    
     private var hostingController: UIHostingController<QRButtonView>?
     
     /// Presents the guide block.
