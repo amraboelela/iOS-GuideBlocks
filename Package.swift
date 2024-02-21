@@ -26,13 +26,19 @@ let package = Package(
             url: "https://github.com/simibac/ConfettiSwiftUI",
             .upToNextMajor(from: "1.0.0")
         ),
+        .package(
+            name: "CodeScanner",
+            url: "https://github.com/twostraws/CodeScanner",
+            .branch("main")
+        )
     ],
     targets: [
         .target(
             name: "GuideBlocks",
             dependencies: [
                 .product(name: "ContextualSDK", package: "Contextual"),
-                .product(name: "ConfettiSwiftUI", package: "ConfettiSwiftUI")
+                .product(name: "ConfettiSwiftUI", package: "ConfettiSwiftUI"),
+                .product(name: "CodeScanner", package: "CodeScanner")
             ]
         ),
         .testTarget(

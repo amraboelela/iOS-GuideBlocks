@@ -150,4 +150,53 @@ class TaskModelTests: XCTestCase {
         taskModel.doTheAction()
     }
     
+    func testCheckTagAction() {
+        var taskModel = TaskModel(
+            name: "Task 2",
+            rawActionType: "checkTag",
+            actionData: TaskActionData(
+                tagKey: "favourited_properties_count",
+                tagValue: "3",
+                rawTagType: "int",
+                rawTagOperator: "gte"
+            )
+        )
+        taskModel.doTheAction()
+        XCTAssertEqual(taskModel.favouritedCount, 1)
+        taskModel.doTheAction()
+        XCTAssertEqual(taskModel.favouritedCount, 2)
+        taskModel.doTheAction()
+        XCTAssertEqual(taskModel.favouritedCount, 3)
+    }
+    
+    // Test case for comparing two integer values with greater than or equal operator
+    func testCompare() {
+        let taskModel = TaskModel(
+            name: "Task 2",
+            rawActionType: "checkTag",
+            actionData: TaskActionData(
+                tagKey: "favourited_properties_count",
+                tagValue: "3",
+                rawTagType: "int",
+                rawTagOperator: "gte"
+            )
+        )
+        var result = taskModel.compare(value1: "5", value2: "3", tagType: .int, tagOperator: .gte)
+        XCTAssertTrue(result)
+        
+        result = taskModel.compare(value1: "5", value2: "3", tagType: .int, tagOperator: .lte)
+        XCTAssertFalse(result)
+        
+        result = taskModel.compare(value1: "5", value2: "5", tagType: .int, tagOperator: .equ)
+        XCTAssertTrue(result)
+        
+        result = taskModel.compare(value1: "hello", value2: "hello", tagType: .string, tagOperator: .equ)
+        XCTAssertTrue(result)
+        
+        result = taskModel.compare(value1: "hello", value2: "world", tagType: .string, tagOperator: .equ)
+        XCTAssertFalse(result)
+        
+        result = taskModel.compare(value1: "5", value2: "3", tagType: .unknown, tagOperator: .gte)
+        XCTAssertFalse(result)
+    }
 }
