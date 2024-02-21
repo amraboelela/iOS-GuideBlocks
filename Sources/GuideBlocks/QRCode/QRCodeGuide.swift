@@ -11,8 +11,9 @@ import ContextualSDK
 
 /// A guide controller for displaying a checklist view.
 public class QRCodeGuide: CTXBaseGuideController {
+    public var scannedCodeCallback: ((String) -> ())?
     
-    public var contextualContainer: ContextualContainer?
+    var contextualContainer: ContextualContainer?
     
     private var hostingController: UIHostingController<QRButtonView>?
     
@@ -37,6 +38,12 @@ public class QRCodeGuide: CTXBaseGuideController {
         self.contextualContainer = contextualContainer
         qrViewModel.qrCodeGuide = self
         qrViewModel.updateData()
+        qrViewModel.scannedCodeCallback = { [weak self] code in
+            guard let self else {
+                return
+            }
+            self.scannedCodeCallback?(code)
+        }
         let guide = contextualContainer.guidePayload.guide
         var view = QRButtonView(viewModel: qrViewModel)
         view.buttonTextElement = guide.title
