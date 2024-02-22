@@ -87,7 +87,7 @@ struct VideoWebView: UIViewRepresentable {
                     self.videoWebView.videoIsPlaying()
                     stopObservingVideoPlayback()
                 } else {
-                    print("No video is playing, elapsedTime: \(elapsedTime)")
+                    //print("No video is playing, elapsedTime: \(elapsedTime)")
                 }
             }
             
@@ -101,7 +101,7 @@ struct VideoWebView: UIViewRepresentable {
         }
         
         func stopObservingVideoPlayback() {
-            print("stopObservingVideoPlayback")
+            //print("stopObservingVideoPlayback")
             // Invalidate the timer to stop it from firing
             timer?.invalidate()
             timer = nil
