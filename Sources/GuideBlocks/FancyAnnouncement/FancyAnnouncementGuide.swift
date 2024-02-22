@@ -10,9 +10,9 @@ import SwiftUI
 import ContextualSDK
 
 public class FancyAnnouncementGuide: CTXBaseGuideController {
-    var closeButtonTapped: (() -> ())?
-    var leftButtonTapped: (() -> ())?
-    var rightButtonTapped: (() -> ())?
+    public var closeButtonTapped: (() -> ())?
+    public var leftButtonTapped: (() -> ())?
+    public var rightButtonTapped: (() -> ())?
     
     private var hostingController: UIHostingController<FancyAnnouncementView>?
     
