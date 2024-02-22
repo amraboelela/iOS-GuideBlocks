@@ -2,7 +2,7 @@
 //  AnimationModel.swift
 //
 //
-//  Created by Aamir on 19/02/24.
+//  Created by Aamir on 2024/2/19.
 //
 
 import Foundation

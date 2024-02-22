@@ -34,7 +34,7 @@ struct QRCodeScannerView: View {
                 if case let .success(result) = response {
                     scannedCode = result.string
                     isPresentingScanner = false
-                    viewModel.scanned(code: result.string)
+                    viewModel.scannedCodeCallback?(result.string)
                 }
             }
         }

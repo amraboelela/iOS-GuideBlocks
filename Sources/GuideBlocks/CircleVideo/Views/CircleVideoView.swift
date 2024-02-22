@@ -8,25 +8,10 @@
 
 import ContextualSDK
 import SwiftUI
-import WebKit
-
-// WebView Representable
-struct WebView: UIViewRepresentable {
-    let url: URL?
-
-    func makeUIView(context: Context) -> WKWebView {
-        return WKWebView()
-    }
-
-    func updateUIView(_ uiView: WKWebView, context: Context) {
-        if let url {
-            uiView.load(URLRequest(url: url))
-        }
-    }
-}
 
 // Round Popup View
 struct CircleVideoView: View {
+    @ObservedObject var circleVideoViewModel: CircleVideoViewModel
     var imageElement: SHTipImageElement?
     var videoUrl: String
     var circleDiameter: Int
@@ -59,18 +44,18 @@ struct CircleVideoView: View {
                 y: -1*(height/2) + (imageElement?.height ?? 0) / 4
             )
             .zIndex(10)
-            WebView(url: URL(string: videoUrl))
+            VideoWebView(url: URL(string: videoUrl))
                 .cornerRadius(width/2)
                 .frame(width:width, height: height)
         }
         .shadow(radius: width/2)
-        
     }
 }
 
 struct CircleVideoView_Previews: PreviewProvider {
     static var previews: some View {
         CircleVideoView(
+            circleVideoViewModel: circleVideoViewModel,
             videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ?si=Wx9SC9sBIU6AlMnz",
             circleDiameter: 150,
             dismissbuttonTapped: {

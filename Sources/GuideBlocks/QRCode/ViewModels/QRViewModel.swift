@@ -7,7 +7,6 @@
 //
 
 import ContextualSDK
-import Foundation
 import SwiftUI
 
 let qrViewModel = QRViewModel()
@@ -32,8 +31,5 @@ class QRViewModel : ObservableObject {
             self.title = title
         }
     }
-    
-    func scanned(code: String) {
-        scannedCodeCallback?(code)
-    }
+
 }

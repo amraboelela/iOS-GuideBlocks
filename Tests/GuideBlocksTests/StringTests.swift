@@ -6,7 +6,6 @@
 //  Copyright © 2024 Contextual.
 //
 
-import Foundation
 import XCTest
 
 @testable import GuideBlocks

@@ -75,7 +75,6 @@ struct OpenCarouselView: View {
         
         VStack(spacing: 20) {
             ZStack {
-                
                 Image("")
                 .resizable()
 
@@ -84,16 +83,15 @@ struct OpenCarouselView: View {
                     .scaledToFit()
                     .offset(x: 0, y: 150)
 //                    .frame(width: screenSize.width * 0.8, height: screenSize.width * 0.8)
-                    .frame(width: guide.containerSize.width * 0.8, height: guide.containerSize.width * 0.8)
+                    //.frame(width: guide.containerSize.width * 0.8, height: guide.containerSize.width * 0.8)
                     .scaleEffect(isAnimating ? 1 : 0.9)
                     .foregroundStyle(.gray)
             }
-
             Spacer()
             Spacer()
-
             if let title = data.carouselDataItem?.titleText {
-                Text(title).contextualCarouselTitleElement(data.carouselDataItem)
+                Text(title)
+                    .contextualCarouselFormat(data.carouselDataItem)
             } else {
                 Text("Title \(data.id)")
                     .font(.title2)
@@ -114,26 +112,25 @@ struct OpenCarouselView: View {
                     .shadow(color: Color.black.opacity(0.1), radius: 1, x: 2, y: 2)
             }
             if let button = data.button {
-                    
                 ContexualButton(button: button,containerSize: guide.containerSize) {
-                        if !data.isLastScreen {
-                            withAnimation {
-                                currentTab += 1
-                            }
-                        } else {
-                            print("Reached last screen")
-                            dismissController()
+                    if !data.isLastScreen {
+                        withAnimation {
+                            currentTab += 1
                         }
+                    } else {
+                        print("Reached last screen")
+                        dismissController()
                     }
-
+                    /*} else {
+                     print("Reached last screen")
+                     dismissController()
+                     }*/
+                }
             } else {
                 Text("Next")
             }
-            
             Spacer()
         }
-        
-
         .onAppear(perform: {
             isAnimating = false
             withAnimation(.easeOut(duration: 0.5)) {
@@ -154,7 +151,7 @@ struct OpenCarouselView: View {
         .background {
             ZStack(alignment: data.backgroundImage?.imageAligment ?? .center, content: {
                 Rectangle()
-                    .frame(width: guide.containerSize.width, height: guide.containerSize.height)
+                    //.frame(width: guide.containerSize.width, height: guide.containerSize.height)
                     .background(Color(uiColor: data.backgroundImage?.backgroundColor ?? .clear))
 
                 backgroundImage?
@@ -180,6 +177,3 @@ struct OpenCarouselView: View {
         }
     }
 }
-
-
-

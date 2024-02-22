@@ -37,7 +37,7 @@ class QRViewModelTests: XCTestCase {
         
         // When
         let expectedCode = "TestQRCode"
-        viewModel.scanned(code: expectedCode)
+        viewModel.scannedCodeCallback?(expectedCode) //scanned(code: expectedCode)
         
         // Then
         XCTAssertEqual(capturedCode, expectedCode, "Scanned code should match the expected code")

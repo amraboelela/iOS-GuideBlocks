@@ -59,4 +59,34 @@ extension View {
             )
         )
     }
+    
+    func contextualCarouselFormat(_ titleElement: SHTipCarouselItem?) -> some View {
+        modifier(
+            ContextualTextModifier(
+                padding: nil,
+                fontName: titleElement?.titleFontName,
+                fontWeight: titleElement?.titleFontWeight,
+                fontSize: titleElement?.titleFontSize,
+                textColor: titleElement?.titleColor, 
+                backgroundColor: titleElement?.backgroundColor
+            )
+        )
+    }
+
+    func contextualCarouselContentElement(_ contentElement: SHTipCarouselItem?) -> some View {
+        modifier(
+            ContextualTextModifier(
+                padding: nil,
+                fontName: contentElement?.contentFontName,
+                fontWeight: contentElement?.contentFontWeight,
+                fontSize: contentElement?.contentFontSize,
+                textColor: contentElement?.contentColor,
+                backgroundColor: contentElement?.backgroundColor
+            )
+        )
+    }
+    
+    func margin(_ margin: FourSide) -> some View {
+        modifier(MarginModifier(margin: margin))
+    }
 }
