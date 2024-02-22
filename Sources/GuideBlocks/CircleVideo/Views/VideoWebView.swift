@@ -86,7 +86,7 @@ struct VideoWebView: UIViewRepresentable {
                     self.videoWebView.videoIsPlaying()
                     stopObservingVideoPlayback()
                 } else {
-                    print("No video is playing")
+                    print("No video is playing, elapsedTime: \(elapsedTime)")
                 }
             }
             
