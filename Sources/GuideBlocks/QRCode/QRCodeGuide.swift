@@ -40,12 +40,6 @@ public class QRCodeGuide: CTXBaseGuideController {
         qrViewModel.updateData()
         qrViewModel.scannedCodeCallback = scannedCodeCallback
         
-        /*{ [weak self] code in
-            guard let self else {
-                return
-            }
-            self.scannedCodeCallback?(code)
-        }*/
         let guide = contextualContainer.guidePayload.guide
         var view = QRButtonView(viewModel: qrViewModel)
         view.buttonTextElement = guide.title

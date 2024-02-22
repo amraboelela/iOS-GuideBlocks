@@ -7,7 +7,6 @@
 //
 
 import ContextualSDK
-import Foundation
 
 public enum TaskActionType : String {
     case gotoScreen

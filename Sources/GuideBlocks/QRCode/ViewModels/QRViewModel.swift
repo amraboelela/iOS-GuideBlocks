@@ -7,7 +7,6 @@
 //
 
 import ContextualSDK
-import Foundation
 import SwiftUI
 
 let qrViewModel = QRViewModel()

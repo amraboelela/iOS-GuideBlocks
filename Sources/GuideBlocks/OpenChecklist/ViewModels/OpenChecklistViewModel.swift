@@ -7,7 +7,6 @@
 //
 
 import ContextualSDK
-import Foundation
 import SwiftUI
 
 let openChecklistViewModel = OpenChecklistViewModel()
@@ -80,7 +79,7 @@ class OpenChecklistViewModel : ObservableObject {
         taskListVisible = !needToDismiss
         if let openChecklistGuide, needToDismiss {
             openChecklistGuide.isDismissingGuide()
-            openChecklistGuide.tasksCompletedCallback?()
+            openChecklistGuide.completedCallback?()
         }
     }
     
