@@ -1,5 +1,5 @@
 //
-//  FancyAnnouncementGuideView.swift
+//  FancyAnnouncementView.swift
 //  GuideBlocks
 //
 //  Created by Marc Stroebel on 2023/11/7.
@@ -9,7 +9,7 @@
 import ContextualSDK
 import SwiftUI
 
-struct FancyAnnouncementGuideView: View {
+struct FancyAnnouncementView: View {
     var titleElement: SHTipTextElement?
     var messageElement: SHTipTextElement?
     var leftButtonElement: SHTipButtonElement?
@@ -72,7 +72,7 @@ struct FancyAnnouncementGuideView: View {
                             Text(message)
                                 .contextualBoxFormat(boxElement)
                                 .contextualTextFormat(messageElement)
-                                //.padding()
+                            //.padding()
                         }
                         HStack {
                             if let leftButtonText = leftButtonElement?.buttonText {
@@ -112,7 +112,7 @@ struct FancyAnnouncementGuideView: View {
                             }
                         }
                     }
-                    .offset(x: 0, y: -20)
+                        .offset(x: 0, y: -20)
                 )
                 .frame(width: square, height: square)
                 .zIndex(0)
@@ -161,26 +161,7 @@ struct FancyAnnouncementGuideView: View {
     }
 }
 
-struct FrameModifier: ViewModifier {
-    let condition: Bool?
-    let width: CGFloat?
-    let height: CGFloat?
-
-    func body(content: Content) -> some View {
-        guard let condition = condition else {
-            return AnyView(content)
-        }
-        
-        if condition {
-            return AnyView(content.frame(width: width ?? .infinity,
-                                         height: height ?? .infinity))
-        } else {
-            return AnyView(content)
-        }
-    }
-}
-
-struct FancyAnnouncementGuideView_Previews: PreviewProvider {
+struct FancyAnnouncementView_Previews: PreviewProvider {
     static var previews: some View {
         let title = SHTipTextElement()
         title.text = "Create Account"
@@ -199,7 +180,7 @@ struct FancyAnnouncementGuideView_Previews: PreviewProvider {
         let rightButton = SHTipButtonElement()
         rightButton.buttonText = "Submit"
         
-        return FancyAnnouncementGuideView(
+        return FancyAnnouncementView(
             titleElement: title,
             messageElement: message,
             leftButtonElement: leftButton,

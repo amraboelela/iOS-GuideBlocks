@@ -11,24 +11,16 @@ import WebKit
 
 struct VideoWebView: UIViewRepresentable {
     let url: URL?
+    let videoIsPlaying: () -> ()
+    
+    let webView = WKWebView()
     
     func makeCoordinator() -> Coordinator {
-        Coordinator()
+        Coordinator(videoWebView: self)
     }
 
     func makeUIView(context: Context) -> WKWebView {
-        let webView = WKWebView()
-        webView.navigationDelegate = context.coordinator // Set the navigation delegate
-        
-        _ = webView.observe(\.estimatedProgress, options: .new) { webView, change in
-            guard let progress = change.newValue else { return }
-            
-            // Check if the progress is increasing significantly
-            if progress > 0.1 { // Adjust this threshold as needed
-                print("Streaming might have started.")
-            }
-        }
-        
+        circleVideoViewModel.videoIsDismissed = false
         return webView
     }
     
@@ -37,55 +29,82 @@ struct VideoWebView: UIViewRepresentable {
             uiView.load(URLRequest(url: url))
         }
     }
-    
-    class Coordinator: NSObject, WKNavigationDelegate {
 
-        func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-            // Inject JavaScript to access the YouTube player API
-            let javaScript = "document.getElementsByTagName('video')[0].paused"
+    class Coordinator: NSObject, WKNavigationDelegate {
+        var videoWebView: VideoWebView
+        var timer: Timer?
+        var elapsedTime: TimeInterval = 0
+        let totalTime: TimeInterval = 60 // Total duration in seconds
+        
+        init(videoWebView: VideoWebView) {
+            self.videoWebView = videoWebView
+            super.init()
             
-            // Execute the JavaScript and handle the result
-            webView.evaluateJavaScript(javaScript) { (result, error) in
+            // Set up WKNavigationDelegate
+            videoWebView.webView.navigationDelegate = self
+            
+            // Start observing for video playback
+            startObservingVideoPlayback()
+        }
+        
+        func startObservingVideoPlayback() {
+            // Create and schedule a repeating timer
+            timer = Timer.scheduledTimer(
+                timeInterval: 1.0,
+                target: self,
+                selector: #selector(checkVideoPlayback),
+                userInfo: nil,
+                repeats: true
+            )
+        }
+        
+        @objc func checkVideoPlayback() {
+            // JavaScript code to detect video playback
+            let javascript = """
+            (function() {
+                var videos = document.querySelectorAll('video');
+                var playing = false;
+                videos.forEach(function(video) {
+                    if (!video.paused) {
+                        playing = true;
+                    }
+                });
+                return playing;
+            })();
+            """
+            
+            // Evaluate JavaScript code in WKWebView
+            videoWebView.webView.evaluateJavaScript(javascript) { [weak self] result, error in
+                guard let self else { return }
                 if let error = error {
-                    print("JavaScript evaluation error: \(error)")
+                    print("Error evaluating JavaScript: \(error)")
                     return
                 }
                 
-                // Check if the result is a boolean indicating whether the video is paused
-                if let isPaused = result as? Bool {
-                    if isPaused {
-                        print("YouTube video is paused")
-                    } else {
-                        print("YouTube video is playing")
-                    }
+                // Check if result indicates video playback
+                if let isPlaying = result as? Bool, isPlaying {
+                    print("Video is playing")
+                    self.videoWebView.videoIsPlaying()
+                    stopObservingVideoPlayback()
                 } else {
-                    print("Unexpected result: \(String(describing: result))")
+                    //print("No video is playing, elapsedTime: \(elapsedTime)")
                 }
             }
+            
+            // Increment elapsed time
+            elapsedTime += 1
+            
+            // Stop timer if elapsed time reaches total time
+            if elapsedTime >= totalTime || circleVideoViewModel.videoIsDismissed {
+                stopObservingVideoPlayback()
+            }
         }
-        /*
-        func webView(_ webView: WKWebView, didCommit navigation: WKNavigation!) {
-                // Inject JavaScript to access the YouTube player API
-                let javaScript = "document.getElementsByTagName('video')[0].paused"
-                
-                // Execute the JavaScript and handle the result
-                webView.evaluateJavaScript(javaScript) { (result, error) in
-                    if let error = error {
-                        print("JavaScript evaluation error: \(error)")
-                        return
-                    }
-                    
-                    // Check if the result is a boolean indicating whether the video is paused
-                    if let isPaused = result as? Bool {
-                        if isPaused {
-                            print("YouTube video is paused")
-                        } else {
-                            print("YouTube video is playing")
-                        }
-                    } else {
-                        print("Unexpected result: \(String(describing: result))")
-                    }
-                }
-            }*/
+        
+        func stopObservingVideoPlayback() {
+            //print("stopObservingVideoPlayback")
+            // Invalidate the timer to stop it from firing
+            timer?.invalidate()
+            timer = nil
+        }
     }
 }

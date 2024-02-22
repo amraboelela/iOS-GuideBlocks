@@ -10,8 +10,11 @@ import SwiftUI
 import ContextualSDK
 
 public class FancyAnnouncementGuide: CTXBaseGuideController {
+    public var closeButtonTapped: (() -> ())?
+    public var leftButtonTapped: (() -> ())?
+    public var rightButtonTapped: (() -> ())?
     
-    private var hostingController: UIHostingController<FancyAnnouncementGuideView>?
+    private var hostingController: UIHostingController<FancyAnnouncementView>?
     
     public override func presentGuideBlock(
         contextualContainer: ContextualContainer,
@@ -30,7 +33,7 @@ public class FancyAnnouncementGuide: CTXBaseGuideController {
             self.dismissGuide()
         }
         
-        let view = FancyAnnouncementGuideView(
+        let view = FancyAnnouncementView(
             titleElement: guide.title,
             messageElement: guide.content,
             leftButtonElement: guide.prev,
@@ -39,12 +42,15 @@ public class FancyAnnouncementGuide: CTXBaseGuideController {
             imageUrl: guide.arrayImages?.first?.resource,
             closeButtonTapped: {
                 dismissGuide()
+                self.closeButtonTapped?()
             },
             leftButtonTapped: {
                 self.previousStepOfGuide()
+                self.leftButtonTapped?()
             },
             rightButtonTapped: {
                 self.nextStepOfGuide()
+                self.rightButtonTapped?()
             }
         )
         
