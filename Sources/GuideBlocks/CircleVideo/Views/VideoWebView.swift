@@ -11,9 +11,10 @@ import WebKit
 
 struct VideoWebView: UIViewRepresentable {
     let url: URL?
+    let videoIsPlaying: () -> ()
     
     func makeCoordinator() -> Coordinator {
-        Coordinator()
+        Coordinator(videoWebView: self)
     }
 
     func makeUIView(context: Context) -> WKWebView {
@@ -39,13 +40,19 @@ struct VideoWebView: UIViewRepresentable {
     }
     
     class Coordinator: NSObject, WKNavigationDelegate {
-
+        var videoWebView: VideoWebView
+        
+        init(videoWebView: VideoWebView) {
+            self.videoWebView = videoWebView
+        }
+        
         func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
             // Inject JavaScript to access the YouTube player API
             let javaScript = "document.getElementsByTagName('video')[0].paused"
             
             // Execute the JavaScript and handle the result
-            webView.evaluateJavaScript(javaScript) { (result, error) in
+            webView.evaluateJavaScript(javaScript) { [weak self] (result, error) in
+                guard let self else { return }
                 if let error = error {
                     print("JavaScript evaluation error: \(error)")
                     return
@@ -57,35 +64,12 @@ struct VideoWebView: UIViewRepresentable {
                         print("YouTube video is paused")
                     } else {
                         print("YouTube video is playing")
+                        self.videoWebView.videoIsPlaying()
                     }
                 } else {
                     print("Unexpected result: \(String(describing: result))")
                 }
             }
         }
-        /*
-        func webView(_ webView: WKWebView, didCommit navigation: WKNavigation!) {
-                // Inject JavaScript to access the YouTube player API
-                let javaScript = "document.getElementsByTagName('video')[0].paused"
-                
-                // Execute the JavaScript and handle the result
-                webView.evaluateJavaScript(javaScript) { (result, error) in
-                    if let error = error {
-                        print("JavaScript evaluation error: \(error)")
-                        return
-                    }
-                    
-                    // Check if the result is a boolean indicating whether the video is paused
-                    if let isPaused = result as? Bool {
-                        if isPaused {
-                            print("YouTube video is paused")
-                        } else {
-                            print("YouTube video is playing")
-                        }
-                    } else {
-                        print("Unexpected result: \(String(describing: result))")
-                    }
-                }
-            }*/
     }
 }

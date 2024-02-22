@@ -51,6 +51,9 @@ public class CircleVideoGuide: CTXBaseGuideController {
             circleDiameter: circleDiameter,
             dismissbuttonTapped: {
                 self.dismissGuide()
+            }, 
+            videoIsPlaying: {
+                self.completedCallback?()
             }
         )
         view.imageElement = guide.arrayImages.first

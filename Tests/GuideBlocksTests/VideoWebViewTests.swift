@@ -17,7 +17,7 @@ class VideoWebViewTests: XCTestCase {
     func testVideoWebViewDisplaysURL() {
         // Given
         let url = URL(string: "https://www.example.com") // Replace with your desired URL
-        let webView = VideoWebView(url: url)
+        let webView = VideoWebView(url: url, videoIsPlaying: {})
         let viewController = UIHostingController(rootView: webView)
         
         // When

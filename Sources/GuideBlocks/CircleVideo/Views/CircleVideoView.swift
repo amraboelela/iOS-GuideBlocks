@@ -16,6 +16,7 @@ struct CircleVideoView: View {
     var videoUrl: String
     var circleDiameter: Int
     var dismissbuttonTapped: () -> ()
+    var videoIsPlaying: () -> ()
     
     var body: some View {
         let width = CGFloat(circleDiameter)
@@ -44,7 +45,12 @@ struct CircleVideoView: View {
                 y: -1*(height/2) + (imageElement?.height ?? 0) / 4
             )
             .zIndex(10)
-            VideoWebView(url: URL(string: videoUrl))
+            VideoWebView(
+                url: URL(string: videoUrl),
+                videoIsPlaying: {
+                    videoIsPlaying()
+                }
+            )
                 .cornerRadius(width/2)
                 .frame(width:width, height: height)
         }
@@ -59,6 +65,8 @@ struct CircleVideoView_Previews: PreviewProvider {
             videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ?si=Wx9SC9sBIU6AlMnz",
             circleDiameter: 150,
             dismissbuttonTapped: {
+            },
+            videoIsPlaying: {
             }
         )
     }
