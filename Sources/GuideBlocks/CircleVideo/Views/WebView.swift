@@ -20,6 +20,16 @@ struct WebView: UIViewRepresentable {
     func makeUIView(context: Context) -> WKWebView {
         let webView = WKWebView()
         webView.navigationDelegate = context.coordinator // Set the navigation delegate
+        
+        _ = webView.observe(\.estimatedProgress, options: .new) { webView, change in
+            guard let progress = change.newValue else { return }
+            
+            // Check if the progress is increasing significantly
+            if progress > 0.1 { // Adjust this threshold as needed
+                print("Streaming might have started.")
+            }
+        }
+        
         return webView
     }
     
