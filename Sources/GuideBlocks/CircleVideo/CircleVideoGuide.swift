@@ -10,7 +10,7 @@ import ContextualSDK
 
 /// A guide controller for displaying a circle video view.
 public class CircleVideoGuide: CTXBaseGuideController {
-    public var completedCallback: (() -> ())?
+    public var videoIsPlaying: (() -> ())?
     
     private var hostingController: UIHostingController<CircleVideoView>?
     
@@ -53,7 +53,7 @@ public class CircleVideoGuide: CTXBaseGuideController {
                 self.dismissGuide()
             }, 
             videoIsPlaying: {
-                self.completedCallback?()
+                self.videoIsPlaying?()
             }
         )
         view.imageElement = guide.arrayImages.first
