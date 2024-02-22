@@ -20,7 +20,7 @@ struct OpenCarouselDataManager {
         let backgroundImages = guide.arrayImages
         
         self.guide = guide
-       // containerSize = guide.containerSize
+        containerSize = guide.containerSize
         
         guard let carouselData = guide.carousel,
               let items = carouselData.items else {
@@ -100,7 +100,7 @@ struct OpenCarouselData: Identifiable {
         self.button = carouselData.button
         self.backgroundImage = backgroundImage
         self.guide = guide
-        //self.backgroundImageSize = backgroundImage?.imageSize(containerSize: guide.containerSize) ?? .zero
+        self.backgroundImageSize = backgroundImage?.imageSize(containerSize: guide.containerSize) ?? .zero
     }
     
     //MARK: Loading Image

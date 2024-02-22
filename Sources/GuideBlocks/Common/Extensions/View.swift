@@ -86,7 +86,7 @@ extension View {
         )
     }
     
-    func margin(_ margin: FourSide) -> some View {
+    func margin(_ margin: FourSide?) -> some View {
         modifier(MarginModifier(margin: margin))
     }
 }

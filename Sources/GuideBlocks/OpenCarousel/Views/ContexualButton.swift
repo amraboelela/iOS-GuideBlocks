@@ -32,8 +32,12 @@ struct ContexualButton: View {
                     .background(Color(uiColor: button.backgroundColor ?? .black))
                     .foregroundStyle(Color(uiColor: button.textColor ?? .white))
                     .contextualButtonFormat(button)
+                    .overlay(content: {
+                        RoundedRectangle(cornerRadius: button.borderCornerRadius)
+                            .stroke(Color(uiColor: button.borderColor), lineWidth: button.borderWidth)
+                    })
                     .clipShape(RoundedRectangle(cornerRadius: button.borderCornerRadius))
-                    .border(Color(uiColor: button.borderColor ?? .clear), width: button.borderWidth)
+
                     .margin(button.margin)
             })
             if button.padding.hasNoLeftRightPadding && buttonSize.width != UIScreen.main.bounds.width {
