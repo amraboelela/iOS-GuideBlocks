@@ -20,6 +20,7 @@ struct VideoWebView: UIViewRepresentable {
     }
 
     func makeUIView(context: Context) -> WKWebView {
+        circleVideoViewModel.videoIsDismissed = false
         return webView
     }
     
@@ -31,7 +32,6 @@ struct VideoWebView: UIViewRepresentable {
 
     class Coordinator: NSObject, WKNavigationDelegate {
         var videoWebView: VideoWebView
-        //var webView: WKWebView
         var timer: Timer?
         var elapsedTime: TimeInterval = 0
         let totalTime: TimeInterval = 60 // Total duration in seconds
