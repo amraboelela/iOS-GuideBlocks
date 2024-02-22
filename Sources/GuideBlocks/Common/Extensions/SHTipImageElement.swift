@@ -11,8 +11,8 @@ import SwiftUI
 
 extension SHTipImageElement {
     
-    var imageSize: CGSize {
-        return CGSize.sizeFromGuide(width: width, height: height)
+    func imageSize(containerSize: CGSize = UIScreen.main.bounds.size) -> CGSize {
+        return CGSize.sizeFromGuide(width: width, height: height, containerSize: containerSize)
     }
     
     var imageAligment: Alignment {

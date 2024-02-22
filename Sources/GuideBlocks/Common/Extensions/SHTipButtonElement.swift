@@ -23,8 +23,7 @@ extension SHTipButtonElement {
         return .center
     }
     
-    var buttonSize: CGSize {
-        
-        return CGSize.sizeFromGuide(width: width, height: height)
+    func buttonSize(containerSize: CGSize) -> CGSize {
+        return CGSize.sizeFromGuide(width: width, height: height, containerSize: containerSize)
     }
 }
