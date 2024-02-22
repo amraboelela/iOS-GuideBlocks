@@ -33,7 +33,7 @@ struct VideoWebView: UIViewRepresentable {
         //var webView: WKWebView
         var timer: Timer?
         var elapsedTime: TimeInterval = 0
-        let totalTime: TimeInterval = 30 // Total duration in seconds
+        let totalTime: TimeInterval = 60 // Total duration in seconds
         
         init(videoWebView: VideoWebView) {
             self.videoWebView = videoWebView
