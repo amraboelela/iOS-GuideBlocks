@@ -1,12 +1,13 @@
 //
-//  ViewModifiers.swift
+//  ContexualImage.swift
+//  GuideBlocks
 //
-//
-//  Created by Aamir on 17/02/24.
+//  Created by Aamir on 2024/2/17.
+//  Copyright © 2024 Contextual.
 //
 
-import SwiftUI
 import ContextualSDK
+import SwiftUI
 
 struct ContexualImage: View {
     

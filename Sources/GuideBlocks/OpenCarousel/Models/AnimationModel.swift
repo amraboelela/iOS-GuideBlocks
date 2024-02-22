@@ -1,11 +1,11 @@
 //
 //  AnimationModel.swift
-//
+//  GuideBlocks
 //
 //  Created by Aamir on 2024/2/19.
+//  Copyright © 2024 Contextual.
 //
 
-import Foundation
 import ContextualSDK
 import UIKit
 

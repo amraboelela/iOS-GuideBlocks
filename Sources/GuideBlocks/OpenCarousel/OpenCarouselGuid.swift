@@ -1,13 +1,13 @@
 //
 //  OpenCarouselGuid.swift
+//  GuideBlocks
 //
-//
-//  Created by Aamir on 10/02/24.
+//  Created by Aamir on 2024/2/10.
+//  Copyright © 2024 Contextual.
 //
 
-import SwiftUI
 import ContextualSDK
-
+import SwiftUI
 
 /// A guide controller for displaying a circle video view.
 public class OpenCarouselGuid: CTXBaseGuideController {
