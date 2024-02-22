@@ -11,7 +11,6 @@ import SwiftUI
 
 // Round Popup View
 struct CircleVideoView: View {
-    //@ObservedObject var circleVideoViewModel: CircleVideoViewModel
     var imageElement: SHTipImageElement?
     var videoUrl: String
     var circleDiameter: Int

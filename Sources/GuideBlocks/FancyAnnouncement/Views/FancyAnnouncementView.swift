@@ -1,5 +1,5 @@
 //
-//  FancyAnnouncementGuideView.swift
+//  FancyAnnouncementView.swift
 //  GuideBlocks
 //
 //  Created by Marc Stroebel on 2023/11/7.
@@ -9,7 +9,7 @@
 import ContextualSDK
 import SwiftUI
 
-struct FancyAnnouncementGuideView: View {
+struct FancyAnnouncementView: View {
     var titleElement: SHTipTextElement?
     var messageElement: SHTipTextElement?
     var leftButtonElement: SHTipButtonElement?
@@ -180,7 +180,7 @@ struct FrameModifier: ViewModifier {
     }
 }
 
-struct FancyAnnouncementGuideView_Previews: PreviewProvider {
+struct FancyAnnouncementView_Previews: PreviewProvider {
     static var previews: some View {
         let title = SHTipTextElement()
         title.text = "Create Account"
@@ -199,7 +199,7 @@ struct FancyAnnouncementGuideView_Previews: PreviewProvider {
         let rightButton = SHTipButtonElement()
         rightButton.buttonText = "Submit"
         
-        return FancyAnnouncementGuideView(
+        return FancyAnnouncementView(
             titleElement: title,
             messageElement: message,
             leftButtonElement: leftButton,
