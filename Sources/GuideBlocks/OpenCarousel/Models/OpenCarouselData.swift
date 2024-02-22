@@ -1,8 +1,9 @@
 //
 //  OpenCarouselDataManager.swift
-//
+//  GuideBlocks
 //
 //  Created by Aamir on 2024/2/10.
+//  Copyright © 2024 Contextual.
 //
 
 import ContextualSDK
