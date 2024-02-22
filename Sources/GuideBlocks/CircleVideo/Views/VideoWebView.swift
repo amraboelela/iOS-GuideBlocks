@@ -26,7 +26,7 @@ struct VideoWebView: UIViewRepresentable {
             
             // Check if the progress is increasing significantly
             if progress > 0.1 { // Adjust this threshold as needed
-                print("Streaming might have started.")
+                print("Youtube streaming might have started.")
             }
         }
         
