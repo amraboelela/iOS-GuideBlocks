@@ -83,9 +83,9 @@ struct VideoWebView: UIViewRepresentable {
                 // Check if result indicates video playback
                 if let isPlaying = result as? Bool, isPlaying {
                     print("Video is playing")
+                    self.videoWebView.videoIsPlaying()
                 } else {
                     print("No video is playing")
-                    self.videoWebView.videoIsPlaying()
                 }
             }
             
