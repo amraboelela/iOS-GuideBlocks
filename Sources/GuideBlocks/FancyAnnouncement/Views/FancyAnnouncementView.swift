@@ -72,7 +72,7 @@ struct FancyAnnouncementView: View {
                             Text(message)
                                 .contextualBoxFormat(boxElement)
                                 .contextualTextFormat(messageElement)
-                                //.padding()
+                            //.padding()
                         }
                         HStack {
                             if let leftButtonText = leftButtonElement?.buttonText {
@@ -112,7 +112,7 @@ struct FancyAnnouncementView: View {
                             }
                         }
                     }
-                    .offset(x: 0, y: -20)
+                        .offset(x: 0, y: -20)
                 )
                 .frame(width: square, height: square)
                 .zIndex(0)
@@ -158,25 +158,6 @@ struct FancyAnnouncementView: View {
             .zIndex(10)
         }
         .background(Color.clear)
-    }
-}
-
-struct FrameModifier: ViewModifier {
-    let condition: Bool?
-    let width: CGFloat?
-    let height: CGFloat?
-
-    func body(content: Content) -> some View {
-        guard let condition = condition else {
-            return AnyView(content)
-        }
-        
-        if condition {
-            return AnyView(content.frame(width: width ?? .infinity,
-                                         height: height ?? .infinity))
-        } else {
-            return AnyView(content)
-        }
     }
 }
 
