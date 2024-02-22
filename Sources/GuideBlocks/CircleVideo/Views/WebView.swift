@@ -40,18 +40,7 @@ struct WebView: UIViewRepresentable {
     }
     
     class Coordinator: NSObject, WKNavigationDelegate {
-        /*func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-            // Handle the navigation action here
-            // For example, you can check if it's a click event
-            if navigationAction.navigationType == .linkActivated {
-                // The WKWebView was clicked
-                print("WKWebView clicked")
-            }
-            
-            // Allow the navigation action to proceed
-            decisionHandler(.allow)
-        }*/
-        
+
         func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
             // Inject JavaScript to access the YouTube player API
             let javaScript = "document.getElementsByTagName('video')[0].paused"
@@ -75,7 +64,7 @@ struct WebView: UIViewRepresentable {
                 }
             }
         }
-        
+        /*
         func webView(_ webView: WKWebView, didCommit navigation: WKNavigation!) {
                 // Inject JavaScript to access the YouTube player API
                 let javaScript = "document.getElementsByTagName('video')[0].paused"
@@ -98,6 +87,6 @@ struct WebView: UIViewRepresentable {
                         print("Unexpected result: \(String(describing: result))")
                     }
                 }
-            }
+            }*/
     }
 }
