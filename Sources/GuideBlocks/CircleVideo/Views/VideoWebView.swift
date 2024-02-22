@@ -1,5 +1,5 @@
 //
-//  WebView.swift
+//  VideoWebView.swift
 //  GuideBlocks
 //
 //  Created by David Jones on 2023/12/11.
@@ -9,8 +9,7 @@
 import SwiftUI
 import WebKit
 
-// WebView Representable
-struct WebView: UIViewRepresentable {
+struct VideoWebView: UIViewRepresentable {
     let url: URL?
     
     func makeCoordinator() -> Coordinator {

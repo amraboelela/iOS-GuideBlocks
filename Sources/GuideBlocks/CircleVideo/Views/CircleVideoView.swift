@@ -44,7 +44,7 @@ struct CircleVideoView: View {
                 y: -1*(height/2) + (imageElement?.height ?? 0) / 4
             )
             .zIndex(10)
-            WebView(url: URL(string: videoUrl))
+            VideoWebView(url: URL(string: videoUrl))
                 .cornerRadius(width/2)
                 .frame(width:width, height: height)
         }

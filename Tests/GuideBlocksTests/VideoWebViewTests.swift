@@ -1,5 +1,5 @@
 //
-//  WebViewTests.swift
+//  VideoWebViewTests.swift
 //  GuideBlocksTests
 //
 //  Created by Amr Aboelela on 2024/2/21.
@@ -12,12 +12,12 @@ import XCTest
 
 @testable import GuideBlocks
 
-class WebViewTests: XCTestCase {
+class VideoWebViewTests: XCTestCase {
     
-    func testWebViewDisplaysURL() {
+    func testVideoWebViewDisplaysURL() {
         // Given
         let url = URL(string: "https://www.example.com") // Replace with your desired URL
-        let webView = WebView(url: url)
+        let webView = VideoWebView(url: url)
         let viewController = UIHostingController(rootView: webView)
         
         // When
@@ -32,6 +32,6 @@ class WebViewTests: XCTestCase {
             view is WKWebView
         }
         
-        //XCTAssertTrue(webViewExists, "WebView should exist in the view hierarchy")
+        //XCTAssertTrue(webViewExists, "VideoWebView should exist in the view hierarchy")
     }
 }
