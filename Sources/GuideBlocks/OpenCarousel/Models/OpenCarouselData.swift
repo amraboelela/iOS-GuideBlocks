@@ -20,7 +20,7 @@ struct OpenCarouselDataManager {
         let backgroundImages = guide.arrayImages
         
         self.guide = guide
-       // containerSize = guide.containerSize
+        containerSize = guide.containerSize
         
         guard let carouselData = guide.carousel,
               let items = carouselData.items else {
