@@ -18,8 +18,6 @@ class OpenChecklistViewModel : ObservableObject {
         openChecklistGuide?.contextualContainer
     }
     
-    var completedCallback: (() -> ())?
-    
     @Published var isPopupVisible: Bool = false
     @Published var title = "Do List"
     @Published var taskListVisible = true
@@ -80,8 +78,9 @@ class OpenChecklistViewModel : ObservableObject {
             }
         }
         taskListVisible = !needToDismiss
-        if needToDismiss {
-            openChecklistGuide?.isDismissingGuide()
+        if let openChecklistGuide, needToDismiss {
+            openChecklistGuide.isDismissingGuide()
+            openChecklistGuide.tasksCompletedCallback?()
         }
     }
     

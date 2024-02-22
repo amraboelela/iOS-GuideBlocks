@@ -11,6 +11,7 @@ import ContextualSDK
 
 /// A guide controller for displaying a checklist view.
 public class OpenChecklistGuide: CTXBaseGuideController {
+    public var tasksCompletedCallback: (() -> ())?
     
     var contextualContainer: ContextualContainer?
     private var hostingController: UIHostingController<OpenChecklistView>?
