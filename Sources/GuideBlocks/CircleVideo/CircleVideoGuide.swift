@@ -50,9 +50,6 @@ public class CircleVideoGuide: CTXBaseGuideController {
             videoUrl: videoUrl,
             circleDiameter: circleDiameter,
             dismissbuttonTapped: {
-                //self.hostingController?.willMove(toParent: nil)
-                //self.hostingController?.view.removeFromSuperview()
-                //self.hostingController?.removeFromParent()
                 self.dismissGuide()
             }
         )
