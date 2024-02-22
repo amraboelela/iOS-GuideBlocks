@@ -46,7 +46,6 @@ public class CircleVideoGuide: CTXBaseGuideController {
         let circleDiameter = (guide.extraJson?["circle_diameter"] as? Int) ?? 200
         
         var view = CircleVideoView(
-            circleVideoViewModel: circleVideoViewModel,
             videoUrl: videoUrl,
             circleDiameter: circleDiameter,
             dismissbuttonTapped: {

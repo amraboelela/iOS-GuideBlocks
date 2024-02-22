@@ -11,7 +11,7 @@ import SwiftUI
 
 // Round Popup View
 struct CircleVideoView: View {
-    @ObservedObject var circleVideoViewModel: CircleVideoViewModel
+    //@ObservedObject var circleVideoViewModel: CircleVideoViewModel
     var imageElement: SHTipImageElement?
     var videoUrl: String
     var circleDiameter: Int
@@ -25,6 +25,7 @@ struct CircleVideoView: View {
             Button(
                 action: {
                     dismissbuttonTapped()
+                    circleVideoViewModel.videoIsDismissed = true
                 },
                 label: {
                     Image(systemName: "xmark.circle.fill")
@@ -61,7 +62,6 @@ struct CircleVideoView: View {
 struct CircleVideoView_Previews: PreviewProvider {
     static var previews: some View {
         CircleVideoView(
-            circleVideoViewModel: circleVideoViewModel,
             videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ?si=Wx9SC9sBIU6AlMnz",
             circleDiameter: 150,
             dismissbuttonTapped: {

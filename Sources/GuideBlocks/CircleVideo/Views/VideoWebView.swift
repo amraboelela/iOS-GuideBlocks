@@ -12,6 +12,7 @@ import WebKit
 struct VideoWebView: UIViewRepresentable {
     let url: URL?
     let videoIsPlaying: () -> ()
+    
     let webView = WKWebView()
     
     func makeCoordinator() -> Coordinator {
@@ -94,12 +95,13 @@ struct VideoWebView: UIViewRepresentable {
             elapsedTime += 1
             
             // Stop timer if elapsed time reaches total time
-            if elapsedTime >= totalTime {
+            if elapsedTime >= totalTime || circleVideoViewModel.videoIsDismissed {
                 stopObservingVideoPlayback()
             }
         }
         
         func stopObservingVideoPlayback() {
+            print("stopObservingVideoPlayback")
             // Invalidate the timer to stop it from firing
             timer?.invalidate()
             timer = nil

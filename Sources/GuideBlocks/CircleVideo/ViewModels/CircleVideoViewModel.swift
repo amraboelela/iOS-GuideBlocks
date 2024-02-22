@@ -13,7 +13,7 @@ let circleVideoViewModel = CircleVideoViewModel()
 
 class CircleVideoViewModel : ObservableObject {
     var circleVideoGuide: CircleVideoGuide?
-    var completedCallback: (() -> ())?
+    var videoIsDismissed = false
     
     init() {
     }
