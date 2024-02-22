@@ -100,7 +100,7 @@ struct OpenCarouselData: Identifiable {
         self.button = carouselData.button
         self.backgroundImage = backgroundImage
         self.guide = guide
-        //self.backgroundImageSize = backgroundImage?.imageSize(containerSize: guide.containerSize) ?? .zero
+        self.backgroundImageSize = backgroundImage?.imageSize(containerSize: guide.containerSize) ?? .zero
     }
     
     //MARK: Loading Image

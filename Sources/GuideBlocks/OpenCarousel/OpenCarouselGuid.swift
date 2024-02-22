@@ -38,10 +38,12 @@ public class OpenCarouselGuid: CTXBaseGuideController {
          }
          */
         
-        print("RECEIVED NEW PAYLOAD \(contextualContainer.guidePayload.guide.carousel)")
+        let guide = contextualContainer.guidePayload.guide
         
-        animation = contextualContainer.guidePayload.guide.animation
-        let view = OpenCarouselGuidView(guide: contextualContainer.guidePayload.guide) {
+        print("RECEIVED NEW PAYLOAD \(guide.carousel)")
+        
+        animation = guide.animation
+        let view = OpenCarouselGuidView(guide: guide) {
             self.hostingController?.dismiss(animated: true)
             self.dismissGuide()
         }
@@ -55,7 +57,7 @@ public class OpenCarouselGuid: CTXBaseGuideController {
         
         hostingController.modalPresentationStyle = .overFullScreen
         hostingController.transitioningDelegate = self
-        hostingController.view.backgroundColor = .clear
+        hostingController.view.backgroundColor = guide.overlayColor == nil ? .clear :  guide.overlayColor
 
         controller.present(hostingController, animated: true)
         
