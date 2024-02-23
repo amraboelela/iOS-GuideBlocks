@@ -12,6 +12,7 @@ import ContextualSDK
 /// A guide controller for displaying a checklist view.
 public class OpenChecklistGuide: CTXBaseGuideController {
     public var completedCallback: (() -> ())?
+    public var closeButtonTapped: (() -> ())?
     
     var contextualContainer: ContextualContainer?
     private var hostingController: UIHostingController<OpenChecklistView>?
@@ -38,7 +39,13 @@ public class OpenChecklistGuide: CTXBaseGuideController {
         openChecklistViewModel.openChecklistGuide = self
         openChecklistViewModel.updateData()
         let guide = contextualContainer.guidePayload.guide
-        var view = OpenChecklistView(viewModel: openChecklistViewModel)
+        var view = OpenChecklistView(
+            viewModel: openChecklistViewModel,
+            closeButtonTapped: {
+                self.dismissGuide()
+                self.closeButtonTapped?()
+            }
+        )
         view.buttonTextElement = guide.title
         self.hostingController = UIHostingController(rootView: view)
         

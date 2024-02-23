@@ -11,11 +11,12 @@ import SwiftUI
 
 struct OpenChecklistView: View {
     var buttonTextElement: SHTipTextElement?
-    
+    var imageElement: SHTipImageElement?
     @ObservedObject var viewModel: OpenChecklistViewModel
+    var closeButtonTapped: () -> ()
     
     var body: some View {
-        VStack {
+        ZStack {
             if viewModel.taskListVisible {
                 Button(
                     action: {
@@ -30,7 +31,15 @@ struct OpenChecklistView: View {
                             .clipShape(RoundedRectangle(cornerRadius: 10))
                     }
                 )
-                
+                CloseButtonView(
+                    imageElement: imageElement,
+                    offsetX: 60,
+                    offsetY: -30,
+                    dismissbuttonTapped: {
+                        closeButtonTapped()
+                        viewModel.taskListVisible = false
+                    }
+                )
             }
         }
         .sheet(isPresented: $viewModel.isPopupVisible) {
@@ -46,6 +55,10 @@ struct OpenChecklistView: View {
 
 struct OpenChecklistView_Previews: PreviewProvider {
     static var previews: some View {
-        OpenChecklistView(viewModel: openChecklistViewModel)
+        OpenChecklistView(
+            viewModel: openChecklistViewModel,
+            closeButtonTapped: {
+            }
+        )
     }
 }
