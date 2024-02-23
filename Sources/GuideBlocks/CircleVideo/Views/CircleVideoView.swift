@@ -18,8 +18,6 @@ struct CircleVideoView: View {
     var videoIsPlaying: () -> ()
     
     var body: some View {
-        //let width = CGFloat(circleDiameter)
-        //let height = CGFloat(circleDiameter)
         ZStack {
             VideoWebView(
                 url: URL(string: videoUrl),

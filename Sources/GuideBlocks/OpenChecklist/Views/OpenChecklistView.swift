@@ -16,30 +16,32 @@ struct OpenChecklistView: View {
     var closeButtonTapped: () -> ()
     
     var body: some View {
-        ZStack {
+        VStack {
             if viewModel.taskListVisible {
-                Button(
-                    action: {
-                        viewModel.isPopupVisible.toggle()
-                        print("Do list button tapped")
-                    },
-                    label: {
-                        Text(viewModel.title)
-                            .contextualTextFormat(buttonTextElement)
-                            .foregroundColor(.white)
-                            .background(.blue)
-                            .clipShape(RoundedRectangle(cornerRadius: 10))
-                    }
-                )
-                CloseButtonView(
-                    imageElement: imageElement,
-                    offsetX: 100,
-                    offsetY: -100,
-                    closeButtonTapped: {
-                        closeButtonTapped()
-                        viewModel.taskListVisible = false
-                    }
-                )
+                ZStack {
+                    Button(
+                        action: {
+                            viewModel.isPopupVisible.toggle()
+                            print("Do list button tapped")
+                        },
+                        label: {
+                            Text(viewModel.title)
+                                .contextualTextFormat(buttonTextElement)
+                                .foregroundColor(.white)
+                                .background(.blue)
+                                .clipShape(RoundedRectangle(cornerRadius: 10))
+                        }
+                    )
+                    CloseButtonView(
+                        imageElement: imageElement,
+                        offsetX: 100,
+                        offsetY: -100,
+                        closeButtonTapped: {
+                            closeButtonTapped()
+                            viewModel.taskListVisible = false
+                        }
+                    )
+                }
             }
         }
         .sheet(isPresented: $viewModel.isPopupVisible) {
