@@ -17,98 +17,34 @@ struct OpenChecklistView: View {
     
     var body: some View {
         VStack {
-            //if viewModel.taskListVisible {
-            //ZStack {
-            /*Button(
-             action: {
-             viewModel.isPopupVisible.toggle()
-             print("Do list button tapped")
-             },
-             label: {
-             Text(viewModel.title)
-             .contextualTextFormat(buttonTextElement)
-             .foregroundColor(.white)
-             .background(.blue)
-             .clipShape(RoundedRectangle(cornerRadius: 10))
-             }
-             )
-             CloseButtonView(
-             imageElement: imageElement,
-             offsetX: 100,
-             offsetY: -100,
-             closeButtonTapped: {
-             closeButtonTapped()
-             viewModel.taskListVisible = false
-             }
-             )*/
-            //}
-            //}
-            /*Button(
-             action: {
-             closeButtonTapped()
-             },
-             label: {
-             Image(systemName: "xmark.circle.fill")
-             .resizable()
-             .contextualImageResize(imageElement)
-             .padding(10)
-             .contextualImageBackground(imageElement)
-             .background(.red)
-             .foregroundColor(.white)
-             .clipShape(Circle())
-             .shadow(radius: 8)
-             //.zIndex(11)
-             }
-             )
-             .position(x: 100, y: 100)
-             */
-            //Button(action: {
-            // Action for the main button
-            //}, label: {
-            Text("Main Button")
-                .padding()
-                .background(Color.blue)
-                .foregroundColor(.white)
-                .cornerRadius(8)
-                .frame(width:200, height: 120)
+            if viewModel.taskListVisible {
+                Button(
+                    action: {
+                        viewModel.isPopupVisible.toggle()
+                        print("Do list button tapped")
+                    },
+                    label: {
+                        Text(viewModel.title)
+                            .contextualTextFormat(buttonTextElement)
+                            .foregroundColor(.white)
+                            .background(.blue)
+                            .clipShape(RoundedRectangle(cornerRadius: 10))
+                    }
+                )
+                .padding(40)
                 //.background(Color.yellow)
-            //})
                 .overlay(
-                    Button(
-                        action: {
+                    CloseButton(
+                        imageElement: imageElement,
+                        closeButtonTapped: {
                             closeButtonTapped()
-                        },
-                        label: {
-                            Image(systemName: "xmark.circle.fill")
-                                .resizable()
-                                .contextualImageResize(imageElement)
-                                .padding(10)
-                                .contextualImageBackground(imageElement)
-                                .background(.red)
-                                .foregroundColor(.white)
-                                .clipShape(Circle())
-                                .shadow(radius: 8)
-                            //.zIndex(11)
+                            viewModel.taskListVisible = false
                         }
                     ),
-                    //.position(x:130, y:-10),
-                    //.padding(80),
-                    //.offset(x: 30, y: -30), // Adjust the offset for positioning
                     alignment: .topTrailing
                 )
-            /*.offset(
-             x: 100,
-             y: -100
-             )*/
-        }
-        /*.sheet(isPresented: $viewModel.isPopupVisible) {
-            if #available(iOS 16.0, *) {
-                TaskListView(viewModel: viewModel)
-                    .presentationDetents([.medium, .large])
-            } else {
-                TaskListView(viewModel: viewModel)
             }
-        }*/
+        }
     }
 }
 

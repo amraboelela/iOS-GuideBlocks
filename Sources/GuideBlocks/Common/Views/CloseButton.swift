@@ -1,5 +1,5 @@
 //
-//  CloseButtonView.swift
+//  CloseButton.swift
 //  GuideBlocks
 //
 //  Created by Amr Aboelela on 2024/2/22.
@@ -9,10 +9,10 @@
 import ContextualSDK
 import SwiftUI
 
-struct CloseButtonView: View {
+struct CloseButton: View {
     var imageElement: SHTipImageElement?
-    var offsetX: CGFloat
-    var offsetY: CGFloat
+    //var offsetX: CGFloat
+    //var offsetY: CGFloat
     var closeButtonTapped: () -> ()
     
     var body: some View {
@@ -33,19 +33,19 @@ struct CloseButtonView: View {
                     .zIndex(11)
             }
         )
-        .offset(
+        /*.offset(
             x: offsetX,
             y: offsetY
-        )
+        )*/
     }
 }
 
-struct CloseButtonView_Previews: PreviewProvider {
+struct CloseButton_Previews: PreviewProvider {
     static var previews: some View {
-        CloseButtonView(
-            imageElement: nil,
-            offsetX: 100,
-            offsetY: 10,
+        CloseButton(
+            //imageElement: nil,
+            //offsetX: 100,
+            //offsetY: 10,
             closeButtonTapped: {
             }
         )

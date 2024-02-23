@@ -27,14 +27,16 @@ struct CircleVideoView: View {
             )
             .cornerRadius(circleDiameter/2)
             .frame(width:circleDiameter, height: circleDiameter)
-            CloseButtonView(
-                imageElement: imageElement,
-                offsetX: circleDiameter / 2 - (imageElement?.width ?? 0) / 4,
-                offsetY: -1 * (circleDiameter/2) + (imageElement?.height ?? 0) / 4,
-                closeButtonTapped: {
-                    closeButtonTapped()
-                    circleVideoViewModel.videoIsDismissed = true
-                }
+            .padding(25)
+            .overlay(
+                CloseButton(
+                    imageElement: imageElement,
+                    closeButtonTapped: {
+                        closeButtonTapped()
+                        circleVideoViewModel.videoIsDismissed = true
+                    }
+                ),
+                alignment: .topTrailing
             )
         }
         .shadow(radius: circleDiameter/2)
