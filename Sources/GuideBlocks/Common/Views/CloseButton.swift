@@ -11,8 +11,6 @@ import SwiftUI
 
 struct CloseButton: View {
     var imageElement: SHTipImageElement?
-    //var offsetX: CGFloat
-    //var offsetY: CGFloat
     var closeButtonTapped: () -> ()
     
     var body: some View {
@@ -33,19 +31,12 @@ struct CloseButton: View {
                     .zIndex(11)
             }
         )
-        /*.offset(
-            x: offsetX,
-            y: offsetY
-        )*/
     }
 }
 
 struct CloseButton_Previews: PreviewProvider {
     static var previews: some View {
         CloseButton(
-            //imageElement: nil,
-            //offsetX: 100,
-            //offsetY: 10,
             closeButtonTapped: {
             }
         )
