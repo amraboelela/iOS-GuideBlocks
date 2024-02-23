@@ -43,7 +43,7 @@ struct OpenChecklistView: View {
                 )*/
             //}
             //}
-            Button(
+            /*Button(
                 action: {
                     closeButtonTapped()
                 },
@@ -57,13 +57,46 @@ struct OpenChecklistView: View {
                         .foregroundColor(.white)
                         .clipShape(Circle())
                         .shadow(radius: 8)
-                        .zIndex(11)
+                        //.zIndex(11)
                 }
             )
-            .offset(
+            .position(x: 100, y: 100)
+            */
+            Button(action: {
+                // Action for the main button
+            }, label: {
+                Text("Main Button")
+                    .padding()
+                    .background(Color.blue)
+                    .foregroundColor(.white)
+                    .cornerRadius(8)
+            })
+            .overlay(
+                Button(
+                    action: {
+                        closeButtonTapped()
+                    },
+                    label: {
+                        Image(systemName: "xmark.circle.fill")
+                            .resizable()
+                            .contextualImageResize(imageElement)
+                            .padding(10)
+                            .contextualImageBackground(imageElement)
+                            .background(.red)
+                            .foregroundColor(.white)
+                            .clipShape(Circle())
+                            .shadow(radius: 8)
+                            //.zIndex(11)
+                    }
+                )
+                //.padding(80),
+                .offset(x: 30, y: -30), // Adjust the offset for positioning
+                alignment: .topTrailing
+            )
+            /*.offset(
                 x: 100,
                 y: -100
-            )
+            )*/
         }
         /*.sheet(isPresented: $viewModel.isPopupVisible) {
             if #available(iOS 16.0, *) {
