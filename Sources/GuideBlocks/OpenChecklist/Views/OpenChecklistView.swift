@@ -19,84 +19,84 @@ struct OpenChecklistView: View {
         VStack {
             //if viewModel.taskListVisible {
             //ZStack {
-                /*Button(
-                 action: {
-                 viewModel.isPopupVisible.toggle()
-                 print("Do list button tapped")
-                 },
-                 label: {
-                 Text(viewModel.title)
-                 .contextualTextFormat(buttonTextElement)
-                 .foregroundColor(.white)
-                 .background(.blue)
-                 .clipShape(RoundedRectangle(cornerRadius: 10))
-                 }
-                 )
-                CloseButtonView(
-                    imageElement: imageElement,
-                    offsetX: 100,
-                    offsetY: -100,
-                    closeButtonTapped: {
-                        closeButtonTapped()
-                        viewModel.taskListVisible = false
-                    }
-                )*/
+            /*Button(
+             action: {
+             viewModel.isPopupVisible.toggle()
+             print("Do list button tapped")
+             },
+             label: {
+             Text(viewModel.title)
+             .contextualTextFormat(buttonTextElement)
+             .foregroundColor(.white)
+             .background(.blue)
+             .clipShape(RoundedRectangle(cornerRadius: 10))
+             }
+             )
+             CloseButtonView(
+             imageElement: imageElement,
+             offsetX: 100,
+             offsetY: -100,
+             closeButtonTapped: {
+             closeButtonTapped()
+             viewModel.taskListVisible = false
+             }
+             )*/
             //}
             //}
             /*Button(
-                action: {
-                    closeButtonTapped()
-                },
-                label: {
-                    Image(systemName: "xmark.circle.fill")
-                        .resizable()
-                        .contextualImageResize(imageElement)
-                        .padding(10)
-                        .contextualImageBackground(imageElement)
-                        .background(.red)
-                        .foregroundColor(.white)
-                        .clipShape(Circle())
-                        .shadow(radius: 8)
-                        //.zIndex(11)
-                }
-            )
-            .position(x: 100, y: 100)
-            */
-            Button(action: {
-                // Action for the main button
-            }, label: {
-                Text("Main Button")
-                    .padding()
-                    .background(Color.blue)
-                    .foregroundColor(.white)
-                    .cornerRadius(8)
-            })
-            .overlay(
-                Button(
-                    action: {
-                        closeButtonTapped()
-                    },
-                    label: {
-                        Image(systemName: "xmark.circle.fill")
-                            .resizable()
-                            .contextualImageResize(imageElement)
-                            .padding(10)
-                            .contextualImageBackground(imageElement)
-                            .background(.red)
-                            .foregroundColor(.white)
-                            .clipShape(Circle())
-                            .shadow(radius: 8)
+             action: {
+             closeButtonTapped()
+             },
+             label: {
+             Image(systemName: "xmark.circle.fill")
+             .resizable()
+             .contextualImageResize(imageElement)
+             .padding(10)
+             .contextualImageBackground(imageElement)
+             .background(.red)
+             .foregroundColor(.white)
+             .clipShape(Circle())
+             .shadow(radius: 8)
+             //.zIndex(11)
+             }
+             )
+             .position(x: 100, y: 100)
+             */
+            //Button(action: {
+            // Action for the main button
+            //}, label: {
+            Text("Main Button")
+                .padding()
+                .background(Color.blue)
+                .foregroundColor(.white)
+                .cornerRadius(8)
+            //})
+                .overlay(
+                    Button(
+                        action: {
+                            closeButtonTapped()
+                        },
+                        label: {
+                            Image(systemName: "xmark.circle.fill")
+                                .resizable()
+                                .contextualImageResize(imageElement)
+                                .padding(10)
+                                .contextualImageBackground(imageElement)
+                                .background(.red)
+                                .foregroundColor(.white)
+                                .clipShape(Circle())
+                                .shadow(radius: 8)
                             //.zIndex(11)
-                    }
-                ),
-                //.padding(80),
-                //.offset(x: 30, y: -30), // Adjust the offset for positioning
-                alignment: .topTrailing
-            )
+                        }
+                    )
+                    //.padding(80),
+                    .offset(x: 30, y: -30), // Adjust the offset for positioning
+                    alignment: .topTrailing
+                )
             /*.offset(
-                x: 100,
-                y: -100
-            )*/
+             x: 100,
+             y: -100
+             )*/
         }
         /*.sheet(isPresented: $viewModel.isPopupVisible) {
             if #available(iOS 16.0, *) {
