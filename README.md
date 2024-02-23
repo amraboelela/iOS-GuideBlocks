@@ -50,20 +50,3 @@ You can contribute to https://guideblocks.org by wrapping a code element that wo
 10. Sit back, relax, have a bubble tea and wait for approval!
 
 
-### Sample GuideBlock.yaml
-
-```
-Title: Confetti
-Author: Marc Stroebel
-Email: support@contextu.al
-TestApp: https://github.com/contextu-al/AirBnB-iOS
-TestAppBranch: confetti
-Description: Launch confetti to targeted users at any time with this low-code GuideBlock
-Acknowledgements: https://github.com/simibac/ConfettiSwiftUI
-Screenshot: https://github.com/GuideBlocks-org/iOS-GuideBlocks/blob/main/Sources/GuideBlocks/Confetti/confetti-guideblock.png 
-Video: https://vimeo.com/907653617/7384df8a67
-Extensibility: {
-  "guideBlockKey": "Confetti"
-}
-```
- 
