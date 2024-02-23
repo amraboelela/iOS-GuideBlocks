@@ -89,8 +89,9 @@ struct OpenChecklistView: View {
                             //.zIndex(11)
                         }
                     )
+                    .position(x:130, y:-10),
                     //.padding(80),
-                    .offset(x: 30, y: -30), // Adjust the offset for positioning
+                    //.offset(x: 30, y: -30), // Adjust the offset for positioning
                     alignment: .topTrailing
                 )
             /*.offset(
