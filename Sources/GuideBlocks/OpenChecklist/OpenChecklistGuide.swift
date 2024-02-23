@@ -40,6 +40,7 @@ public class OpenChecklistGuide: CTXBaseGuideController {
         openChecklistViewModel.updateData()
         let guide = contextualContainer.guidePayload.guide
         var view = OpenChecklistView(
+            imageElement: guide.arrayImages.first,
             viewModel: openChecklistViewModel,
             closeButtonTapped: {
                 self.dismissGuide()

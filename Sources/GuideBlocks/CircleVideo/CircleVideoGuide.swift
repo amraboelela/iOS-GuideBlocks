@@ -46,7 +46,8 @@ public class CircleVideoGuide: CTXBaseGuideController {
         let videoUrl = (guide.extraJson?["vid_url"] as? String) ?? defaultVideoURL
         let circleDiameter = (guide.extraJson?["circle_diameter"] as? Int) ?? 200
         
-        var view = CircleVideoView(
+        let view = CircleVideoView(
+            imageElement: guide.arrayImages.first,
             videoUrl: videoUrl,
             circleDiameter: circleDiameter,
             closeButtonTapped: {
@@ -57,7 +58,7 @@ public class CircleVideoGuide: CTXBaseGuideController {
                 self.videoIsPlaying?()
             }
         )
-        view.imageElement = guide.arrayImages.first
+        //view.imageElement = guide.arrayImages.first
         hostingController = UIHostingController(rootView: view)
         
         guard let hostingController = self.hostingController else {
