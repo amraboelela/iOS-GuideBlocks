@@ -17,41 +17,41 @@ struct OpenChecklistView: View {
     
     var body: some View {
         VStack {
-            if viewModel.taskListVisible {
-                ZStack {
-                    /*Button(
-                        action: {
-                            viewModel.isPopupVisible.toggle()
-                            print("Do list button tapped")
-                        },
-                        label: {
-                            Text(viewModel.title)
-                                .contextualTextFormat(buttonTextElement)
-                                .foregroundColor(.white)
-                                .background(.blue)
-                                .clipShape(RoundedRectangle(cornerRadius: 10))
-                        }
-                    )*/
-                    CloseButtonView(
-                        imageElement: imageElement,
-                        offsetX: 100,
-                        offsetY: -100,
-                        closeButtonTapped: {
-                            closeButtonTapped()
-                            viewModel.taskListVisible = false
-                        }
-                    )
-                }
+            //if viewModel.taskListVisible {
+            ZStack {
+                /*Button(
+                 action: {
+                 viewModel.isPopupVisible.toggle()
+                 print("Do list button tapped")
+                 },
+                 label: {
+                 Text(viewModel.title)
+                 .contextualTextFormat(buttonTextElement)
+                 .foregroundColor(.white)
+                 .background(.blue)
+                 .clipShape(RoundedRectangle(cornerRadius: 10))
+                 }
+                 )*/
+                CloseButtonView(
+                    imageElement: imageElement,
+                    offsetX: 100,
+                    offsetY: -100,
+                    closeButtonTapped: {
+                        closeButtonTapped()
+                        viewModel.taskListVisible = false
+                    }
+                )
             }
+            //}
         }
-        .sheet(isPresented: $viewModel.isPopupVisible) {
+        /*.sheet(isPresented: $viewModel.isPopupVisible) {
             if #available(iOS 16.0, *) {
                 TaskListView(viewModel: viewModel)
                     .presentationDetents([.medium, .large])
             } else {
                 TaskListView(viewModel: viewModel)
             }
-        }
+        }*/
     }
 }
 
