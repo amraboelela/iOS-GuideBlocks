@@ -13,13 +13,12 @@ struct CloseButtonView: View {
     var imageElement: SHTipImageElement?
     var offsetX: CGFloat
     var offsetY: CGFloat
-    var dismissbuttonTapped: () -> ()
+    var closeButtonTapped: () -> ()
     
     var body: some View {
         Button(
             action: {
-                dismissbuttonTapped()
-                circleVideoViewModel.videoIsDismissed = true
+                closeButtonTapped()
             },
             label: {
                 Image(systemName: "xmark.circle.fill")
@@ -47,7 +46,7 @@ struct CloseButtonView_Previews: PreviewProvider {
             imageElement: nil,
             offsetX: 100,
             offsetY: 10,
-            dismissbuttonTapped: {
+            closeButtonTapped: {
             }
         )
     }

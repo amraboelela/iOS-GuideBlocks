@@ -35,7 +35,7 @@ struct OpenChecklistView: View {
                     imageElement: imageElement,
                     offsetX: 60,
                     offsetY: -30,
-                    dismissbuttonTapped: {
+                    closeButtonTapped: {
                         closeButtonTapped()
                         viewModel.taskListVisible = false
                     }

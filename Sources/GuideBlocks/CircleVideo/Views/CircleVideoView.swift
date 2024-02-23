@@ -33,7 +33,7 @@ struct CircleVideoView: View {
                 imageElement: imageElement,
                 offsetX: width / 2 - (imageElement?.width ?? 0) / 4,
                 offsetY: -1 * (height/2) + (imageElement?.height ?? 0) / 4,
-                dismissbuttonTapped: {
+                closeButtonTapped: {
                     closeButtonTapped()
                     circleVideoViewModel.videoIsDismissed = true
                 }
