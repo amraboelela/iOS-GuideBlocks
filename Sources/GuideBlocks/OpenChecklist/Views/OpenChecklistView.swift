@@ -19,7 +19,7 @@ struct OpenChecklistView: View {
         VStack {
             if viewModel.taskListVisible {
                 ZStack {
-                    Button(
+                    /*Button(
                         action: {
                             viewModel.isPopupVisible.toggle()
                             print("Do list button tapped")
@@ -31,7 +31,7 @@ struct OpenChecklistView: View {
                                 .background(.blue)
                                 .clipShape(RoundedRectangle(cornerRadius: 10))
                         }
-                    )
+                    )*/
                     CloseButtonView(
                         imageElement: imageElement,
                         offsetX: 100,
