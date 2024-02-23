@@ -60,6 +60,10 @@ struct OpenChecklistView: View {
                         .zIndex(11)
                 }
             )
+            .offset(
+                x: 100,
+                y: -100
+            )
         }
         /*.sheet(isPresented: $viewModel.isPopupVisible) {
             if #available(iOS 16.0, *) {
