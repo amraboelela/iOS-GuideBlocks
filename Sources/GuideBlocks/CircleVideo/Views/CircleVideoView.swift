@@ -13,13 +13,11 @@ import SwiftUI
 struct CircleVideoView: View {
     var imageElement: SHTipImageElement?
     var videoUrl: String
-    var circleDiameter: Int
+    var circleDiameter: CGFloat
     var closeButtonTapped: () -> ()
     var videoIsPlaying: () -> ()
     
     var body: some View {
-        let width = CGFloat(circleDiameter)
-        let height = CGFloat(circleDiameter)
         ZStack {
             VideoWebView(
                 url: URL(string: videoUrl),
@@ -27,19 +25,21 @@ struct CircleVideoView: View {
                     videoIsPlaying()
                 }
             )
-                .cornerRadius(width/2)
-                .frame(width:width, height: height)
-            CloseButtonView(
-                imageElement: imageElement,
-                offsetX: width / 2 - (imageElement?.width ?? 0) / 4,
-                offsetY: -1 * (height/2) + (imageElement?.height ?? 0) / 4,
-                closeButtonTapped: {
-                    closeButtonTapped()
-                    circleVideoViewModel.videoIsDismissed = true
-                }
+            .cornerRadius(circleDiameter/2)
+            .frame(width:circleDiameter, height: circleDiameter)
+            .padding(25)
+            .overlay(
+                CloseButton(
+                    imageElement: imageElement,
+                    closeButtonTapped: {
+                        closeButtonTapped()
+                        circleVideoViewModel.videoIsDismissed = true
+                    }
+                ),
+                alignment: .topTrailing
             )
         }
-        .shadow(radius: width/2)
+        .shadow(radius: circleDiameter/2)
     }
 }
 

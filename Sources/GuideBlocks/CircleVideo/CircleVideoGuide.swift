@@ -44,9 +44,10 @@ public class CircleVideoGuide: CTXBaseGuideController {
         let guide = contextualContainer.guidePayload.guide
         let defaultVideoURL = "https://www.youtube.com/embed/Y9ChGCY8Azk?si=aLGas88lnxI6g_jJ?autoplay=1"
         let videoUrl = (guide.extraJson?["vid_url"] as? String) ?? defaultVideoURL
-        let circleDiameter = (guide.extraJson?["circle_diameter"] as? Int) ?? 200
+        let circleDiameter = (guide.extraJson?["circle_diameter"] as? CGFloat) ?? 200
         
-        var view = CircleVideoView(
+        let view = CircleVideoView(
+            imageElement: guide.arrayImages.first,
             videoUrl: videoUrl,
             circleDiameter: circleDiameter,
             closeButtonTapped: {
@@ -57,7 +58,7 @@ public class CircleVideoGuide: CTXBaseGuideController {
                 self.videoIsPlaying?()
             }
         )
-        view.imageElement = guide.arrayImages.first
+        //view.imageElement = guide.arrayImages.first
         hostingController = UIHostingController(rootView: view)
         
         guard let hostingController = self.hostingController else {

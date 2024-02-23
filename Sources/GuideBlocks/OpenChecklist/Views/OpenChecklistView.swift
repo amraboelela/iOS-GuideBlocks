@@ -16,7 +16,7 @@ struct OpenChecklistView: View {
     var closeButtonTapped: () -> ()
     
     var body: some View {
-        ZStack {
+        VStack {
             if viewModel.taskListVisible {
                 Button(
                     action: {
@@ -31,23 +31,18 @@ struct OpenChecklistView: View {
                             .clipShape(RoundedRectangle(cornerRadius: 10))
                     }
                 )
-                CloseButtonView(
-                    imageElement: imageElement,
-                    offsetX: 60,
-                    offsetY: -30,
-                    closeButtonTapped: {
-                        closeButtonTapped()
-                        viewModel.taskListVisible = false
-                    }
+                .padding(40)
+                //.background(Color.yellow)
+                .overlay(
+                    CloseButton(
+                        imageElement: imageElement,
+                        closeButtonTapped: {
+                            closeButtonTapped()
+                            viewModel.taskListVisible = false
+                        }
+                    ),
+                    alignment: .topTrailing
                 )
-            }
-        }
-        .sheet(isPresented: $viewModel.isPopupVisible) {
-            if #available(iOS 16.0, *) {
-                TaskListView(viewModel: viewModel)
-                    .presentationDetents([.medium, .large])
-            } else {
-                TaskListView(viewModel: viewModel)
             }
         }
     }
