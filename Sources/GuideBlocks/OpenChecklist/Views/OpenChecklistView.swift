@@ -18,7 +18,7 @@ struct OpenChecklistView: View {
     var body: some View {
         VStack {
             //if viewModel.taskListVisible {
-            ZStack {
+            //ZStack {
                 /*Button(
                  action: {
                  viewModel.isPopupVisible.toggle()
@@ -31,7 +31,7 @@ struct OpenChecklistView: View {
                  .background(.blue)
                  .clipShape(RoundedRectangle(cornerRadius: 10))
                  }
-                 )*/
+                 )
                 CloseButtonView(
                     imageElement: imageElement,
                     offsetX: 100,
@@ -40,9 +40,26 @@ struct OpenChecklistView: View {
                         closeButtonTapped()
                         viewModel.taskListVisible = false
                     }
-                )
-            }
+                )*/
             //}
+            //}
+            Button(
+                action: {
+                    closeButtonTapped()
+                },
+                label: {
+                    Image(systemName: "xmark.circle.fill")
+                        .resizable()
+                        .contextualImageResize(imageElement)
+                        .padding(10)
+                        .contextualImageBackground(imageElement)
+                        .background(.red)
+                        .foregroundColor(.white)
+                        .clipShape(Circle())
+                        .shadow(radius: 8)
+                        .zIndex(11)
+                }
+            )
         }
         /*.sheet(isPresented: $viewModel.isPopupVisible) {
             if #available(iOS 16.0, *) {
