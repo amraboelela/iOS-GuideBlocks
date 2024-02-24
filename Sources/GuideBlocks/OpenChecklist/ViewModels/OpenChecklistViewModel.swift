@@ -69,6 +69,10 @@ class OpenChecklistViewModel : ObservableObject {
         }
     }
     
+    func tappedATask() {
+        openChecklistGuide?.nextStepOfGuide()
+    }
+    
     func dismissIfNeeded() {
         var needToDismiss = true
         for taskModel in taskModels {
