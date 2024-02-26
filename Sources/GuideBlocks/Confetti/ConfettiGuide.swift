@@ -49,10 +49,12 @@ public class ConfettiGuide: CTXBaseGuideController {
         success(contextualContainer.guidePayload)
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-            // Dismissing the guide after 5 seconds since it is a timed guide requiring no user intervention
-            // If we don't dismiss the guide here, we would see a message in the console if we tried to use the same
+            // Invoking "nextStepOfGuide" after 5 seconds since it is a timed guide requiring no user intervention
+            // - Invoking this method means that the SDK will try and present the next step in this guide (if there is one), OR;
+            // - It will "accept" the guide (analytics event) if there is no step to proceed to and dismiss the guide
+            // If we don't invoke this here, we would see a message in the console if we tried to use the same
             // guide again on a different page without this one being dismissed
-            self.dismissGuide()
+            self.nextStepOfGuide()
         }
     }
     
