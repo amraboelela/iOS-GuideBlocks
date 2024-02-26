@@ -43,6 +43,14 @@ struct OpenChecklistView: View {
                     ),
                     alignment: .topTrailing
                 )
+                .sheet(isPresented: $viewModel.isPopupVisible) {
+                    if #available(iOS 16.0, *) {
+                        TaskListView(viewModel: viewModel)
+                            .presentationDetents([.medium, .large])
+                    } else {
+                        TaskListView(viewModel: viewModel)
+                    }
+                }
             }
         }
     }

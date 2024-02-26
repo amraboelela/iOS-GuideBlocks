@@ -55,10 +55,10 @@ public class CircleVideoGuide: CTXBaseGuideController {
                 self.closeButtonTapped?()
             },
             videoIsPlaying: {
+                self.tapInsideOfGuide()
                 self.videoIsPlaying?()
             }
         )
-        //view.imageElement = guide.arrayImages.first
         hostingController = UIHostingController(rootView: view)
         
         guard let hostingController = self.hostingController else {

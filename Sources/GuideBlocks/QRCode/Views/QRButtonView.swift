@@ -11,8 +11,9 @@ import SwiftUI
 
 struct QRButtonView: View {
     var buttonTextElement: SHTipTextElement?
-    
+    var imageElement: SHTipImageElement?
     @ObservedObject var viewModel: QRViewModel
+    var closeButtonTapped: () -> ()
     
     var body: some View {
         VStack {
@@ -30,15 +31,26 @@ struct QRButtonView: View {
                             .clipShape(RoundedRectangle(cornerRadius: 10))
                     }
                 )
-                
-            }
-        }
-        .sheet(isPresented: $viewModel.isPopupVisible) {
-            if #available(iOS 16.0, *) {
-                QRCodeScannerView(viewModel: viewModel)
-                    .presentationDetents([.medium, .large])
-            } else {
-                QRCodeScannerView(viewModel: viewModel)
+                .padding(40)
+                //.background(Color.yellow)
+                .overlay(
+                    CloseButton(
+                        imageElement: imageElement,
+                        closeButtonTapped: {
+                            closeButtonTapped()
+                            viewModel.qrCodeVisible = false
+                        }
+                    ),
+                    alignment: .topTrailing
+                )
+                .sheet(isPresented: $viewModel.isPopupVisible) {
+                    if #available(iOS 16.0, *) {
+                        QRCodeScannerView(viewModel: viewModel)
+                            .presentationDetents([.medium, .large])
+                    } else {
+                        QRCodeScannerView(viewModel: viewModel)
+                    }
+                }
             }
         }
     }
@@ -46,6 +58,10 @@ struct QRButtonView: View {
 
 struct QRButtonView_Previews: PreviewProvider {
     static var previews: some View {
-        QRButtonView(viewModel: qrViewModel)
+        QRButtonView(
+            viewModel: qrViewModel,
+            closeButtonTapped: {
+            }
+        )
     }
 }
