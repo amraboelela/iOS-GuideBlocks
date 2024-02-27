@@ -16,7 +16,9 @@ class QRViewModel : ObservableObject {
     var contextualContainer: ContextualContainer? {
         qrCodeGuide?.contextualContainer
     }
+    var scanButtonTapped: (() -> ())?
     var scannedCodeCallback: ((String) -> ())?
+    
     
     @Published var isPopupVisible: Bool = false
     @Published var title = "QR Code Scanner"

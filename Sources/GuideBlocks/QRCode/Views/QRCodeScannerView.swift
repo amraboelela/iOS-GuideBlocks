@@ -14,11 +14,14 @@ struct QRCodeScannerView: View {
     @State private var isPresentingScanner = false
     @State private var scannedCode: String?
 
+    //var scanButtonTapped: (() -> ())?
+    
     var body: some View {
         VStack(spacing: 10) {
             Spacer()
             Button("Scan Code") {
                 isPresentingScanner = true
+                viewModel.scanButtonTapped?()
             }
             .padding(40)
             if let code = scannedCode {

@@ -1,8 +1,8 @@
 //
-//  QRCodeGuide.swift
+//  QuizGuide.swift
 //  GuideBlocks
 //
-//  Created by Amr Aboelela on 2024/2/19.
+//  Created by Amr Aboelela on 2024/2/26.
 //  Copyright © 2024 Contextual.
 //
 
@@ -10,14 +10,12 @@ import SwiftUI
 import ContextualSDK
 
 /// A guide controller for displaying a checklist view.
-public class QRCodeGuide: CTXBaseGuideController {
-    //public var scanButtonTapped: (() -> ())?
-    public var scannedCodeCallback: ((String) -> ())?
+public class QuizGuide: CTXBaseGuideController {
+    public var completedCallback: (() -> ())?
     public var closeButtonTapped: (() -> ())?
-
-    var contextualContainer: ContextualContainer?
     
-    private var hostingController: UIHostingController<QRButtonView>?
+    var contextualContainer: ContextualContainer?
+    private var hostingController: UIHostingController<QuizView>?
     
     /// Presents the guide block.
     ///
@@ -38,24 +36,19 @@ public class QRCodeGuide: CTXBaseGuideController {
             return
         }
         self.contextualContainer = contextualContainer
-        qrViewModel.qrCodeGuide = self
-        qrViewModel.updateData()
-        qrViewModel.scanButtonTapped = {
-            self.nextStepOfGuide()
-        }
-        qrViewModel.scannedCodeCallback = scannedCodeCallback
-        
-        let guide = contextualContainer.guidePayload.guide
-        var view = QRButtonView(
-            imageElement: guide.arrayImages.first,
-            viewModel: qrViewModel,
+        quizViewModel.quizGuide = self
+        quizViewModel.updateData()
+        //let guide = contextualContainer.guidePayload.guide
+        let view = QuizView(
+            //imageElement: guide.arrayImages.first,
+            viewModel: quizViewModel,
             closeButtonTapped: {
                 self.dismissGuide()
                 self.closeButtonTapped?()
             }
         )
-        view.buttonTextElement = guide.title
-        hostingController = UIHostingController(rootView: view)
+        //view.buttonTextElement = guide.title
+        self.hostingController = UIHostingController(rootView: view)
         
         guard let hostingController = self.hostingController else {
             failure(contextualContainer.guidePayload)
