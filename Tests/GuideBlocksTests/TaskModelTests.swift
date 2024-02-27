@@ -16,17 +16,17 @@ class TaskModelTests: XCTestCase {
     func testIDGeneration() {
         let task1 = TaskModel(
             name: "Task 1",
-            rawActionType: "gotoScreen",
+            action: "gotoScreen",
             actionData: TaskActionData(deepLink: "airbnbContextual://screen/screen_1")
         )
         let task2 = TaskModel(
             name: "Task 2",
-            rawActionType: "gotoScreen",
+            action: "gotoScreen",
             actionData: TaskActionData(deepLink: "airbnbContextual://screen/screen_2")
         )
         let task3 = TaskModel(
             name: "Task 3",
-            rawActionType: "gotoScreen",
+            action: "gotoScreen",
             actionData: TaskActionData(deepLink: "airbnbContextual://screen/screen_3")
         )
         XCTAssertEqual(task1.id, "task_1")
@@ -37,22 +37,22 @@ class TaskModelTests: XCTestCase {
     func testEquality() {
         let task1 = TaskModel(
             name: "Task 1",
-            rawActionType: "gotoScreen",
+            action: "gotoScreen",
             actionData: TaskActionData(deepLink: "airbnbContextual://screen/screen_1")
         )
         let task2 = TaskModel(
             name: "Task 2",
-            rawActionType: "gotoScreen",
+            action: "gotoScreen",
             actionData: TaskActionData(deepLink: "airbnbContextual://screen/screen_2")
         )
         let task3 = TaskModel(
             name: "Task 3",
-            rawActionType: "gotoScreen",
+            action: "gotoScreen",
             actionData: TaskActionData(deepLink: "airbnbContextual://screen/screen_3")
         )
         let task4 = TaskModel(
             name: "Task 3 ",
-            rawActionType: "gotoScreen",
+            action: "gotoScreen",
             actionData: TaskActionData(deepLink: "airbnbContextual://screen/screen_3")
         )
         
@@ -66,22 +66,22 @@ class TaskModelTests: XCTestCase {
     func testHashing() {
         let task1 = TaskModel(
             name: "Task 1",
-            rawActionType: "gotoScreen",
+            action: "gotoScreen",
             actionData: TaskActionData(deepLink: "airbnbContextual://screen/screen_1")
         )
         let task2 = TaskModel(
             name: "Task 2",
-            rawActionType: "gotoScreen",
+            action: "gotoScreen",
             actionData: TaskActionData(deepLink: "airbnbContextual://screen/screen_2")
         )
         let task3 = TaskModel(
             name: "Task 3",
-            rawActionType: "gotoScreen",
+            action: "gotoScreen",
             actionData: TaskActionData(deepLink: "airbnbContextual://screen/screen_3")
         )
         let task4 = TaskModel(
             name: "Task 3 ",
-            rawActionType: "gotoScreen",
+            action: "gotoScreen",
             actionData: TaskActionData(deepLink: "airbnbContextual://screen/screen_3")
         )
         
@@ -94,21 +94,21 @@ class TaskModelTests: XCTestCase {
     func testDeepLinkURL() {
         let taskModel1 = TaskModel(
             name: "Task 1",
-            rawActionType: "gotoScreen",
+            action: "gotoScreen",
             actionData: TaskActionData(deepLink: "https://example.com")
         )
         XCTAssertNotNil(taskModel1.deepLinkURL)
         
         let taskModel2 = TaskModel(
             name: "Task 2",
-            rawActionType: "gotoScreen",
+            action: "gotoScreen",
             actionData: TaskActionData(deepLink: "myApp://screen/home")
         )
         XCTAssertNotNil(taskModel2.deepLinkURL)
         
         let taskModel3 = TaskModel(
             name: "Task 3",
-            rawActionType: "gotoScreen",
+            action: "gotoScreen",
             actionData: TaskActionData(deepLink: "airbnbContextual://screen/inbox")
         )
         XCTAssertNotNil(taskModel3.deepLinkURL)
@@ -126,7 +126,7 @@ class TaskModelTests: XCTestCase {
     func testGotoScreenAction() {
         var taskModel = TaskModel(
             name: "Task 1",
-            rawActionType: "gotoScreen",
+            action: "gotoScreen",
             actionData: TaskActionData(deepLink: "myApp://screen/home")
         )
         
@@ -144,7 +144,7 @@ class TaskModelTests: XCTestCase {
     func testSetTagAction() {
         var taskModel = TaskModel(
             name: "Task 2",
-            rawActionType: "setTag",
+            action: "setTag",
             actionData: TaskActionData(tagKey: "tag_key", tagValue: "tag_value")
         )
         taskModel.doTheAction()
@@ -153,7 +153,7 @@ class TaskModelTests: XCTestCase {
     func testCheckTagAction() {
         var taskModel = TaskModel(
             name: "Task 2",
-            rawActionType: "checkTag",
+            action: "checkTag",
             actionData: TaskActionData(
                 tagKey: "favourited_properties_count",
                 tagValue: "3",
@@ -173,7 +173,7 @@ class TaskModelTests: XCTestCase {
     func testCompare() {
         let taskModel = TaskModel(
             name: "Task 2",
-            rawActionType: "checkTag",
+            action: "checkTag",
             actionData: TaskActionData(
                 tagKey: "favourited_properties_count",
                 tagValue: "3",
@@ -183,20 +183,13 @@ class TaskModelTests: XCTestCase {
         )
         var result = taskModel.compare(value1: "5", value2: "3", tagType: .int, tagOperator: .gte)
         XCTAssertTrue(result)
-        
         result = taskModel.compare(value1: "5", value2: "3", tagType: .int, tagOperator: .lte)
         XCTAssertFalse(result)
-        
         result = taskModel.compare(value1: "5", value2: "5", tagType: .int, tagOperator: .equ)
         XCTAssertTrue(result)
-        
         result = taskModel.compare(value1: "hello", value2: "hello", tagType: .string, tagOperator: .equ)
         XCTAssertTrue(result)
-        
         result = taskModel.compare(value1: "hello", value2: "world", tagType: .string, tagOperator: .equ)
-        XCTAssertFalse(result)
-        
-        result = taskModel.compare(value1: "5", value2: "3", tagType: .unknown, tagOperator: .gte)
         XCTAssertFalse(result)
     }
 }

@@ -12,13 +12,11 @@ public enum TaskActionType : String {
     case gotoScreen
     case setTag
     case checkTag
-    case unknown
 }
 
 public enum TagType : String {
     case int
     case string
-    case unknown
 }
 
 public enum TagOperator : String {
@@ -36,7 +34,7 @@ struct TaskActionData: Codable {
     
     var tagType: TagType {
         get {
-            return TagType(rawValue:rawTagType ?? "unknown") ?? .unknown
+            return TagType(rawValue:rawTagType ?? "unknown") ?? .int
         }
         set {
             self.rawTagType = newValue.rawValue
@@ -64,7 +62,7 @@ struct TaskModel: Codable, Hashable {
     var contextualContainer: ContextualContainer?
     
     var name: String
-    var rawActionType: String
+    var action: String
     var actionData: TaskActionData
     
     var gotoScreenAction: ((URL) -> ())?
@@ -77,10 +75,10 @@ struct TaskModel: Codable, Hashable {
     
     public var actionType: TaskActionType {
         get {
-            return TaskActionType(rawValue:rawActionType) ?? .unknown
+            return TaskActionType(rawValue:action) ?? .gotoScreen
         }
         set {
-            self.rawActionType = newValue.rawValue
+            self.action = newValue.rawValue
         }
     }
     
@@ -110,7 +108,7 @@ struct TaskModel: Codable, Hashable {
     
     enum CodingKeys: String, CodingKey {
         case name
-        case rawActionType = "action"
+        case action
         case actionData = "action_data"
     }
     
@@ -126,7 +124,7 @@ struct TaskModel: Codable, Hashable {
     static func sampleTaskModelWith(index: Int) -> TaskModel {
         return TaskModel(
             name: "Task \(index)",
-            rawActionType: "gotoScreen",
+            action: "gotoScreen",
             actionData: TaskActionData(deepLink: "airbnbContextual://screen/" + "task_\(index)")
         )
     }
@@ -146,8 +144,6 @@ struct TaskModel: Codable, Hashable {
             }
         case .string:
             return value1 == value2
-        case .unknown:
-            return false
         }
         return false
     }
@@ -195,8 +191,6 @@ struct TaskModel: Codable, Hashable {
                     )
                 }
             }
-        case .unknown:
-            print("TaskModel, doTheAction, unknown actionType")
         }
     }
     

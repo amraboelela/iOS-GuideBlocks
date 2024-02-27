@@ -11,8 +11,8 @@ import ContextualSDK
 struct QuizModel: Codable {
     let guideBlockKey: String
     let questions: [QuestionModel]
-    let fail: FailActionModel
-    let pass: PassActionModel
+    let fail: QuizActionModel
+    let pass: QuizActionModel
 }
 
 struct QuestionModel: Codable {
@@ -32,25 +32,42 @@ struct AnswerModel: Codable {
     var correct: Bool
 }
 
-struct FailActionModel: Codable {
-    let quizAction: String
-    let allowScreenAccess: Bool
-    let attempts: Int
-    let lockoutSeconds: Int
-    let setTag: SetTag
+public enum QuizActionType : String {
+    case restartQuiz
+    case setTag
 }
 
-struct PassActionModel: Codable {
-    let quizAction: QuizAction
+struct QuizActionData: Codable {
+    var tagKey: String?
+    var tagValue: String?
     let allowScreenAccess: Bool
+    let attempts: Int?
+    let lockoutSeconds: Int?
+    
+    enum CodingKeys: String, CodingKey {
+        case tagKey = "key"
+        case tagValue = "value"
+        case allowScreenAccess = "allow_screen_access"
+        case attempts
+        case lockoutSeconds = "lockout_seconds"
+    }
 }
 
-struct SetTag: Codable {
-    let key: String
-    let value: String
-}
-
-struct QuizAction: Codable {
-    let setTag: SetTag
-    let allowScreenAccess: Bool
+struct QuizActionModel: Codable {
+    var action: String
+    let actionData: QuizActionData
+    
+    public var actionType: QuizActionType {
+        get {
+            return QuizActionType(rawValue:action) ?? .restartQuiz
+        }
+        set {
+            self.action = newValue.rawValue
+        }
+    }
+    
+    enum CodingKeys: String, CodingKey {
+        case action
+        case actionData = "action_data"
+    }
 }
