@@ -34,11 +34,12 @@ class QuizViewModel : ObservableObject {
     
     func loadWithSampleQuizs() {
         var result = [AnswerModel]()
-        for i in 1...12 {
-            var answerModel = QuestionModel.sampleAnswerModelWith(index: i)
+        for i in 1...4 {
+            let answerModel = QuestionModel.sampleAnswerModelWith(index: i)
             //quizModel.contextualContainer = contextualContainer
             result.append(answerModel)
         }
+        result[3].correct = true
         answerModels = result
     }
     

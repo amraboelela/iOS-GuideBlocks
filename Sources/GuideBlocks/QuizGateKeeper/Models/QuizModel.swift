@@ -29,7 +29,7 @@ struct QuestionModel: Codable {
 
 struct AnswerModel: Codable {
     let label: String
-    let correct: Bool
+    var correct: Bool
 }
 
 struct FailActionModel: Codable {

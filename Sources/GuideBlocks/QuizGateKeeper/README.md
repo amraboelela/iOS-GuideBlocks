@@ -17,30 +17,61 @@ Everyone loves checklists. This is a simple example to get you started with Cont
 `
 {
     "guideBlockKey": "QuizGateKeeper",
-    "quizs": [
+    "Questions": [
         {
-            "name": "Set My Tag",
-            "action": "SetTag",
-            "action_data": {
-                "key": "mytag",
-                "value": "1234"
-            }
+            "question": "How would you do X?",
+            "answers": [
+                {
+                    "label": "By clicking the edit profile",
+                    "correct": false
+                },
+                {
+                    "label": "By praying to my fave deity",
+                    "correct": false
+                },
+                {
+                    "label": "By entering the dish and selecting Fave",
+                    "correct": true
+                }
+            ]
         },
         {
-            "name": "Visit Inbox",
-            "action": "gotoScreen",
-            "action_data": {
-                "deep_link": "airbnbContextual://tab/inbox"
-            }
-        },
-        {
-            "name": "Visit Profile",
-            "action": "gotoScreen",
-            "action_data": {
-                "deep_link": "airbnbContextual://tab/profile"
-            }
+            "question": "What planet are you on?",
+            "answers": [
+                {
+                    "label": "Earth",
+                    "correct": true
+                },
+                {
+                    "label": "Betelgeuse Seven",
+                    "correct": false
+                },
+                {
+                    "label": "Golgafrincham",
+                    "correct": false
+                }
+            ]
         }
-    ]
+    ],
+    "fail": {
+        "quiz_action": "Restart_Quiz",
+        "allow_screen_access": false,
+        "attempts": 2,
+        "lockout_seconds": 600,
+        "setTag": {
+            "key": "Quiz_fail_datetime",
+            "value": "@now"
+        }
+    },
+    "pass": {
+        "quiz_action": {
+            "setTag": {
+                "key": "Quiz_pass_datetime",
+                "value": "@now"
+            },
+            "allow_screen_access": true
+        }
+    }
 }
 `
  * Match the name in the JSON to the name of your wrapper in the code
