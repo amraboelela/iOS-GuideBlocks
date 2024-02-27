@@ -17,7 +17,7 @@ Everyone loves checklists. This is a simple example to get you started with Cont
 `
 {
     "guideBlockKey": "QuizGateKeeper",
-    "Questions": [
+    "questions": [
         {
             "question": "How would you do X?",
             "answers": [
@@ -54,21 +54,20 @@ Everyone loves checklists. This is a simple example to get you started with Cont
         }
     ],
     "fail": {
-        "quiz_action": "Restart_Quiz",
-        "allow_screen_access": false,
-        "attempts": 2,
-        "lockout_seconds": 600,
-        "setTag": {
+        "action": "restartQuiz",
+        "action_data": {
             "key": "Quiz_fail_datetime",
-            "value": "@now"
+            "value": "@now",
+            "attempts": 2,
+            "lockout_seconds": 600,
+            "allow_screen_access": false
         }
     },
     "pass": {
-        "quiz_action": {
-            "setTag": {
-                "key": "Quiz_pass_datetime",
-                "value": "@now"
-            },
+        "action": "setTag",
+        "action_data": {
+            "key": "Quiz_pass_datetime",
+            "value": "@now",
             "allow_screen_access": true
         }
     }
