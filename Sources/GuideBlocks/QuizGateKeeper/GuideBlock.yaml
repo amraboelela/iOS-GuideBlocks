@@ -1,0 +1,68 @@
+Title: My Checklist
+Author: Amr Aboelela
+Email: support@contextu.al
+TestApp: https://github.com/contextu-al/AirBnB-iOS
+TestAppBranch: mychecklist
+Description: this GuideBlock will display a popup dialog with a text list, each row in the list has text that is read-only with a check box that is read-only. When the user touches a row it will execute some programatic action unique to each row.
+Acknowledgements:
+Screenshot: 
+Video:
+Extensibility: {
+    "guideBlockKey": "QuizGateKeeper",
+    "Questions": [
+        {
+            "question": "How would you do X?",
+            "answers": [
+                {
+                    "label": "By clicking the edit profile",
+                    "correct": false
+                },
+                {
+                    "label": "By praying to my fave deity",
+                    "correct": false
+                },
+                {
+                    "label": "By entering the dish and selecting Fave",
+                    "correct": true
+                }
+            ]
+        },
+        {
+            "question": "What planet are you on?",
+            "answers": [
+                {
+                    "label": "Earth",
+                    "correct": true
+                },
+                {
+                    "label": "Betelgeuse Seven",
+                    "correct": false
+                },
+                {
+                    "label": "Golgafrincham",
+                    "correct": false
+                }
+            ]
+        }
+    ],
+    "fail": {
+        "quiz_action": "Restart_Quiz",
+        "allow_screen_access": false,
+        "attempts": 2,
+        "lockout_seconds": 600,
+        "setTag": {
+            "key": "Quiz_fail_datetime",
+            "value": "@now"
+        }
+    },
+    "pass": {
+        "quiz_action": {
+            "setTag": {
+                "key": "Quiz_pass_datetime",
+                "value": "@now"
+            },
+            "allow_screen_access": true
+        }
+    }
+}
+
