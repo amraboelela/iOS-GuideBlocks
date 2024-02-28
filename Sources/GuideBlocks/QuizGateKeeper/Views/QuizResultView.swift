@@ -11,17 +11,21 @@ import SwiftUI
 struct QuizResultView: View {
     @ObservedObject var viewModel: QuizViewModel
     
+    var correctCount: Int {
+        viewModel.quizModel?.correctCount ?? 0
+    }
+    
     var body: some View {
         VStack {
-            Text("You scored \(viewModel.correctCount) / \(viewModel.questionsCount)")
+            Text("You scored \(correctCount) / \(viewModel.questionsCount)")
                 .padding()
             Button(
                 action: {
-                    print("Restart Quiz")
-                    viewModel.restartQuiz()
+                    print("Perform action")
+                    viewModel.performAction()
                 },
                 label: {
-                    Text("Restart Quiz")
+                    Text("OK")
                 }
             )
             .padding()

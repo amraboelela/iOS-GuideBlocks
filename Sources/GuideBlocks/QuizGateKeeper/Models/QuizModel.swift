@@ -8,11 +8,9 @@
 
 import ContextualSDK
 
-struct QuizModel: Codable {
-    let guideBlockKey: String
-    var questions: [QuestionModel]
-    let fail: QuizActionModel
-    let pass: QuizActionModel
+struct AnswerModel: Codable {
+    let label: String
+    var correct: Bool
 }
 
 struct QuestionModel: Codable {
@@ -25,16 +23,6 @@ struct QuestionModel: Codable {
             correct: false
         )
     }
-}
-
-struct AnswerModel: Codable {
-    let label: String
-    var correct: Bool
-}
-
-public enum QuizActionType : String {
-    case restartQuiz
-    case setTag
 }
 
 struct QuizActionData: Codable {
@@ -53,7 +41,12 @@ struct QuizActionData: Codable {
     }
 }
 
-struct QuizActionModel: Codable {
+public enum QuizActionType : String {
+    case restartQuiz
+    case goHome
+}
+
+struct QuizAction: Codable {
     var action: String
     let actionData: QuizActionData
     
@@ -71,3 +64,63 @@ struct QuizActionModel: Codable {
         case actionData = "action_data"
     }
 }
+
+struct QuizModel: Codable {
+    var contextualContainer: ContextualContainer?
+    
+    let guideBlockKey: String
+    var questions: [QuestionModel]
+    let fail: QuizAction
+    let pass: QuizAction
+    
+    var correctCount = 0
+    
+    enum CodingKeys: String, CodingKey {
+        case guideBlockKey
+        case questions
+        case fail
+        case pass
+    }
+    
+    mutating func performAction() {
+        var actionData: QuizActionData
+        if correctCount < questions.count { // fail
+            actionData = fail.actionData
+            switch pass.actionType {
+            case .restartQuiz:
+                print("performAction, pass, restartQuiz")
+            case .goHome:
+                print("performAction, pass, goHome")
+            }
+        } else { // pass
+            actionData = pass.actionData
+            switch fail.actionType {
+            case .restartQuiz:
+                print("performAction, fail, restartQuiz")
+            case .goHome:
+                print("performAction, fail, goHome")
+            }
+        }
+        correctCount = 0
+        if let tagKey = actionData.tagKey, let tagValue = actionData.tagValue {
+            if tagValue == "@now" {
+                contextualContainer?.tagManager.saveTag(
+                    key: tagKey,
+                    value: Date.now,
+                    success: nil,
+                    failure: nil,
+                    forceSend: false
+                )
+            } else {
+                contextualContainer?.tagManager.saveTag(
+                    key: tagKey,
+                    value: tagValue,
+                    success: nil,
+                    failure: nil,
+                    forceSend: false
+                )
+            }
+        }
+    }
+}
+

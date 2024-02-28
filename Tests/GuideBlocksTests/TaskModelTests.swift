@@ -136,7 +136,7 @@ class TaskModelTests: XCTestCase {
             XCTAssertEqual(deepLinkURL, taskModelDeepLink)
             expectation.fulfill()
         }
-        taskModel.doTheAction()
+        taskModel.performAction()
         // Wait for the expectation to be fulfilled, or timeout after a specified interval
         wait(for: [expectation], timeout: 1.0)
     }
@@ -147,7 +147,7 @@ class TaskModelTests: XCTestCase {
             action: "setTag",
             actionData: TaskActionData(tagKey: "tag_key", tagValue: "tag_value")
         )
-        taskModel.doTheAction()
+        taskModel.performAction()
     }
     
     func testCheckTagAction() {
@@ -161,11 +161,11 @@ class TaskModelTests: XCTestCase {
                 rawTagOperator: "gte"
             )
         )
-        taskModel.doTheAction()
+        taskModel.performAction()
         XCTAssertEqual(taskModel.favouritedCount, 1)
-        taskModel.doTheAction()
+        taskModel.performAction()
         XCTAssertEqual(taskModel.favouritedCount, 2)
-        taskModel.doTheAction()
+        taskModel.performAction()
         XCTAssertEqual(taskModel.favouritedCount, 3)
     }
     
