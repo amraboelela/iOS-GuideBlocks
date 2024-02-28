@@ -21,20 +21,12 @@ struct AnswerView: View {
     
     var body: some View {
         Button(action: {
-            /*if answerModel.enabled {
-                print("Action for quiz \(quizModel.name)")
-                viewModel.quizModels[quizIndex].doTheAction()
-                viewModel.isPopupVisible = false
-                viewModel.tappedAQuiz()
-            } else {
-                print("Quiz \(quizModel.name) is not enabled")
-            }*/
+            viewModel.choseAnswerWith(index: answerIndex)
         }) {
             HStack {
                 Text(answerModel.label)
                 Spacer()
             }
-            /*.foregroundColor(answerModel.enabled ? .primary : .gray)*/
         }
     }
 }

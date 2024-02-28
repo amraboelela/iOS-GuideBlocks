@@ -13,9 +13,13 @@ struct QuizView: View {
     
     var body: some View {
         VStack {
-            Text(viewModel.currentQuestion.question)
-            List(viewModel.currentAnswers.indices, id: \.self) { index in
-                AnswerView(viewModel: quizViewModel, answerIndex: index)
+            if viewModel.showResults {
+                Text("Correct count: \(viewModel.correctCount)")
+            } else {
+                Text(viewModel.currentQuestion?.question ?? "A Question")
+                List(viewModel.currentAnswers.indices, id: \.self) { index in
+                    AnswerView(viewModel: quizViewModel, answerIndex: index)
+                }
             }
         }
         .padding()

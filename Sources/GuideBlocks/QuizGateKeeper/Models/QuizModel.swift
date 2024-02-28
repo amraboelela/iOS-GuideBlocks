@@ -10,7 +10,7 @@ import ContextualSDK
 
 struct QuizModel: Codable {
     let guideBlockKey: String
-    let questions: [QuestionModel]
+    var questions: [QuestionModel]
     let fail: QuizActionModel
     let pass: QuizActionModel
 }

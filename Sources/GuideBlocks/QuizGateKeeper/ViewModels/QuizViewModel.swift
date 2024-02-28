@@ -18,9 +18,15 @@ class QuizViewModel : ObservableObject {
     }
     @Published var isPopupVisible = true
     @Published var quizIsVisible = true
-    @Published var currentQuestion = QuestionModel(question: "", answers: [AnswerModel]())
+    @Published var quizModel: QuizModel?
+    @Published var currentQuestionIndex = 0
+    var correctCount = 0
+    var currentQuestion: QuestionModel? {
+        quizModel?.questions[currentQuestionIndex]
+    }
+    @Published var showResults = false
     var currentAnswers: [AnswerModel] {
-        return currentQuestion.answers
+        return currentQuestion?.answers ?? [AnswerModel]()
     }
     
     init() {
@@ -28,12 +34,32 @@ class QuizViewModel : ObservableObject {
     }
     
     func loadWithSampleQuizs() {
-        currentQuestion = QuestionModel(question: "What is it?", answers: [AnswerModel]())
+        var aQuestion = QuestionModel(question: "What is it?", answers: [AnswerModel]())
+        quizModel = QuizModel(
+            guideBlockKey: "QuizGateKeeper",
+            questions: [aQuestion],
+            fail: QuizActionModel(
+                action: "setTag",
+                actionData: QuizActionData(
+                    allowScreenAccess: false,
+                    attempts: 2,
+                    lockoutSeconds: 600
+                )
+            ),
+            pass: QuizActionModel(
+                action: "setTag",
+                actionData: QuizActionData(
+                    allowScreenAccess: true,
+                    attempts: nil,
+                    lockoutSeconds: nil
+                )
+            )
+        )
         for i in 1...4 {
             let answerModel = QuestionModel.sampleAnswerModelWith(index: i)
-            currentQuestion.answers.append(answerModel)
+            quizModel?.questions[currentQuestionIndex].answers.append(answerModel)
         }
-        currentQuestion.answers[3].correct = true
+        quizModel?.questions[currentQuestionIndex].answers[3].correct = true
     }
     
     func updateData() {
@@ -45,13 +71,21 @@ class QuizViewModel : ObservableObject {
         if let quizGuideDictionary = quizGuideJSON as? NSDictionary,
            let quizGuideData = quizGuideDictionary.toData() {
             do {
-                let quizModel = try JSONDecoder().decode(QuizModel.self, from: quizGuideData)
-                if let firstQuestion = quizModel.questions.first {
-                    currentQuestion = firstQuestion
-                }
+                quizModel = try JSONDecoder().decode(QuizModel.self, from: quizGuideData)
             } catch {
                 print("couldn't serialize JSON, error: \(error)")
             }
+        }
+    }
+    
+    func choseAnswerWith(index: Int) {
+        if currentQuestion?.answers[index].correct == true {
+            correctCount += 1
+        }
+        if let quizModel, currentQuestionIndex < quizModel.questions.count - 1 {
+            currentQuestionIndex += 1
+        } else {
+            showResults = true
         }
     }
     
