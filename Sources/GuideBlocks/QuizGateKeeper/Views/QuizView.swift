@@ -14,7 +14,9 @@ struct QuizView: View {
     var body: some View {
         VStack {
             if viewModel.showResults {
-                Text("Correct count: \(viewModel.correctCount)")
+                QuizResultView(
+                    viewModel: quizViewModel
+                )
             } else {
                 Text(viewModel.currentQuestion?.question ?? "A Question")
                 List(viewModel.currentAnswers.indices, id: \.self) { index in

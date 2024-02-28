@@ -70,7 +70,7 @@ struct OpenCarouselView: View {
     @Binding var currentTab: Int
     @State private var backgroundImage: Image?
     @State private var primaryImage: Image?
-    @State private var isAnimating: Bool = false
+    @State private var isAnimating = false
     
     var body: some View {
         
