@@ -17,7 +17,7 @@ class OpenChecklistViewModel : ObservableObject {
         openChecklistGuide?.contextualContainer
     }
     
-    @Published var isPopupVisible: Bool = false
+    @Published var isPopupVisible = false
     @Published var title = "Do List"
     @Published var taskListVisible = true
     @Published var taskModels = [TaskModel]() {

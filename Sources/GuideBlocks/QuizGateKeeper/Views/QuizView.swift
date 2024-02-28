@@ -10,13 +10,16 @@ import SwiftUI
 
 struct QuizView: View {
     @ObservedObject var viewModel: QuizViewModel
-    var closeButtonTapped: () -> ()
     
     var body: some View {
         VStack {
-            Text("How would you do X?")
-            List(viewModel.answerModels.indices, id: \.self) { index in
-                AnswerView(viewModel: quizViewModel, answerIndex: index)
+            if viewModel.showResults {
+                Text("Correct count: \(viewModel.correctCount)")
+            } else {
+                Text(viewModel.currentQuestion?.question ?? "A Question")
+                List(viewModel.currentAnswers.indices, id: \.self) { index in
+                    AnswerView(viewModel: quizViewModel, answerIndex: index)
+                }
             }
         }
         .padding()
@@ -29,9 +32,7 @@ struct QuizView: View {
 struct QuizView_Previews: PreviewProvider {
     static var previews: some View {
         QuizView(
-            viewModel: quizViewModel,
-            closeButtonTapped: {
-            }
+            viewModel: quizViewModel
         )
     }
 }
