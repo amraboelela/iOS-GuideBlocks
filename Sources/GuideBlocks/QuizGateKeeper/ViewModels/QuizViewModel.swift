@@ -100,13 +100,17 @@ class QuizViewModel : ObservableObject {
     }
     
     func performAction() {
-        quizModel?.correctCount = 0
+        if let quizAction = quizModel?.performAction() {
+            switch quizAction.actionType {
+            case .restartQuiz:
+                print("QuizViewModel, performAction, restartQuiz")
+            case .goHome:
+                print("QuizViewModel, performAction, goHome")
+                isPopupVisible = false
+                quizIsVisible = false
+            }
+        }
         showResults = false
         currentQuestionIndex = 0
     }
-    
-    /*func tappedAQuiz() {
-        quizGuide?.nextStepOfGuide()
-    }*/
-    
 }

@@ -28,7 +28,7 @@ class QuizViewModelTests: XCTestCase {
         XCTAssertEqual(viewModel?.currentAnswers.filter { $0.correct }.count, 1)
     }
     
-    func testUpdateData() {
+    func testLoad() {
         guard let viewModel else {
             XCTFail("viewModel is nil")
             return
@@ -110,5 +110,31 @@ class QuizViewModelTests: XCTestCase {
         } catch {
             XCTFail("Error decoding JSON data: \(error)")
         }
+    }
+    
+    func testPerformAction() {
+        guard let viewModel else {
+            XCTFail("viewModel is nil")
+            return
+        }
+        viewModel.quizModel = QuizViewModel.sampleQuiz
+        
+        // Fail
+        viewModel.quizModel?.correctCount = 1
+        viewModel.performAction()
+        
+        XCTAssertEqual(viewModel.isPopupVisible, true)
+        XCTAssertEqual(viewModel.quizIsVisible, true)
+        XCTAssertEqual(viewModel.showResults, false)
+        XCTAssertEqual(viewModel.currentQuestionIndex, 0)
+        
+        // Pass
+        viewModel.quizModel?.correctCount = 2
+        viewModel.performAction()
+        
+        XCTAssertEqual(viewModel.isPopupVisible, false)
+        XCTAssertEqual(viewModel.quizIsVisible, false)
+        XCTAssertEqual(viewModel.showResults, false)
+        XCTAssertEqual(viewModel.currentQuestionIndex, 0)
     }
 }

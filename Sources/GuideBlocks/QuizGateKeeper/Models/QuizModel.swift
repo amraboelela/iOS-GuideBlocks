@@ -82,27 +82,16 @@ struct QuizModel: Codable {
         case pass
     }
     
-    mutating func performAction() {
-        var actionData: QuizActionData
-        if correctCount < questions.count { // fail
-            actionData = fail.actionData
-            switch pass.actionType {
-            case .restartQuiz:
-                print("performAction, pass, restartQuiz")
-            case .goHome:
-                print("performAction, pass, goHome")
-            }
-        } else { // pass
-            actionData = pass.actionData
-            switch fail.actionType {
-            case .restartQuiz:
-                print("performAction, fail, restartQuiz")
-            case .goHome:
-                print("performAction, fail, goHome")
-            }
+    mutating func performAction() -> QuizAction {
+        let quizAction = correctCount < questions.count ? fail : pass
+        switch quizAction.actionType {
+        case .restartQuiz:
+            print("QuizModel, performAction, restartQuiz")
+        case .goHome:
+            print("QuizModel, performAction, goHome")
         }
         correctCount = 0
-        if let tagKey = actionData.tagKey, let tagValue = actionData.tagValue {
+        if let tagKey = quizAction.actionData.tagKey, let tagValue = quizAction.actionData.tagValue {
             if tagValue == "@now" {
                 contextualContainer?.tagManager.saveTag(
                     key: tagKey,
@@ -121,6 +110,7 @@ struct QuizModel: Codable {
                 )
             }
         }
+        return quizAction
     }
 }
 
