@@ -17,7 +17,7 @@ struct QuizModel: Codable {
 
 struct QuestionModel: Codable {
     let question: String
-    let answers: [AnswerModel]
+    var answers: [AnswerModel]
     
     static func sampleAnswerModelWith(index: Int) -> AnswerModel {
         return AnswerModel(

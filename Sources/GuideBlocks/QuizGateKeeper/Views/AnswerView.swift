@@ -13,10 +13,10 @@ struct AnswerView: View {
     var answerIndex: Int
     
     var answerModel: AnswerModel {
-        if answerIndex < viewModel.answerModels.count {
-            return viewModel.answerModels[answerIndex]
+        if answerIndex < viewModel.currentAnswers.count {
+            return viewModel.currentAnswers[answerIndex]
         }
-        return viewModel.answerModels.last ?? QuestionModel.sampleAnswerModelWith(index: 0)
+        return viewModel.currentAnswers.last ?? QuestionModel.sampleAnswerModelWith(index: 0)
     }
     
     var body: some View {
@@ -33,12 +33,9 @@ struct AnswerView: View {
             HStack {
                 Text(answerModel.label)
                 Spacer()
-                /*Image(systemName: quizModel.checked ? "checkmark.square.fill" : "square.fill")
-                    .foregroundColor(quizModel.checked ? .green : .gray)*/
             }
             /*.foregroundColor(answerModel.enabled ? .primary : .gray)*/
         }
-        //.disabled(!answerModel.enabled)
     }
 }
 

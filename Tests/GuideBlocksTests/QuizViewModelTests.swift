@@ -24,8 +24,8 @@ class QuizViewModelTests: XCTestCase {
     }
 
     func testLoadWithSampleQuizs() {
-        XCTAssertEqual(viewModel?.answerModels.count, 4)
-        XCTAssertEqual(viewModel?.answerModels.filter { $0.correct }.count, 1)
+        XCTAssertEqual(viewModel?.currentAnswers.count, 4)
+        XCTAssertEqual(viewModel?.currentAnswers.filter { $0.correct }.count, 1)
     }
     
     func testUpdateData() {
@@ -103,7 +103,7 @@ class QuizViewModelTests: XCTestCase {
                 // Use jsonDictionary as needed
                 print(jsonDictionary)
                 viewModel.load(quizGuideJSON: jsonDictionary)
-                XCTAssertEqual(viewModel.answerModels.count, 3)
+                XCTAssertEqual(viewModel.currentAnswers.count, 3)
             } else {
                 print("Failed to decode JSON data to NSDictionary")
             }

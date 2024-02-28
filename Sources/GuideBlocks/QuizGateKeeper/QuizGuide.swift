@@ -15,7 +15,7 @@ public class QuizGuide: CTXBaseGuideController {
     public var closeButtonTapped: (() -> ())?
     
     var contextualContainer: ContextualContainer?
-    private var hostingController: UIHostingController<QuizView>?
+    private var hostingController: UIHostingController<QuizSheetView>?
     
     /// Presents the guide block.
     ///
@@ -39,7 +39,7 @@ public class QuizGuide: CTXBaseGuideController {
         quizViewModel.quizGuide = self
         quizViewModel.updateData()
         //let guide = contextualContainer.guidePayload.guide
-        let view = QuizView(
+        let view = QuizSheetView(
             //imageElement: guide.arrayImages.first,
             viewModel: quizViewModel,
             closeButtonTapped: {
