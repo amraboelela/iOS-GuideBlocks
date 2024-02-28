@@ -13,7 +13,18 @@ struct QuizResultView: View {
     
     var body: some View {
         VStack {
-            Text("Correct count: \(viewModel.correctCount)")
+            Text("You scored \(viewModel.correctCount) / \(viewModel.questionsCount)")
+                .padding()
+            Button(
+                action: {
+                    print("Restart Quiz")
+                    viewModel.restartQuiz()
+                },
+                label: {
+                    Text("Restart Quiz")
+                }
+            )
+            .padding()
         }
         .padding()
         .background(Color.white)

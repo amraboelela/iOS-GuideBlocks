@@ -24,6 +24,9 @@ class QuizViewModel : ObservableObject {
     var currentQuestion: QuestionModel? {
         quizModel?.questions[currentQuestionIndex]
     }
+    var questionsCount: Int {
+        quizModel?.questions.count ?? 0
+    }
     @Published var showResults = false
     var currentAnswers: [AnswerModel] {
         return currentQuestion?.answers ?? [AnswerModel]()
@@ -87,6 +90,12 @@ class QuizViewModel : ObservableObject {
         } else {
             showResults = true
         }
+    }
+    
+    func restartQuiz() {
+        correctCount = 0
+        showResults = false
+        currentQuestionIndex = 0
     }
     
     func tappedAQuiz() {
