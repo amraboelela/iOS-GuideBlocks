@@ -58,7 +58,6 @@ struct QuizModel: Codable {
         switch quizAction.actionType {
         case .restartQuiz:
             print("QuizModel, performAction, restartQuiz")
-            numberOfAttempts += 1
         case .goHome:
             print("QuizModel, performAction, goHome")
         }

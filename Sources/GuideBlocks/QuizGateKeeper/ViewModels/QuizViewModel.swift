@@ -73,6 +73,7 @@ class QuizViewModel : ObservableObject {
         if let quizModel, currentQuestionIndex < quizModel.questions.count - 1 {
             currentQuestionIndex += 1
         } else {
+            quizModel?.numberOfAttempts += 1
             showResults = true
         }
     }

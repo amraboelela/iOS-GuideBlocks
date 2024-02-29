@@ -155,9 +155,11 @@ class QuizViewModelTests: XCTestCase {
         }
         
         viewModel.quizModel?.correctCount = 1
-        viewModel.showResults = true
-        
+        viewModel.updateResultsData()
         XCTAssertEqual(viewModel.actionButtonLabel, "Restart Quiz")
+        viewModel.quizModel?.numberOfAttempts = 2
+        viewModel.updateResultsData()
+        XCTAssertEqual(viewModel.actionButtonLabel, "OK")
     }
     
     func testPerformAction() {
