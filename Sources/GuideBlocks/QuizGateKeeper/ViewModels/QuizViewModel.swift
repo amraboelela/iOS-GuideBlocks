@@ -79,7 +79,7 @@ class QuizViewModel : ObservableObject {
     
     func updateResultsData() {
         var result = "OK"
-        if let quizAction = quizModel?.quizAction {
+        if let quizAction = quizModel?.quizActionModel {
             switch quizAction.actionType {
             case .restartQuiz:
                 result = "Restart Quiz"
@@ -91,7 +91,7 @@ class QuizViewModel : ObservableObject {
     }
     
     func performAction() {
-        if let quizAction = quizModel?.quizAction {
+        if let quizAction = quizModel?.quizActionModel {
             switch quizAction.actionType {
             case .restartQuiz:
                 print("QuizViewModel, performAction, restartQuiz")

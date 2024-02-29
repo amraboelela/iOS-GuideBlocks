@@ -64,7 +64,7 @@ Everyone loves checklists. This is a simple example to get you started with Cont
         }
     },
     "pass": {
-        "action": "setTag",
+        "action": "goHome",
         "action_data": {
             "key": "Quiz_pass_datetime",
             "value": "@now",
