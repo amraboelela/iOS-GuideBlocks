@@ -17,12 +17,13 @@ class QuizViewModelTests: XCTestCase {
     
     override func setUpWithError() throws {
         viewModel = QuizViewModel()
+        viewModel?.quizModel = QuizModel.sampleQuiz
     }
-
+    
     override func tearDownWithError() throws {
         viewModel = nil
     }
-
+    
     func testLoadWithSampleQuizs() {
         guard let viewModel else {
             XCTFail("viewModel is nil")
@@ -123,7 +124,6 @@ class QuizViewModelTests: XCTestCase {
             XCTFail("viewModel is nil")
             return
         }
-        viewModel.quizModel = QuizModel.sampleQuiz
         viewModel.choseAnswerWith(index: 1)
         XCTAssertEqual(viewModel.currentQuestionIndex, 1)
         viewModel.choseAnswerWith(index: 1)
@@ -135,12 +135,24 @@ class QuizViewModelTests: XCTestCase {
         XCTAssertEqual(viewModel.actionButtonLabel, "Restart Quiz")
     }
     
+    func testPerformActionType() {
+        guard let viewModel else {
+            XCTFail("viewModel is nil")
+            return
+        }
+        
+        var result = viewModel.performActionType
+        XCTAssertEqual(result, .restartQuiz)
+        viewModel.quizModel?.numberOfAttempts = 2
+        result = viewModel.performActionType
+        XCTAssertEqual(result, .goHome)
+    }
+    
     func testUpdateResultsData() {
         guard let viewModel else {
             XCTFail("viewModel is nil")
             return
         }
-        viewModel.quizModel = QuizModel.sampleQuiz
         
         viewModel.quizModel?.correctCount = 1
         viewModel.showResults = true
@@ -153,7 +165,6 @@ class QuizViewModelTests: XCTestCase {
             XCTFail("viewModel is nil")
             return
         }
-        viewModel.quizModel = QuizModel.sampleQuiz
         
         // Fail
         viewModel.quizModel?.correctCount = 1

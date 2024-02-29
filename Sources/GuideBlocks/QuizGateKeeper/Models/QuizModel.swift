@@ -17,6 +17,7 @@ struct QuizModel: Codable {
     let pass: QuizActionModel
     
     var correctCount = 0
+    var numberOfAttempts = 0
     
     enum CodingKeys: String, CodingKey {
         case guideBlockKey
@@ -57,10 +58,10 @@ struct QuizModel: Codable {
         switch quizAction.actionType {
         case .restartQuiz:
             print("QuizModel, performAction, restartQuiz")
+            numberOfAttempts += 1
         case .goHome:
             print("QuizModel, performAction, goHome")
         }
-        correctCount = 0
         if let tagKey = quizAction.actionData.tagKey, let tagValue = quizAction.actionData.tagValue {
             if tagValue == "@now" {
                 contextualContainer?.tagManager.saveTag(
