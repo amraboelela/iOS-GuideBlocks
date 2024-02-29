@@ -24,8 +24,14 @@ class QuizViewModelTests: XCTestCase {
     }
 
     func testLoadWithSampleQuizs() {
-        XCTAssertEqual(viewModel?.currentAnswers.count, 4)
-        XCTAssertEqual(viewModel?.currentAnswers.filter { $0.correct }.count, 1)
+        guard let viewModel else {
+            XCTFail("viewModel is nil")
+            return
+        }
+        
+        XCTAssertEqual(viewModel.currentAnswers.count, 3)
+        print("viewModel.currentAnswers: \(viewModel.currentAnswers)")
+        XCTAssertEqual(viewModel.currentAnswers.filter { $0.correct }.count, 1)
     }
     
     func testLoad() {
@@ -112,12 +118,42 @@ class QuizViewModelTests: XCTestCase {
         }
     }
     
+    func testChoseAnswerWithIndex() {
+        guard let viewModel else {
+            XCTFail("viewModel is nil")
+            return
+        }
+        viewModel.quizModel = QuizModel.sampleQuiz
+        viewModel.choseAnswerWith(index: 1)
+        XCTAssertEqual(viewModel.currentQuestionIndex, 1)
+        viewModel.choseAnswerWith(index: 1)
+        XCTAssertEqual(viewModel.currentQuestionIndex, 1)
+        
+        XCTAssertEqual(viewModel.quizModel?.correctCount, 1)
+        XCTAssertEqual(viewModel.showResults, true)
+        
+        XCTAssertEqual(viewModel.actionButtonLabel, "Restart Quiz")
+    }
+    
+    func testUpdateResultsData() {
+        guard let viewModel else {
+            XCTFail("viewModel is nil")
+            return
+        }
+        viewModel.quizModel = QuizModel.sampleQuiz
+        
+        viewModel.quizModel?.correctCount = 1
+        viewModel.showResults = true
+        
+        XCTAssertEqual(viewModel.actionButtonLabel, "Restart Quiz")
+    }
+    
     func testPerformAction() {
         guard let viewModel else {
             XCTFail("viewModel is nil")
             return
         }
-        viewModel.quizModel = QuizViewModel.sampleQuiz
+        viewModel.quizModel = QuizModel.sampleQuiz
         
         // Fail
         viewModel.quizModel?.correctCount = 1
@@ -131,6 +167,7 @@ class QuizViewModelTests: XCTestCase {
         // Pass
         viewModel.quizModel?.correctCount = 2
         viewModel.performAction()
+        XCTAssertEqual(viewModel.quizModel?.correctCount, 0)
         
         XCTAssertEqual(viewModel.isPopupVisible, false)
         XCTAssertEqual(viewModel.quizIsVisible, false)

@@ -25,7 +25,7 @@ struct QuizResultView: View {
                     viewModel.performAction()
                 },
                 label: {
-                    Text("OK")
+                    Text(viewModel.actionButtonLabel)
                 }
             )
             .padding()

@@ -8,70 +8,13 @@
 
 import ContextualSDK
 
-struct AnswerModel: Codable {
-    let label: String
-    var correct: Bool
-}
-
-struct QuestionModel: Codable {
-    let question: String
-    var answers: [AnswerModel]
-    
-    static func sampleAnswerModelWith(index: Int) -> AnswerModel {
-        return AnswerModel(
-            label: "Answer \(index)",
-            correct: false
-        )
-    }
-}
-
-struct QuizActionData: Codable {
-    var tagKey: String?
-    var tagValue: String?
-    let allowScreenAccess: Bool
-    let attempts: Int?
-    let lockoutSeconds: Int?
-    
-    enum CodingKeys: String, CodingKey {
-        case tagKey = "key"
-        case tagValue = "value"
-        case allowScreenAccess = "allow_screen_access"
-        case attempts
-        case lockoutSeconds = "lockout_seconds"
-    }
-}
-
-public enum QuizActionType : String {
-    case restartQuiz
-    case goHome
-}
-
-struct QuizAction: Codable {
-    var action: String
-    let actionData: QuizActionData
-    
-    public var actionType: QuizActionType {
-        get {
-            return QuizActionType(rawValue:action) ?? .restartQuiz
-        }
-        set {
-            self.action = newValue.rawValue
-        }
-    }
-    
-    enum CodingKeys: String, CodingKey {
-        case action
-        case actionData = "action_data"
-    }
-}
-
 struct QuizModel: Codable {
     var contextualContainer: ContextualContainer?
     
     let guideBlockKey: String
     var questions: [QuestionModel]
-    let fail: QuizAction
-    let pass: QuizAction
+    let fail: QuizActionModel
+    let pass: QuizActionModel
     
     var correctCount = 0
     
@@ -82,8 +25,35 @@ struct QuizModel: Codable {
         case pass
     }
     
-    mutating func performAction() -> QuizAction {
-        let quizAction = correctCount < questions.count ? fail : pass
+    static var sampleQuiz: QuizModel {
+        return QuizModel(
+            guideBlockKey: "QuizGateKeeper",
+            questions: [QuestionModel.sampleQuestion1, QuestionModel.sampleQuestion2],
+            fail: QuizActionModel(
+                action: "restartQuiz",
+                actionData: QuizActionData(
+                    allowScreenAccess: false,
+                    attempts: 2,
+                    lockoutSeconds: 600
+                )
+            ),
+            pass: QuizActionModel(
+                action: "goHome",
+                actionData: QuizActionData(
+                    allowScreenAccess: true,
+                    attempts: nil,
+                    lockoutSeconds: nil
+                )
+            )
+        )
+    }
+    
+    var quizActionModel: QuizActionModel {
+        correctCount < questions.count ? fail : pass
+    }
+    
+    mutating func performAction()  {
+        let quizAction = quizActionModel
         switch quizAction.actionType {
         case .restartQuiz:
             print("QuizModel, performAction, restartQuiz")
@@ -110,7 +80,6 @@ struct QuizModel: Codable {
                 )
             }
         }
-        return quizAction
     }
 }
 
