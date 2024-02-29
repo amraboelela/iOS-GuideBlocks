@@ -13,11 +13,15 @@ import XCTest
 
 class QuestionModelTests: XCTestCase {
     
-    func testSampleAnswerModelWithIndex() {
-        let index = 1
+    func testSampleQuestion1() {
+        let sampleQuestion = QuestionModel.sampleQuestion1
         
-        let answerModel = QuestionModel.sampleAnswerModelWith(index: index)
+        XCTAssertEqual(sampleQuestion.answers.count, 3)
+    }
+    
+    func testSampleQuestion2() {
+        let sampleQuestion = QuestionModel.sampleQuestion2
         
-        XCTAssertEqual(answerModel.label, "Answer \(index)")
+        XCTAssertEqual(sampleQuestion.answers.count, 3)
     }
 }

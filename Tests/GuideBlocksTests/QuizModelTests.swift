@@ -14,9 +14,10 @@ import XCTest
 class QuizModelTests: XCTestCase {
     
     func testPerformAction() {
-        var quizModel = QuizViewModel.sampleQuiz
+        var quizModel = QuizModel.sampleQuiz
         quizModel.correctCount = 1
-        let quizAction = quizModel.performAction()
+        quizModel.performAction()
+        let quizAction = quizModel.quizAction
         XCTAssertEqual(quizModel.correctCount, 0)
         XCTAssertEqual(quizAction.action, "restartQuiz")
     }

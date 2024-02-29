@@ -16,18 +16,26 @@ class QuizViewModel : ObservableObject {
     var contextualContainer: ContextualContainer? {
         quizGuide?.contextualContainer
     }
+    
     @Published var isPopupVisible = true
     @Published var quizIsVisible = true
     @Published var quizModel: QuizModel?
     @Published var currentQuestionIndex = 0
+    @Published var actionButtonLabel = "OK"
+    @Published var showResults = false {
+        didSet {
+            updateResultsData()
+        }
+    }
     
     var currentQuestion: QuestionModel? {
         quizModel?.questions[currentQuestionIndex]
     }
+    
     var questionsCount: Int {
         quizModel?.questions.count ?? 0
     }
-    @Published var showResults = false
+
     var currentAnswers: [AnswerModel] {
         return currentQuestion?.answers ?? [AnswerModel]()
     }
@@ -36,38 +44,8 @@ class QuizViewModel : ObservableObject {
         loadWithSampleQuizs()
     }
     
-    static var sampleQuiz: QuizModel {
-        let question1 = QuestionModel(question: "What is it?", answers: [AnswerModel]())
-        let question2 = QuestionModel(question: "Why is it?", answers: [AnswerModel]())
-        return QuizModel(
-            guideBlockKey: "QuizGateKeeper",
-            questions: [question1, question2],
-            fail: QuizAction(
-                action: "restartQuiz",
-                actionData: QuizActionData(
-                    allowScreenAccess: false,
-                    attempts: 2,
-                    lockoutSeconds: 600
-                )
-            ),
-            pass: QuizAction(
-                action: "goHome",
-                actionData: QuizActionData(
-                    allowScreenAccess: true,
-                    attempts: nil,
-                    lockoutSeconds: nil
-                )
-            )
-        )
-    }
-    
     func loadWithSampleQuizs() {
-        quizModel = QuizViewModel.sampleQuiz
-        for i in 1...4 {
-            let answerModel = QuestionModel.sampleAnswerModelWith(index: i)
-            quizModel?.questions[currentQuestionIndex].answers.append(answerModel)
-        }
-        quizModel?.questions[currentQuestionIndex].answers[3].correct = true
+        quizModel = QuizModel.sampleQuiz
         quizModel?.contextualContainer = contextualContainer
     }
     
@@ -99,8 +77,21 @@ class QuizViewModel : ObservableObject {
         }
     }
     
+    func updateResultsData() {
+        var result = "OK"
+        if let quizAction = quizModel?.quizAction {
+            switch quizAction.actionType {
+            case .restartQuiz:
+                result = "Restart Quiz"
+            case .goHome:
+                break
+            }
+        }
+        actionButtonLabel = result
+    }
+    
     func performAction() {
-        if let quizAction = quizModel?.performAction() {
+        if let quizAction = quizModel?.quizAction {
             switch quizAction.actionType {
             case .restartQuiz:
                 print("QuizViewModel, performAction, restartQuiz")

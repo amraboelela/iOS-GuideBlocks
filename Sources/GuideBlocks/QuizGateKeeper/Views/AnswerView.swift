@@ -16,7 +16,7 @@ struct AnswerView: View {
         if answerIndex < viewModel.currentAnswers.count {
             return viewModel.currentAnswers[answerIndex]
         }
-        return viewModel.currentAnswers.last ?? QuestionModel.sampleAnswerModelWith(index: 0)
+        return viewModel.currentAnswers.last ?? AnswerModel.sampleAnswer11
     }
     
     var body: some View {
