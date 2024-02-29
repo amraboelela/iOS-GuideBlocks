@@ -22,6 +22,7 @@ struct QuizResultView: View {
             Button(
                 action: {
                     print("Perform action")
+                    viewModel.performAction()
                 },
                 label: {
                     Text(viewModel.actionButtonLabel)

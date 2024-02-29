@@ -167,6 +167,7 @@ class QuizViewModelTests: XCTestCase {
         // Pass
         viewModel.quizModel?.correctCount = 2
         viewModel.performAction()
+        XCTAssertEqual(viewModel.quizModel?.correctCount, 0)
         
         XCTAssertEqual(viewModel.isPopupVisible, false)
         XCTAssertEqual(viewModel.quizIsVisible, false)

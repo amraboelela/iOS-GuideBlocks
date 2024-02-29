@@ -101,6 +101,7 @@ class QuizViewModel : ObservableObject {
                 quizIsVisible = false
             }
         }
+        quizModel?.performAction()
         showResults = false
         currentQuestionIndex = 0
     }
