@@ -56,7 +56,7 @@ Extensibility: {
         }
     },
     "pass": {
-        "action": "setTag",
+        "action": "goHome",
         "action_data": {
             "key": "Quiz_pass_datetime",
             "value": "@now",

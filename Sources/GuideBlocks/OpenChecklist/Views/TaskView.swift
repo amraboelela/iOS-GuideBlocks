@@ -23,7 +23,7 @@ struct TaskView: View {
         Button(action: {
             if taskModel.enabled {
                 print("Action for task \(taskModel.name)")
-                viewModel.taskModels[taskIndex].doTheAction()
+                viewModel.taskModels[taskIndex].performAction()
                 viewModel.isPopupVisible = false
                 viewModel.tappedATask()
             } else {
