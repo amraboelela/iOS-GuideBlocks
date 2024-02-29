@@ -10,7 +10,6 @@ import SwiftUI
 
 struct QuizResultView: View {
     @ObservedObject var viewModel: QuizViewModel
-    @State var buttoLabel = "OK"
     
     var correctCount: Int {
         viewModel.quizModel?.correctCount ?? 0
@@ -23,10 +22,9 @@ struct QuizResultView: View {
             Button(
                 action: {
                     print("Perform action")
-                    buttoLabel = viewModel.actionButtonLabel
                 },
                 label: {
-                    Text(buttoLabel)
+                    Text(viewModel.actionButtonLabel)
                 }
             )
             .padding()
