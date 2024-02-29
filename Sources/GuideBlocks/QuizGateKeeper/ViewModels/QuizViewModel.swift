@@ -77,32 +77,44 @@ class QuizViewModel : ObservableObject {
         }
     }
     
+    var performActionType: QuizActionType {
+        guard let quizModel else {
+            print("performActionType, quizModel is nil")
+            return .goHome
+        }
+        var result = quizModel.quizActionModel.actionType
+        if let attempts = quizModel.quizActionModel.actionData.attempts {
+            if quizModel.numberOfAttempts >= attempts {
+                result = .goHome
+            }
+        }
+        return result
+    }
+        
     func updateResultsData() {
         var result = "OK"
-        if let quizAction = quizModel?.quizActionModel {
-            switch quizAction.actionType {
-            case .restartQuiz:
-                result = "Restart Quiz"
-            case .goHome:
-                break
-            }
+        switch performActionType {
+        case .restartQuiz:
+            result = "Restart Quiz"
+        case .goHome:
+            break
         }
         actionButtonLabel = result
     }
     
     func performAction() {
-        if let quizAction = quizModel?.quizActionModel {
-            switch quizAction.actionType {
-            case .restartQuiz:
-                print("QuizViewModel, performAction, restartQuiz")
-            case .goHome:
-                print("QuizViewModel, performAction, goHome")
-                isPopupVisible = false
-                quizIsVisible = false
-            }
-        }
         quizModel?.performAction()
+        switch performActionType {
+        case .restartQuiz:
+            print("QuizViewModel, performAction, restartQuiz")
+        case .goHome:
+            print("QuizViewModel, performAction, goHome")
+            isPopupVisible = false
+            quizIsVisible = false
+            quizModel?.numberOfAttempts = 0
+        }
         showResults = false
         currentQuestionIndex = 0
+        quizModel?.correctCount = 0
     }
 }
