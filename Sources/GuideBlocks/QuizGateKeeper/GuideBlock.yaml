@@ -2,8 +2,8 @@ Title: My Checklist
 Author: Amr Aboelela
 Email: support@contextu.al
 TestApp: https://github.com/contextu-al/AirBnB-iOS
-TestAppBranch: mychecklist
-Description: this GuideBlock will display a popup dialog with a text list, each row in the list has text that is read-only with a check box that is read-only. When the user touches a row it will execute some programatic action unique to each row.
+TestAppBranch: quiz
+Description: this GuideBlock will display a popup dialog with a text list, will show multiple choice questions, and if user pass all questions, then they won't see this quiz again. Otherwise, they will keep seeing it for up to number of allowed `attempts` then they won't see it for `lockout_seconds` period of time.
 Acknowledgements:
 Screenshot: 
 Video:
@@ -48,8 +48,6 @@ Extensibility: {
     "fail": {
         "action": "restartQuiz",
         "action_data": {
-            "key": "Quiz_fail_datetime",
-            "value": "@now",
             "attempts": 2,
             "lockout_seconds": 600,
             "allow_screen_access": false
@@ -58,8 +56,6 @@ Extensibility: {
     "pass": {
         "action": "goHome",
         "action_data": {
-            "key": "Quiz_pass_datetime",
-            "value": "@now",
             "allow_screen_access": true
         }
     }

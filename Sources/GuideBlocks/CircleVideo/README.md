@@ -13,14 +13,7 @@ Everyone loves Circle Video! This is a simple example to get you started with Co
  * choose “Display the guides on any screen of your app” and 
  * pick one of the “Standard” Contextual Announcement Templates.
  * Preview the Announcement on your Phone - it should look similar to the template
-7. Now go to the Extensibility section in the sidebar and paste in the JSON as follows:
-`
-{
-    "guideBlockKey": "CircleVideo",
-    "vid_url": "https://www.youtube.com/embed/Y9ChGCY8Azk?si=aLGas88lnxI6g_jJ?autoplay=1 ",
-    "circle_diameter": 200
-}
-`
+7. Now go to the Extensibility section in the sidebar and paste in the JSON as in the GuideBlock.yaml file.
  * Match the name in the JSON to the name of your wrapper in the code
 
  <img src="circlevideo-guideblock.png" alt="Circle video guide block" width="200"/>

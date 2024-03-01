@@ -17,8 +17,7 @@ class QuizViewModel : ObservableObject {
         quizGuide?.contextualContainer
     }
     
-    @Published var isPopupVisible = true
-    @Published var quizIsVisible = true
+    @Published var quizIsVisible = false
     @Published var quizModel: QuizModel?
     @Published var currentQuestionIndex = 0
     @Published var actionButtonLabel = "OK"
@@ -52,6 +51,7 @@ class QuizViewModel : ObservableObject {
     func updateData() {
         let guide = contextualContainer?.guidePayload.guide
         load(quizGuideJSON: guide?.extraJson)
+        quizIsVisible = quizModel?.shouldShowQuiz ?? true
     }
     
     func load(quizGuideJSON: Any?) {
@@ -110,7 +110,6 @@ class QuizViewModel : ObservableObject {
             print("QuizViewModel, performAction, restartQuiz")
         case .goHome:
             print("QuizViewModel, performAction, goHome")
-            isPopupVisible = false
             quizIsVisible = false
             quizModel?.numberOfAttempts = 0
         }
