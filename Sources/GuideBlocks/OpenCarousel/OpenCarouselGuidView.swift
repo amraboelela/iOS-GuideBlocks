@@ -111,8 +111,6 @@ struct OpenCarouselView: View {
                         dismissController()
                     }
                 }
-            } else {
-                Text(Constants.PlaceholderTexts.button_next_title)
             }
             Spacer()
         }

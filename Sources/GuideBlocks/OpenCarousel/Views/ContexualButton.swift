@@ -34,7 +34,7 @@ struct ContexualButton: View {
                     .contextualButtonFormat(button)
                     .overlay(content: {
                         RoundedRectangle(cornerRadius: button.borderCornerRadius)
-                            .stroke(Color(uiColor: button.borderColor), lineWidth: button.borderWidth)
+                            .stroke(Color(uiColor: button.borderColor == nil ? .clear : button.borderColor), lineWidth: button.borderWidth)
                     })
                     .clipShape(RoundedRectangle(cornerRadius: button.borderCornerRadius))
 
