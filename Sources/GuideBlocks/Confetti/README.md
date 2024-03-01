@@ -14,12 +14,7 @@ Everyone loves Confetti! This is a simple example to get you started with Contex
  * choose “Display the guides on any screen of your app” and 
  * pick one of the “Standard” Contextual Announcement Templates.
  * Preview the Announcement on your Phone - it should look similar to the template
-7. Now go to the Extensibility section in the sidebar and paste in the JSON as follows:
-`
-{
-  "guideBlockKey": "Confetti"
-}
-`
+7. Now go to the Extensibility section in the sidebar and paste in the JSON as in the GuideBlock.yaml file.
  * Match the name in the JSON to the name of your wrapper in the code
 
  <img src="confetti-guideblock.png" alt="Adding your Extra JSON" width="200"/>

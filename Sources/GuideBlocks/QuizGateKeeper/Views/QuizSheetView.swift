@@ -11,11 +11,12 @@ import SwiftUI
 struct QuizSheetView: View {
     @ObservedObject var viewModel: QuizViewModel
     var closeButtonTapped: () -> ()
+    @State var sheetIsVisible = true
     
     var body: some View {
         if viewModel.quizIsVisible {
             Text("")
-                .sheet(isPresented: $viewModel.isPopupVisible) {
+                .sheet(isPresented: $sheetIsVisible) {
                     if #available(iOS 16.0, *) {
                         QuizView(viewModel: viewModel)
                             .presentationDetents([.medium, .large])

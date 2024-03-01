@@ -14,11 +14,7 @@ Probably the simplest but most useful notification tool you can provide for inAp
  * choose “Display the guides on any screen of your app” and 
  * pick one of the “Standard” Contextual Announcement Templates. Change the Title and Content text in the editing sidebar.
  * Preview the Announcement on your Phone - it should look similar to the template
-7. Now go to the Extensibility section in the sidebar and paste in the JSON as follows:
-`
-{
-  "guideBlockKey": "UIAlertController"
-}
+7. Now go to the Extensibility section in the sidebar and paste in the JSON as in the GuideBlock.yaml file.
 `
  * Match the name in the JSON to the name of your wrapper in the code
 

@@ -13,66 +13,7 @@ Everyone loves checklists. This is a simple example to get you started with Cont
  * choose “Display the guides on any screen of your app” and 
  * pick one of the “Standard” Contextual Announcement Templates.
  * Preview the Announcement on your Phone - it should look similar to the template
-7. Now go to the Extensibility section in the sidebar and paste in the JSON as follows:
-`
-{
-    "guideBlockKey": "QuizGateKeeper",
-    "questions": [
-        {
-            "question": "How would you do X?",
-            "answers": [
-                {
-                    "label": "By clicking the edit profile",
-                    "correct": false
-                },
-                {
-                    "label": "By praying to my fave deity",
-                    "correct": false
-                },
-                {
-                    "label": "By entering the dish and selecting Fave",
-                    "correct": true
-                }
-            ]
-        },
-        {
-            "question": "What planet are you on?",
-            "answers": [
-                {
-                    "label": "Earth",
-                    "correct": true
-                },
-                {
-                    "label": "Betelgeuse Seven",
-                    "correct": false
-                },
-                {
-                    "label": "Golgafrincham",
-                    "correct": false
-                }
-            ]
-        }
-    ],
-    "fail": {
-        "action": "restartQuiz",
-        "action_data": {
-            "key": "Quiz_fail_datetime",
-            "value": "@now",
-            "attempts": 2,
-            "lockout_seconds": 600,
-            "allow_screen_access": false
-        }
-    },
-    "pass": {
-        "action": "goHome",
-        "action_data": {
-            "key": "Quiz_pass_datetime",
-            "value": "@now",
-            "allow_screen_access": true
-        }
-    }
-}
-`
+7. Now go to the Extensibility section in the sidebar and paste in the JSON as in the GuideBlock.yaml file.
  * Match the name in the JSON to the name of your wrapper in the code
 
  <img src="mychecklist-guideblock.png" alt="QuizGateKeeper guide block" width="200"/>

@@ -9,15 +9,11 @@
 import ContextualSDK
 
 struct QuizActionData: Codable {
-    var tagKey: String?
-    var tagValue: String?
     let allowScreenAccess: Bool
     let attempts: Int?
     let lockoutSeconds: Int?
     
     enum CodingKeys: String, CodingKey {
-        case tagKey = "key"
-        case tagValue = "value"
         case allowScreenAccess = "allow_screen_access"
         case attempts
         case lockoutSeconds = "lockout_seconds"

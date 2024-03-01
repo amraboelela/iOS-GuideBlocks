@@ -12,12 +12,7 @@ In this example, we show how to make a Fancy Announcement, just like the crazy o
  * choose “Display the guides on any screen of your app” and 
  * pick one of the “Standard” Contextual Announcement Templates.
  * Preview the Announcement on your Phone - it should look similar to the template
-7. Now go to the Extensibility section in the sidebar and paste in the JSON as follows:
-`
-{
-  "guideBlockKey": "FancyAnnouncement"
-}
-`
+7. Now go to the Extensibility section in the sidebar and paste in the JSON as in the GuideBlock.yaml file.
  * Match the name in the JSON to the name of your wrapper in the code
 
  <img src="FancyAnnouncementTree.png" alt="Adding your Extra JSON" width="200"/>

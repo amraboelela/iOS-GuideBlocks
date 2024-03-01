@@ -13,36 +13,7 @@ Everyone loves checklists. This is a simple example to get you started with Cont
  * choose “Display the guides on any screen of your app” and 
  * pick one of the “Standard” Contextual Announcement Templates.
  * Preview the Announcement on your Phone - it should look similar to the template
-7. Now go to the Extensibility section in the sidebar and paste in the JSON as follows:
-`
-{
-    "guideBlockKey": "OpenChecklist",
-    "tasks": [
-        {
-            "name": "Set My Tag",
-            "action": "SetTag",
-            "action_data": {
-                "key": "mytag",
-                "value": "1234"
-            }
-        },
-        {
-            "name": "Visit Inbox",
-            "action": "gotoScreen",
-            "action_data": {
-                "deep_link": "airbnbContextual://tab/inbox"
-            }
-        },
-        {
-            "name": "Visit Profile",
-            "action": "gotoScreen",
-            "action_data": {
-                "deep_link": "airbnbContextual://tab/profile"
-            }
-        }
-    ]
-}
-`
+7. Now go to the Extensibility section in the sidebar and paste in the JSON as in the GuideBlock.yaml file.
  * Match the name in the JSON to the name of your wrapper in the code
 
  <img src="mychecklist-guideblock.png" alt="OpenChecklist guide block" width="200"/>

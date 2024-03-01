@@ -155,9 +155,11 @@ class QuizViewModelTests: XCTestCase {
         }
         
         viewModel.quizModel?.correctCount = 1
-        viewModel.showResults = true
-        
+        viewModel.updateResultsData()
         XCTAssertEqual(viewModel.actionButtonLabel, "Restart Quiz")
+        viewModel.quizModel?.numberOfAttempts = 2
+        viewModel.updateResultsData()
+        XCTAssertEqual(viewModel.actionButtonLabel, "OK")
     }
     
     func testPerformAction() {
@@ -170,8 +172,7 @@ class QuizViewModelTests: XCTestCase {
         viewModel.quizModel?.correctCount = 1
         viewModel.performAction()
         
-        XCTAssertEqual(viewModel.isPopupVisible, true)
-        XCTAssertEqual(viewModel.quizIsVisible, true)
+        XCTAssertEqual(viewModel.quizIsVisible, false)
         XCTAssertEqual(viewModel.showResults, false)
         XCTAssertEqual(viewModel.currentQuestionIndex, 0)
         
@@ -180,7 +181,6 @@ class QuizViewModelTests: XCTestCase {
         viewModel.performAction()
         XCTAssertEqual(viewModel.quizModel?.correctCount, 0)
         
-        XCTAssertEqual(viewModel.isPopupVisible, false)
         XCTAssertEqual(viewModel.quizIsVisible, false)
         XCTAssertEqual(viewModel.showResults, false)
         XCTAssertEqual(viewModel.currentQuestionIndex, 0)

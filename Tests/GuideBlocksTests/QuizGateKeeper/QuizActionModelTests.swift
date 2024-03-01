@@ -16,8 +16,6 @@ class QuizActionDataTests: XCTestCase {
     func testEncodingDecoding() throws {
         // Given
         let quizActionData = QuizActionData(
-            tagKey: "Quiz_fail_datetime",
-            tagValue: "@now",
             allowScreenAccess: false,
             attempts: 2,
             lockoutSeconds: 600
@@ -28,8 +26,6 @@ class QuizActionDataTests: XCTestCase {
         let decodedData = try JSONDecoder().decode(QuizActionData.self, from: encodedData)
         
         // Then
-        XCTAssertEqual(decodedData.tagKey, "Quiz_fail_datetime")
-        XCTAssertEqual(decodedData.tagValue, "@now")
         XCTAssertEqual(decodedData.allowScreenAccess, false)
         XCTAssertEqual(decodedData.attempts, 2)
         XCTAssertEqual(decodedData.lockoutSeconds, 600)
@@ -41,8 +37,6 @@ class QuizActionModelTests: XCTestCase {
     func testEncodingDecoding() throws {
         // Given
         let quizActionData = QuizActionData(
-            tagKey: "Quiz_fail_datetime",
-            tagValue: "@now",
             allowScreenAccess: false,
             attempts: 2,
             lockoutSeconds: 600
@@ -55,8 +49,6 @@ class QuizActionModelTests: XCTestCase {
         
         // Then
         XCTAssertEqual(decodedData.action, "restartQuiz")
-        XCTAssertEqual(decodedData.actionData.tagKey, "Quiz_fail_datetime")
-        XCTAssertEqual(decodedData.actionData.tagValue, "@now")
         XCTAssertEqual(decodedData.actionData.allowScreenAccess, false)
         XCTAssertEqual(decodedData.actionData.attempts, 2)
         XCTAssertEqual(decodedData.actionData.lockoutSeconds, 600)
@@ -67,8 +59,6 @@ class QuizActionModelTests: XCTestCase {
         let quizActionModel = QuizActionModel(
             action: "restartQuiz",
             actionData: QuizActionData(
-                tagKey: "Quiz_fail_datetime",
-                tagValue: "@now",
                 allowScreenAccess: false,
                 attempts: 2,
                 lockoutSeconds: 600
