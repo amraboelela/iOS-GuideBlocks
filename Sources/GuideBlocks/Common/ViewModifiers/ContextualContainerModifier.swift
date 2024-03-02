@@ -40,6 +40,8 @@ struct ContextualContainerModifier: ViewModifier {
             if let backgroundColor {
                 content
                     .background(Color(backgroundColor))
+            } else {
+                content
             }
         }
     }
