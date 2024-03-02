@@ -14,7 +14,7 @@ struct QRButtonView: View {
     var closeButtonTapped: () -> ()
     
     var container: SHTipElement? {
-        viewModel.guideContainer
+        viewModel.contextualContainer?.guidePayload.guide
     }
     
     var title: String {

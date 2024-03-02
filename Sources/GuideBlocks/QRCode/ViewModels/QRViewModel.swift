@@ -16,9 +16,6 @@ class QRViewModel : ObservableObject {
     var contextualContainer: ContextualContainer? {
         qrCodeGuide?.contextualContainer
     }
-    var guideContainer: SHTipElement? {
-        contextualContainer?.guidePayload.guide
-    }
     var scanButtonTapped: (() -> ())?
     var scannedCodeCallback: ((String) -> ())?
     
