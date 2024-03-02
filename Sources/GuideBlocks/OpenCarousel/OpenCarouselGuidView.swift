@@ -24,29 +24,41 @@ struct OpenCarouselGuidView: View {
     @State private var currentTab = 0
     
     var body: some View {
-        TabView(selection: $currentTab,
-                content:  {
-            ForEach(openCarouselDataManager.carouselItems) { viewData in
-                OpenCarouselView(data: viewData,
-                                 dismissController: dismissController,
-                                 guide: openCarouselDataManager.guide,
-                                 currentTab: $currentTab)
-                .tag(viewData.id)
+        ZStack(alignment: .topTrailing, content: {
+            VStack {
+                TabView(selection: $currentTab,
+                        content:  {
+                    ForEach(openCarouselDataManager.carouselItems) { viewData in
+                        OpenCarouselView(data: viewData,
+                                         dismissController: dismissController,
+                                         guide: openCarouselDataManager.guide,
+                                         currentTab: $currentTab)
+                        .tag(viewData.id)
+                    }
+                })
+                .tabViewStyle(PageTabViewStyle())
+                .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .automatic))
+                
+                //background color of Container > Fill
+                .background(Color(uiColor: openCarouselDataManager.guide.backgroundColor))
+                .overlay(content: {
+                    RoundedRectangle(cornerRadius: openCarouselDataManager.guide.borderCornerRadius)
+                        .stroke(Color(uiColor: openCarouselDataManager.guide.borderColor), lineWidth: openCarouselDataManager.guide.borderWidth)
+                })
+                .clipShape(RoundedRectangle(cornerRadius: openCarouselDataManager.guide.borderCornerRadius))
+                .margin(openCarouselDataManager.guide.padding)
+                .margin(openCarouselDataManager.guide.margin)
             }
+            
+            if let dismiss = openCarouselDataManager.guide.dismiss {
+                ContexualDismissButton(button: dismiss, containerSize: openCarouselDataManager.guide.containerSize) {
+                    dismissController()
+                }
+            }
+
         })
         .frame(width: openCarouselDataManager.containerSize.width, height: openCarouselDataManager.containerSize.height)
-        .tabViewStyle(PageTabViewStyle())
-        .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .automatic))
-        
-        //background color of Container > Fill
-        .background(Color(uiColor: openCarouselDataManager.guide.backgroundColor))
-        .overlay(content: {
-            RoundedRectangle(cornerRadius: openCarouselDataManager.guide.borderCornerRadius)
-                .stroke(Color(uiColor: openCarouselDataManager.guide.borderColor), lineWidth: openCarouselDataManager.guide.borderWidth)
-        })
-        .clipShape(RoundedRectangle(cornerRadius: openCarouselDataManager.guide.borderCornerRadius))
-        .margin(openCarouselDataManager.guide.padding)
-        .margin(openCarouselDataManager.guide.margin)
+
     }
 }
 
