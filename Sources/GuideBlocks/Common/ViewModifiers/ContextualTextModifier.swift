@@ -27,10 +27,10 @@ struct ContextualTextModifier: ViewModifier {
             )
         }
         return EdgeInsets(
-            top: 16,
-            leading: 16,
-            bottom: 16,
-            trailing: 16
+            top: 10,
+            leading: 10,
+            bottom: 10,
+            trailing: 10
         )
     }
     

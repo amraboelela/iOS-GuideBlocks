@@ -38,9 +38,7 @@ public class QuizGuide: CTXBaseGuideController {
         self.contextualContainer = contextualContainer
         quizViewModel.quizGuide = self
         quizViewModel.updateData()
-        //let guide = contextualContainer.guidePayload.guide
         let view = QuizSheetView(
-            //imageElement: guide.arrayImages.first,
             viewModel: quizViewModel,
             closeButtonTapped: {
                 self.dismissGuide()

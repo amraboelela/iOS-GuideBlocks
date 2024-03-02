@@ -19,19 +19,13 @@ class QRViewModel : ObservableObject {
     var scanButtonTapped: (() -> ())?
     var scannedCodeCallback: ((String) -> ())?
     
-    
     @Published var isPopupVisible: Bool = false
-    @Published var title = "QR Code Scanner"
     @Published var qrCodeVisible = true
     
     init() {
     }
     
     func updateData() {
-        let guide = contextualContainer?.guidePayload.guide
-        if let title = guide?.title?.text {
-            self.title = title
-        }
     }
 
 }
