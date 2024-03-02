@@ -38,16 +38,14 @@ public class OpenChecklistGuide: CTXBaseGuideController {
         self.contextualContainer = contextualContainer
         openChecklistViewModel.openChecklistGuide = self
         openChecklistViewModel.updateData()
-        let guide = contextualContainer.guidePayload.guide
-        var view = OpenChecklistView(
-            imageElement: guide.arrayImages.first,
+        let view = OpenChecklistView(
             viewModel: openChecklistViewModel,
             closeButtonTapped: {
                 self.dismissGuide()
                 self.closeButtonTapped?()
             }
         )
-        view.buttonTextElement = guide.title
+        //view.buttonTextElement = guide.title
         self.hostingController = UIHostingController(rootView: view)
         
         guard let hostingController = self.hostingController else {

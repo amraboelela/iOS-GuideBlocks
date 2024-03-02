@@ -18,7 +18,7 @@ class OpenChecklistViewModel : ObservableObject {
     }
     
     @Published var isPopupVisible = false
-    @Published var title = "Do List"
+    //@Published var title = "Do List"
     @Published var taskListVisible = true
     @Published var taskModels = [TaskModel]() {
         didSet {
@@ -43,9 +43,6 @@ class OpenChecklistViewModel : ObservableObject {
     func updateData() {
         let guide = contextualContainer?.guidePayload.guide
         load(tasks: guide?.extraJson?["tasks"])
-        if let title = guide?.title?.text {
-            self.title = title
-        }
     }
     
     func load(tasks: Any?) {

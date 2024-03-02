@@ -10,10 +10,16 @@ import ContextualSDK
 import SwiftUI
 
 struct OpenChecklistView: View {
-    var buttonTextElement: SHTipTextElement?
-    var imageElement: SHTipImageElement?
     @ObservedObject var viewModel: OpenChecklistViewModel
     var closeButtonTapped: () -> ()
+    
+    var container: SHTipElement? {
+        viewModel.contextualContainer?.guidePayload.guide
+    }
+    
+    var title: String {
+        container?.title.text ?? "Do List"
+    }
     
     var body: some View {
         VStack {
@@ -24,8 +30,10 @@ struct OpenChecklistView: View {
                         print("Do list button tapped")
                     },
                     label: {
-                        Text(viewModel.title)
-                            .contextualTextFormat(buttonTextElement)
+                        Text(title)
+                            .contextualContainerFormat(container)
+                            .contextualTextFormat(container?.title)
+                            .contextualTextFormat(container?.content)
                             .foregroundColor(.white)
                             .background(.blue)
                             .clipShape(RoundedRectangle(cornerRadius: 10))
@@ -35,7 +43,7 @@ struct OpenChecklistView: View {
                 //.background(Color.yellow)
                 .overlay(
                     CloseButton(
-                        imageElement: imageElement,
+                        imageElement: container?.arrayImages.first,
                         closeButtonTapped: {
                             closeButtonTapped()
                             viewModel.taskListVisible = false

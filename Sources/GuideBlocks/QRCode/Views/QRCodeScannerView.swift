@@ -13,8 +13,6 @@ struct QRCodeScannerView: View {
     @ObservedObject var viewModel: QRViewModel
     @State private var isPresentingScanner = false
     @State private var scannedCode: String?
-
-    //var scanButtonTapped: (() -> ())?
     
     var body: some View {
         VStack(spacing: 10) {
