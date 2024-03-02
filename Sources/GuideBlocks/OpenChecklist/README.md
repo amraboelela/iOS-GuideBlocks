@@ -21,3 +21,6 @@ Everyone loves checklists. This is a simple example to get you started with Cont
 8. If you are still in Preview Mode, then you should see the Announcement will magically change to OpenChecklist.
 9. Save the guide and show to your Product Team, once you release this version of the App they can launch OpenChecklist to whoever they want, whenever they want.
 
+### Editing the "Do List" title
+You can edit the title by clicking on Title in the guide dashboard from https://dashboard.contextu.al/ then under `Text & Font` type the desired title you want to appear on the start button.
+
