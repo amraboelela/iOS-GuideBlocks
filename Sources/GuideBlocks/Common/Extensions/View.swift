@@ -10,6 +10,15 @@ import ContextualSDK
 import SwiftUI
 
 extension View {
+    func contextualContainerFormat(_ containerElement: SHTipElement?) -> some View {
+        modifier(
+            ContextualContainerModifier(
+                padding: containerElement?.padding,
+                backgroundColor: containerElement?.backgroundColor
+            )
+        )
+    }
+    
     func contextualTextFormat(_ textElement: SHTipTextElement?) -> some View {
         modifier(
             ContextualTextModifier(

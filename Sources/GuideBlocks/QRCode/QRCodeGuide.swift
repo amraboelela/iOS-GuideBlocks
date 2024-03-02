@@ -45,16 +45,13 @@ public class QRCodeGuide: CTXBaseGuideController {
         }
         qrViewModel.scannedCodeCallback = scannedCodeCallback
         
-        let guide = contextualContainer.guidePayload.guide
-        var view = QRButtonView(
-            imageElement: guide.arrayImages.first,
+        let view = QRButtonView(
             viewModel: qrViewModel,
             closeButtonTapped: {
                 self.dismissGuide()
                 self.closeButtonTapped?()
             }
         )
-        view.buttonTextElement = guide.title
         hostingController = UIHostingController(rootView: view)
         
         guard let hostingController = self.hostingController else {
