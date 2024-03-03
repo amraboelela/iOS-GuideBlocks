@@ -27,3 +27,10 @@ extension SHTipButtonElement {
         return CGSize.sizeFromGuide(width: width, height: height, containerSize: containerSize)
     }
 }
+
+extension SHTipDismissElement {
+    
+    func buttonSize(containerSize: CGSize) -> CGSize {
+        return CGSize.sizeFromGuide(width: width, height: height, containerSize: containerSize)
+    }
+}
