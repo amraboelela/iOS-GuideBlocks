@@ -21,12 +21,16 @@ struct CircleVideoView: View {
         return 40.0 * (1.0 - circleDiameter / 300.0)
     }
     
+    func dismiss() {
+        closeButtonTapped()
+        circleVideoViewModel.dismiss()
+    }
+    
     var body: some View {
         ZStack {
             BackDismissView(
                 viewTapped: {
-                    closeButtonTapped()
-                    circleVideoViewModel.videoIsDismissed = true
+                    dismiss()
                 }
             )
             VideoWebView(
@@ -46,8 +50,7 @@ struct CircleVideoView: View {
                 CloseButton(
                     imageElement: imageElement,
                     closeButtonTapped: {
-                        closeButtonTapped()
-                        circleVideoViewModel.videoIsDismissed = true
+                        dismiss()
                     }
                 ),
                 alignment: .topTrailing
