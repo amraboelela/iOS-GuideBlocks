@@ -90,4 +90,13 @@ class OpenChecklistViewModel : ObservableObject {
         }
     }
     
+    func dismiss(outside: Bool) {
+        taskListVisible = true
+        if outside {
+            guideController?.tapOutsideOfGuide()
+        } else {
+            guideController?.previousStepOfGuide()
+        }
+    }
+    
 }
