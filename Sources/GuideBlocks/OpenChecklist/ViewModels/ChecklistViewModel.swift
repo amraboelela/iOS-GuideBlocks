@@ -18,7 +18,7 @@ class OpenChecklistViewModel : ObservableObject {
     }
     
     @Published var isPopupVisible = false
-    @Published var taskListVisible = true
+    @Published var guideIsVisible = true
     @Published var taskModels = [TaskModel]() {
         didSet {
             dismissIfNeeded()
@@ -83,7 +83,7 @@ class OpenChecklistViewModel : ObservableObject {
                 needToDismiss = false
             }
         }
-        taskListVisible = !needToDismiss
+        guideIsVisible = !needToDismiss
         if let guideController, needToDismiss {
             guideController.dismissGuide()
             guideController.completedCallback?()
@@ -91,7 +91,7 @@ class OpenChecklistViewModel : ObservableObject {
     }
     
     func dismiss(outside: Bool) {
-        taskListVisible = true
+        guideIsVisible = false
         if outside {
             guideController?.tapOutsideOfGuide()
         } else {

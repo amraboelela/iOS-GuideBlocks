@@ -28,7 +28,7 @@ struct OpenChecklistView: View {
     
     var body: some View {
         ZStack {
-            if viewModel.taskListVisible {
+            if viewModel.guideIsVisible {
                 BackDismissView(
                     viewTapped: {
                         dismiss(outside: true)
