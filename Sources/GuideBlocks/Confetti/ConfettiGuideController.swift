@@ -1,5 +1,5 @@
 //
-//  ConfettiGuide.swift
+//  ConfettiGuideController.swift
 //  GuideBlocks
 //
 //  Created by Marc Stroebel on 2023/12/8.
@@ -9,7 +9,7 @@
 import SwiftUI
 import ContextualSDK
 
-public class ConfettiGuide: CTXBaseGuideController {
+public class ConfettiGuideController: CTXBaseGuideController {
     
     private var hostingController: UIHostingController<ConfettiView>?
     
