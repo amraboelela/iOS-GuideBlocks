@@ -10,6 +10,7 @@ import SwiftUI
 import ContextualSDK
 
 public class ConfettiGuideController: CTXBaseGuideController {
+    var contextualContainer: ContextualContainer?
     
     private var hostingController: UIHostingController<ConfettiView>?
     
@@ -24,6 +25,8 @@ public class ConfettiGuideController: CTXBaseGuideController {
             failure(contextualContainer.guidePayload)
             return
         }
+        self.contextualContainer = contextualContainer
+        confettiViewModel.guideController = self
         
         let view = ConfettiView()
         
