@@ -11,7 +11,7 @@ import SwiftUI
 
 let openChecklistViewModel = OpenChecklistViewModel()
 
-class OpenChecklistViewModel : GuideViewModelProtocol {
+class OpenChecklistViewModel: GuideViewModelProtocol {
     var guideController: ChecklistGuideController?
     var contextualContainer: ContextualContainer? {
         guideController?.contextualContainer

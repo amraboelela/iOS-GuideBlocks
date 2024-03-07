@@ -11,7 +11,7 @@ import SwiftUI
 
 let qrViewModel = QRViewModel()
 
-class QRViewModel : GuideViewModelProtocol {
+class QRViewModel: GuideViewModelProtocol {
     var guideController: QRCodeGuideController?
     var contextualContainer: ContextualContainer? {
         guideController?.contextualContainer

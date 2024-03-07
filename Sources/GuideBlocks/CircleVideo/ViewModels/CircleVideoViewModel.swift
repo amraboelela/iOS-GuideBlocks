@@ -11,7 +11,7 @@ import SwiftUI
 
 let circleVideoViewModel = CircleVideoViewModel()
 
-class CircleVideoViewModel : GuideViewModelProtocol {
+class CircleVideoViewModel: GuideViewModelProtocol {
     var guideController: CircleVideoGuideController?
     
     var guideIsVisible = true
