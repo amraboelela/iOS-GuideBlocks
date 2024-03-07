@@ -118,4 +118,13 @@ class QuizViewModel : ObservableObject {
         currentQuestionIndex = 0
         quizModel?.correctCount = 0
     }
+    
+    func dismiss(outside: Bool) {
+        guideIsVisible = false
+        if outside {
+            guideController?.tapOutsideOfGuide()
+        } else {
+            guideController?.previousStepOfGuide()
+        }
+    }
 }
