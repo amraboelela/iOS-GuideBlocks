@@ -11,7 +11,7 @@ import SwiftUI
 
 let quizViewModel = QuizViewModel()
 
-class QuizViewModel : ObservableObject {
+class QuizViewModel : GuideViewModelProtocol {
     var guideController: QuizGuideController?
     var contextualContainer: ContextualContainer? {
         guideController?.contextualContainer
@@ -117,14 +117,5 @@ class QuizViewModel : ObservableObject {
         showResults = false
         currentQuestionIndex = 0
         quizModel?.correctCount = 0
-    }
-    
-    func dismiss(outside: Bool) {
-        guideIsVisible = false
-        if outside {
-            guideController?.tapOutsideOfGuide()
-        } else {
-            guideController?.previousStepOfGuide()
-        }
     }
 }
