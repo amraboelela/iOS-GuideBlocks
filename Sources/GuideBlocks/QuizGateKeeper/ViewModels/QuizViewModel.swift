@@ -122,6 +122,11 @@ class QuizViewModel: GuideViewModelProtocol {
         case .blockAndWait:
             if let quizModel {
                 result = "Wait for \(quizModel.waitMinutesRemaining) minutes"
+                if quizModel.waitMinutesRemaining > 1 {
+                    Timer.scheduledTimer(withTimeInterval: 60, repeats: false) { [weak self] _ in
+                        self?.updateResultsData()
+                    }
+                }
             }
         case .goHome:
             break
