@@ -114,6 +114,9 @@ class QuizViewModel: GuideViewModelProtocol {
     }
         
     func updateResultsData() {
+        if showResults {
+            quizModel?.updateResultsData()
+        }
         var result = "OK"
         switch quizFinalAction {
         case .restartQuiz:
@@ -135,7 +138,6 @@ class QuizViewModel: GuideViewModelProtocol {
     }
     
     func performAction() {
-        quizModel?.performAction()
         switch quizFinalAction {
         case .restartQuiz:
             print("QuizViewModel, quizFinalAction, restartQuiz")

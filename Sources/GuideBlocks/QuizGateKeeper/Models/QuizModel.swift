@@ -116,7 +116,7 @@ struct QuizModel: Codable {
         correctCount < questions.count ? fail : pass
     }
     
-    mutating func performAction() {
+    mutating func updateResultsData() {
         switch quizActionModel.actionType {
         case .restartQuiz:
             print("QuizModel, performAction, restartQuiz")
