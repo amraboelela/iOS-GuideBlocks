@@ -121,8 +121,9 @@ class QuizViewModel: GuideViewModelProtocol {
             result = "Restart Quiz"
         case .blockAndWait:
             if let quizModel {
-                result = "Wait for \(quizModel.waitMinutesRemaining) minutes"
-                if quizModel.waitMinutesRemaining > 1 {
+                let minutesRemaining = quizModel.waitMinutesRemaining
+                result = "Wait for \(minutesRemaining) minutes"
+                if minutesRemaining > 1 {
                     Timer.scheduledTimer(withTimeInterval: 60, repeats: false) { [weak self] _ in
                         self?.updateResultsData()
                     }
