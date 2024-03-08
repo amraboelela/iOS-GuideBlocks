@@ -79,7 +79,11 @@ struct QuizModel: Codable {
     }
     
     var waitMinutesRemaining: Int {
-        waitSecondsRemaining / 60
+        if waitSecondsRemaining % 60 > 0 {
+            waitSecondsRemaining / 60 + 1
+        } else {
+            waitSecondsRemaining / 60
+        }
     }
     
     var waitSecondsRemaining: Int {
