@@ -78,13 +78,32 @@ struct QuizModel: Codable {
         return .unknown
     }
     
+    var waitMinutesRemaining: Int {
+        waitSecondsRemaining / 60
+    }
+    
+    var waitSecondsRemaining: Int {
+        let actionData = quizActionModel.actionData
+        switch lastTimeResult {
+        case .pass(_):
+            break
+        case .fail(let failTime):
+            if let lockoutSeconds = actionData.lockoutSeconds {
+                return failTime + lockoutSeconds - Date.now
+            }
+        case .unknown:
+            break
+        }
+        return 0
+    }
+    
     var shouldShowQuiz: Bool {
+        let actionData = quizActionModel.actionData
         switch lastTimeResult {
         case .pass(_):
             return false
         case .fail(let failTime):
-            if let lockoutSeconds = quizActionModel.actionData.lockoutSeconds,
-               Date.now < failTime + lockoutSeconds {
+            if waitSecondsRemaining > 0 && actionData.allowScreenAccess {
                 return false
             }
         case .unknown:
