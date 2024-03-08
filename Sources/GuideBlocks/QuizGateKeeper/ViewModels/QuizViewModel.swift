@@ -80,6 +80,7 @@ class QuizViewModel: GuideViewModelProtocol {
             currentQuestionIndex += 1
         } else {
             quizModel?.numberOfAttempts += 1
+            quizModel?.updateResultsData()
             showResults = true
         }
     }
@@ -114,9 +115,6 @@ class QuizViewModel: GuideViewModelProtocol {
     }
         
     func updateResultsData() {
-        if showResults {
-            quizModel?.updateResultsData()
-        }
         var result = "OK"
         switch quizFinalAction {
         case .restartQuiz:
